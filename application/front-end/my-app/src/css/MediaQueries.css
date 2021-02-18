@@ -1,0 +1,83 @@
+@media only screen and (max-width: 992px) {
+  .about-wrapper-two {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 300px;
+    width: 100% !important;
+  }
+
+  .wrapper-three {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 300px;
+    width: 97% !important;
+  }
+
+  .about-team-card {
+    left: 50px;
+  }
+  .hero-about header {
+    position: relative;
+    top: 84px;
+  }
+
+  .section-img {
+    position: relative;
+    left: 2px;
+    top: 80px;
+  }
+
+  .hero-about {
+    position: relative;
+    left: -4px;
+    top: 80px;
+  }
+  .font-users-icon {
+    padding: 0 70px;
+  }
+  .aws-img img,
+  .react-img img {
+    width: 147px;
+  }
+
+  .react-img img {
+    bottom: 138px;
+  }
+
+  .node-img img {
+    width: 162px;
+    height: 117px;
+    bottom: 87px;
+  }
+
+  .mysql-img img {
+    bottom: 86px;
+    width: 213px;
+  }
+  .redux-img img {
+    width: 214px;
+    bottom: 131px;
+  }
+
+  .express-img img {
+    width: 198px;
+    bottom: 81px;
+  }
+  .about-team-section {
+    margin-top: 100px;
+    height: 1200px;
+  }
+
+  .individual-about-section img {
+    bottom: 80px;
+  }
+
+  .individual-about {
+    top: 39px;
+    position: relative;
+  }
+
+  .john {
+    top: 0px !important;
+  }
+}
