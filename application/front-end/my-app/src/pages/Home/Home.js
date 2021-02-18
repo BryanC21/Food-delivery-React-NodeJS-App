@@ -6,15 +6,16 @@ import ReduxImg from "../../images/logos/redux-logo.png";
 import NodeImg from "../../images/logos/nodejs.png";
 import ExpressImg from "../../images/logos/express.png";
 import { Link } from "react-router-dom";
+import { smoothScrolling } from "../../js/smoothScrolling";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-
 library.add(faUsers);
 
 function Home() {
   return (
     <>
+      {smoothScrolling()}
       <section className='hero section-background-color'>
         <div className='hero-about container wrapper-two '>
           <header className='flex-column '>
@@ -22,6 +23,13 @@ function Home() {
             <p className='secondary-heading secondary-color left-20 '>
               A team of JavaScript developers
             </p>
+            <ul className='top-20'>
+              <li className='hero-about-team-link'>
+                <a className=' white-color font-sm' href='#about-team'>
+                  About Team
+                </a>
+              </li>
+            </ul>
           </header>
           <div className='primary-color font-users-icon'>
             <FontAwesomeIcon className='font-user-1' icon={faUsers} size='8x' />
@@ -71,28 +79,64 @@ function Home() {
         </header>
         <div className='about-team-card container wrapper-three'>
           <div className='card'>
-            <h1>Byran</h1>
-            <Link to='/about/BryanCaldera'>Read More</Link>
+            <div className='about-card-info flex-center-card'>
+              <h1>Bryan Caldera</h1>
+              <ul className='top-20'>
+                <li className='about-card-btn'>
+                  <Link to='/about/BryanCaldera'>Read More</Link>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className='card'>
-            <h1>Marco</h1>
-            <Link to='/about/MarcoMarino'>Read More</Link>
+            <div className='about-card-info flex-center-card'>
+              <h1>Marco Marino</h1>
+              <ul className='top-20'>
+                <li className='about-card-btn'>
+                  <Link to='/about/MarcoMarino'>Read More</Link>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className='card'>
-            <h1>Calvin Tan</h1>
-            <Link to='/about/CalvinTan'>Read More</Link>
+            <div className='about-card-info flex-center-card'>
+              <h1>Calvin Tan</h1>
+              <ul className='top-20'>
+                <li className='about-card-btn'>
+                  <Link to='/about/CalvinTan'>Read More</Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className='card top-20'>
-            <h1>John To </h1>
-            <Link to='/about/JohnTo'>Read More</Link>
+          <div className='john card top-20 '>
+            <div className='about-card-info flex-center-card'>
+              <h1>John To </h1>
+              <ul className='top-20'>
+                <li className='about-card-btn'>
+                  <Link to='/about/JohnTo'>Read More</Link>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className=' card top-20'>
-            <h1>Denny Feng </h1>
-            <Link to='/about/DennyFeng'>Read More</Link>
+            <div className='about-card-info flex-center-card'>
+              <h1>Denny Feng </h1>
+              <ul className='top-20'>
+                <li className='about-card-btn'>
+                  <Link to='/about/DennyFeng'>Read More</Link>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className='card top-20'>
-            <h1>Huan Nguyen </h1>
-            <Link to='/about/HuanNguyen'>Read More</Link>
+            <div className='about-card-info flex-center-card'>
+              <h1>Huan Nguyen </h1>
+              <ul className='top-20'>
+                <li className='about-card-btn'>
+                  <Link to='/about/HuanNguyen'>Read More</Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
