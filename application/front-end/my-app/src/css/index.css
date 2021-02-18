@@ -1,0 +1,148 @@
+/* Navbar */
+.navbar {
+  height: 80px;
+}
+.nav-logo {
+  position: relative;
+  top: 10px;
+}
+.nav-links {
+  position: relative;
+  bottom: 30px;
+}
+
+.nav-button {
+  border: 1px solid var(--white-color);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 158px;
+  height: 35px;
+}
+
+.nav-button a {
+  left: 18px;
+  top: 6px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+/* Home */
+
+/* hero section */
+
+.hero {
+  height: 397px;
+}
+
+.hero-about {
+  position: relative;
+  left: 90px;
+  top: 80px;
+}
+
+.hero-about header {
+  position: relative;
+  top: 40px;
+}
+
+.font-users-icon {
+  padding: 0 35px;
+}
+
+.font-users-2 {
+  position: relative;
+  left: 3px;
+}
+
+/* Stack Section */
+
+.stack-section header,
+.about-team-section header {
+  position: relative;
+  right: 50px;
+}
+
+.aws-img img,
+.react-img img,
+.redux-img img,
+.express-img img {
+  height: auto;
+}
+
+.node-img img {
+  width: 220px;
+  height: 150px;
+}
+
+.aws-img img,
+.react-img img {
+  width: 200px;
+}
+
+.react-img img {
+  position: relative;
+  bottom: 80px;
+  right: 15px;
+}
+
+.node-img img {
+  position: relative;
+  bottom: 40px;
+}
+
+.mysql-img img {
+  position: relative;
+  bottom: 100px;
+  left: 50px;
+}
+.redux-img img {
+  position: relative;
+  bottom: 80px;
+  width: 300px;
+  left: 30px;
+}
+
+.express-img img {
+  width: 290px;
+  position: relative;
+  bottom: 40px;
+  left: 50px;
+}
+.section-img {
+  position: relative;
+  left: 95px;
+  top: 80px;
+}
+
+/* About Team Section */
+
+.about-team-section {
+  margin-top: 100px;
+  height: 800px;
+}
+
+.about-team-card {
+  position: relative;
+  left: 2px;
+  top: 80px;
+}
+
+/* Footer */
+.footer {
+  height: 80px;
+}
+
+.footer header {
+  position: relative;
+  top: 40px;
+}
+
+.footer .fa-icon {
+  position: relative;
+  right: 80px;
+  top: 10px;
+}
+
+.fa-icon-github:hover {
+  color: var(--secondary-color);
+}
