@@ -85,6 +85,12 @@ a {
   grid-template-rows: 300px;
   width: 80% !important;
 }
+.about-wrapper-two {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 300px;
+  width: 100% !important;
+}
 
 .wrapper-three {
   display: grid;
@@ -105,6 +111,20 @@ a {
   align-items: center;
 }
 
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 63vh;
+}
+.flex-center-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 28vh;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -119,7 +139,9 @@ a {
 }
 
 /* Font-sizing */
-
+.font-xsm {
+  font-size: 15px;
+}
 .font-sm {
   font-size: 17px;
 }
@@ -154,7 +176,9 @@ a {
   position: relative;
   top: 20px;
 }
-
+.margin-top-10 {
+  margin-top: 10px;
+}
 /* Footer */
 /* put footer at the bottom */
 .App {
