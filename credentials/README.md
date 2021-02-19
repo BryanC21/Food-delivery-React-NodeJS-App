@@ -10,15 +10,15 @@
 1. Server URL or IP : http://ec2-3-141-202-77.us-east-2.compute.amazonaws.com
 3. SSH username: ubuntu
 4. SSH key : Team_5_key_pair.pem
-4. Database URL or IP and port used.
-    <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-5. Database username
-6. Database password
-7. Database name (basically the name that contains all your tables)
+4. Database URL or IP and port used: http://ec2-3-141-202-77.us-east-2.compute.amazonaws.com port:3306
+5. Database username: root
+6. Database password: gamer
+7. Database name (basically the name that contains all your tables): N/A
 8. Instructions on how to use the above information.
     * Change key permisions locally: chmod 400 Team_5_key_pair.pem
     * To ssh into our ec2 instance: ssh -i "Team_5_key_pair.pem" ubuntu@ec2-3-141-202-77.us-east-2.compute.amazonaws.com 
     * To view running servers on ec2: sudo pm2 list
+    * To use mySQL db: mysql -u root -p
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
