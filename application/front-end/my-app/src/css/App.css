@@ -1,0 +1,204 @@
+/* Google Font import */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap");
+
+:root {
+  --primary-heading: "Montserrat", sans-serif;
+  --secondary-heading: "Poppins", sans-serif;
+  --primary-color: #222331;
+  --secondary-color: #5d5d61;
+  --white-color: #fff;
+  --section-light-gray-color: rgba(247, 247, 247, 0.62);
+  --card-border-radius: 5px;
+  --content-overlay: rgba(0, 0, 0, 0.5);
+  --space: 1.5em 0;
+  --space: 2em 0;
+}
+
+/* CSS Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* remove white space on the right side of the page */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--primary-heading);
+}
+
+li {
+  list-style-type: none;
+}
+a {
+  list-style-type: none;
+  text-decoration: none;
+}
+
+/* Fonts */
+.secondary-heading {
+  font-family: var(--secondary-heading);
+}
+
+/* Colors */
+
+.primary-color {
+  color: var(--primary-color);
+}
+.white-color {
+  color: var(--white-color);
+}
+.secondary-color {
+  color: var(--secondary-color);
+}
+
+.primary-background {
+  background-color: var(--primary-color) !important;
+}
+
+.section-background-color {
+  background-color: var(--section-light-gray-color);
+}
+
+/* Container */
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Card  */
+.card {
+  border: 2px solid var(--primary-color);
+  background-color: var(--white-color);
+  border-radius: var(--card-border-radius);
+  width: 200px;
+  height: 277px;
+  position: relative;
+  box-shadow: 0 8px 16px 0 var(--content-overlay);
+}
+
+/* Wrapper */
+
+.wrapper-two {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 300px;
+  width: 97% !important;
+}
+.about-wrapper-two {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 300px;
+  width: 100% !important;
+}
+
+.wrapper-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 300px;
+  width: 70% !important;
+}
+
+/* Flex-property */
+
+.display-flex {
+  display: flex;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 63vh;
+}
+.flex-center-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 28vh;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/* Font-sizing */
+.font-xsm {
+  font-size: 15px;
+}
+.font-sm {
+  font-size: 17px;
+}
+
+.font-md {
+  font-size: 30px;
+}
+
+.font-xl {
+  font-size: 50px;
+}
+
+/* Padding */
+.padding-left {
+  padding: 0px 40px;
+}
+
+/* Alignment */
+
+.align-item-center {
+  align-items: center;
+}
+
+/* positioning */
+
+.left-20 {
+  position: relative;
+  left: 10px;
+}
+
+.top-20 {
+  position: relative;
+  top: 20px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+/* Footer */
+/* put footer at the bottom */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-content {
+  flex: 1 0 auto;
+  padding: var(--space) var(--space) 0;
+  width: 100%;
+}
