@@ -6,6 +6,10 @@ const app = express();
 const appServer = server.createServer(app);
 const appProxy = httpProxy.createProxyServer(app);
 
+//Runs with: 
+//node gateway.js - from this folder
+//this redirects you from open port 80 to port 3000 where react app is
+//react app also needs to be started
 appProxy.on('error', (err, req, res) => {
   console.log(err);
   res.status(500).send('Proxy down :(');
