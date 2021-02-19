@@ -14,7 +14,7 @@
   }
 
   .about-team-card {
-    left: 50px;
+    left: 22px;
   }
   .hero-about header {
     position: relative;
@@ -79,5 +79,171 @@
 
   .john {
     top: 0px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .about-team-section p {
+    left: 40px;
+    width: 400px;
+  }
+
+  .font-users-icon {
+    font-size: 15px;
+    position: relative;
+    left: 21px;
+    bottom: 0px;
+  }
+  .hero-about header {
+    position: relative;
+    top: 49px;
+  }
+}
+
+@media only screen and (max-width: 497px) {
+  .wrapper-two {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 281px;
+    width: 97% !important;
+  }
+
+  .wrapper-three {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 255px;
+    width: 100% !important;
+  }
+
+  .hero-about header {
+    /* center */
+    margin: 0 auto;
+    top: 60px;
+    left: 17px;
+  }
+  .font-users-icon {
+    font-size: 12px;
+    bottom: 15px;
+  }
+
+  .flex-center-card {
+    height: 21vh;
+  }
+
+  .hero-about {
+    position: relative;
+    left: -4px;
+    top: 10px;
+  }
+  .stack-section header,
+  .about-team-section header {
+    position: relative;
+    right: 0px;
+    margin-top: 10px;
+  }
+
+  .aws-img,
+  .mysql-img,
+  .react-img,
+  .redux-img,
+  .node-img,
+  .express-img {
+    margin: 0 auto;
+  }
+
+  .react-img img {
+    right: 0;
+    bottom: 176px;
+  }
+
+  .mysql-img img {
+    left: 0;
+    bottom: 178px;
+  }
+  .redux-img img {
+    left: 0;
+    bottom: 162px;
+  }
+
+  .express-img img {
+    left: 0;
+    bottom: 130px;
+  }
+
+  .node-img img {
+    width: 162px;
+    height: 117px;
+    bottom: 147px;
+  }
+
+  .card {
+    width: 179px;
+    height: 222px;
+  }
+  .about-team-section {
+    margin-top: 10px;
+    height: 973px;
+  }
+  .about-team-card {
+    left: 15px;
+  }
+  .about-team-section p {
+    left: 15px;
+    width: 282px;
+    font-size: 13px;
+  }
+  .footer .fa-icon {
+    right: 44px;
+  }
+}
+
+@media only screen and (min-width: 424px) {
+  .font-users-icon {
+    font-size: 9px;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .font-users-icon {
+    font-size: 9px;
+    left: 22px;
+  }
+  .individual-about-section img {
+    width: 237px;
+  }
+
+  .top-20 {
+    top: 11px;
+  }
+
+  .individual-about-section-rest img {
+    bottom: 23px !important;
+  }
+
+  .individual-about-section p {
+    font-size: 15px;
+    top: -8px;
+  }
+  .width {
+    width: 348px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .font-users-icon {
+    font-size: 6px;
+  }
+  .about-team-card {
+    left: -12px;
+  }
+
+  .wrapper-three {
+    width: 109% !important;
+  }
+  .footer .fa-icon {
+    right: 7px;
+  }
+  .padding-left {
+    padding: 0px 0px;
   }
 }
