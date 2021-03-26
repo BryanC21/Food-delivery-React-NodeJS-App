@@ -4,7 +4,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import MapContainer from "./Maps"
+import MapContainer from "./MapContainer";
 
 function App() {
   const [restaurant, setRestaurant] = useState([]);
@@ -29,16 +29,18 @@ function App() {
 
   // using the search button
   const setFilter = () => {
-    if (searchType == "cuisine") {
+    if (searchType === "cuisine") {
       setFilterRestaurant(
-        loadRestaurants.filter((restaurants) => 
+        loadRestaurants.filter((restaurants) =>
           restaurants.cuisine_type.toLowerCase().includes(search.toLowerCase())
         )
       );
-    }else {
+    } else {
       setFilterRestaurant(
-        loadRestaurants.filter((restaurants) => 
-          restaurants.restaurant_name.toLowerCase().includes(search.toLowerCase())
+        loadRestaurants.filter((restaurants) =>
+          restaurants.restaurant_name
+            .toLowerCase()
+            .includes(search.toLowerCase())
         )
       );
     }
@@ -69,8 +71,8 @@ function App() {
   };
 
   const handleSelector = (event) => {
-   // console.log(event.target.value)
-    setSearchType(event.target.value)
+    // console.log(event.target.value)
+    setSearchType(event.target.value);
   };
 
   const RestaurantDetail = (props) => {
@@ -79,7 +81,11 @@ function App() {
     return (
       <div className='col-sm-6'>
         <div className='card mb-4 shadow-sm'>
-          <img src={restaurant_logo} className='card-img-top ' alt='logo' />
+          <img
+            src={restaurant_logo}
+            className='card-img-top card-img'
+            alt='logo'
+          />
           <div className='card-body'>
             <h5 className='card-title'>{restaurant_name}</h5>
           </div>
@@ -122,9 +128,9 @@ function App() {
               </button>
             </div>
             <h4>Search by: </h4>
-            <select style={{margin: "auto"}} onChange={handleSelector}>
-              <option selected value="cuisine">Cuisine Type</option>
-              <option value="name">Restaurant Name</option>
+            <select style={{ margin: "auto" }} onChange={handleSelector}>
+              <option value='cuisine'>Cuisine Type</option>
+              <option value='name'>Restaurant Name</option>
             </select>
           </div>
         </div>
@@ -140,10 +146,8 @@ function App() {
       </section>
 
       <MapContainer />
-
       <ToastContainer />
     </div>
-
   );
 }
 

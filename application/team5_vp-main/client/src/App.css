@@ -13,6 +13,6 @@ body {
   padding-bottom: 6rem;
 }
 
-/*img { removed beacuase changes map
+.card-img {
   height: 500px !important;
-}*/
+}
