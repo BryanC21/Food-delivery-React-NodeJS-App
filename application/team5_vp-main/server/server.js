@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const app = require("./app");
+const path = require('path')
 
 // Catching exceptions
 process.on("uncaughtException", (err) => {
