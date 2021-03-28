@@ -16,6 +16,15 @@ appProxy.on('error', (err, req, res) => {
 });
 
 const fronEndHost = process.env.FRONT_END_HOST || 'http://localhost:3000';
+
+
+app.all('/api*', (req, res) => {
+  const options = {
+      target: 'http://localhost:4000'
+  };
+  appProxy.web(req, res, options);
+});
+
 app.all('/*', (req, res) => {
   appProxy.web(req, res, { target: fronEndHost });
 });
