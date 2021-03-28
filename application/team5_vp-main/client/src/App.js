@@ -11,7 +11,7 @@ function App() {
   const [loadRestaurants, setLoadRestaurants] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [search, setSearch] = useState("");
-  const [searchType, setSearchType] = useState("cuisine");
+  const [searchType, setSearchType] = useState("All");
 
   useEffect(() => {
     load();
@@ -29,13 +29,8 @@ function App() {
 
   // using the search button
   const setFilter = () => {
-    if (searchType === "cuisine") {
-      setFilterRestaurant(
-        loadRestaurants.filter((restaurants) =>
-          restaurants.cuisine_type.toLowerCase().includes(search.toLowerCase())
-        )
-      );
-    } else {
+    if (searchType === "All") {
+
       setFilterRestaurant(
         loadRestaurants.filter((restaurants) =>
           restaurants.restaurant_name
@@ -43,6 +38,15 @@ function App() {
             .includes(search.toLowerCase())
         )
       );
+
+    } else {
+
+      setFilterRestaurant(
+        loadRestaurants.filter((restaurants) =>
+          restaurants.cuisine_type.toLowerCase().includes(searchType.toLowerCase())
+        )
+      );
+      
     }
   };
 
@@ -86,8 +90,9 @@ function App() {
             className='card-img-top card-img'
             alt='logo'
           />
-          <div className='card-body'>
+          <div className='card-body card-img'>
             <h5 className='card-title'>{restaurant_name}</h5>
+            <MapContainer />
           </div>
         </div>
       </div>
@@ -127,10 +132,12 @@ function App() {
                 Search
               </button>
             </div>
-            <h4>Search by: </h4>
+            <h4>Or select a cuisine type and press search: </h4>
             <select style={{ margin: "auto" }} onChange={handleSelector}>
-              <option value='cuisine'>Cuisine Type</option>
-              <option value='name'>Restaurant Name</option>
+              <option value='All'>All</option>
+              <option value='American'>American</option>
+              <option value='Italian'>Italian</option>
+              <option value='Korean'>Korean</option>
             </select>
           </div>
         </div>
@@ -144,8 +151,6 @@ function App() {
           </div>
         </div>
       </section>
-
-      <MapContainer />
       <ToastContainer />
     </div>
   );

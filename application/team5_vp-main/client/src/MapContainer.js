@@ -8,9 +8,8 @@ dotenv.config({ path: "./config/config.env" });
  */
 
 const mapStyles = {
-  margin: "auto",
-  width: "50%",
-  height: "50%",
+  width: "95%",
+  height: "40%",
 };
 
 function MapContainer(props) {
