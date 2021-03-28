@@ -9,8 +9,7 @@ process.on("uncaughtException", (err) => {
 });
 
 // dotenv configuration
-
-dotenv.config({ path: "./config/config.env" });
+dotenv.config({ path: path.join(__dirname, './config/config.env') });
 
 //  port declarations
 const port = process.env.PORT || 4000;
