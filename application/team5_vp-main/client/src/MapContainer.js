@@ -53,7 +53,7 @@ function MapContainer(props) {
         onClose={onClose}
       >
         <div>
-          <h4>{selectedPlace.name}</h4>
+          <h4 className='map-name'>{selectedPlace.name}</h4>
         </div>
       </InfoWindow>
     </Map>

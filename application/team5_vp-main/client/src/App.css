@@ -20,3 +20,7 @@ body {
 .card-body {
   height: 100% !important;
 }
+
+.map-name {
+  font-size: 15px !important;
+}
