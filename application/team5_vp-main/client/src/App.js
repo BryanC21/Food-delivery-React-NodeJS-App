@@ -95,7 +95,7 @@ function App() {
           />
           <div className='card-body card-img'>
             <h5 className='card-title'>{restaurant_name}</h5>
-            <p class='card-text'>{address}</p>
+            <p className='card-text'>{address}</p>
           </div>
         </div>
       </div>
