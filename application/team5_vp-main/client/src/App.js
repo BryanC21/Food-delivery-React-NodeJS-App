@@ -43,7 +43,8 @@ function App() {
 
       setFilterRestaurant(
         loadRestaurants.filter((restaurants) =>
-          restaurants.cuisine_type.toLowerCase().includes(searchType.toLowerCase())
+          restaurants.cuisine_type.toLowerCase().includes(searchType.toLowerCase()) 
+          && restaurants.restaurant_name.toLowerCase().includes(search.toLowerCase())
         )
       );
       
@@ -132,12 +133,12 @@ function App() {
                 Search
               </button>
             </div>
-            <h4>Or select a cuisine type and press search: </h4>
             <select style={{ margin: "auto" }} onChange={handleSelector}>
               <option value='All'>All</option>
               <option value='American'>American</option>
               <option value='Italian'>Italian</option>
               <option value='Korean'>Korean</option>
+              <option value='Chinese'>Chinese</option>
             </select>
           </div>
         </div>
