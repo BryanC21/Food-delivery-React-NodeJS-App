@@ -15,3 +15,8 @@ npm run dev
 ```
 
 This will allow you to run backend and frontend together
+
+AWS Build is running:
+team5_vp-main/server/server.js
+back-end/server/frontend.js
+back-end/server/gateway.js
