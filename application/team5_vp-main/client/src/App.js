@@ -76,11 +76,12 @@ function App() {
   };
 
   const RestaurantDetail = (props) => {
-    const { restaurant_name, restaurant_logo } = props;
+    const { restaurant_name, restaurant_logo, address } = props;
 
     return (
       <div className='col-sm-6'>
         <div className='card mb-4 shadow-sm'>
+          <MapContainer />
           <img
             src={restaurant_logo}
             className='card-img-top card-img'
@@ -88,6 +89,7 @@ function App() {
           />
           <div className='card-body'>
             <h5 className='card-title'>{restaurant_name}</h5>
+            <p class='card-text'>{address}</p>
           </div>
         </div>
       </div>
@@ -129,8 +131,13 @@ function App() {
             </div>
             <h4>Search by: </h4>
             <select style={{ margin: "auto" }} onChange={handleSelector}>
-              <option value='cuisine'>Cuisine Type</option>
-              <option value='name'>Restaurant Name</option>
+              <optgroup label='Cuisine'>
+                <option value='All'>All</option>
+                <option value='American'>American</option>
+                <option value='Italian'>Italian</option>
+                <option value='Korean'>Korean</option>
+                <option value='Chinese'>Chinese</option>
+              </optgroup>
             </select>
           </div>
         </div>
@@ -145,7 +152,7 @@ function App() {
         </div>
       </section>
 
-      <MapContainer />
+      {/* <MapContainer /> */}
       <ToastContainer />
     </div>
   );
