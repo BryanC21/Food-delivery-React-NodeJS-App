@@ -9,8 +9,11 @@ dotenv.config({ path: "./config/config.env" });
 
 const mapStyles = {
   margin: "auto",
-  width: "50%",
-  height: "50%",
+  width: "30%",
+  height: "30%",
+  position: "relative",
+  top: "54.4%",
+  left: "35%",
 };
 
 function MapContainer(props) {
@@ -58,6 +61,5 @@ function MapContainer(props) {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc',
-  //apiKey: process.env.MAPKEY, //I dont know how to do this
+  apiKey: "AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc",
 })(MapContainer);
