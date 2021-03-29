@@ -87,7 +87,7 @@ function App() {
     return (
       <div className='col-sm-6'>
         <div className='card mb-4 shadow-sm'>
-          <MapContainer />
+          <MapContainer name={address} />
           <img
             src={restaurant_logo}
             className='card-img-top card-img'
