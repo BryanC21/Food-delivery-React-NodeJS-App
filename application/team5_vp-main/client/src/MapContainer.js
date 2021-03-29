@@ -9,11 +9,11 @@ dotenv.config({ path: "./config/config.env" });
 
 const mapStyles = {
   margin: "auto",
-  width: "30%",
-  height: "25%",
+  width: "40%",
+  height: "30%",
   position: "relative",
-  top: "59%",
-  left: "35%",
+  top: "53%",
+  left: "30%",
 };
 
 function MapContainer(props) {
@@ -46,7 +46,7 @@ function MapContainer(props) {
         lng: -122.48015507898837,
       }}
     >
-      <Marker onClick={onMarkerClick} name={"SFSU"} />
+      <Marker onClick={onMarkerClick} name={props.name} />
       <InfoWindow
         marker={activeMarker}
         visible={showInfoWindow}
