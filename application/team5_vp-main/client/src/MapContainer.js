@@ -1,9 +1,9 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 //const NodeGeocoder = require('node-geocoder');
 //var geocoder = require('google-geocoder');
 //const net = require('net');
-const axios = require('axios')
+const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
 
@@ -20,25 +20,25 @@ const mapStyles = {
   left: "30%",
 };
 
-function MapContainer (props) {
+function MapContainer(props) {
   const [showInfoWindow, setShowInfoWindow] = useState(false);
   const [activeMarker, setActiveMarker] = useState({});
   const [selectedPlace, setSelectedPlace] = useState({});
-  const [latLon, setLatLon] = useState({lat: 1, lng: 1});
+  const [latLon, setLatLon] = useState({ lat: 1, lng: 1 });
 
   const getCoordinates = async () => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${props.name}&key=AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc`;
-    axios
+    await axios
       .get(url)
       .then((response) => {
         console.log(JSON.stringify(response.data.results[0].geometry.location));
-        setLatLon(response.data.results[0].geometry.location)
+        setLatLon(response.data.results[0].geometry.location);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
+
   useEffect(() => {
     getCoordinates();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,7 +67,7 @@ function MapContainer (props) {
       initialCenter={latLon}
       center={latLon}
     >
-      <Marker onClick={onMarkerClick} name={props.name}  position={latLon}/>
+      <Marker onClick={onMarkerClick} name={props.name} position={latLon} />
       <InfoWindow
         marker={activeMarker}
         visible={showInfoWindow}

@@ -54,7 +54,7 @@ function App() {
 
   const load = async () => {
     const url = "/api/v1/restaurants/getAllRestaurants";
-    axios.get(url).then((response) => {
+    await axios.get(url).then((response) => {
       console.log(response.data);
       const { restaurants } = response.data;
       setLoadRestaurants(restaurants);
@@ -63,7 +63,7 @@ function App() {
 
   const handleSearches = async () => {
     const url = `/api/v1/search/items?search=${search.toLowerCase()}`;
-    axios
+    await axios
       .get(url)
       .then((response) => {
         setRestaurant(response.data);
