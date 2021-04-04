@@ -1,5 +1,6 @@
 import "./css/App.css";
 import "./css/index.css";
+import "./css/MediaQueries.css";
 import Navbar from "./utility/Navbar/Navbar";
 import Footer from "./utility/Footer/Footer";
 import Home from "./pages/Home/Home";

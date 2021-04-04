@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar-brand {
+  font-size: 1.5rem !important;
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.card-img {
+  height: 500px !important;
+}
+
+.card-body {
+  height: 100% !important;
+}
+
+.map-name {
+  font-size: 15px !important;
+}
