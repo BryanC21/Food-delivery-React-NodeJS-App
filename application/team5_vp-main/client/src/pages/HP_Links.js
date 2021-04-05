@@ -8,6 +8,13 @@ function HP_Links() {
         <h1>Leave links to pages you create here so we can reach them easily:</h1>
         <p>You need to add routes in src/index.js for links to work also</p>
         <Link to="/">Home</Link>
+        <br></br>
+        <Link to={{
+          pathname: '/RestaurantMenu',
+          state: {
+            restaurantName: "McDonalds"
+          }
+        }}>RestaurantMenu</Link>
       </header>
     </div>
   );
