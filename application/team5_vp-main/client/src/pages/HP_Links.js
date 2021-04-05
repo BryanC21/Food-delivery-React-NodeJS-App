@@ -6,6 +6,7 @@ function HP_Links() {
     <div>
       <header>
         <h1>Leave links to pages you create here so we can reach them easily:</h1>
+        <p>You need to add routes in src/index.js for links to work also</p>
         <Link to="/">Home</Link>
       </header>
     </div>
