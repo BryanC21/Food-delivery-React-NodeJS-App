@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import MapContainer from "./MapContainer";
+import MapContainer from "./components/MapContainer";
 
 function App() {
   const [restaurant, setRestaurant] = useState([]);
@@ -113,6 +114,9 @@ function App() {
       </header>
       <section className='jumbotron text-center bg-light'>
         <div className='container'>
+
+          <Link to="/HP_Pages">HP_Pages</Link>  
+
           <h2 className='display-2'>Team5</h2>
           <h5 className='display-7'>CSC648 - Spring 2021</h5>
           <div className='row'>
