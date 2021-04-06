@@ -7,6 +7,7 @@ import HP_Links from "./pages/HP_Links";
 import Home from "./pages/Home/Home";
 import Navbar from "./utility/Navbar/Navbar";
 import Footer from "./utility/Footer/Footer";
+import ResMenuPage from "./pages/ResMenuPage";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route exact path='/' component={App} />
         <Route exact path='/HP_Pages' component={HP_Links} />
         <Route exact path='/HP/home_page' component={Home} />
+        <Route exact path='/RestaurantMenu' component={ResMenuPage} />
       </Switch>
       <Route path='/HP' component={Footer} />
     </Router>

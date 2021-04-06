@@ -10,9 +10,11 @@ function HP_Links() {
         </h1>
         <p>You need to add routes in src/index.js for links to work also</p>
         <Link to='/'>Home</Link>
+        <br></br>
+        <Link to='/RestaurantMenu'>RestaurantMenu</Link>
       </header>
       <div>
-        <Link to='/HP/home_page'>HP homepage</Link>
+        <Link to='/HP/homepage'>HP homepage</Link>
       </div>
     </div>
   );
