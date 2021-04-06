@@ -88,6 +88,17 @@ body {
 .restaurant-section .card-img-top {
   height: 215px;
 }
+.restaurant-section .card {
+  background-color: #fff !important;
+  background-clip: border-box;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.3rem;
+}
+
+.restaurant-section .card-title,
+.restaurant-section .card-text {
+  color: rgb(146, 146, 146);
+}
 
 /* CHEF SECTION */
 
