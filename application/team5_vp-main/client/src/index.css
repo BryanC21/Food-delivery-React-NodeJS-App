@@ -103,14 +103,15 @@ body {
 }
 
 .chef-section {
-  background-color: var(--content-overlay);
+  background-color: var(--secondary-color);
 }
 .chef-about {
   margin-top: 80px !important;
 }
 /* Footer */
 .footer {
-  background-color: var(--primary-color);
+  background-color: var(--white-color);
+  /* background-color: var(--primary-color); */
 }
 
 .footer a {
@@ -118,6 +119,6 @@ body {
 }
 
 .footer a:hover {
-  color: var(--white-color) !important;
+  color: var(--primary-color-hover) !important;
   text-decoration: underline !important;
 }
