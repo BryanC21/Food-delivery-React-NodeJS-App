@@ -120,8 +120,8 @@ function Home() {
               <div className='chef-about col-sm-6 white-color-font '>
                 <h2>Your Next Meal Awaits You. </h2>
                 <p className='lead'>
-                  Neighborhood chefs are waiting to cook your meal that will
-                  satisfy your cravings.
+                  Neighborhood chefs are waiting to cook your next meal, that
+                  will help satisfy your cravings.
                 </p>
               </div>
               <div className='col-sm-6'>
