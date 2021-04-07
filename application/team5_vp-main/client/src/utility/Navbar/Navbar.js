@@ -49,7 +49,7 @@ function Navbar() {
             aria-label='Search'
           />
 
-          <button className='btn btn-outline-success' type='submit'>
+          <button className='btn btn-search btn-outline-success' type='submit'>
             <FontAwesomeIcon icon={faSearch} size='1x' />
           </button>
         </form>
