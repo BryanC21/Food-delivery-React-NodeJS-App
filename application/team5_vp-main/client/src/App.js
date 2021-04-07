@@ -116,6 +116,7 @@ function App() {
         <div className='container'>
 
           <Link to="/HP_Pages">HP_Pages</Link>  
+          <Link to="/CustomerViewRestaruantMenu">CustomerViewRestaruantMenu</Link>  
 
           <h2 className='display-2'>Team5</h2>
           <h5 className='display-7'>CSC648 - Spring 2021</h5>
