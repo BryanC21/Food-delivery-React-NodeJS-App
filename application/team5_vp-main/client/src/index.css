@@ -5,6 +5,7 @@
   --primary-color: #743282;
   --primary-color-hover: rgb(96, 30, 109);
   --secondary-color: #dc9200;
+  --secondary-color-hover: #b87d07;
   --logo-font: "Gochi Hand", cursive;
   --content-overlay: rgba(0, 0, 0, 0.5);
   --white-color: #fff;
@@ -12,6 +13,12 @@
 
 body {
   font-family: "Poppins", sans-serif;
+}
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
 }
 
 .white-color-font {
@@ -81,23 +88,36 @@ body {
   left: 25%;
 }
 
-.restaurant-section .card-width {
-  width: 18rem;
+/* Join */
+.join-section {
+  /* position: fixed; */
+  margin-left: 76px !important;
 }
 
-.restaurant-section .card-img-top {
-  height: 215px;
-}
-.restaurant-section .card {
-  background-color: #fff !important;
-  background-clip: border-box;
-  border: 1px solid var(--primary-color);
-  border-radius: 0.3rem;
+.join-section .btn-link {
+  margin-left: 65px;
+  width: 250px;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
-.restaurant-section .card-title,
-.restaurant-section .card-text {
-  color: rgb(146, 146, 146);
+.join-section .card-deliverer {
+  margin-top: 4rem;
+}
+.join-section .btn-partner {
+  margin-top: 1rem !important;
+}
+
+.join-section .card-user {
+  font-size: 20px !important;
+}
+.join-section .card-title-right-1 {
+  position: relative;
+  right: 50px;
+}
+.join-section .card-title-right-2 {
+  position: relative;
+  right: 35px;
 }
 
 /* CHEF SECTION */
@@ -119,6 +139,7 @@ body {
 .chef-about {
   margin-top: 80px !important;
 }
+
 /* Footer */
 .footer {
   background-color: var(--white-color);
