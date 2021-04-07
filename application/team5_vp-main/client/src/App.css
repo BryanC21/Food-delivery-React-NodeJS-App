@@ -21,6 +21,10 @@
 
 /* Bootstrap  */
 
+.col-sm-4 {
+  width: 17.333333% !important;
+}
+
 /* NAVBAR START */
 .nav-active {
   color: var(--primary-color) !important;
@@ -102,12 +106,17 @@
   background-color: var(--primary-color);
   border-color: var(--primary-color);
 }
+.nav .btn-search {
+  color: var(--white-color) !important;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
 
 /* NAVBAR END */
 
 /* BUTTON START */
 
-.btn-outline-success {
+.hero .btn-outline-success {
   color: var(--white-color) !important;
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
@@ -241,6 +250,133 @@
 .join-about {
   text-align: start;
   position: relative;
-  left: 200px;
   padding: 20px 0;
+}
+
+.join-about p {
+  width: 406px;
+}
+
+/* Media Queries */
+
+@media (min-width: 1900px) {
+  .col-sm-4 {
+    width: 17.333333% !important;
+  }
+}
+@media (max-width: 1600px) {
+  .col-sm-4 {
+    width: 25.333333% !important;
+  }
+  .restaurant-section .restaurant-content {
+    left: 20%;
+  }
+}
+@media (max-width: 1200px) {
+  .col-sm-4 {
+    width: 30.333333% !important;
+  }
+  .join-section {
+    margin-left: -66px !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .join-section {
+    margin-right: 210px !important;
+  }
+  .restaurant-section .restaurant-content {
+    left: 10%;
+  }
+}
+
+@media (max-width: 890px) {
+  .restaurant-section .card-width {
+    width: 15rem;
+  }
+}
+@media (max-width: 576px) {
+  .col-sm-4 {
+    width: 28.333333% !important;
+  }
+  .join-section {
+    position: relative;
+
+    margin-top: 107px;
+
+    right: 139px;
+  }
+  .join-about {
+    left: 108px;
+
+    width: 134px !important;
+  }
+  .join-about p {
+    width: 301px;
+  }
+
+  .restaurant-section .card-width {
+    height: 276px;
+    width: 9rem;
+  }
+  .restaurant-section .restaurant-content {
+    left: 12% !important;
+  }
+
+  .restaurant-section .card-img-top {
+    height: 119px;
+  }
+
+  .chef-about .lead {
+    width: 344px;
+  }
+  .hero .h6 {
+    font-size: 0.9rem;
+  }
+  .card-title {
+    font-size: 0.9rem;
+  }
+  .card-text {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 414px) {
+  .join-section {
+    right: 100px;
+  }
+  .hero .h6 {
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+  }
+  .restaurant-section .card-width {
+    width: 7rem;
+  }
+}
+@media (max-width: 375px) {
+  .restaurant-section .card-width {
+    width: 6.5rem;
+  }
+  .restaurant-section .restaurant-content {
+    left: 1%;
+  }
+  .join-section {
+    margin-top: 175px;
+    right: 110px;
+  }
+  .chef-about .lead {
+    width: 318px;
+  }
+  .footer-nav {
+    margin-top: 30px !important;
+  }
+  .hero .h6 {
+    font-size: 0.75rem;
+    line-height: 1.4rem;
+  }
+  .nav {
+    margin-top: 10px !important;
+  }
+  .card-title {
+    font-size: 0.5rem;
+  }
 }
