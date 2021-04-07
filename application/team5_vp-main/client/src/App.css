@@ -105,15 +105,15 @@
 
 /* NAVBAR END */
 
-/* HOMEPAGE START */
+/* BUTTON START */
 
-.hero .btn-outline-success {
+.btn-outline-success {
   color: var(--white-color) !important;
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
 }
 
-.hero .btn-outline-success:hover {
+.btn-outline-success:hover {
   background-color: var(--primary-color-hover) !important;
   border-color: var(--primary-color) !important;
 }
@@ -131,4 +131,116 @@
   box-shadow: none !important;
 }
 
-/* HOMEPAGE END */
+/* BUTTON END */
+
+/* Restaurant Section */
+
+.restaurant-section .card-width {
+  width: 18rem;
+}
+
+.restaurant-section .card-img-top {
+  height: 215px;
+}
+.restaurant-section .card {
+  background-color: #fff !important;
+  background-clip: border-box;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.3rem;
+}
+
+.restaurant-section .card-title {
+  color: #464646;
+  font-weight: bold;
+}
+.restaurant-section .card-text {
+  color: rgb(146, 146, 146);
+}
+
+/* Join */
+.join-section .card {
+  margin-left: 50%;
+  background-color: #fff !important;
+  background-clip: border-box;
+  border: 1px solid var(--primary-color);
+  border-radius: 1rem;
+}
+.join-section .card-width {
+  width: 22rem;
+  height: 30rem;
+}
+
+.join-section .card-img-top {
+  margin-top: 10px;
+  height: 215px;
+}
+
+.join-section .card-title {
+  font-size: 25px !important;
+  color: #464646;
+  font-weight: bold;
+}
+.join-section .card-text {
+  color: #5f6368;
+  width: 250px;
+  font-weight: 400;
+  list-style-type: "→";
+  margin-left: 10px;
+}
+
+.join-section .card-text span {
+  position: relative;
+  right: 20px;
+}
+.join-section .card-text .span-2 {
+  position: relative;
+  right: 40px;
+}
+.join-section .card-text .span-3 {
+  position: relative;
+  right: 10px;
+}
+.join-section .card-text .span-4 {
+  position: relative;
+  right: 10px;
+}
+.join-section .card-text .span-5 {
+  position: relative;
+  left: 5px;
+}
+.join-section .card-text .span-6 {
+  position: relative;
+  right: 17px;
+}
+.join-section .card-text .span-7 {
+  position: relative;
+  right: 7px;
+}
+.join-section .card-text .span-8 {
+  position: relative;
+  right: 25px;
+}
+.join-section .card-text .span-9 {
+  position: relative;
+  right: 1px;
+}
+
+.join-section .btn-outline-success {
+  color: var(--white-color) !important;
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+  position: relative;
+  right: 36px;
+}
+
+.join-section .btn-outline-success:hover {
+  background-color: var(--secondary-color-hover) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+.join-about {
+  text-align: start;
+  position: relative;
+  left: 200px;
+  padding: 20px 0;
+}
