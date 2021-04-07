@@ -33,7 +33,7 @@ function Home() {
             </p>
           </div>
           <div className='row'>
-            <div className='col-4'>
+            <div className='col-6 col-sm-4'>
               <div className='card card-width text-white primary-color-bg mb-3'>
                 <img
                   className='card-img-top'
@@ -46,7 +46,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className='col-4'>
+            <div className='col-6 col-sm-4'>
               <div className='card card-width text-white primary-color-bg mb-3'>
                 <img
                   className='card-img-top'
@@ -59,7 +59,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className='col-4'>
+            <div className='col-6 col-sm-4'>
               <div className='card card-width text-white primary-color-bg mb-3'>
                 <img
                   className='card-img-top'
@@ -72,9 +72,8 @@ function Home() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className='row'>
-            <div className='col-4'>
+            <div class='w-100 d-none d-md-block'></div>
+            <div className='col-6 col-sm-4'>
               <div className='card card-width text-white primary-color-bg mb-3'>
                 <img
                   className='card-img-top'
@@ -87,7 +86,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className='col-4'>
+            <div className='col-6 col-sm-4'>
               <div className='card card-width text-white primary-color-bg mb-3'>
                 <img
                   className='card-img-top'
@@ -100,7 +99,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className='col-4'>
+            <div className='col-6 col-sm-4'>
               <div className='card card-width text-white primary-color-bg mb-3'>
                 <img
                   className='card-img-top'
