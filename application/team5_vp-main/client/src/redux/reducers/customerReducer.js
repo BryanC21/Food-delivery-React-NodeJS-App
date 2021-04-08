@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    restaruant_menu: [{name: "burger", price: "17.99"},{name: "burger", price: "17.99"},{name: "burger", price: "17.99"},{name: "burger", price: "17.99"},{name: "burger", price: "17.99"},{name: "burger", price: "17.99"},{name: "burger", price: "17.99"}],
+    restaruant_menu: [{name: "burger", description: "Taste good", price: "17.99"},{name: "burger", description: "Taste good",price: "17.99"},{name: "burger", description: "Taste good",price: "17.99"},{name: "burger", description: "Taste good",price: "17.99"},{name: "burger", description: "Taste good",price: "17.99"},{name: "burger", description: "Taste good",price: "17.99"},{name: "burger", description: "Taste good",price: "17.99"}],
     search_type: ""
 };
 
