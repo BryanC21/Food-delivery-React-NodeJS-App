@@ -14,33 +14,16 @@ function Navbar() {
           <img src={Logo} alt='logo' />
         </Link>
         <form className='d-flex container-sm '>
-          <div class='dropdown me-3'>
-            <button
-              class='btn btn-secondary dropdown-toggle'
-              type='button'
-              id='dropdownMenuButton1'
-              data-bs-toggle='dropdown'
-              aria-expanded='false'
-            >
-              All
-            </button>
-            <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-              <li>
-                <Link class='dropdown-item' to='#'>
-                  American
-                </Link>
-              </li>
-              <li>
-                <Link class='dropdown-item' to='#'>
-                  Italian
-                </Link>
-              </li>
-              <li>
-                <Link class='dropdown-item' to='#'>
-                  Chinese
-                </Link>
-              </li>
-            </ul>
+          <div className='dropdown me-3'>
+            <select className='btn btn-secondary dropdown-toggle'>
+              <optgroup label='Cuisine'>
+                <option value='All'>All</option>
+                <option value='American'>American</option>
+                <option value='Italian'>Italian</option>
+                <option value='Korean'>Korean</option>
+                <option value='Chinese'>Chinese</option>
+              </optgroup>
+            </select>
           </div>
           <input
             className='form-control me-2'
