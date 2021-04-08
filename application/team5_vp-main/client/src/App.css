@@ -145,7 +145,7 @@
 /* Restaurant Section */
 
 .restaurant-section .card-width {
-  width: 18rem;
+  width: 17rem;
 }
 
 .restaurant-section .card-img-top {
@@ -167,12 +167,21 @@
 }
 
 /* Join */
+
+/* .join-section {
+  max-width: 1000px !important;
+} */
+
+.join-section .row {
+  --bs-gutter-x: -12.5rem;
+}
+
 .join-section .card {
-  margin-left: 50%;
   background-color: #fff !important;
   background-clip: border-box;
   border: 1px solid var(--primary-color);
   border-radius: 1rem;
+  margin-left: 35%;
 }
 .join-section .card-width {
   width: 22rem;
@@ -197,41 +206,9 @@
   margin-left: 10px;
 }
 
-.join-section .card-text span {
-  position: relative;
-  right: 20px;
-}
-.join-section .card-text .span-2 {
-  position: relative;
-  right: 40px;
-}
-.join-section .card-text .span-3 {
-  position: relative;
-  right: 10px;
-}
-.join-section .card-text .span-4 {
-  position: relative;
-  right: 10px;
-}
-.join-section .card-text .span-5 {
-  position: relative;
-  left: 5px;
-}
-.join-section .card-text .span-6 {
-  position: relative;
-  right: 17px;
-}
-.join-section .card-text .span-7 {
-  position: relative;
-  right: 7px;
-}
-.join-section .card-text .span-8 {
-  position: relative;
-  right: 25px;
-}
-.join-section .card-text .span-9 {
-  position: relative;
-  right: 1px;
+.join-section .card-text li {
+  text-align: start;
+  padding: 0 2px;
 }
 
 .join-section .btn-outline-success {
@@ -250,6 +227,7 @@
 .join-about {
   text-align: start;
   position: relative;
+  margin-left: 130px;
   padding: 20px 0;
 }
 
@@ -259,34 +237,18 @@
 
 /* Media Queries */
 
-@media (min-width: 1900px) {
-  .col-sm-4 {
-    width: 17.333333% !important;
-  }
-}
-@media (max-width: 1600px) {
-  .col-sm-4 {
-    width: 25.333333% !important;
-  }
+@media (max-width: 1024px) {
   .restaurant-section .restaurant-content {
-    left: 20%;
-  }
-}
-@media (max-width: 1200px) {
-  .col-sm-4 {
-    width: 30.333333% !important;
+    left: 13% !important;
   }
   .join-section {
-    margin-left: -66px !important;
+    /* position: fixed; */
+    margin-left: 3px !important;
   }
 }
-
-@media (min-width: 576px) {
-  .join-section {
-    margin-right: 210px !important;
-  }
+@media (max-width: 797px) {
   .restaurant-section .restaurant-content {
-    left: 10%;
+    left: 10% !important;
   }
 }
 
@@ -296,6 +258,9 @@
   }
 }
 @media (max-width: 576px) {
+  .join-section {
+    margin-right: 210px !important;
+  }
   .col-sm-4 {
     width: 28.333333% !important;
   }

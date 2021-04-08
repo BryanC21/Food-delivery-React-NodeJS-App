@@ -21,6 +21,14 @@ body {
   overflow-x: hidden;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 340px;
+  width: 55% !important;
+  grid-gap: 1%;
+}
+
 .white-color-font {
   color: var(--white-color);
 }
