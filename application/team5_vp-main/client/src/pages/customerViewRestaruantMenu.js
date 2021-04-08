@@ -2,7 +2,9 @@
 import React from "react";
 import "./customerViewRestaurantMenu.css";
 import { connect } from "react-redux";
-import { Button, Card, CardColumns } from "react-bootstrap";
+import { Button, Card, CardColumns, CardDeck } from "react-bootstrap";
+import Navbar from "../utility/Navbar/Navbar"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 
@@ -21,16 +23,24 @@ const customerViewRestaruantMenu =   ({restaruant_menu})  => {
     var s = ' '
      return (
         <div>
+          <div className='jumbotron bg-dark'>
+            
+          
          <h2 className='head'>Resturant Name</h2>
 
+         </div>
 
+         <div className='head'>
+           <h3> Our Menu </h3>
+         </div>
+         
 
-         <CardColumns >
+         <CardDeck style={{display: 'flex', flexDirection: 'row', margin: '5rem', flexWrap: "wrap"}}>
 
         {restaruant_menu.map((restaruant_menu) =>
-          <Card>
+          <Card style={{ width: '18rem', margin: '1rem' }}>
 
-
+            <Card.Img variant="top" src="" />
             <Card.Body>
               <Card.Title>{restaruant_menu.name}</Card.Title>
               <Card.Text>
@@ -47,7 +57,9 @@ const customerViewRestaruantMenu =   ({restaruant_menu})  => {
 
         )}
 
-      </CardColumns>
+</CardDeck>
+
+     
         
 
 
