@@ -16,7 +16,7 @@ function Navbar() {
         <form className='d-flex container-sm '>
           <div class='dropdown me-3'>
             <button
-              class='btn btn-secondary dropdown-toggle'
+              className='btn btn-secondary dropdown-toggle'
               type='button'
               id='dropdownMenuButton1'
               data-bs-toggle='dropdown'
@@ -24,22 +24,10 @@ function Navbar() {
             >
               All
             </button>
-            <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-              <li>
-                <Link class='dropdown-item' to='#'>
-                  American
-                </Link>
-              </li>
-              <li>
-                <Link class='dropdown-item' to='#'>
-                  Italian
-                </Link>
-              </li>
-              <li>
-                <Link class='dropdown-item' to='#'>
-                  Chinese
-                </Link>
-              </li>
+            <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+              <li className='dropdown-item'>American</li>
+              <li className='dropdown-item'>Italian</li>
+              <li className='dropdown-item'>Chinese</li>
             </ul>
           </div>
           <input
