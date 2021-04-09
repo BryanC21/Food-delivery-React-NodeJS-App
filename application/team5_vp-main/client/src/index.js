@@ -10,7 +10,7 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/reducers/rootReducer";
 import Home from "./pages/Home/Home";
-import SearchPage from "./pages/Search/SearchPage";
+import SearchMenu from "./pages/Search/SearchMenu";
 import Navbar from "./utility/Navbar/Navbar";
 import Footer from "./utility/Footer/Footer";
 import ResMenuPage from "./pages/ResMenuPage";
@@ -31,7 +31,7 @@ ReactDOM.render(
             component={customerViewRestaruantMenu}
           />
           <Route exact path='/HP/homepage' component={Home} />
-          <Route exact path='/HP/search_result' component={SearchPage} />
+          <Route exact path='/HP/search_result_menu' component={SearchMenu} />
           <Route exact path='/HP/RestaurantMenu' component={ResMenuPage} />
         </Switch>
         <Route path='/HP' component={Footer} />
