@@ -26,7 +26,7 @@ ReactDOM.render(
         <Route exact path='/HP_Pages' component={HP_Links} />
         <Route exact path='/HP/CustomerViewRestaruantMenu' component={customerViewRestaruantMenu} />
         <Route exact path='/HP/homepage' component={Home} />
-        <Route exact path='/RestaurantMenu' component={ResMenuPage} />
+        <Route exact path='/HP/RestaurantMenu' component={ResMenuPage} />
       </Switch>
       <Route path='/HP' component={Footer} />
     </Router>
