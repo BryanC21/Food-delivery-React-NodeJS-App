@@ -8,6 +8,7 @@ import axios from "axios";
 
 function Home() {
   const [loadRestaurants, setLoadRestaurants] = useState([]);
+  const [phone, setPhone] = useState()
 
   useEffect(() => {
     loadAllRestaurants();
@@ -72,6 +73,11 @@ function Home() {
             <p className='lead'>
               Select your favorite restaurants to start ordering
             </p>
+          </div>
+          <div>
+            <p>Sign up for our newsletter! <br /> Enter your phone number below:</p>
+            <input type="range" min="0000000000" max="9999999999" onChange={(e) => setPhone(e.target.value)} style={{width: 500}}></input>
+            <h4>{phone}</h4>
           </div>
           <div className='wrapper'>
             {loadRestaurants.map((restaurant, id) => (
