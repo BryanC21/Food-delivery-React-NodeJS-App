@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Chef from "../../images/cooked.svg";
 import Deliverer from "../../images/deliverer.svg";
-import restaurant from "../../images/Chef.svg";
+import restaurant_img from "../../images/Chef.svg";
 import subscription from "../../images/subscriptions.svg";
 import axios from "axios";
 
@@ -19,19 +19,28 @@ function Home() {
     await axios.get(url).then((response) => {
       // destructure restaurant from response.data
       const { restaurants } = response.data;
+      console.log(restaurants);
       // put the restaurants data into array called setLoadRestaurant
       setLoadRestaurants(restaurants);
-      console.log(loadRestaurants);
     });
   };
 
   const LoadRestaurantDetail = (props) => {
-    const { restaurant_name, restaurant_logo, address } = props;
+    const {
+      restaurant_name,
+      restaurant_logo,
+      address,
+      dollar_sign,
+      cuisine_type,
+    } = props;
     return (
       <div className='card card-width text-white primary-color-bg mb-3'>
         <img className='card-img-top' src={restaurant_logo} alt='Breakfast' />
         <div className='card-body'>
           <h5 className='card-title'>{restaurant_name}</h5>
+          <h6 className='card-subtitle mb-2 text-muted'>
+            {dollar_sign} → {cuisine_type}
+          </h6>
           <p className='card-text'>{address}</p>
         </div>
       </div>
@@ -107,7 +116,11 @@ function Home() {
             </div>
             <div className='col'>
               <div className='card card-width text-white primary-color-bg mb-3'>
-                <img className='card-img-top' src={restaurant} alt='Deliver' />
+                <img
+                  className='card-img-top'
+                  src={restaurant_img}
+                  alt='Deliver'
+                />
                 <div className='card-body'>
                   <h5 className='card-title card-title-right-2'>
                     Partner With Us
