@@ -6,10 +6,16 @@ import SearchPage from "../../pages/Search/SearchPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+
+import {useSelector, useDispatch} from 'react-redux';
+import {setSearchTerm} from '../../redux/actions/searchActions';
+
 library.add(faSearch, faCartPlus);
 
 function Navbar() {
   const history = useHistory();
+
+  const dispatch = useDispatch();
 
   const [loadRestaurants, setLoadRestaurants] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
@@ -53,21 +59,22 @@ function Navbar() {
     }
   };
   const handleSearches = async (e) => {
-    e.preventDefault();
-    const url = `/api/v1/search/items?search=${search.toLowerCase()}`;
+    //e.preventDefault();
+    /*const url = `/api/v1/search/items?search=${search.toLowerCase()}`;
     await axios
       .get(url)
       .then((response) => {
         setFilter(response.data);
         console.log(response.data);
+        history.push("/HP/search_result");
         filterRestaurant.map((restaurant, id) => (
           <SearchPage key={id} {...restaurant} />
         ));
-        history.push("/HP/search_result");
       })
       .catch((error) => {
         console.log(error);
-      });
+      });*/
+      
   };
 
   const handleSelector = (event) => {
@@ -103,14 +110,15 @@ function Navbar() {
             aria-label='Search'
             onChange={(e) => setSearch(e.target.value)}
           />
-
+          <Link to={{pathname: '/HP/RestaurantMenu', param1: search }}>
           <button
             className='btn btn-search btn-outline-success'
             type='submit'
-            onClick={handleSearches}
+            onClick={() => dispatch(setSearchTerm(search))}
           >
             <FontAwesomeIcon icon={faSearch} size='1x' />
           </button>
+          </Link>
         </form>
         <nav className='nav py-2 '>
           <ul class='nav '>
