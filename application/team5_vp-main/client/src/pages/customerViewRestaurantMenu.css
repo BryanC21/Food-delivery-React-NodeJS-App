@@ -7,4 +7,23 @@
     margin: auto;
   }
 
+  .head-black {
+    text-align: center;
+    color: black;
+  }
 
+  .mergin{
+    margin-left: 200px;
+  }
+
+  .sidenav{
+    width: 170px;
+    position:  relative;
+    z-index: 1;
+    top: 75px;
+    color: white;
+    left: 10px;
+    background:#743282;
+    overflow-x: hidden;
+    padding: 8px 0;
+  }

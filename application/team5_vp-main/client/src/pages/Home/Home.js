@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Chef from "../../images/cooked.svg";
 import Deliverer from "../../images/deliverer.svg";
 import restaurant from "../../images/Chef.svg";
 import subscription from "../../images/subscriptions.svg";
+import axios from "axios";
 
 function Home() {
+  const [loadRestaurants, setLoadRestaurants] = useState([]);
+
+  useEffect(() => {
+    loadAllRestaurants();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const loadAllRestaurants = async () => {
+    const url = "/api/v1/restaurants/getAllRestaurants";
+    await axios.get(url).then((response) => {
+      // destructure restaurant from response.data
+      const { restaurants } = response.data;
+      // put the restaurants data into array called setLoadRestaurant
+      setLoadRestaurants(restaurants);
+      console.log(loadRestaurants);
+    });
+  };
+
+  const LoadRestaurantDetail = (props) => {
+    const { restaurant_name, restaurant_logo, address } = props;
+    return (
+      <div className='card card-width text-white primary-color-bg mb-3'>
+        <img className='card-img-top' src={restaurant_logo} alt='Breakfast' />
+        <div className='card-body'>
+          <h5 className='card-title'>{restaurant_name}</h5>
+          <p className='card-text'>{address}</p>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <header>
@@ -32,92 +64,17 @@ function Home() {
               Select your favorite restaurants to start ordering
             </p>
           </div>
-          <div className='row'>
-            <div className='col-6 col-sm-4'>
-              <div className='card card-width text-white primary-color-bg mb-3'>
-                <img
-                  className='card-img-top'
-                  src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/breakfast_o1qakz.jpg'
-                  alt='Breakfast'
-                />
-                <div className='card-body'>
-                  <h5 className='card-title'>Morning Club</h5>
-                  <p className='card-text'>Park Merced, 94132</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-6 col-sm-4'>
-              <div className='card card-width text-white primary-color-bg mb-3'>
-                <img
-                  className='card-img-top'
-                  src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/korean_b17ap5.jpg'
-                  alt='Korean'
-                />
-                <div className='card-body'>
-                  <h5 className='card-title'>K-Blast</h5>
-                  <p className='card-text'>333 Eucalyptus Dr, 94132</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-6 col-sm-4'>
-              <div className='card card-width text-white primary-color-bg mb-3'>
-                <img
-                  className='card-img-top'
-                  src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/chinese_uyayjh.jpg'
-                  alt='Chinese'
-                />
-                <div className='card-body'>
-                  <h5 className='card-title'>DimSum</h5>
-                  <p className='card-text'>265 Winston Dr, 94132</p>
-                </div>
-              </div>
-            </div>
-            <div class='w-100 d-none d-md-block'></div>
-            <div className='col-6 col-sm-4'>
-              <div className='card card-width text-white primary-color-bg mb-3'>
-                <img
-                  className='card-img-top'
-                  src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/Italian_bmuhgo.jpg'
-                  alt='Italian'
-                />
-                <div className='card-body'>
-                  <h5 className='card-title'>ItalianCusine</h5>
-                  <p className='card-text'>Daly City Bart, 94132</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-6 col-sm-4'>
-              <div className='card card-width text-white primary-color-bg mb-3'>
-                <img
-                  className='card-img-top'
-                  src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg'
-                  alt='American'
-                />
-                <div className='card-body'>
-                  <h5 className='card-title'>BreakfastPerrfect</h5>
-                  <p className='card-text'>Stonestown, 94132</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-6 col-sm-4'>
-              <div className='card card-width text-white primary-color-bg mb-3'>
-                <img
-                  className='card-img-top'
-                  src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1607472716/j2nbz4j9mr7spa1cytx2.jpg'
-                  alt='American'
-                />
-                <div className='card-body'>
-                  <h5 className='card-title'>CoffeeSynergy</h5>
-                  <p className='card-text'>Stonestown, 94132</p>
-                </div>
-              </div>
-            </div>
+          <div className='wrapper'>
+            {loadRestaurants.map((restaurant, id) => (
+              <LoadRestaurantDetail key={id} {...restaurant} />
+            ))}
           </div>
         </div>
       </section>
-      <section className=' jumbotron jumbotron-fluid'>
-        <div className='join-section container d-flex flex-column text-center  '>
-          <div className='row justify-content-center'>
+      <section className='join jumbotron jumbotron-fluid'>
+        <div className='join-section container text-center  '>
+          {/* <div className='row justify-content-center'> */}
+          <div className='row '>
             <div className='col-4 join-about'>
               <h2 className='h1'>Join Us</h2>
               <p className='lead'>
@@ -135,15 +92,9 @@ function Home() {
                     Be a Deliverer
                   </h5>
                   <ul className='card-text'>
-                    <li>
-                      <span>Make extra income</span>
-                    </li>
-                    <li>
-                      <span className='span-2'>GPS guidance</span>
-                    </li>
-                    <li>
-                      <span>Work Conveniently</span>
-                    </li>
+                    <li>Make extra income</li>
+                    <li>GPS guidance</li>
+                    <li>Work Conveniently</li>
                   </ul>
                   <Link
                     className='btn-link btn btn-outline-success py-2 my-2'
@@ -162,17 +113,9 @@ function Home() {
                     Partner With Us
                   </h5>
                   <ul className='card-text'>
-                    <li>
-                      <span className='span-6'>Faster ordering process</span>
-                    </li>
-                    <li>
-                      <span className='span-7'>Update online menu easily</span>
-                    </li>
-                    <li>
-                      <span className='span-5'>
-                        Restaurant owner registration{" "}
-                      </span>
-                    </li>
+                    <li>Faster ordering process</li>
+                    <li>Update online menu easily</li>
+                    <li> Restaurant owner Registration</li>
                   </ul>
                   <Link
                     className='btn-partner btn-link btn btn-outline-success py-2 my-2'
@@ -195,15 +138,9 @@ function Home() {
                     Register To Start Ordering
                   </h5>
                   <ul className='card-text'>
-                    <li>
-                      <span className='span-8'>Meal fully prepared</span>
-                    </li>
-                    <li>
-                      <span className='span-4'>On campus food orders</span>
-                    </li>
-                    <li>
-                      <span className='span-9'>Will fit your budget needs</span>
-                    </li>
+                    <li>Meal fully prepared</li>
+                    <li>On campus food orders</li>
+                    <li>Will fit your budget needs</li>
                   </ul>
                   <Link
                     className='btn-link btn btn-outline-success py-2 my-2'
