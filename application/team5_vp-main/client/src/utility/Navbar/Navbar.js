@@ -1,12 +1,80 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import Logo from "../../images/logo_letters.png";
+import axios from "axios";
+import SearchPage from "../../pages/Search/SearchPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faSearch, faCartPlus);
 
 function Navbar() {
+  const history = useHistory();
+
+  const [loadRestaurants, setLoadRestaurants] = useState([]);
+  const [filterRestaurant, setFilterRestaurant] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchType, setSearchType] = useState("All");
+
+  useEffect(() => {
+    loadAllRestaurants();
+  }, []);
+
+  const loadAllRestaurants = async () => {
+    const url = "/api/v1/restaurants/getAllRestaurants";
+    await axios.get(url).then((response) => {
+      const { restaurants } = response.data;
+      setLoadRestaurants(restaurants);
+    });
+  };
+
+  // using the search button
+  const setFilter = () => {
+    if (searchType === "All") {
+      setFilterRestaurant(
+        loadRestaurants.filter((restaurants) =>
+          restaurants.restaurant_name
+            .toLowerCase()
+            .includes(search.toLowerCase())
+        )
+      );
+    } else {
+      setFilterRestaurant(
+        loadRestaurants.filter(
+          (restaurants) =>
+            restaurants.cuisine_type
+              .toLowerCase()
+              .includes(searchType.toLowerCase()) &&
+            restaurants.restaurant_name
+              .toLowerCase()
+              .includes(search.toLowerCase())
+        )
+      );
+    }
+  };
+  const handleSearches = async (e) => {
+    e.preventDefault();
+    const url = `/api/v1/search/items?search=${search.toLowerCase()}`;
+    await axios
+      .get(url)
+      .then((response) => {
+        setFilter(response.data);
+        console.log(response.data);
+        filterRestaurant.map((restaurant, id) => (
+          <SearchPage key={id} {...restaurant} />
+        ));
+        history.push("/HP/search_result");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleSelector = (event) => {
+    // console.log(event.target.value)
+    setSearchType(event.target.value);
+  };
+
   return (
     <div className='navbar navbar-light bg-light '>
       <div className='container'>
@@ -15,7 +83,10 @@ function Navbar() {
         </Link>
         <form className='d-flex container-sm '>
           <div className='dropdown me-3'>
-            <select className='btn btn-secondary dropdown-toggle'>
+            <select
+              className='btn btn-secondary dropdown-toggle'
+              onChange={handleSelector}
+            >
               <optgroup label='Cuisine'>
                 <option value='All'>All</option>
                 <option value='American'>American</option>
@@ -30,9 +101,14 @@ function Navbar() {
             type='search'
             placeholder='Search'
             aria-label='Search'
+            onChange={(e) => setSearch(e.target.value)}
           />
 
-          <button className='btn btn-search btn-outline-success' type='submit'>
+          <button
+            className='btn btn-search btn-outline-success'
+            type='submit'
+            onClick={handleSearches}
+          >
             <FontAwesomeIcon icon={faSearch} size='1x' />
           </button>
         </form>
@@ -42,7 +118,7 @@ function Navbar() {
               <Link
                 class='nav-link nav-active active'
                 aria-current='page'
-                to='#'
+                to='/HP/homepage'
               >
                 Home
               </Link>
