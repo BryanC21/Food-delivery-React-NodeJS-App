@@ -10,7 +10,6 @@ library.add(faSearch, faCartPlus);
 
 function Navbar() {
   const history = useHistory();
-
   const [loadRestaurants, setLoadRestaurants] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [search, setSearch] = useState("");
@@ -60,10 +59,10 @@ function Navbar() {
       .then((response) => {
         setFilter(response.data);
         console.log(response.data);
+        history.push("/HP/search_result");
         filterRestaurant.map((restaurant, id) => (
           <SearchPage key={id} {...restaurant} />
         ));
-        history.push("/HP/search_result");
       })
       .catch((error) => {
         console.log(error);
