@@ -13,6 +13,8 @@ function HP_Links() {
         <br></br>
         <Link to='/HP/RestaurantMenu'>RestaurantMenu</Link>
         <br></br>
+        <Link to='/HP/search_result?q=All'>Search result</Link>
+        <br></br>
         <Link to='/HP/CustomerViewRestaruantMenu'>
           CustomerViewRestaruantMenu
         </Link>
