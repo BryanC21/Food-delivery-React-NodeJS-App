@@ -1,0 +1,13 @@
+.heading{
+    text-align: center;
+    background-color: rgb(210,227,234);
+    padding: 100px;
+}
+
+.button{
+    background-color: #5F6368;
+    color:white;
+    margin:50px;
+    border-radius: 5px;
+    padding: 10px 100px;
+}

@@ -3,90 +3,79 @@ import React from "react";
 import "./customerViewRestaurantMenu.css";
 import { connect } from "react-redux";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
+import { setCart } from"../redux/actions/customerActions";
 import Navbar from "../utility/Navbar/Navbar"
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const handleAddToCart = (e) => {
+  let item = {
+    product_name: e
+  }
+
+ // dispatch(setCart(e));
+};
 
 
+const customerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
 
-const customerViewRestaruantMenu =   ({restaruant_menu})  => {
-  //console.log(14,props)
- 
-// function dispatch(){
-//   props.dispatch(itemListA())
-
-// }
-
-//console.log(15,props.itemlist)
-    //console.log(15,props.itemlist[0])
-    //dispatch();
-    var s = ' '
-     return (
-        <div>
-          <div className='jumbotron bg-dark'>
-            
-          
-         <h2 className='head'>Resturant Name</h2>
-
-         </div>
-
-         <div className='head-black '>
-           <h3> Our Menu </h3>
-         </div>
+  
+  return (
+    <div>
+      <div className='jumbotron bg-dark'>
 
 
+        <h2 className='head'>Resturant Name</h2>
+
+      </div>
+
+      <div className='head-black '>
+        <h3> Our Menu </h3>
+      </div>
+      <div className="sidenav">
+        <p>Search filter</p>
+      </div>
+      <div className="mergin">
 
 
-
-
-
-
-         
-         <div className = "sidenav">
-         <p>Search filter</p>
-         </div>
-        <div className = "mergin">
-          
-          
         {/* <CardDeck style={{display: 'flex', flexDirection: 'row', margin: '5rem', flexWrap: "wrap"}}> */}
         <CardColumns >
 
-        {restaruant_menu.map((restaruant_menu) =>
-          <Card border="dark" style={{  margin: '1rem' }}>
-            <Row>
-            <Col xs={2}>
-            <Card.Img variant="top"  style={{ height: '180px', width: '180px'}} src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg' />
-            </Col>
-            <Col xs={10}>
-            <Card.Body>
-              <Card.Title>{restaruant_menu.name}</Card.Title>
-              <Card.Text>
-              {restaruant_menu.description}<br></br>
+          {restaruant_menu.map((restaruant_menu) =>
+            <Card border="dark" style={{ margin: '1rem' }}>
+              <Row>
+                <Col xs={2}>
+                  <Card.Img variant="top" style={{ height: '180px', width: '180px' }} src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg' />
+                </Col>
+                <Col xs={10}>
+                  <Card.Body>
+                    <Card.Title>{restaruant_menu.name}</Card.Title>
+                    <Card.Text>
+                      {restaruant_menu.description}<br></br>
               Price: ${restaruant_menu.price}
-              </Card.Text>
-             <Button variant="primary" >Add</Button> 
-             
-             {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
-            </Card.Body>
-            </Col>
-            </Row>
+                    </Card.Text>
+                    <Button variant="primary" onClick={() => dispatch(setCart(restaruant_menu.name))} >Add</Button>
 
-          </Card>
+                    {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
+                  </Card.Body>
+                </Col>
+              </Row>
+
+            </Card>
 
 
-        )}
-</CardColumns>
- {/*</CardDeck>*/}
+          )}
+        </CardColumns>
+        {/*</CardDeck>*/}
 
- </div>
- 
-        
+      </div>
 
 
 
 
 
-              {/* {
+
+
+      {/* {
               props.itemList.map(item=>
               <div>
                  <a href={'http://localhost:3001/api/items?itemId='+item.product_id}> 
@@ -96,9 +85,9 @@ const customerViewRestaruantMenu =   ({restaruant_menu})  => {
               </div>)
               } */}
 
-           
-        </div>
-    )
+
+    </div>
+  )
 };
 
 const mapStateToProps = (state) => {
