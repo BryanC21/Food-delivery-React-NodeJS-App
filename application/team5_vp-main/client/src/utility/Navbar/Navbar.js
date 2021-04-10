@@ -20,18 +20,20 @@ function Navbar() {
         </Link>
         <form className='d-flex container-sm '>
           <div className='dropdown me-3'>
-            <select
-              className='btn btn-secondary dropdown-toggle'
-              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-            >
-              <optgroup label='Cuisine'>
-                <option value='All'>All</option>
-                <option value='American'>American</option>
-                <option value='Italian'>Italian</option>
-                <option value='Korean'>Korean</option>
-                <option value='Chinese'>Chinese</option>
-              </optgroup>
-            </select>
+            <Link to={{ pathname: "/HP/search_result_menu", param1: search }}>
+              <select
+                className='btn btn-secondary dropdown-toggle'
+                onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+              >
+                <optgroup label='Cuisine'>
+                  <option value='All'>All</option>
+                  <option value='American'>American</option>
+                  <option value='Italian'>Italian</option>
+                  <option value='Korean'>Korean</option>
+                  <option value='Chinese'>Chinese</option>
+                </optgroup>
+              </select>
+            </Link>
           </div>
           <input
             className='form-control me-2'
