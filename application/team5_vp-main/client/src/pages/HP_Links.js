@@ -18,6 +18,11 @@ function HP_Links() {
         <Link to='/HP/CustomerViewRestaruantMenu'>
           CustomerViewRestaruantMenu
         </Link>
+        <br></br>
+        <Link to='/HP/DelivererMainMenu'>
+          DelivererMainMenu
+        </Link>
+        <br></br>
       </header>
       <div>
         <Link to='/HP/homepage'>HP homepage</Link>
