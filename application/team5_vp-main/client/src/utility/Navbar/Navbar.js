@@ -20,7 +20,12 @@ function Navbar() {
         </Link>
         <form className='d-flex container-sm '>
           <div className='dropdown me-3'>
-            <Link to={{ pathname: "/HP/search_result_menu", param1: search }}>
+            <Link
+              to={{
+                pathname: "/HP/search_result_menu",
+                param1: (e) => e.target.value,
+              }}
+            >
               <select
                 className='btn btn-secondary dropdown-toggle'
                 onChange={(e) => dispatch(setSearchTerm(e.target.value))}
