@@ -53,7 +53,7 @@ const customerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
                       {restaruant_menu.description}<br></br>
               Price: ${restaruant_menu.price}
                     </Card.Text>
-                    <Button variant="primary" onClick={() => dispatch(setCart(restaruant_menu.name))} >Add</Button>
+                    <Button variant="primary" onClick={() => dispatch(setCart(restaruant_menu))} >Add</Button>
 
                     {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
                   </Card.Body>
@@ -94,6 +94,7 @@ const mapStateToProps = (state) => {
 
   return {
     restaruant_menu: state.customerReducer.restaruant_menu,
+    cart: state.customerReducer.cart,
   };
 };
 

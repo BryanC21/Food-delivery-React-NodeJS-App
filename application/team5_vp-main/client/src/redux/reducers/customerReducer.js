@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     restaruant_menu: [{ name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }],
     search_type: "",
-    cart: []
+    cart: [{ name: "burger", description: "Taste good", price: "17.99" }]
 };
 
 const customerReducer = (state = INITIAL_STATE, action) => {
@@ -12,6 +12,11 @@ const customerReducer = (state = INITIAL_STATE, action) => {
                 restaruant_menu: action.restaruant_menu,
             };
         case "SET_CART":
+            return {
+                ...state,
+                cart: [...state.cart, action.cart],
+            };
+        case "DELETE_CART":
             return {
                 ...state,
                 cart: action.cart,

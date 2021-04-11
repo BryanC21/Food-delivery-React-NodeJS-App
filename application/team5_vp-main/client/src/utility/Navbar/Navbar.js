@@ -79,9 +79,11 @@ function Navbar() {
               </Link>
             </li>
             <li className='nav-item'>
+            <Link to={{ pathname: "/HP/customerCart", param1: search }}>
               <button className='nav-link btn btn-link nav-active' to='#'>
                 <FontAwesomeIcon icon={faCartPlus} size='2x' />
               </button>
+              </Link>
             </li>
           </ul>
         </nav>
