@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
+    //Fake data, need database
     restaruant_menu: [{ name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }],
-    search_type: "",
-    cart: [{ name: "burger", description: "Taste good", price: "17.99" }]
+    //fake cart data
+    cart: [{ name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }]
 };
 
 const customerReducer = (state = INITIAL_STATE, action) => {

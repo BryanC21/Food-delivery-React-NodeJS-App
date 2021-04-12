@@ -16,6 +16,7 @@ import Footer from "./utility/Footer/Footer";
 import ResMenuPage from "./pages/ResMenuPage";
 import DelivererMainMenu from "./pages/DelivererMainMenu";
 import customerCart from "./pages/customerCart";
+import Cart from "./pages/cart";
 
 const store = createStore(rootReducer, applyMiddleware(thunk)); //save fake data for customerVieRestaurantMenu
 
@@ -36,6 +37,11 @@ ReactDOM.render(
             exact
             path='/HP/customerCart'
             component={customerCart}
+          />
+          <Route
+            exact
+            path='/HP/cart'
+            component={Cart}
           />
           <Route
           exact path = '/HP/DelivererMainMenu'

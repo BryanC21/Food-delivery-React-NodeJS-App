@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./customerViewRestaurantMenu.css";
+import "./cart.css";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { deleteCart } from "../redux/actions/customerActions";
 
-
-
-const CustomerCart = ({ cart, dispatch }) => {
-    const [total, setTotal] = useState(cart.length);//Total number of order
-
+function Cart({ cart, dispatch }) { ///////////////////////////////////////////Test page//////////////////////////////////////////////////////////////////////////////////
+    const [total, setTotal] = useState(cart.length);
     console.log(cart);
 
     const handleDelete = () => {
@@ -49,53 +47,39 @@ const CustomerCart = ({ cart, dispatch }) => {
                                     <h6 className="card-title">{cart.description}</h6>
                                     <h6 className="card-title">QTYx1</h6>
                                     <button className="bottun " onClick={handleDelete}><p className="text-color">Delete</p></button>
+                                   
                                 </div>
+
+
+
                             </div>
+
+
                         )}
                     </div>
+
+
                 </div>
 
-            </section>
 
+
+
+
+
+            </section>
             <div className='jumbotron bg-dark'>
+
 
                 <h2 className='head'>Check Out Total:</h2>
 
+
+
             </div>
-            
-            {/*}
-            <CardColumns >
-
-                {cart.map((cart) => //Map customerReducer cart to card
-                    <Card border="dark" style={{ margin: '1rem' }}>
-                        <Row>
-                            <Col xs={2}>
-                                <Card.Img variant="top" style={{ height: '180px', width: '180px' }} src='https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg' />
-                            </Col>
-                            <Col xs={10}>
-                                <Card.Body>
-                                    <Card.Title>{cart.name}</Card.Title>
-                                    <Card.Text>
-                                        {cart.description}<br></br>
-    Price: ${cart.price}
-                                    </Card.Text>
-                                    <Button variant="primary" onClick={handleDelete}>Delete</Button>
-
-                                    {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
-            {/*}       </Card.Body>
-                            </Col>
-                        </Row>
-
-                    </Card>
-
-
-                )}
-            </CardColumns>
-                */}
         </div>
 
-    )
-};
+    );
+
+}
 
 const mapStateToProps = (state) => {
 
@@ -105,4 +89,5 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(CustomerCart);
+
+export default connect(mapStateToProps)(Cart);
