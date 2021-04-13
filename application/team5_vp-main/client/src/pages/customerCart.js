@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./customerViewRestaurantMenu.css";
+import "./cart.css";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { deleteCart } from "../redux/actions/customerActions";
 
@@ -29,7 +30,7 @@ const CustomerCart = ({ cart, dispatch }) => {
 
     return (
         <div>
-            <div className='jumbotron bg-dark'>
+            <div className='jumbotron hero-bg'>
 
 
                 <h2 className='head'>Cart total: {total}</h2>
@@ -57,12 +58,34 @@ const CustomerCart = ({ cart, dispatch }) => {
 
             </section>
 
-            <div className='jumbotron bg-dark'>
+            <div className='jumbotron hero-bg'>
 
                 <h2 className='head'>Check Out Total:</h2>
+                <div className = "order-form">
+                <form >
+                    
+                    <input type="radio" id="male" name="gender" value="male" checked></input>
+                    <label for="male" className='head'>Pickup</label><br></br>
+                    <input type="radio" id="female" name="gender" value="female"></input>
+                    <label for="female" className='head'>Delivery</label><br></br>
+                </form>
+
+                <label for="cars" className='input'>Choose a Delivery Times:</label>
+                <input className='input'></input>
+
+                <select name="cars" id="cars">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                </select>
+
+                <br></br>
+             <Button className='' to='#'>
+                Order
+                </Button>
+                </div>
 
             </div>
-            
+
             {/*}
             <CardColumns >
 

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import HP_Links from "./pages/HP_Links";
-import customerViewRestaruantMenu from "./pages/customerViewRestaruantMenu";
+import CustomerViewRestaruantMenu from "./pages/customerViewRestaruantMenu";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
@@ -16,7 +16,7 @@ import Footer from "./utility/Footer/Footer";
 import ResMenuPage from "./pages/ResMenuPage";
 import DelivererMainMenu from "./pages/DelivererMainMenu";
 import customerCart from "./pages/customerCart";
-import Cart from "./pages/cart";
+
 
 const store = createStore(rootReducer, applyMiddleware(thunk)); //save fake data for customerVieRestaurantMenu
 
@@ -31,17 +31,12 @@ ReactDOM.render(
           <Route
             exact
             path='/HP/CustomerViewRestaruantMenu'
-            component={customerViewRestaruantMenu}
+            component={CustomerViewRestaruantMenu}
           />
           <Route
             exact
             path='/HP/customerCart'
             component={customerCart}
-          />
-          <Route
-            exact
-            path='/HP/cart'
-            component={Cart}
           />
           <Route
           exact path = '/HP/DelivererMainMenu'

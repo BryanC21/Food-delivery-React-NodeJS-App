@@ -1,11 +1,12 @@
 
-import React from "react";
+import React, {useState} from "react";
 import "./customerViewRestaurantMenu.css";
 import { connect } from "react-redux";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { setCart } from"../redux/actions/customerActions";
 import Navbar from "../utility/Navbar/Navbar"
 import "bootstrap/dist/css/bootstrap.min.css";
+import Modal from 'react-modal';
 
 const handleAddToCart = (e) => {
   let item = {
@@ -16,12 +17,18 @@ const handleAddToCart = (e) => {
 };
 
 
-const customerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
+const CustomerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   
   return (
     <div>
       <div className='jumbotron bg-dark'>
+      <Modal isOpen={modalIsOpen}>
+                      <h2>Item added</h2>
+                      <button onClick={() => setModalIsOpen(false)}> close </button>
+                      </Modal>
+                     
 
 
         <h2 className='head'>Resturant Name</h2>
@@ -53,8 +60,8 @@ const customerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
                       {restaruant_menu.description}<br></br>
               Price: ${restaruant_menu.price}
                     </Card.Text>
-                    <Button variant="primary" onClick={() => dispatch(setCart(restaruant_menu))} >Add</Button>
-
+                    <Button variant="primary" onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}} >Add</Button>
+                    
                     {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
                   </Card.Body>
                 </Col>
@@ -99,4 +106,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps)(customerViewRestaruantMenu);
+export default connect(mapStateToProps)(CustomerViewRestaruantMenu);
