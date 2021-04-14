@@ -46,6 +46,7 @@ function Navbar() {
             placeholder='Search'
             aria-label='Search'
             onChange={(e) => setSearch(e.target.value)}
+            maxLength='40'
           />
           <Link to={{ pathname: "/HP/search_result_menu", param1: search }}>
             <button
@@ -79,10 +80,10 @@ function Navbar() {
               </Link>
             </li>
             <li className='nav-item'>
-            <Link to={{ pathname: "/HP/customerCart", param1: search }}>
-              <button className='nav-link btn btn-link nav-active' to='#'>
-                <FontAwesomeIcon icon={faCartPlus} size='2x' />
-              </button>
+              <Link to={{ pathname: "/HP/customerCart", param1: search }}>
+                <button className='nav-link btn btn-link nav-active' to='#'>
+                  <FontAwesomeIcon icon={faCartPlus} size='2x' />
+                </button>
               </Link>
             </li>
           </ul>
