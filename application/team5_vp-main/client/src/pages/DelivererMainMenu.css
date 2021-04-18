@@ -11,3 +11,13 @@
     border-radius: 5px;
     padding: 10px 100px;
 }
+
+.orderHeading{
+    text-align: center;
+}
+
+.orderSection{
+   display:grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   padding:50px;
+}
