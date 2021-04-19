@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import "./DeliveryOrderPage.css"
+import "../styling/DeliveryOrderPage.css"
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InfoCard from "../components/InfoCard";

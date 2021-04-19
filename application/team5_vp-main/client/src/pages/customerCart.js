@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./customerViewRestaurantMenu.css";
-import "./cart.css";
+import "../styling/customerViewRestaurantMenu.css";
+import "../styling/cart.css";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { deleteCart } from "../redux/actions/customerActions";
 

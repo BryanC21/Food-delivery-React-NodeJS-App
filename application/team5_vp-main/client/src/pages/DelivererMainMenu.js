@@ -1,6 +1,6 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./DelivererMainMenu.css";
+import "../styling/DelivererMainMenu.css";
 import InfoCard from "../components/InfoCard"
 import MapContainer from '../components/MapContainer';
 import { left } from '@popperjs/core';

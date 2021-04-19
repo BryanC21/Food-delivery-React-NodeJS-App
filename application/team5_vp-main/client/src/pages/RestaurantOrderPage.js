@@ -1,7 +1,7 @@
 import React,{useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
-import "./DelivererMainMenu.css";
-import "./RestaurantOrderPage.css"
+import "../styling/DelivererMainMenu.css";
+import "../styling/RestaurantOrderPage.css"
 import InfoCard from "../components/InfoCard"
 
 const RestaurantOrderPage = () =>{
