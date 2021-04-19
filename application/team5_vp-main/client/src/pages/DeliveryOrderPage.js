@@ -1,20 +1,27 @@
-import React from "react";
+import React,{useState} from "react";
 import "./DeliveryOrderPage.css"
-import { connect } from "react-redux";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
-import { setCart } from"../redux/actions/customerActions";
 import Navbar from "../utility/Navbar/Navbar"
 import Footer from "../utility/Footer/Footer"
 import "bootstrap/dist/css/bootstrap.min.css";
-import Modal from 'react-modal';
+import InfoCard from "../components/InfoCard";
 
-const DeliveryOrderPage = (props) =>{
+
+const DeliveryOrderPage = ({orderCards}) =>{
+    
     return(
         <div>
-        <Navbar />
-
+            <InfoCard
+            img
+            restaurant name
+            order number
+            special instructions
+            delivery time
+            delivery address
+            restaurant address
+            ></InfoCard>
         
-        <Footer />
+
         </div>
     )
 }

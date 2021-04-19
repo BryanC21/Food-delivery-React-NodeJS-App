@@ -24,6 +24,9 @@ function HP_Links() {
         <br></br>
         <Link to='/HP/DelivererMainMenu'>DelivererMainMenu</Link>
         <br></br>
+        <Link to='/HP/RestaurantOrderPage'>RestaurantOrderPage</Link>
+        <br></br>
+        <Link to='/HP/DeliveryOrderPage'>DeliveryOrderPage</Link>
       </header>
       <div>
         <Link to='/HP/homepage'>HP homepage</Link>
