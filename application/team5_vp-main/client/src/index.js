@@ -18,6 +18,9 @@ import DelivererMainMenu from "./pages/DelivererMainMenu";
 import customerCart from "./pages/customerCart";
 import RestaurantOrderPage from "./pages/RestaurantOrderPage";
 import DeliveryOrderPage from "./pages/DeliveryOrderPage";
+import DeliveryOrderDetail from './pages/DeliveryOrderDetail';
+import RestaurantDeliveryOrderDetail from './pages/RestaurantDeliveryOrderDetail';
+import RestaurantPickupOrderDetails from "./pages/RestaurantPickupOrderDetails";
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk)); //save fake data for customerVieRestaurantMenu
@@ -43,6 +46,18 @@ ReactDOM.render(
           <Route
           exact path = '/HP/DelivererMainMenu'
           component={DelivererMainMenu}
+          />
+          <Route
+            exact path = '/HP/DeliveryOrderDetail'
+            component = {DeliveryOrderDetail}
+          />
+          <Route
+            exact path = '/HP/RestaurantDeliveryOrderDetail'
+            component = {RestaurantDeliveryOrderDetail}
+          />
+          <Route
+            exact path = '/HP/RestaurantPickupOrderDetails'
+            component = {RestaurantPickupOrderDetails}
           />
           <Route exact path='/HP/RestaurantOrderPage' component={RestaurantOrderPage} />
           <Route exact path='/HP/DeliveryOrderPage' component={DeliveryOrderPage} />

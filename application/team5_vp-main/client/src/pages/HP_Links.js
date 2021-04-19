@@ -28,6 +28,12 @@ function HP_Links() {
         <br></br>
         <Link to='/HP/DeliveryOrderPage'>DeliveryOrderPage</Link>
         <br></br>
+        <Link to='/HP/DeliveryOrderDetail'>DeliveryOrderDetail</Link>
+        <br></br>
+        <Link to='/HP/RestaurantDeliveryOrderDetail'>Restaurant Delivery Order Detail</Link>
+        <br></br>
+        <Link to='/HP/RestaurantPickupOrderDetails'>Restaurant Pickup Order Details</Link>
+        <br></br>
       </header>
       <div>
         <Link to='/HP/homepage'>HP homepage</Link>
