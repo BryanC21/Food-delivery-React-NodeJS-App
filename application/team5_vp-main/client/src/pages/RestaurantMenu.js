@@ -41,6 +41,19 @@ const RestaurantMenu = (props) => {
           </div>
         </div>
       </section>
+
+      <section className='jumbotron bg-light'>
+      <div className='container-fluid '>
+          <div className='row'>
+            <div className="text-center">
+              <h2>View your menu</h2>
+            </div>
+            <div className="text-center">
+              <p>Show their menu</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
