@@ -9,7 +9,7 @@ const RestaurantOrderPage = () =>{
     return(
         <div>
         <div className="text-center">
-        <h1>Orders in Queue</h1>
+        <h1><b>Orders in Queue</b></h1>
         <hr></hr>
         </div>
 
