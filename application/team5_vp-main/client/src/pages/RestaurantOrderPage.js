@@ -1,15 +1,21 @@
 import React,{useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./DelivererMainMenu.css";
+import "./RestaurantOrderPage.css"
 import InfoCard from "../components/InfoCard"
 
 const RestaurantOrderPage = () =>{
     
     return(
         <div>
+        <div className="text-center">
+        <h1>Orders in Queue</h1>
+        <hr></hr>
+        </div>
+
         <h1 className='overHeading'>
-        Current Orders
         <div className = 'orderSection'>
+
         <InfoCard
         foodName = '1xDouble Cheeseburger'
         orderNumber = '11285'
@@ -33,8 +39,11 @@ const RestaurantOrderPage = () =>{
         deliveryTime = '11:20'
         price='$23.35'
         ></InfoCard>
+
+        
         </div>
         </h1>
+        <hr></hr>
         </div>
     )
 }

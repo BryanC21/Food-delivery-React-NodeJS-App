@@ -15,7 +15,7 @@ function InfoCard (props){
                 <p style = {{display: props.orderersInfo ? "block":"none"}}>Orderer's Info: {props.orderersInfo}</p>
                 <p style = {{display: props.deliveryTime ? "block":"none"}}>Delivery Time: {props.deliveryTime}</p>
                 <p style = {{display: props.deliveredTime ? "block":"none"}}>Delivered Time: {props.deliveredTime}</p>
-                <p style = {{display: props.deliveredDate ? "block":"none"}}>Delivered Date:{props.deliveredDate}</p>
+                <p style = {{display: props.deliveredDate ? "block":"none"}}>Delivered Date: {props.deliveredDate}</p>
                 <p style = {{display: props.deliveryDate ? "block":"none"}}>Delivery Date: {props.deliveryDate}</p>
                 <p style = {{display: props.deliverersName ? "block":"none"}}>Deliverer's Name: {props.deliverersName}</p>
                 <p>Status Fulfilled: {props.statusFulfilled}</p>
