@@ -41,7 +41,7 @@ const DelivererMainMenu = (props) => {
                 <InfoCard 
                 img = "https://prods3.imgix.net/images/articles/2017_05/Facebook-hawaiian-pizza-origins.jpg" 
                 restaurantName = "Circular Table" 
-                foodName = "Italian Crucifixion"
+                foodName = "Pineapple Pizza"
                 orderNumber = "2"
                 deliveredTime = "10:00PM"
                 deliveredDate = "4/1/2021"
