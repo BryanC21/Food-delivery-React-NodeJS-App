@@ -12,12 +12,11 @@ dotenv.config({ path: "./config/config.env" });
  */
 
 const mapStyles = {
-  margin: "auto",
-  width: "40%",
-  height: "30%",
+  margin: "10px",
+  height: "50%",
   position: "relative",
-  top: "53%",
-  left: "30%",
+  border: "solid",
+  borderRadius: "10px",
 };
 
 function MapContainer(props) {
