@@ -21,17 +21,20 @@ const DelivererMainMenu = (props) => {
             </h6>
 
         <div>
+            {/*
             <button className = 'button'>
                 Customer Reviews
             </button>
+            */}
 
             <button className = 'button'>
                 Orders
             </button>
-
+            {/*
             <button className = 'button'>
                 My Performance
             </button>
+            */}
         </div>
         </div>
         <div>
@@ -50,7 +53,7 @@ const DelivererMainMenu = (props) => {
                 <InfoCard 
                 img = "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2018/07/best-black-bean-burgers-2.jpg"
                 restaurantName = "Inside and Outside"
-                foodName = "Daily Calorie Intake Special"
+                foodName = "Double Double"
                 orderNumber = "10"
                 deliveredTime = "9:00AM"
                 deliveredDate = "3/21/2019"

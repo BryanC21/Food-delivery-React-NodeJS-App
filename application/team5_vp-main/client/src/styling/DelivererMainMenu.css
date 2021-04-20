@@ -5,9 +5,14 @@
 }
 
 .button{
-    background-color: #5F6368;
+   /* background-color: #5F6368;
     color:white;
     margin:50px;
+    border-radius: 5px;
+    padding: 10px 100px; */
+    background-color: #5F6368;
+    color:white;
+    margin:auto;
     border-radius: 5px;
     padding: 10px 100px;
 }
