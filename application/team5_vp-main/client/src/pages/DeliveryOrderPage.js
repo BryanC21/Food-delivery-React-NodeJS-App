@@ -10,14 +10,15 @@ const DeliveryOrderPage = () =>{
     return(
         <div>
 
-        <div className="text-center">
-        <h1><b>Current available orders in your area</b></h1>
+        <div className="Title">
+        <p><b>Current available orders in your area</b></p>
         </div>
 
         <h1 className='overHeading'>
         <hr></hr>
         <div className = 'orderSection'>
 
+        <div className='infoSheet'>
         <InfoCard
         restaurantName="Nation's Giant Hamburgers"
         orderNumber='11285'
@@ -25,7 +26,10 @@ const DeliveryOrderPage = () =>{
         deliveryTime='11:30pm'
         deliveryAddress='5824 Aleghany Rd.'
         ></InfoCard>
+        <button className ='confirmButton'>Accept</button>
+        </div>
 
+        <div className='infoSheet'>
         <InfoCard
         restaurantName='Taco Bell'
         orderNumber = '11286'
@@ -33,7 +37,10 @@ const DeliveryOrderPage = () =>{
         deliveryTime = '1:30am'
         deliveryAddress='5537 Brunswick Ave.'
         ></InfoCard>
+        <button className ='confirmButton'>Accept</button>
+        </div>
 
+        <div className='infoSheet'>
         <InfoCard
         restaurantName='The Philly Cheesesteak Shop'
         orderNumber = '11287'
@@ -41,6 +48,19 @@ const DeliveryOrderPage = () =>{
         deliveryTime = '11:20'
         deliveryAddress='9898 Clayton Dr.'
         ></InfoCard>
+        <button className ='confirmButton'>Accept</button>
+        </div>
+
+        <div className='infoSheet'>
+        <InfoCard
+        restaurantName='The Philly Cheesesteak Shop'
+        orderNumber = '11287'
+        specialInstructions = 'none'
+        deliveryTime = '11:20'
+        deliveryAddress='9898 Clayton Dr.'
+        ></InfoCard>
+        <button className ='confirmButton'>Accept</button>
+        </div>
 
         </div>
         </h1>
