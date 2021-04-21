@@ -15,7 +15,6 @@ const DeliveryOrderPage = () =>{
         </div>
 
         <h1 className='overHeading'>
-        <hr></hr>
         <div className = 'orderSection'>
 
         <div className='infoSheet'>
