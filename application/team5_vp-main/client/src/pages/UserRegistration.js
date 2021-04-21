@@ -73,13 +73,8 @@ export default function UserRegistration() {
           I accept the terms of service
         </label>
 
-<<<<<<< HEAD
-      <button className = 'buttonClass'>Register</button>
-    </form>
-=======
         <button className='buttonClass'>Register</button>
       </form>
->>>>>>> b133ddd4ccc500e48de795bdb53b1bffb5a59b05
     </div>
   );
 }
