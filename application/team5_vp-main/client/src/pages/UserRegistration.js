@@ -19,7 +19,8 @@ export default function App() {
   };
 
   return (
-    <form className = "formClass"onSubmit={handleSubmit}>
+    <div className="row justify-content-center">
+    <form className = "formClass"onSubmit={handleSubmit} >
       <h1 className = "formH1Class">Create Account</h1>
 
 
@@ -28,8 +29,8 @@ export default function App() {
         <input className = 'inputClass'
           name="name"
           type="text"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+          value={name}
+          onChange={e => setName(e.target.value)}
           required
         />
       </label>
@@ -69,5 +70,6 @@ export default function App() {
 
       <button className = 'buttonClass'>Register</button>
     </form>
+    </div>
   );
 }
