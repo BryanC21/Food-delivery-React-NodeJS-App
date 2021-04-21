@@ -31,8 +31,8 @@ export default function UserRegistration() {
             className='inputClass'
             name='name'
             type='text'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </label>
