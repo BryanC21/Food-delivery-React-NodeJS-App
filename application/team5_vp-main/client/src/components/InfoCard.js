@@ -9,20 +9,21 @@ function InfoCard (props){
             <img className = "imageContainer" src = {props.img}></img>
 
             <div style ={{padding:"10px"}}>
-                <p style = {{display: props.restaurantName ? "block":"none"}}>Restaurant Name/Address: {props.restaurantName}</p>
-                <p>Food Name: {props.foodName} </p>
-                <p>Order Number:{props.orderNumber}</p>
-                <p style = {{display: props.pickupTime ? "block":"none"}}>Pickup Time: {props.pickupTime}</p>
-                <p style = {{display: props.orderersInfo ? "block":"none"}}>Orderer's Info: {props.orderersInfo}</p>
-                <p style = {{display: props.deliveryAddress ? "block":"none"}}>Delivery Address: {props.deliveryAddress}</p>
-                <p style = {{display: props.deliveryTime ? "block":"none"}}>Delivery Time: {props.deliveryTime}</p>
-                <p style = {{display: props.deliveredTime ? "block":"none"}}>Delivered Time: {props.deliveredTime}</p>
-                <p style = {{display: props.deliveredDate ? "block":"none"}}>Delivered Date: {props.deliveredDate}</p>
-                <p style = {{display: props.deliveryDate ? "block":"none"}}>Delivery Date: {props.deliveryDate}</p>
-                <p style = {{display: props.deliverersName ? "block":"none"}}>Deliverer's Name: {props.deliverersName}</p>
-                <p>Status Fulfilled: {props.statusFulfilled}</p>
-                <p style = {{display: props.price ? "block":"none"}}>Price: {props.price}</p>
-                <p style = {{display: props.specialInstructions ? "block":"none"}}>Special Instructions: {props.specialInstructions}</p>
+                <p style = {{display: props.restaurantName ? "block":"none"}}><b>Restaurant Name: </b>{props.restaurantName}</p>
+                <p style = {{display: props.restaurantAddress ? "block":"none"}}><b>Restaurant Address: </b>{props.restaurantAddress}</p>
+                <p style = {{display: props.foodName ? "block":"none"}}><b>Food Name: </b>{props.foodName} </p>
+                <p style = {{display: props.orderNumber ? "block":"none"}}><b>Order Number: </b>{props.orderNumber}</p>
+                <p style = {{display: props.pickupTime ? "block":"none"}}><b>Pickup Time: </b>{props.pickupTime}</p>
+                <p style = {{display: props.orderersInfo ? "block":"none"}}><b>Orderer's Info: </b>{props.orderersInfo}</p>
+                <p style = {{display: props.deliveryAddress ? "block":"none"}}><b>Delivery Address: </b>{props.deliveryAddress}</p>
+                <p style = {{display: props.deliveryTime ? "block":"none"}}><b>Delivery Time: </b>{props.deliveryTime}</p>
+                <p style = {{display: props.deliveredTime ? "block":"none"}}><b>Delivered Time: </b>{props.deliveredTime}</p>
+                <p style = {{display: props.deliveredDate ? "block":"none"}}><b>Delivered Date: </b>{props.deliveredDate}</p>
+                <p style = {{display: props.deliveryDate ? "block":"none"}}><b>Delivery Date: </b>{props.deliveryDate}</p>
+                <p style = {{display: props.deliverersName ? "block":"none"}}><b>Deliverer's Name: </b>{props.deliverersName}</p>
+                <p style = {{display: props.statusFulfilled ? "block":"none"}}><b>Status Fulfilled: </b>{props.statusFulfilled}</p>
+                <p style = {{display: props.price ? "block":"none"}}><b>Price: </b>{props.price}</p>
+                <p style = {{display: props.specialInstructions ? "block":"none"}}><b>Special Instructions: </b>{props.specialInstructions}</p>
                 </div>
         </div>
     )
