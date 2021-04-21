@@ -19,13 +19,13 @@ export default function App() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Create Account</h1>
+    <form className = 'formClass' onSubmit={handleSubmit}>
+      <h1 className = 'formH1Class'>Create Account</h1>
 
 
-       <label>
+       <label className = 'labelClass'>
         Please enter your name:
-        <input
+        <input className = 'inputClass'
           name="name"
           type="text"
           value={email}
@@ -34,9 +34,9 @@ export default function App() {
         />
       </label>
 
-      <label>
+      <label className = 'labelClass'>
         Please enter your email:
-        <input
+        <input className = 'inputClass'
           name="email"
           type="email"
           value={email}
@@ -45,9 +45,9 @@ export default function App() {
         />
       </label>
     
-      <label>
+      <label className = 'labelClass'>
         Please enter your password:
-        <input
+        <input className = 'inputClass'
           name="password"
           type="password"
           value={password}
@@ -57,8 +57,8 @@ export default function App() {
       </label>
       {"\n"}
 
-      <label>
-        <input
+      <label className = 'labelClass'>
+        <input className = 'inputClass'
           name="acceptedTerms"
           type="checkbox"
           onChange={e => setAcceptedTerms(e.target.value)}
@@ -67,7 +67,7 @@ export default function App() {
         I accept the terms of service
       </label>
 
-      <button>Register</button>
+      <button className = 'buttonClass'>Register</button>
     </form>
   );
 }

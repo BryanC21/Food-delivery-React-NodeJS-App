@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-body {
+.bodyClass {
   font-family: Lato;
   height: 97vh;
   width: 100%;
@@ -13,7 +13,7 @@ body {
   background-color: #0ca07b;
 }
 
-form {
+.formClass {
   display: flex;
   flex-direction: column;
   width: 450px;
@@ -25,7 +25,7 @@ form {
   background-color: #fefefe;
 }
 
-form > h1 {
+.formH1Class {
   display: flex;
   justify-content: center;
   font-family: "Segoe UI", "Ubuntu", "Roboto", "Open Sans", "Helvetica Neue",
@@ -43,13 +43,13 @@ form > h1 {
   padding-right: 0.5em;
 }
 
-label {
+.labelClass {
   margin-bottom: 0.5em;
   color: #4a4e69;
   font-weight: lighter;
 }
 
-input {
+.inputClass {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
@@ -74,7 +74,7 @@ input[type="checkbox"] {
   margin-right: 10px;
 }
 
-button {
+.buttonClass {
   min-width: 100%;
   cursor: pointer;
   margin-right: 0.25em;
@@ -85,7 +85,7 @@ button {
   background-color: #db2269;
   color: #fefefe;
 }
-button:hover {
+.buttonClass:hover {
   background-color: #db2269;
   color: #fefefe;
 }
