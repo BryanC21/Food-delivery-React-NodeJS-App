@@ -14,6 +14,7 @@ function InfoCard (props){
                 <p>Order Number:{props.orderNumber}</p>
                 <p style = {{display: props.pickupTime ? "block":"none"}}>Pickup Time: {props.pickupTime}</p>
                 <p style = {{display: props.orderersInfo ? "block":"none"}}>Orderer's Info: {props.orderersInfo}</p>
+                <p style = {{display: props.deliveryAddress ? "block":"none"}}>Delivery Address: {props.deliveryAddress}</p>
                 <p style = {{display: props.deliveryTime ? "block":"none"}}>Delivery Time: {props.deliveryTime}</p>
                 <p style = {{display: props.deliveredTime ? "block":"none"}}>Delivered Time: {props.deliveredTime}</p>
                 <p style = {{display: props.deliveredDate ? "block":"none"}}>Delivered Date: {props.deliveredDate}</p>
