@@ -13,7 +13,7 @@
 .formClass {
   display: flex;
   flex-direction: column;
-  width: 450px;
+  width: 550px;
   min-width: 50px;
   min-height: 30px;
   padding: 20px 40px 40px 40px;
@@ -31,7 +31,8 @@
   font-weight: lighter;
   margin-top: 0.3em;
   color: #db2269;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
 }
 
 .info {
@@ -53,6 +54,16 @@
   width: 100%;
 }
 
+/* Show only the auth-form  when user scrolls to 100 viewport height */
+/* Better UX/UI design*/
+.auth-form {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f4f7;
+}
+
 .buttonClass {
   min-width: 100%;
   cursor: pointer;
@@ -61,11 +72,14 @@
   padding: 0.938em;
   border: none;
   border-radius: 4px;
-  background-color: #db2269;
+  /* We should stick with school color for our btns for consistency! */
+  /* background-color: #db2269; */
+  background-color: var(--primary-color);
   color: #fefefe;
 }
 .buttonClass:hover {
-  background-color: #db2269;
+  /* background-color: #db2269; */
+  background-color: var(--primary-color-hover);
   color: #fefefe;
 }
 
