@@ -15,3 +15,16 @@ exports.getAllRestaurants = CatchAsync(async (req, res, next) => {
     }
   });
 });
+exports.getAllCuisineType = CatchAsync(async (req, res, next) => {
+  await db.query("SELECT * FROM cuisine_type;").then(([results, fields]) => {
+    if (results && results.length == 0) {
+      return next(new AppError("No cuisine type were found!", 200));
+    } else {
+      return res.json({
+        status: "success",
+        message: `${results.length} cuisine type were successfully found`,
+        restaurants: results,
+      });
+    }
+  });
+});
