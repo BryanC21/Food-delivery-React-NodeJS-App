@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../images/logo_letters.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,11 +6,30 @@ import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { useDispatch } from "react-redux";
 import { setSearchTerm } from "../../redux/actions/searchActions";
+import axios from "axios";
 library.add(faSearch, faCartPlus);
 
 function Navbar() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [loadCuisineType, setLoadCuisineType] = useState([]);
+
+  useEffect(() => {
+    loadAllRestaurants();
+  }, []);
+
+  const loadAllRestaurants = async () => {
+    const url = "/api/v1/restaurants/getAllCuisineType";
+    axios.get(url).then((res) => {
+      const { restaurants } = res.data;
+      console.log(restaurants);
+      setLoadCuisineType(restaurants);
+    });
+  };
+
+  const LoadCuisineTypeCuisine = ({ cuisine_type }) => {
+    return <option value={cuisine_type}>{cuisine_type}</option>;
+  };
 
   return (
     <div className='navbar navbar-light bg-light '>
@@ -30,12 +49,11 @@ function Navbar() {
                 className='btn btn-secondary dropdown-toggle'
                 onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               >
-                <optgroup label='Cuisine'>
-                  <option value='All'>All</option>
-                  <option value='American'>American</option>
-                  <option value='Italian'>Italian</option>
-                  <option value='Korean'>Korean</option>
-                  <option value='Chinese'>Chinese</option>
+                <optgroup>
+                  <option value='Cuisines'>Cuisine</option>
+                  {loadCuisineType.map((restaurant, id) => (
+                    <LoadCuisineTypeCuisine {...restaurant} key={id} />
+                  ))}
                 </optgroup>
               </select>
             </Link>
