@@ -56,10 +56,11 @@ function Home() {
               <span className='secondary-color-font'>Unii</span>
             </h1>
             <p className='h6 white-color-font'>
-              Convenient meals delivered or picked up at one's disposal.
+              Convenient meals delivered or picked up at one's disposal near
+              SFSU.
             </p>
             <Link className='btn btn-outline-success py-2 my-2' to='#'>
-              Learn More
+              ORDER NOW
             </Link>
           </div>
         </div>
