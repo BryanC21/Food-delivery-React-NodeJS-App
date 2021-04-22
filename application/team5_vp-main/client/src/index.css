@@ -52,7 +52,7 @@ body {
 .hero {
   position: relative;
   background: url("./images/hero_bg.jpg") no-repeat center center/cover;
-  height: 50vh;
+  height: 30vh;
   overflow: hidden;
   object-fit: cover;
 }
