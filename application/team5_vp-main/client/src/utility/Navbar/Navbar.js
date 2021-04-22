@@ -34,7 +34,7 @@ function Navbar() {
   return (
     <div className='navbar navbar-light bg-light '>
       <div className='container'>
-        <Link className='navbar-brand'>
+        <Link className='navbar-brand' to='/HP/homepage'>
           <img src={Logo} alt='logo' />
         </Link>
         <form className='d-flex container-sm '>
@@ -78,15 +78,6 @@ function Navbar() {
         </form>
         <nav className='nav py-2 '>
           <ul class='nav '>
-            <li class='nav-item'>
-              <Link
-                class='nav-link nav-active active'
-                aria-current='page'
-                to='/HP/homepage'
-              >
-                Home
-              </Link>
-            </li>
             <li class='nav-item'>
               <Link class='nav-link btn btn btn-outline-primary me-3' to='#'>
                 Login
