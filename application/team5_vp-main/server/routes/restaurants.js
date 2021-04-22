@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { getAllRestaurants } = require("../controller/restaurantController");
+const {
+  getAllRestaurants,
+  getAllCuisineType,
+} = require("../controller/restaurantController");
 
 router.get("/getAllRestaurants", getAllRestaurants);
+
+router.get("/getAllCuisineType", getAllCuisineType);
 
 // router.post("/createRestaurant", imageUpload.single("image"), createRestaurant);
 
