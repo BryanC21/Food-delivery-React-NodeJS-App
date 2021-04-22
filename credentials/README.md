@@ -7,16 +7,16 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP : http://ec2-135-197-193.us-east-2.compute.amazonaws.com
+1. Server URL or IP : http://ec3-135-197-193.us-east-2.compute.amazonaws.com
 3. SSH username: ubuntu
 4. SSH key : Team_5_key_pair.pem
-4. Database URL or IP and port used: http://ec2-135-197-193.us-east-2.compute.amazonaws.com port:3306
+4. Database URL or IP and port used: http://ec3-135-197-193.us-east-2.compute.amazonaws.com port:3306
 5. Database username: root
 6. Database password: gamer
 7. Database name (basically the name that contains all your tables): team5vp
 8. Instructions on how to use the above information.
     * Change key permisions locally: chmod 400 Team_5_key_pair.pem
-    * To ssh into our ec2 instance: ssh -i "Team_5_key_pair.pem" ubuntu@ec2-135-197-193.us-east-2.compute.amazonaws.com 
+    * To ssh into our ec2 instance: ssh -i "Team_5_key_pair.pem" ubuntu@ec3-135-197-193.us-east-2.compute.amazonaws.com 
     * To view running servers on ec2: sudo pm2 list
     * To use mySQL db: mysql -u root -p
 
