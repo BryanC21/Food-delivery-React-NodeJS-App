@@ -20,60 +20,106 @@ export default function RestaurantRegistration() {
 
   return (
     // Need to start with a div to style more efficiently
-    <div className='auth-form'>
-      {/* If no bootstrap container form will be all the way to the left  */}
-      <form className='formClass container' onSubmit={handleSubmit}>
-        <h1 className='formH1Class'>Register Your Restaurant</h1>
-
-        <label className='labelClass'>
-          Please enter your name:
-          <input
-            className='inputClass'
-            name='name'
-            type='text'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+    <div>
+      <form className = "registrationFormContainer" onSubmit={handleSubmit}>
+        <h1 className = "formHeader">Restaurant Sign Up</h1>
+          <label className = "formLabel">
+            Restaurant Name: 
+            <input
+            className = "formInput"
+            name = "restaurantName"
+            type = "text"
+            placeholder = "Restaurant Name"
             required
-          />
-        </label>
-
-        <label className='labelClass'>
-          Please enter your email:
-          <input
-            className='inputClass'
-            name='email'
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            >
+            </input>
+          </label>
+          <label className = "formLabel">
+            Address: 
+          
+            <input
+            className = "formInput"
+            name = "address"
+            type = "text"
+            placeholder = "Address"
             required
-          />
-        </label>
-
-        <label className='labelClass'>
-          Please enter your password:
-          <input
-            className='inputClass'
-            name='password'
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            >
+            </input>
+          </label>
+          <label className = "formLabel">
+            Email: 
+            <input
+            className = "formInput"
+            name = "email"
+            type = "email"
+            placeholder = "Email"
             required
-          />
-        </label>
-        {"\n"}
-
-        <label className='labelClass'>
-          <input
-            className='inputClass'
-            name='acceptedTerms'
-            type='checkbox'
-            onChange={(e) => setAcceptedTerms(e.target.value)}
+            >
+            </input>
+          </label>
+          <label className = "formLabel">
+            Password: 
+            <input
+            className = "formInput"
+            name = "password"
+            type = "password"
+            placeholder = "Password"
             required
-          />
-          I accept the terms of service
-        </label>
+            >
+            </input>
+          </label>
+          <label className = "formLabel">
+            Confirm Password: 
+            <input
+            className = "formInput"
+            name = "confirmPassword"
+            type = "password"
+            placeholder = "Confirm Password"
+            required
+            >
+            </input>
+          </label>
+          <label className = "formLabel">
+            Restaurant Description 
+            <input
+            className = "formInput"
+            name = "restaurantDescription"
+            type = "text"
+            placeholder = "Restaurant Description"
+            required
+            >
+            </input>
+          </label>
+        <button
+          className = "formButton"
+        >
+            Upload Logo
+        </button>
 
-        <button className='buttonClass'>Register</button>
+        <button
+          className = "formButton"
+          name = "signUpButton"
+          type = "submit"
+        >
+            Sign Up 
+        </button>
+
+        <p style={{textAlign:"center",fontWeight:"bold"}}>
+          OR
+        </p>
+
+        <button
+          className = "formButton"
+        >
+            New User Sign Up
+        </button>
+
+        <button
+          className = "formButton"
+        >
+            Deliverer Sign Up
+        </button>
+
       </form>
     </div>
   );

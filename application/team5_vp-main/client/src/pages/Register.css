@@ -94,3 +94,36 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+/* new restaurant registration css */
+
+.registrationFormContainer{
+  border:solid;
+  border-radius:5px;
+  width:35%;
+  margin:auto;
+}
+
+.formHeader{
+  text-align: center;
+}
+
+.formInput{
+  width:300px;
+  float: right;
+  border-radius:5px;
+}
+
+.formLabel{
+  display: block;
+  margin:20px;
+}
+
+.formButton{
+  background-color:rgb(95, 99, 104);
+  color:white;
+  border-radius: 5px;
+  width: 300px;
+  display:block;
+  margin:20px auto;
+}
