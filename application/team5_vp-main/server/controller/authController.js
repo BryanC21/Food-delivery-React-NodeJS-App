@@ -63,3 +63,44 @@ exports.restaurantRegister = CatchAsync(async (req, res, next) => {
       console.log(err);
     });
 });
+
+exports.delivererRegister = CatchAsync(async (req, res, next) => {
+  const { name, email, password } = req.body;
+
+  db.execute("SELECT * FROM deliverers WHERE name=?", [name])
+    .then(() => {
+      return db.execute("SELECT * FROM deliverers WHERE email=?", [email]);
+    })
+    .then(([results, fields]) => {
+      //   If email dne, then we hash password and store it in db
+      if (results && results.length == 0) {
+        return bcrypt.hash(password, 15);
+      } else {
+        res.status(200).json({
+          status: "fail",
+          error: `${email} already exist. Please login.`,
+        });
+      }
+    })
+    .then((hashedPassword) => {
+      let baseSQL =
+        "INSERT INTO deliverers (name,email,password) VALUES (?,?,?)";
+      return db.execute(baseSQL, [name, email, hashedPassword]);
+    })
+    .then(([results, fields]) => {
+      if (results && results.affectedRows) {
+        res.status(200).json({
+          status: "success",
+          message: `${email} has successfully signed up!`,
+        });
+      } else {
+        res.status(500).json({
+          status: "fail",
+          error: `"Server error, user could not be created"`,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
