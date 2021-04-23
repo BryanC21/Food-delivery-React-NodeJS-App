@@ -89,7 +89,7 @@
   border-color: var(--secondary-color) !important;
 }
 
-.nav a:hover {
+.nav span:hover {
   color: var(--secondary-color) !important;
   background-color: var(--white-color) !important;
 }
