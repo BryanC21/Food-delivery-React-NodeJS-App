@@ -41,6 +41,7 @@ function MapContainer(props) {
   useEffect(() => {
     getCoordinates();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    calculateDistance();
   }, []);
 
   const onMarkerClick = (props, marker) => {
@@ -54,6 +55,24 @@ function MapContainer(props) {
       setShowInfoWindow(false);
       setActiveMarker(null);
     }
+  };
+
+  const calculateDistance = () => {
+    const { google } = props;
+    const service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+      {
+        // 265 Winston Dr, San Francisco, CA 94132, USA
+        origins: [{ lat: 37.7266474, lng: -122.4763117 }],
+        // 1600 Holloway Ave, San Francisco, CA 94132, USA
+        destinations: [{ lat: 37.7227669, lng: -122.47891 }],
+        travelMode: "DRIVING",
+      },
+      (response, status) => {
+        console.log("response", response);
+        console.log("status", status);
+      }
+    );
   };
 
   const { google } = props;
