@@ -1,0 +1,65 @@
+const db = require("../config/dbConfig");
+const bcrypt = require("bcryptjs");
+const CatchAsync = require("../utility/CatchAsync");
+const AppError = require("../utility/AppError");
+
+exports.restaurantRegister = CatchAsync(async (req, res, next) => {
+  const { name, email, password, address, description } = req.body;
+
+  //   find if restaurant_owner name exist in db
+  db.execute("SELECT * FROM restaurant_owner WHERE name=?", [name])
+    .then(([results, fields]) => {
+      // if no results
+      if (results && results.length == 0) {
+        //   see if email exists
+        return db.execute("SELECT * FROM restaurant_owner WHERE email=?", [
+          email,
+        ]);
+      } else {
+        return next(
+          new AppError(
+            `${name} is associated with an existing account. Please login.`,
+            401
+          )
+        );
+      }
+    })
+    .then(([results, fields]) => {
+      //   If name/email dne, then we hash password and store it in db
+      if (results && results.length == 0) {
+        return bcrypt.hash(password, 15);
+      } else {
+        res.status(200).json({
+          status: "fail",
+          error: `${email} already exist. Please login.`,
+        });
+      }
+    })
+    .then((hashedPassword) => {
+      let baseSQL =
+        "INSERT INTO restaurant_owner (name,email,password,address,description) VALUES (?,?,?,?,?)";
+      return db.execute(baseSQL, [
+        name,
+        email,
+        hashedPassword,
+        address,
+        description,
+      ]);
+    })
+    .then(([results, fields]) => {
+      if (results && results.affectedRows) {
+        res.status(200).json({
+          status: "success",
+          message: `${email} has successfully signed up!`,
+        });
+      } else {
+        res.status(500).json({
+          status: "fail",
+          error: `"Server error, user could not be created"`,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
