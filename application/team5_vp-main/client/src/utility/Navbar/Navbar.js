@@ -79,7 +79,7 @@ function Navbar() {
         <nav className='nav py-2 '>
           <ul class='nav '>
             <li class='nav-item'>
-              <Link class='nav-link btn btn btn-outline-primary me-3' to='#'>
+              <Link class='nav-link btn btn btn-outline-primary me-3' to='/HP/CustomerSignIn'>
                 Login
               </Link>
             </li>

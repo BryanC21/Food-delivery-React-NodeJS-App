@@ -1,0 +1,57 @@
+:root {
+    --primary-color: #743282;
+    --primary-color-hover: rgb(96, 30, 109);
+    --secondary-color: #dc9200;
+    --secondary-color-hover: #b87d07;
+    --logo-font: "Gochi Hand", cursive;
+    --content-overlay: rgba(0, 0, 0, 0.5);
+    --white-color: #fff;
+  }
+
+.head {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.text {
+    text-align: right;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.center-text {
+    text-align: center;
+   
+}
+
+
+    .Customer-button {
+        display: flex;
+        background-color:  var(--primary-color);
+        color: white;
+        margin: auto;
+        border: none;
+        padding: 10px 100px;
+    }
+  
+
+.inputField {
+    display: block;
+    margin: auto;
+    margin-top:1rem;
+}
+
+.form{
+    
+   
+    margin: auto;
+    left: 25% !important;
+    height: 500px;
+    width: 500px;
+    background-color: antiquewhite;
+    border: 1px solid var(--primary-color);
+   
+
+}
+
+
+  
