@@ -89,19 +89,19 @@ function Navbar() {
             <ul className='nav '>
               <Dropdown.Menu>
                 <Dropdown.Item>
-                  <Link className='primary-color-font me-3' to='#'>
+                  <span className='primary-color-font me-3' to='#'>
                     Login
-                  </Link>
+                  </span>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link className='primary-color-font me-3' to='#'>
+                  <span className='primary-color-font me-3' to='#'>
                     Restaurant Login
-                  </Link>
+                  </span>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link className='primary-color-font me-3' to='#'>
+                  <span className='primary-color-font me-3' to='#'>
                     Deliverer Login
-                  </Link>
+                  </span>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </ul>
@@ -115,20 +115,20 @@ function Navbar() {
             </Dropdown.Toggle>
             <ul className='nav '>
               <Dropdown.Menu>
-                <Dropdown.Item>
-                  <Link className='primary-color-font me-3' to='#'>
+                <Dropdown.Item to='#'>
+                  <span className='primary-color-font me-3'>
                     Register For Free
-                  </Link>
+                  </span>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link className='primary-color-font me-3' to='#'>
+                  <span className='primary-color-font me-3' to='#'>
                     Restaurant Register
-                  </Link>
+                  </span>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link className='primary-color-font me-3' to='#'>
+                  <span className='primary-color-font me-3' to='#'>
                     Deliverer Register
-                  </Link>
+                  </span>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </ul>
