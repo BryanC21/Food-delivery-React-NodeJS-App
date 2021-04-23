@@ -23,6 +23,10 @@ function HP_Links() {
         CustomerCart
         </Link>
         <br></br>
+        <Link to='/HP/CustomerSignIn'>
+        CustomerSignIn
+        </Link>
+        <br></br>
         <Link to='/HP/UserRegistration'>UserRegistration</Link>
         <br></br>
         <h2>Restaurant</h2>
