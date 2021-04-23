@@ -11,7 +11,7 @@ exports.searchItems = CatchAsync(async (req, res, next) => {
   if (!searchTerm) {
     await db
       .query(
-        "SELECT id, restaurant_name, restaurant_logo, cuisine_type FROM restaurants ",
+        "SELECT id, restaurant_name, restaurant_logo, cuisine_type, address, dollar_sign FROM restaurants ",
         []
       )
       .then(([results, fields]) => {
