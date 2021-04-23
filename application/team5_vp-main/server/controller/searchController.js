@@ -11,7 +11,7 @@ exports.searchItems = CatchAsync(async (req, res, next) => {
   if (!searchTerm) {
     await db
       .query(
-        "SELECT id, restaurant_name, restaurant_logo, cuisine_type FROM restaurants ",
+        "SELECT * FROM restaurants ",
         []
       )
       .then(([results, fields]) => {
@@ -32,8 +32,7 @@ exports.searchItems = CatchAsync(async (req, res, next) => {
     //   if searchTerm does exist run our baseSQL statement and show the results
     //  example: localhost:3000/api/v1/search/items?search=korean
     let baseSQL =
-      "SELECT id, restaurant_name, restaurant_logo, cuisine_type, concat_ws(' ', restaurant_name, cuisine_type  ) \
-      AS haystack FROM restaurants HAVING haystack like ? ;";
+      "SELECT * FROM restaurants HAVING concat_ws(' ', restaurant_name, cuisine_type  ) like ? ;";
     let searches = "%" + searchTerm + "%";
     await db
       .execute(baseSQL, [searches])
@@ -64,7 +63,7 @@ exports.searchItems = CatchAsync(async (req, res, next) => {
           // if no results were found, just show all of the restaurants results
           // example:localhost:3000/api/v1/search/items?search=gf
           db.query(
-            "SELECT id, restaurant_name, restaurant_logo, cuisine_type FROM restaurants ",
+            "SELECT * FROM restaurants ",
             []
           ).then(([results, fields]) => {
             res.json({
