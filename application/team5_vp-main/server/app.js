@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const restaurantRoutes = require("./routes/restaurants");
+const authRoutes = require("./routes/auth");
 const searchRoutes = require("./routes/search");
 // Error handling
 const AppError = require("./utility/AppError");
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV == "development") {
 
 // routes
 app.use("/api/v1/restaurants", restaurantRoutes);
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/search", searchRoutes);
 
 // route middleware
