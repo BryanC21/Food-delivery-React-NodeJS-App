@@ -68,7 +68,7 @@ function Home() {
       <section className='restaurant-section jumbotron jumbotron-fluid'>
         <div className='restaurant-content  container-fluid'>
           <div>
-            <h1>Local Restaurants</h1>
+            <h1>Restaurants Within SFSU Vicinity</h1>
             <p className='lead'>
               Select your favorite restaurants to start ordering
             </p>
