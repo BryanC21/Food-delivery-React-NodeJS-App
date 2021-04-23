@@ -20,106 +20,87 @@ export default function RestaurantRegistration() {
 
   return (
     // Need to start with a div to style more efficiently
-    <div>
-      <form className = "registrationFormContainer" onSubmit={handleSubmit}>
-        <h1 className = "formHeader">Restaurant Sign Up</h1>
-          <label className = "formLabel">
-            Restaurant Name: 
-            <input
-            className = "formInput"
-            name = "restaurantName"
-            type = "text"
-            placeholder = "Restaurant Name"
-            required
-            >
-            </input>
-          </label>
-          <label className = "formLabel">
-            Address: 
-          
-            <input
-            className = "formInput"
-            name = "address"
-            type = "text"
-            placeholder = "Address"
-            required
-            >
-            </input>
-          </label>
-          <label className = "formLabel">
-            Email: 
-            <input
-            className = "formInput"
-            name = "email"
-            type = "email"
-            placeholder = "Email"
-            required
-            >
-            </input>
-          </label>
-          <label className = "formLabel">
-            Password: 
-            <input
-            className = "formInput"
-            name = "password"
-            type = "password"
-            placeholder = "Password"
-            required
-            >
-            </input>
-          </label>
-          <label className = "formLabel">
-            Confirm Password: 
-            <input
-            className = "formInput"
-            name = "confirmPassword"
-            type = "password"
-            placeholder = "Confirm Password"
-            required
-            >
-            </input>
-          </label>
-          <label className = "formLabel">
-            Restaurant Description 
-            <input
-            className = "formInput"
-            name = "restaurantDescription"
-            type = "text"
-            placeholder = "Restaurant Description"
-            required
-            >
-            </input>
-          </label>
-        <button
-          className = "formButton"
-        >
-            Upload Logo
-        </button>
+    <div className='auth-form '>
+      <form
+        className='registrationFormContainer container d-flex flex-column  justify-content-center '
+        onSubmit={handleSubmit}
+      >
+        <h1 className='formHeader'>Restaurant Sign Up</h1>
+        <label htmlFor='rname' className='formLabel'>
+          Restaurant Name
+        </label>
+        <input
+          id='rname'
+          className='formInput'
+          name='restaurantName'
+          type='text'
+          required
+        />
+
+        <label htmlFor='address' className='formLabel'>
+          Address
+        </label>
+        <input
+          id='address'
+          className='formInput'
+          name='address'
+          type='text'
+          required
+        />
+
+        <label htmlFor='email' className='formLabel'>
+          Email
+        </label>
+        <input
+          id='email'
+          className='formInput'
+          name='email'
+          type='email'
+          required
+        />
+
+        <label htmlFor='password' className='formLabel'>
+          Password
+        </label>
+        <input
+          id='password'
+          className='formInput'
+          name='password'
+          type='password'
+          required
+        />
+
+        <label htmlFor='passwordConfirm' className='formLabel'>
+          Confirm Password
+        </label>
+        <input
+          id='passwordConfirm'
+          className='formInput'
+          name='confirmPassword'
+          type='password'
+          required
+        />
+
+        <label id='rdes' className='formLabel'>
+          Restaurant Description
+        </label>
+        <input
+          id='rdes'
+          className='formInput'
+          name='restaurantDescription'
+          type='text'
+          required
+        />
+
+        <button className='formButton formUploadButton'>Upload Logo</button>
 
         <button
-          className = "formButton"
-          name = "signUpButton"
-          type = "submit"
+          className='formButton  btn btn-outline-primary '
+          name='signUpButton'
+          type='submit'
         >
-            Sign Up 
+          Sign Up
         </button>
-
-        <p style={{textAlign:"center",fontWeight:"bold"}}>
-          OR
-        </p>
-
-        <button
-          className = "formButton"
-        >
-            New User Sign Up
-        </button>
-
-        <button
-          className = "formButton"
-        >
-            Deliverer Sign Up
-        </button>
-
       </form>
     </div>
   );
