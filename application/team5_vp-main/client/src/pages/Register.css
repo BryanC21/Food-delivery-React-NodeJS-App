@@ -1,4 +1,3 @@
-
 .bodyClass {
   font-family: Lato;
   height: 97vh;
@@ -97,33 +96,64 @@
 
 /* new restaurant registration css */
 
-.registrationFormContainer{
-  border:solid;
-  border-radius:5px;
-  width:35%;
-  margin:auto;
+.registrationFormContainer {
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  width: 500px;
+  height: 690px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 20px var(--content-overlay);
 }
 
-.formHeader{
+.registrationFormContainer .btn-outline-primary {
+  color: #fff;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.registrationFormContainer .btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color);
+}
+
+.registrationFormContainer .formUploadButton {
+  color: var(--primary-color);
+  background-color: var(--white-color);
+  border: 1px solid var(--primary-color);
+  margin-bottom: 8px;
+}
+.registrationFormContainer .formUploadButton:hover {
+  color: #fff;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.formHeader {
   text-align: center;
 }
 
-.formInput{
-  width:300px;
-  float: right;
-  border-radius:5px;
-}
-
-.formLabel{
-  display: block;
-  margin:20px;
-}
-
-.formButton{
-  background-color:rgb(95, 99, 104);
-  color:white;
+.formInput {
+  width: 385px;
+  height: 40px;
+  margin-top: 10px;
+  border: 1px solid gray;
   border-radius: 5px;
-  width: 300px;
-  display:block;
-  margin:20px auto;
+}
+
+.formLabel {
+  margin-top: 5px;
+  align-self: start;
+  position: relative;
+  left: 45px;
+}
+
+.formButton {
+  position: relative;
+  color: white;
+  border-radius: 4px;
+  top: 20px;
+  width: 385px;
+  height: 40px;
 }
