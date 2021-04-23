@@ -7,6 +7,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { useDispatch } from "react-redux";
 import { setSearchTerm } from "../../redux/actions/searchActions";
 import axios from "axios";
+import { Dropdown } from "react-bootstrap";
+
 library.add(faSearch, faCartPlus);
 
 function Navbar() {
@@ -76,25 +78,67 @@ function Navbar() {
             </button>
           </Link>
         </form>
-        <nav className='nav py-2 '>
-          <ul class='nav '>
-            <li class='nav-item'>
-              <Link class='nav-link btn btn btn-outline-primary me-3' to='#'>
-                Login
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link  btn btn-primary me-3' to='#'>
-                Register
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to={{ pathname: "/HP/customerCart", param1: search }}>
-                <button className='nav-link btn btn-link nav-active' to='#'>
-                  <FontAwesomeIcon icon={faCartPlus} size='2x' />
-                </button>
-              </Link>
-            </li>
+        <nav className='nav '>
+          <Dropdown className='dropdown'>
+            <Dropdown.Toggle
+              variant='btn btn btn-outline-primary my-3 '
+              id='dropdown-basic'
+            >
+              Login
+            </Dropdown.Toggle>
+            <ul className='nav '>
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <Link className='primary-color-font me-3' to='#'>
+                    Login
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link className='primary-color-font me-3' to='#'>
+                    Restaurant Login
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link className='primary-color-font me-3' to='#'>
+                    Deliverer Login
+                  </Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </ul>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle
+              variant='btn btn btn-outline-primary my-3 '
+              id='dropdown-basic'
+            >
+              Register
+            </Dropdown.Toggle>
+            <ul className='nav '>
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <Link className='primary-color-font me-3' to='#'>
+                    Register For Free
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link className='primary-color-font me-3' to='#'>
+                    Restaurant Register
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link className='primary-color-font me-3' to='#'>
+                    Deliverer Register
+                  </Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </ul>
+          </Dropdown>
+          <ul className='py-3'>
+            <Link to={{ pathname: "/HP/customerCart", param1: search }}>
+              <button className='nav-link btn btn-link nav-active' to='#'>
+                <FontAwesomeIcon icon={faCartPlus} size='2x' />
+              </button>
+            </Link>
           </ul>
         </nav>
       </div>
