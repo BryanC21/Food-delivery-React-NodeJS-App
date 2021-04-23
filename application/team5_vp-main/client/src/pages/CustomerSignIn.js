@@ -56,14 +56,21 @@ const CustomerSignIn = () => {
               />
             </label>
             {"\n"}
+
+
+            <Link>Forgot your password?</Link>
     
         
     
             <button className='buttonClass'>Sign In</button>
 
-            <h1 className='formH1Class'>Or </h1>
+            <h2 className='formH2Class'>Or </h2>
 
-            <button className='buttonClass'>Restaurant Sign In</button>
+            <lable className = 'formP'>
+            <p>Need a Account?</p><Link to = '/HP/UserRegistration'>Register now</Link>
+            </lable>
+
+            <button className='buttonClass'to = '/HP/UserRegistration'>Restaurant Sign In</button>
             <button className='buttonClass'>Delivery Sign In</button>
           </form>
         </div>
