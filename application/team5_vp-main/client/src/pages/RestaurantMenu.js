@@ -12,6 +12,7 @@ const RestaurantMenu = (props) => {
 
   return (
     <div>
+      {/*
       <br />
       <header className="text-center">
         <h1>Restaurant Menu for {restaurantName}</h1>
@@ -33,6 +34,7 @@ const RestaurantMenu = (props) => {
           </div>
         </div>
       </section>
+      */}
 
       <section className='jumbotron bg-dark '>
         <div className='container-fluid'>
@@ -76,7 +78,7 @@ const RestaurantMenu = (props) => {
           </div>
         </div>
       </section>
-
+      {/*
       <section className='jumbotron bg-light'>
         <div className='container-fluid '>
           <div className='row'>
@@ -97,8 +99,6 @@ const RestaurantMenu = (props) => {
                           {'Good food'}<br></br>Price: ${'10'}
                         </Card.Text>
                         <Button variant="primary" >Delete</Button>
-
-                        {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
                       </Card.Body>
                     </Col>
                   </Row>
@@ -116,8 +116,6 @@ const RestaurantMenu = (props) => {
                           {'Good food'}<br></br>Price: ${'10'}
                         </Card.Text>
                         <Button variant="primary" >Delete</Button>
-
-                        {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
                       </Card.Body>
                     </Col>
                   </Row>
@@ -128,6 +126,7 @@ const RestaurantMenu = (props) => {
           </div>
         </div>
       </section>
+      */}
     </div>
   );
 }
