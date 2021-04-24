@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-.head {
-    text-align: center;
-    color: azure;
-=======
 .customer-head {
     text-align: center;
     color: var(--secondary-color);
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
   }
 
   .cardPos{
@@ -14,10 +8,7 @@
   }
 
   .head-black {
-<<<<<<< HEAD
-=======
     margin: 1rem;
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
     text-align: center;
     color: black;
   }
@@ -37,8 +28,6 @@
     overflow-x: hidden;
     padding: 8px 0;
   }
-<<<<<<< HEAD
-=======
 
 .customer-card-body {
   height: 100% !important;
@@ -49,4 +38,3 @@
 .customer-buttom {
   border:none;
 }
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3

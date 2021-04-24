@@ -31,27 +31,13 @@ const CustomerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
                      
 
 
-<<<<<<< HEAD
-        <h2 className='head'>Resturant Name</h2>
-=======
         <h2 className='customer-head'>Resturant Name</h2>
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
 
       </div>
 
       <div className='head-black '>
         <h3> Our Menu </h3>
       </div>
-<<<<<<< HEAD
-      <div className="sidenav">
-        <p>Search filter</p>
-      </div>
-      <div className="mergin">
-
-
-        {/* <CardDeck style={{display: 'flex', flexDirection: 'row', margin: '5rem', flexWrap: "wrap"}}> */}
-        <CardColumns >
-=======
 
 
       <section className="order-section">
@@ -84,7 +70,6 @@ const CustomerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
 
         {/* <CardDeck style={{display: 'flex', flexDirection: 'row', margin: '5rem', flexWrap: "wrap"}}> */}
        {/* <CardColumns >
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
 
           {restaruant_menu.map((restaruant_menu) =>
             <Card border="dark" style={{ margin: '1rem' }}>
@@ -102,11 +87,7 @@ const CustomerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
                     <Button variant="primary" onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}} >Add</Button>
                     
                     {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
-<<<<<<< HEAD
-                  </Card.Body>
-=======
             {/*      </Card.Body>
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
                 </Col>
               </Row>
 
@@ -114,11 +95,7 @@ const CustomerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
 
 
           )}
-<<<<<<< HEAD
-        </CardColumns>
-=======
         </CardColumns>*/}
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
         {/*</CardDeck>*/}
 
       </div>
@@ -129,25 +106,10 @@ const CustomerViewRestaruantMenu = ({dispatch, restaruant_menu }) => {
 
 
 
-<<<<<<< HEAD
-      {/* {
-              props.itemList.map(item=>
-              <div>
-                 <a href={'http://localhost:3001/api/items?itemId='+item.product_id}> 
-                  {item.product_name}
-                 </a> *
-                {s}is selling for ${item.price}
-              </div>)
-              } */}
-
-
-    </div>
-=======
     
 
 
    
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
   )
 };
 

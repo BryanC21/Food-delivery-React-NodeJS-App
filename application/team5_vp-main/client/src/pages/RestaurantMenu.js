@@ -12,10 +12,7 @@ const RestaurantMenu = (props) => {
 
   return (
     <div>
-<<<<<<< HEAD
-=======
       {/*
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
       <br />
       <header className="text-center">
         <h1>Restaurant Menu for {restaurantName}</h1>
@@ -37,10 +34,7 @@ const RestaurantMenu = (props) => {
           </div>
         </div>
       </section>
-<<<<<<< HEAD
-=======
       */}
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
 
       <section className='jumbotron bg-dark '>
         <div className='container-fluid'>
@@ -84,11 +78,7 @@ const RestaurantMenu = (props) => {
           </div>
         </div>
       </section>
-<<<<<<< HEAD
-
-=======
       {/*
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
       <section className='jumbotron bg-light'>
         <div className='container-fluid '>
           <div className='row'>
@@ -109,11 +99,6 @@ const RestaurantMenu = (props) => {
                           {'Good food'}<br></br>Price: ${'10'}
                         </Card.Text>
                         <Button variant="primary" >Delete</Button>
-<<<<<<< HEAD
-
-                        {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
-=======
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
                       </Card.Body>
                     </Col>
                   </Row>
@@ -131,11 +116,6 @@ const RestaurantMenu = (props) => {
                           {'Good food'}<br></br>Price: ${'10'}
                         </Card.Text>
                         <Button variant="primary" >Delete</Button>
-<<<<<<< HEAD
-
-                        {/*} <Link variant="primary" onClick={() => dispatch(setItemID(itemList.product_id))} to={`${match.path}/itemPage`}>Check</Link>*/}
-=======
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
                       </Card.Body>
                     </Col>
                   </Row>
@@ -146,15 +126,8 @@ const RestaurantMenu = (props) => {
           </div>
         </div>
       </section>
-<<<<<<< HEAD
-    </div>
-  );
-}
-export default RestaurantMenu;
-=======
       */}
     </div>
   );
 }
 export default RestaurantMenu;
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3

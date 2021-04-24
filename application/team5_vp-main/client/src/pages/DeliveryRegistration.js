@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Register.css";
+import "../styling/Registration.css"
 
 export default function DeliveryRegistration() {
   const [name, setName] = React.useState("");
