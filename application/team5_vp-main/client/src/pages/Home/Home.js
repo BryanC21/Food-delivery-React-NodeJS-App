@@ -52,8 +52,8 @@ function Home() {
         <div className='  hero jumbotron jumbotron-fluid '>
           <div className=' hero-content container'>
             <h1 className='display-1 primary-color-font logo-font'>
-              State
-              <span className='secondary-color-font'>Unii</span>
+              Gator
+              <span className='secondary-color-font'>Dash</span>
             </h1>
             <p className='h6 white-color-font'>
               Convenient meals delivered or picked up at one's disposal near
