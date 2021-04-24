@@ -1,6 +1,6 @@
-.head {
+.customer-head {
     text-align: center;
-    color: azure;
+    color: var(--secondary-color);
   }
 
   .cardPos{
@@ -8,6 +8,7 @@
   }
 
   .head-black {
+    margin: 1rem;
     text-align: center;
     color: black;
   }
@@ -27,3 +28,13 @@
     overflow-x: hidden;
     padding: 8px 0;
   }
+
+.customer-card-body {
+  height: 100% !important;
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.customer-buttom {
+  border:none;
+}
