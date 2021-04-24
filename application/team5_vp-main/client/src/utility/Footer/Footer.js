@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../images/logo.png";
 
 function Footer() {
   return (
@@ -7,9 +8,9 @@ function Footer() {
       <div className='footer-content container'>
         <div className='row'>
           <div className='col-sm-6'>
-            <h1 className='h4 primary-color-font logo-font'>
-              State<span className='secondary-color-font'>Unii</span> © 2020
-            </h1>
+            <h5 className='primary-color-font footer-logo-font'>
+              Gator<span className='secondary-color-font'>Dash</span> © 2020
+            </h5>
             <div className='col'>
               <Link to='#' className='primary-color-font me-3'>
                 Privacy
