@@ -10,10 +10,7 @@ exports.searchItems = CatchAsync(async (req, res, next) => {
   //    example: localhost:3000/api/v1/search/items?search=
   if (!searchTerm) {
     await db
-      .query(
-        "SELECT id, restaurant_name, restaurant_logo, cuisine_type FROM restaurants ",
-        []
-      )
+      .query("SELECT * FROM restaurants ", [])
       .then(([results, fields]) => {
         res.json({
           status: "success",
@@ -32,8 +29,7 @@ exports.searchItems = CatchAsync(async (req, res, next) => {
     //   if searchTerm does exist run our baseSQL statement and show the results
     //  example: localhost:3000/api/v1/search/items?search=korean
     let baseSQL =
-      "SELECT id, restaurant_name, restaurant_logo, cuisine_type, concat_ws(' ', restaurant_name, cuisine_type  ) \
-      AS haystack FROM restaurants HAVING haystack like ? ;";
+      "SELECT * FROM restaurants HAVING concat_ws(' ', restaurant_name, cuisine_type  ) like ? ;";
     let searches = "%" + searchTerm + "%";
     await db
       .execute(baseSQL, [searches])
@@ -63,17 +59,16 @@ exports.searchItems = CatchAsync(async (req, res, next) => {
         } else {
           // if no results were found, just show all of the restaurants results
           // example:localhost:3000/api/v1/search/items?search=gf
-          db.query(
-            "SELECT id, restaurant_name, restaurant_logo, cuisine_type FROM restaurants ",
-            []
-          ).then(([results, fields]) => {
-            res.json({
-              status: "success",
-              message:
-                "Results not found, but checkout our latest restaurants!",
-              results: results,
-            });
-          });
+          db.query("SELECT * FROM restaurants ", []).then(
+            ([results, fields]) => {
+              res.json({
+                status: "success",
+                message:
+                  "Results not found, but checkout our latest restaurants!",
+                results: results,
+              });
+            }
+          );
 
           //   WILL PRINT
           // All of the  restaurants in our database
