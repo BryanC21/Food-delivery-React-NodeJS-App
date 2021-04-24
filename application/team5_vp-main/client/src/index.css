@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Ultra&display=swap");
 :root {
   --primary-color: #743282;
   --primary-color-hover: rgb(96, 30, 109);
   --secondary-color: #dc9200;
   --secondary-color-hover: #b87d07;
-  --logo-font: "Gochi Hand", cursive;
+  --logo-font: "Ultra", serif !important;
   --content-overlay: rgba(0, 0, 0, 0.5);
   --white-color: #fff;
 }
@@ -46,6 +45,12 @@ body {
 
 .logo-font {
   font-family: var(--logo-font);
+  font-size: 3.5rem !important;
+}
+
+.footer-logo-font {
+  font-family: var(--logo-font);
+  font-size: 1.5rem !important;
 }
 
 /* Home page */
