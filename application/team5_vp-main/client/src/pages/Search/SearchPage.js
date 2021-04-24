@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-
-const SearchPage = (props) => {
-  const { restaurant_name, restaurant_logo, address } = props;
-
-  return (
-    <div className='col-sm-6'>
-=======
 import React, { useState, useEffect }  from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
@@ -46,7 +37,6 @@ const SearchPage = (props) => {
 
   return (
     <div>
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
       <div className='card mb-4 shadow-sm'>
         <img
           src={restaurant_logo}
@@ -55,9 +45,6 @@ const SearchPage = (props) => {
         />
         <div className='card-body card-img'>
           <h5 className='card-title'>{restaurant_name}</h5>
-<<<<<<< HEAD
-          <p className='card-text'>{address}</p>
-=======
           <h6>
             {dollar_sign} - {cuisine_type} - {distance}
           </h6>
@@ -70,17 +57,12 @@ const SearchPage = (props) => {
             />
             <span className='mx-2'>{address}</span>
           </p>
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
         </div>
       </div>
     </div>
   );
 };
-<<<<<<< HEAD
-export default SearchPage;
-=======
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc",
 })(SearchPage);
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3

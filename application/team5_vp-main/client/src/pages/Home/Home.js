@@ -56,18 +56,11 @@ function Home() {
               <span className='secondary-color-font'>Unii</span>
             </h1>
             <p className='h6 white-color-font'>
-<<<<<<< HEAD
-              Convenient meals delivered or picked up at one's disposal.
-            </p>
-            <Link className='btn btn-outline-success py-2 my-2' to='#'>
-              Learn More
-=======
               Convenient meals delivered or picked up at one's disposal near
               SFSU.
             </p>
             <Link className='btn btn-outline-success py-2 my-2' to='#'>
               ORDER NOW
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
             </Link>
           </div>
         </div>
@@ -75,11 +68,7 @@ function Home() {
       <section className='restaurant-section jumbotron jumbotron-fluid'>
         <div className='restaurant-content  container-fluid'>
           <div>
-<<<<<<< HEAD
-            <h1>Local Restaurants</h1>
-=======
             <h1>Restaurants Within SFSU Vicinity</h1>
->>>>>>> 7e98124adcacce91992968a78454732ac64448e3
             <p className='lead'>
               Select your favorite restaurants to start ordering
             </p>
