@@ -29,11 +29,15 @@ function SearchMenu(props) {
   return (
     <div className='container'>
       <div className='row'>
+        
         <h6 className='py-2 my-3'>{message}</h6>
         {searchItem.map((restaurant, id) => (
+          <div className='col-sm-6'>
           <SearchPage key={id} {...restaurant}></SearchPage>
+          </div>
         ))}
-      </div>
+        </div>
+      
     </div>
   );
 }
