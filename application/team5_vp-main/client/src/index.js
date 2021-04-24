@@ -5,6 +5,10 @@ import "./index.css";
 import App from "./App";
 import HP_Links from "./pages/HP_Links";
 import CustomerViewRestaruantMenu from "./pages/customerViewRestaruantMenu";
+<<<<<<< HEAD
+=======
+import CustomerSignIn from "./pages/CustomerSignIn";
+>>>>>>> 7e98124adcacce91992968a78454732ac64448e3
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
@@ -47,6 +51,14 @@ ReactDOM.render(
             component={customerCart}
           />
           <Route
+<<<<<<< HEAD
+=======
+            exact
+            path='/HP/CustomerSignIn'
+            component={CustomerSignIn}
+          />
+          <Route
+>>>>>>> 7e98124adcacce91992968a78454732ac64448e3
           exact path = '/HP/DelivererMainMenu'
           component={DelivererMainMenu}
           />
