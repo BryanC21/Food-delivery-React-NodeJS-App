@@ -1,80 +1,69 @@
-:root {
-  --primary-color: #743282;
-  --primary-color-hover: rgb(96, 30, 109);
-  --secondary-color: #dc9200;
-  --secondary-color-hover: #b87d07;
-  --logo-font: "Gochi Hand", cursive;
-  --content-overlay: rgba(0, 0, 0, 0.5);
-  --white-color: #fff;
+.order-section {
+  position: relative;
+  height: auto;
 }
 
-.order-section {
-    position: relative;
-    height: auto;
-  }
-
 .text-color {
-    color: #743282;
-    margin-bottom: 0.5rem;
-    font-size: 14px;
-    font-family: DD-TTNorms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 700;
-
+  color: #743282;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+  font-family: DD-TTNorms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 700;
 }
 
 .order-section .order-content {
-    
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        flex-direction: column;
-        left: 25% !important;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    
-  }
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  left: 25% !important;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
 .wrapper2 {
-    /*display: grid;
+  /*display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 340px;
     width: 55% !important;
     grid-gap: 1%;*/
-    display: grid;
-    /*grid-template-columns: repeat(2, calc(50% - 8px));*/
-    width: 55% !important;
-    gap: 16px;
-  }
+  display: grid;
+  /*grid-template-columns: repeat(2, calc(50% - 8px));*/
+  width: 55% !important;
+  gap: 16px;
+}
 
-.bottun{
-    padding: 0;
-    border: none;
-    background: none;
+.bottun {
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 .order-section .card {
-    background-color: #fff !important;
-    flex-direction: row !important;
-    background-clip: border-box;
-    border: 1px solid var(--primary-color);
-    border-radius: 0.3rem;
-  }
+  background-color: #fff !important;
+  flex-direction: row !important;
+  background-clip: border-box;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.3rem;
+}
 
 .order-section .card-width {
-    width: 100%;
-  }
+  width: 100%;
+}
 
 .order-section .card-img-top {
-    height: auto;
-    width: 119px;
-  }
+  height: auto;
+  width: 119px;
+}
 
 .card-body {
-    height: 100% !important;
-  }
+  height: 100% !important;
+}
 
-.popup{
+.popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -85,7 +74,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .popup-inner {
@@ -93,11 +81,10 @@
   padding: 32px;
   width: 100%;
   max-width: 640px;
-  background-color: #FFF;
-
+  background-color: #fff;
 }
 
-.popup-inner .close-bin{
+.popup-inner .close-bin {
   position: absolute;
   top: top;
   right: 16px;
@@ -107,12 +94,11 @@
   background-color: var(--secondary-color);
 }
 
-.order-form{
+.order-form {
   margin-left: 25%;
 }
 
-.order-form .input{
+.order-form .input {
   color: #fff;
   margin-right: 1rem;
-
 }
