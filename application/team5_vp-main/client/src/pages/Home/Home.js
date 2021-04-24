@@ -51,7 +51,7 @@ function Home() {
       <header>
         <div className='  hero jumbotron jumbotron-fluid '>
           <div className=' hero-content container'>
-            <h1 className='display-1 primary-color-font logo-font'>
+            <h1 className='display-1 secondary-color-font logo-font'>
               Gator
               <span className='secondary-color-font'>Dash</span>
             </h1>
@@ -59,9 +59,6 @@ function Home() {
               Convenient meals delivered or picked up at one's disposal near
               SFSU.
             </p>
-            <Link className='btn btn-outline-success py-2 my-2' to='#'>
-              ORDER NOW
-            </Link>
           </div>
         </div>
       </header>
