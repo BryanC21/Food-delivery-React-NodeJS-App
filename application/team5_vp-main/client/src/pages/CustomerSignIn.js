@@ -5,12 +5,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css"
+import "./Register.css";
+import {
+  setEmail,
+  setPassword,
+  setIsLoggedIn
+} from "../redux/actions/customerActions"
 
 
-const CustomerSignIn = () => {
+
+const CustomerSignIn = ({isLoggedIn}) => {
     
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [email, setStateEmail] = React.useState("");
+    const [password, setStatePassword] = React.useState("");
+
+
+    if (isLoggedIn)  {
+      console.log("Logged")
+      setIsLoggedIn(true)
+      
+    }
     
   
     const handleSubmit = (event) => {
@@ -20,6 +34,12 @@ const CustomerSignIn = () => {
         Password: ${password}
        
       `);
+
+      setEmail(email);
+      setPassword(password);
+      setIsLoggedIn(true)
+
+      
   
       event.preventDefault();
     };
@@ -39,7 +59,7 @@ const CustomerSignIn = () => {
                 name='email'
                 type='email'
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setStateEmail(e.target.value)}
                 required
               />
             </label>
@@ -51,7 +71,7 @@ const CustomerSignIn = () => {
                 name='password'
                 type='password'
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>setStatePassword(e.target.value)}
                 required
               />
             </label>
@@ -118,5 +138,13 @@ const CustomerSignIn = () => {
 
     );*/
 }
+
+const mapStateToProps = (state) => {
+
+  return {
+    isLoggedIn: state.customerReducer.isLoggedIn,
+    
+  };
+};
 
 export default CustomerSignIn
