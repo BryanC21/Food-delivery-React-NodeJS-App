@@ -9,7 +9,7 @@ function Footer() {
         <div className='row'>
           <div className='col-sm-6'>
             <h5 className='primary-color-font footer-logo-font'>
-              Gator<span className='secondary-color-font'>Dash</span> © 2020
+              Gator<span className='secondary-color-font'>Dash</span> © 2021
             </h5>
             <div className='col'>
               <Link to='#' className='primary-color-font me-3'>
