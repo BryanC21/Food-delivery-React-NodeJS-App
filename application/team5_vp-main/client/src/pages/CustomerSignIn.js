@@ -91,8 +91,8 @@ const CustomerSignIn = ({isLoggedIn}) => {
             </lable>
 
             
-            <Link className='linkClass' to = '/HP/RestaurantSignIn' > Restaurant Sign In</Link>
-            <button className='buttonClass'>Delivery Sign In</button>
+            <Link className='linkClass' to = '/HP/RestaurantSignIn' >Restaurant Sign In</Link>
+            <Link className='linkClass' to = '/HP/DeliverySignIn' >Delivery Sign In</Link>
           </form>
           
         </div>

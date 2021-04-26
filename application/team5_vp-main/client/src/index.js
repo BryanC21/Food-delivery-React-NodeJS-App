@@ -26,6 +26,7 @@ import UserRegistration from './pages/UserRegistration'
 import RestaurantRegistration from './pages/RestaurantRegistration'
 import DeliveryRegistration from './pages/DeliveryRegistration'
 import RestaurantSignIn from './pages/RestaurantSignIn'
+import DeliverySignIn from './pages/DeliverySignIn'
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk)); //save fake data for customerVieRestaurantMenu
@@ -85,6 +86,7 @@ ReactDOM.render(
             exact path = '/HP/DeliveryRegistration'
             component = {DeliveryRegistration}
           />
+          <Route exact path = '/HP/DeliverySignIn' component = {DeliverySignIn} />
           <Route exact path='/HP/RestaurantOrderPage' component={RestaurantOrderPage} />
           <Route exact path='/HP/DeliveryOrderPage' component={DeliveryOrderPage} />
           <Route exact path='/HP/homepage' component={Home} />

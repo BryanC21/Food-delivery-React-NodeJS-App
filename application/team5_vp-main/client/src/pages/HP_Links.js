@@ -45,6 +45,8 @@ function HP_Links() {
         <br></br>
         <Link to='/HP/DeliveryRegistration'>DeliveryRegistration</Link>
         <br></br>
+        <Link to='/HP/DeliverySignIn'>DeliverySignIn</Link>
+        <br></br>
       </header>
      
     </div>

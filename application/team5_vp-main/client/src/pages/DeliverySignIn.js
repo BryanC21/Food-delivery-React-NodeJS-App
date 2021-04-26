@@ -10,13 +10,12 @@ import "./Register.css";
 
 
 
-const RestaurantSignIn = () => {
+const DeliverySignIn = () => {
     
     const [email, setStateEmail] = React.useState("");
     const [password, setStatePassword] = React.useState("");
 
 
-   
     
   
     const handleSubmit = (event) => {
@@ -38,7 +37,7 @@ const RestaurantSignIn = () => {
         <div className='auth-form'>
           {/* If no bootstrap container form will be all the way to the left  */}
           <form className='formClass container' onSubmit={handleSubmit}>
-            <h1 className='formH1Class'>Restaurant Sign In </h1>
+            <h1 className='formH1Class'>Delivery Sign In </h1>
     
          
     
@@ -77,12 +76,12 @@ const RestaurantSignIn = () => {
             <h2 className='formH2Class'>Or </h2>
 
             <lable className = 'formP'>
-            <p>Need a Restaurant Account?</p><Link to = '/HP/RestaurantRegistration'>Register now</Link>
+            <p>Need a Delivery Account?</p><Link to = '/HP/DeliveryRegistration'>Register now</Link>
             </lable>
 
+            <Link className='linkClass' to = '/HP/CustomerSignIn' >Customer Sign In</Link>
+            <Link className='linkClass' to = '/HP/RestaurantSignIn' >Restaurant Sign In</Link>
             
-            <Link className='linkClass' to = '/HP/CustomerSignIn'>Customer Sign In</Link>
-            <Link className='linkClass' to = '/HP/DeliverySignIn'>Delivery Sign In</Link>
           </form>
           
         </div>
@@ -90,14 +89,9 @@ const RestaurantSignIn = () => {
 
 );
 
-    }
 
-const mapStateToProps = (state) => {
+}
 
-    return {
-      isLoggedIn: state.customerReducer.isLoggedIn,
-      
-    };
-  };
-  
-  export default RestaurantSignIn
+
+
+export default DeliverySignIn
