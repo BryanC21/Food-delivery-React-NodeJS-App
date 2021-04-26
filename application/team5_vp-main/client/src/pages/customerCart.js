@@ -45,8 +45,8 @@ const CustomerCart = ({ cart, dispatch }) => {
                         {cart.map((cart) =>
                             <div className="card card-width">
                                 <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
-                                <div className="card-body">
-                                    <h5 className="card-title">{cart.name}</h5>
+                                <div className="customer-card-body">
+                                    <h5 className="customer-card-title">{cart.name}</h5>
                                     <h6 className="card-title">{cart.description}</h6>
                                     <h6 className="card-title">QTYx1</h6>
                                     <button className="bottun " onClick={handleDelete}><p className="text-color">Delete</p></button>
@@ -79,9 +79,8 @@ const CustomerCart = ({ cart, dispatch }) => {
                 </select>
 
                 <br></br>
-             <Button className='' to='#'>
-                Order
-                </Button>
+                <button className='cart-button'>Order</button>
+          
                 </div>
 
             </div>

@@ -48,8 +48,9 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
                 <div className="card card-width">
                   <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
                   <div className="customer-card-body">
-                    <h5 className="card-title">{restaruant_menu.name}</h5>
+                    <h5 className="customer-card-title">{restaruant_menu.name}</h5>
                     <h6 className="card-title">{restaruant_menu.description}</h6>
+                    <h6 className="card-title">$7.99</h6>
 
                     {/* <button className="bottun " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
                   </div>
