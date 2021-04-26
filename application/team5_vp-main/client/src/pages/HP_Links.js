@@ -15,17 +15,11 @@ function HP_Links() {
         <Link to='/HP/homepage'>HP homepage</Link>
       </div>
         <h2>Customer</h2>
-        <Link to='/HP/CustomerViewRestaruantMenu'>
-        CustomerViewRestaruantMenu
-        </Link>
+        <Link to='/HP/CustomerViewRestaruantMenu'>CustomerViewRestaruantMenu </Link>
         <br></br>
-        <Link to='/HP/customerCart'>
-        CustomerCart
-        </Link>
+        <Link to='/HP/customerCart'>CustomerCart</Link>
         <br></br>
-        <Link to='/HP/CustomerSignIn'>
-        CustomerSignIn
-        </Link>
+        <Link to='/HP/CustomerSignIn'>CustomerSignIn</Link>
         <br></br>
         <Link to='/HP/UserRegistration'>UserRegistration</Link>
         <br></br>
@@ -37,6 +31,8 @@ function HP_Links() {
         <Link to='/HP/RestaurantPickupOrderDetails'>Restaurant Pickup Order Details</Link>
         <br></br>
         <Link to='/HP/RestaurantRegistration'>RestaurantRegistration</Link>
+        <br></br>
+        <Link to='/HP/RestaurantSignIn'>RestaurantSignIn</Link>
         <br></br>
         <Link to='/HP/RestaurantMenu'>RestaurantMenu</Link>
         <br></br>
