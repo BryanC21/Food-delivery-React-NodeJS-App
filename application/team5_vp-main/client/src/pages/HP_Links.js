@@ -12,10 +12,12 @@ function HP_Links() {
         <Link to='/'>Home</Link>
         <br></br>
         <div>
-        <Link to='/HP/homepage'>HP homepage</Link>
-      </div>
+          <Link to='/HP/homepage'>HP homepage</Link>
+        </div>
         <h2>Customer</h2>
-        <Link to='/HP/CustomerViewRestaruantMenu'>CustomerViewRestaruantMenu </Link>
+        <Link to='/HP/CustomerViewRestaruantMenu'>
+          CustomerViewRestaruantMenu{" "}
+        </Link>
         <br></br>
         <Link to='/HP/customerCart'>CustomerCart</Link>
         <br></br>
@@ -26,15 +28,21 @@ function HP_Links() {
         <h2>Restaurant</h2>
         <Link to='/HP/RestaurantOrderPage'>RestaurantOrderPage</Link>
         <br></br>
-        <Link to='/HP/RestaurantDeliveryOrderDetail'>Restaurant Delivery Order Detail</Link>
+        <Link to='/HP/RestaurantDeliveryOrderDetail'>
+          Restaurant Delivery Order Detail
+        </Link>
         <br></br>
-        <Link to='/HP/RestaurantPickupOrderDetails'>Restaurant Pickup Order Details</Link>
+        <Link to='/HP/RestaurantPickupOrderDetails'>
+          Restaurant Pickup Order Details
+        </Link>
         <br></br>
         <Link to='/HP/RestaurantRegistration'>RestaurantRegistration</Link>
         <br></br>
         <Link to='/HP/RestaurantSignIn'>RestaurantSignIn</Link>
         <br></br>
         <Link to='/HP/RestaurantMenu'>RestaurantMenu</Link>
+        <br></br>
+        <Link to='/HP/RestaurantInfo'>RestaurantInfo</Link>
         <br></br>
         <h2>Delivery</h2>
         <Link to='/HP/DelivererMainMenu'>DelivererMainMenu</Link>
@@ -48,7 +56,6 @@ function HP_Links() {
         <Link to='/HP/DeliverySignIn'>DeliverySignIn</Link>
         <br></br>
       </header>
-     
     </div>
   );
 }
