@@ -4,7 +4,7 @@ const CatchAsync = require("../utility/CatchAsync");
 const AppError = require("../utility/AppError");
 
 exports.restaurantRegister = CatchAsync(async (req, res, next) => {
-  const { name, email, password, address, description } = req.body;
+  const { name, email, password } = req.body;
 
   //   find if restaurant_owner name exist in db
   db.execute("SELECT * FROM restaurant_owner WHERE name=?", [name])
@@ -37,14 +37,8 @@ exports.restaurantRegister = CatchAsync(async (req, res, next) => {
     })
     .then((hashedPassword) => {
       let baseSQL =
-        "INSERT INTO restaurant_owner (name,email,password,address,description) VALUES (?,?,?,?,?)";
-      return db.execute(baseSQL, [
-        name,
-        email,
-        hashedPassword,
-        address,
-        description,
-      ]);
+        "INSERT INTO restaurant_owner (name,email,password) VALUES (?,?,?)";
+      return db.execute(baseSQL, [name, email, hashedPassword]);
     })
     .then(([results, fields]) => {
       if (results && results.affectedRows) {
