@@ -15,19 +15,19 @@ import SearchMenu from "./pages/Search/SearchMenu";
 import Navbar from "./utility/Navbar/Navbar";
 import Footer from "./utility/Footer/Footer";
 import ResMenuPage from "./pages/ResMenuPage";
+import ResInfoPage from "./pages/RestaurantInfo";
 import DelivererMainMenu from "./pages/DelivererMainMenu";
 import customerCart from "./pages/customerCart";
 import RestaurantOrderPage from "./pages/RestaurantOrderPage";
 import DeliveryOrderPage from "./pages/DeliveryOrderPage";
-import DeliveryOrderDetail from './pages/DeliveryOrderDetail';
-import RestaurantDeliveryOrderDetail from './pages/RestaurantDeliveryOrderDetail';
+import DeliveryOrderDetail from "./pages/DeliveryOrderDetail";
+import RestaurantDeliveryOrderDetail from "./pages/RestaurantDeliveryOrderDetail";
 import RestaurantPickupOrderDetails from "./pages/RestaurantPickupOrderDetails";
-import UserRegistration from './pages/UserRegistration'
-import RestaurantRegistration from './pages/RestaurantRegistration'
-import DeliveryRegistration from './pages/DeliveryRegistration'
-import RestaurantSignIn from './pages/RestaurantSignIn'
-import DeliverySignIn from './pages/DeliverySignIn'
-
+import UserRegistration from "./pages/UserRegistration";
+import RestaurantRegistration from "./pages/RestaurantRegistration";
+import DeliveryRegistration from "./pages/DeliveryRegistration";
+import RestaurantSignIn from "./pages/RestaurantSignIn";
+import DeliverySignIn from "./pages/DeliverySignIn";
 
 const store = createStore(rootReducer, applyMiddleware(thunk)); //save fake data for customerVieRestaurantMenu
 
@@ -44,54 +44,63 @@ ReactDOM.render(
             path='/HP/CustomerViewRestaruantMenu'
             component={CustomerViewRestaruantMenu}
           />
+          <Route exact path='/HP/customerCart' component={customerCart} />
+          <Route exact path='/HP/CustomerSignIn' component={CustomerSignIn} />
           <Route
             exact
-            path='/HP/customerCart'
-            component={customerCart}
+            path='/HP/DelivererMainMenu'
+            component={DelivererMainMenu}
           />
           <Route
             exact
-            path='/HP/CustomerSignIn'
-            component={CustomerSignIn}
+            path='/HP/DeliveryOrderDetail'
+            component={DeliveryOrderDetail}
           />
           <Route
-          exact path = '/HP/DelivererMainMenu'
-          component={DelivererMainMenu}
+            exact
+            path='/HP/RestaurantDeliveryOrderDetail'
+            component={RestaurantDeliveryOrderDetail}
           />
           <Route
-            exact path = '/HP/DeliveryOrderDetail'
-            component = {DeliveryOrderDetail}
+            exact
+            path='/HP/RestaurantPickupOrderDetails'
+            component={RestaurantPickupOrderDetails}
           />
           <Route
-            exact path = '/HP/RestaurantDeliveryOrderDetail'
-            component = {RestaurantDeliveryOrderDetail}
+            exact
+            path='/HP/UserRegistration'
+            component={UserRegistration}
           />
           <Route
-            exact path = '/HP/RestaurantPickupOrderDetails'
-            component = {RestaurantPickupOrderDetails}
-          />
-          <Route 
-            exact path = '/HP/UserRegistration'
-            component = {UserRegistration}
-          />
-          <Route 
-            exact path = '/HP/RestaurantRegistration'
-            component = {RestaurantRegistration}
-          />
-          <Route 
-            exact path = '/HP/RestaurantSignIn'
-            component = {RestaurantSignIn}
+            exact
+            path='/HP/RestaurantRegistration'
+            component={RestaurantRegistration}
           />
           <Route
-            exact path = '/HP/DeliveryRegistration'
-            component = {DeliveryRegistration}
+            exact
+            path='/HP/RestaurantSignIn'
+            component={RestaurantSignIn}
           />
-          <Route exact path = '/HP/DeliverySignIn' component = {DeliverySignIn} />
-          <Route exact path='/HP/RestaurantOrderPage' component={RestaurantOrderPage} />
-          <Route exact path='/HP/DeliveryOrderPage' component={DeliveryOrderPage} />
+          <Route
+            exact
+            path='/HP/DeliveryRegistration'
+            component={DeliveryRegistration}
+          />
+          <Route exact path='/HP/DeliverySignIn' component={DeliverySignIn} />
+          <Route
+            exact
+            path='/HP/RestaurantOrderPage'
+            component={RestaurantOrderPage}
+          />
+          <Route
+            exact
+            path='/HP/DeliveryOrderPage'
+            component={DeliveryOrderPage}
+          />
           <Route exact path='/HP/homepage' component={Home} />
           <Route exact path='/HP/search_result_menu' component={SearchMenu} />
           <Route exact path='/HP/RestaurantMenu' component={ResMenuPage} />
+          <Route exact path='/HP/RestaurantInfo' component={ResInfoPage} />
         </Switch>
         <Route path='/HP' component={Footer} />
       </Router>
