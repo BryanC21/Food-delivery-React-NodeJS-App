@@ -37,17 +37,6 @@ export default function RestaurantRegistration() {
           required
         />
 
-        <label htmlFor='address' className='formLabel'>
-          Address
-        </label>
-        <input
-          id='address'
-          className='formInput'
-          name='address'
-          type='text'
-          required
-        />
-
         <label htmlFor='email' className='formLabel'>
           Email
         </label>
@@ -81,18 +70,7 @@ export default function RestaurantRegistration() {
           required
         />
 
-        <label id='rdes' className='formLabel'>
-          Restaurant Description
-        </label>
-        <input
-          id='rdes'
-          className='formInput'
-          name='restaurantDescription'
-          type='text'
-          required
-        />
-
-        <button className='formButton formUploadButton'>Upload Logo</button>
+        <button className='formButton formUploadButton'>Upload Image</button>
 
         <button
           className='formButton  btn btn-outline-primary '
