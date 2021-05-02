@@ -25,9 +25,9 @@ export default function RestaurantRegistration() {
         className='registrationFormContainer container d-flex flex-column  justify-content-center '
         onSubmit={handleSubmit}
       >
-        <h1 className='formHeader'>Restaurant Sign Up</h1>
+        <h1 className='formHeader'>Restaurant Owner Sign Up</h1>
         <label htmlFor='rname' className='formLabel'>
-          Restaurant Name
+          Full Name
         </label>
         <input
           id='rname'
