@@ -69,9 +69,6 @@ export default function RestaurantRegistration() {
           type='password'
           required
         />
-
-        <button className='formButton formUploadButton'>Upload Image</button>
-
         <button
           className='formButton  btn btn-outline-primary '
           name='signUpButton'
