@@ -7,3 +7,21 @@ export const deleteCart = (cart) => ({ //delete cart item
     type: 'DELETE_CART',
     cart,
 });
+
+export const setEmail = (email) => ({ 
+    type: 'SET_EMAIL',
+    email,
+});
+
+export const setIsLoggedIn = (isLoggedIn) => ({
+    type: 'SET_ISLOGGEDIN',
+    isLoggedIn,
+});
+
+export const setPassword = (password) => ({ 
+    type: 'SET_PASSWORD',
+    password,
+});
+
+
+

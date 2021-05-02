@@ -6,25 +6,16 @@ import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css"
 import "./Register.css";
-import {
-  setEmail,
-  setPassword,
-  setIsLoggedIn
-} from "../redux/actions/customerActions"
 
 
 
-const CustomerSignIn = ({isLoggedIn}) => {
+
+const DeliverySignIn = () => {
     
     const [email, setStateEmail] = React.useState("");
     const [password, setStatePassword] = React.useState("");
 
 
-    if (isLoggedIn)  {
-      console.log("Logged")
-      setIsLoggedIn(true)
-      
-    }
     
   
     const handleSubmit = (event) => {
@@ -35,9 +26,7 @@ const CustomerSignIn = ({isLoggedIn}) => {
        
       `);
 
-      setEmail(email);
-      setPassword(password);
-      setIsLoggedIn(true)
+   
 
       
   
@@ -48,7 +37,7 @@ const CustomerSignIn = ({isLoggedIn}) => {
         <div className='auth-form'>
           {/* If no bootstrap container form will be all the way to the left  */}
           <form className='formClass container' onSubmit={handleSubmit}>
-            <h1 className='formH1Class'>Sign In </h1>
+            <h1 className='formH1Class'>Delivery Sign In </h1>
     
          
     
@@ -87,12 +76,12 @@ const CustomerSignIn = ({isLoggedIn}) => {
             <h2 className='formH2Class'>Or </h2>
 
             <lable className = 'formP'>
-            <p>Need a Account?</p><Link to = '/HP/UserRegistration'>Register now</Link>
+            <p>Need a Delivery Account?</p><Link to = '/HP/DeliveryRegistration'>Register now</Link>
             </lable>
 
-            
+            <Link className='linkClass' to = '/HP/CustomerSignIn' >Customer Sign In</Link>
             <Link className='linkClass' to = '/HP/RestaurantSignIn' >Restaurant Sign In</Link>
-            <Link className='linkClass' to = '/HP/DeliverySignIn' >Delivery Sign In</Link>
+            
           </form>
           
         </div>
@@ -103,12 +92,6 @@ const CustomerSignIn = ({isLoggedIn}) => {
 
 }
 
-const mapStateToProps = (state) => {
 
-  return {
-    isLoggedIn: state.customerReducer.isLoggedIn,
-    
-  };
-};
 
-export default CustomerSignIn
+export default DeliverySignIn
