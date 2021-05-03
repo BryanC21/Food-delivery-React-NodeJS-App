@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
+
 const restaurantRoutes = require("./routes/restaurants");
 const authRoutes = require("./routes/auth");
 const searchRoutes = require("./routes/search");
@@ -10,6 +11,27 @@ const GlobalErrorHandler = require("./controller/errorController");
 
 // express app initialized
 const app = express();
+
+// Session has been initalized to keep track of server data
+const sessions = require("express-session");
+const mysqlSessions = require("express-mysql-session")(sessions);
+
+const mysqlSessionsStore = new mysqlSessions(
+  {
+    /* using default options*/
+  },
+  require("./config/dbConfig")
+);
+
+app.use(
+  sessions({
+    key: "gatordash",
+    secret: "gators",
+    store: mysqlSessionsStore,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // Body Parser
 app.use(express.json({ limit: "10kb" }));
