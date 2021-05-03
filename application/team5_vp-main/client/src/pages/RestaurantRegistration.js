@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 import "../styling/Registration.css";
+import axios from "axios";
 
 export default function RestaurantRegistration() {
-  const [name, setName] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
 
-  const handleSubmit = (event) => {
-    console.log(`
-      Name:  ${name}
-      Email: ${email}
-      Password: ${password}
-      Accepted Terms: ${acceptedTerms}
-    `);
-
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const data = {
+      username,
+      email,
+      password,
+    };
+
+    try {
+      const res = await axios.post("/api/v1/auth/registerRestaurant", data);
+      console.log("RESTAURANT LOGIN: ", res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -34,7 +40,9 @@ export default function RestaurantRegistration() {
           className='formInput'
           name='restaurantName'
           type='text'
+          value={username}
           required
+          onChange={(e) => setUsername(e.target.value)}
         />
 
         <label htmlFor='email' className='formLabel'>
@@ -45,7 +53,9 @@ export default function RestaurantRegistration() {
           className='formInput'
           name='email'
           type='email'
+          value={email}
           required
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <label htmlFor='password' className='formLabel'>
@@ -56,10 +66,12 @@ export default function RestaurantRegistration() {
           className='formInput'
           name='password'
           type='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <label htmlFor='passwordConfirm' className='formLabel'>
+        {/* <label htmlFor='passwordConfirm' className='formLabel'>
           Confirm Password
         </label>
         <input
@@ -68,7 +80,7 @@ export default function RestaurantRegistration() {
           name='confirmPassword'
           type='password'
           required
-        />
+        /> */}
         <button
           className='formButton  btn btn-outline-primary '
           name='signUpButton'
