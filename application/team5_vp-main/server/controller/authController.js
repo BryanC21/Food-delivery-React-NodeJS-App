@@ -3,11 +3,13 @@ const bcrypt = require("bcryptjs");
 const CatchAsync = require("../utility/CatchAsync");
 const AppError = require("../utility/AppError");
 
+/* Restuarant Registration */
 exports.restaurantRegister = CatchAsync(async (req, res, next) => {
   const { name, email, password } = req.body;
 
   //   find if restaurant_owner name exist in db
-  db.execute("SELECT * FROM restaurant_owner WHERE name=?", [name])
+  await db
+    .execute("SELECT * FROM restaurant_owner WHERE name=?", [name])
     .then(([results, fields]) => {
       // if no results
       if (results && results.length == 0) {
@@ -58,10 +60,12 @@ exports.restaurantRegister = CatchAsync(async (req, res, next) => {
     });
 });
 
+/* Deliverer Registration */
 exports.delivererRegister = CatchAsync(async (req, res, next) => {
   const { name, email, password } = req.body;
 
-  db.execute("SELECT * FROM deliverers WHERE name=?", [name])
+  await db
+    .execute("SELECT * FROM deliverers WHERE name=?", [name])
     .then(() => {
       return db.execute("SELECT * FROM deliverers WHERE email=?", [email]);
     })
@@ -99,10 +103,12 @@ exports.delivererRegister = CatchAsync(async (req, res, next) => {
     });
 });
 
+/* Normal user Registration  for staffs/students*/
 exports.approvedUserRegister = CatchAsync(async (req, res, next) => {
   const { username, email, password, address, phone_number } = req.body;
 
-  db.execute("SELECT * FROM approved_users WHERE username=?", [username])
+  await db
+    .execute("SELECT * FROM approved_users WHERE username=?", [username])
     .then(([results, fields]) => {
       if (results && results.length == 0) {
         return db.execute("SELECT * FROM approved_users WHERE email=?", [
@@ -149,6 +155,111 @@ exports.approvedUserRegister = CatchAsync(async (req, res, next) => {
         res.status(500).json({
           status: "fail",
           error: `"Server error, user could not be created"`,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+/* Restuarant Sign in */
+exports.restaurantLogin = CatchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+  let baseSQL = "SELECT email, password FROM restaurant_owner WHERE email=?;";
+  await db
+    .execute(baseSQL, [email])
+    .then(([results, fields]) => {
+      if (results && results.length == 1) {
+        let hashedPassword = results[0].password;
+        return bcrypt.compare(password, hashedPassword);
+      } else {
+        res.status(401).json({
+          status: "fail",
+          error: "email or password is incorrect. Please try again. ",
+        });
+      }
+    })
+    .then((passwordMatch) => {
+      if (passwordMatch) {
+        res.status(401).json({
+          status: "success",
+          message: `Welcome back owner, ${email}`,
+        });
+      } else {
+        return res.status(401).json({
+          status: "fail",
+          error: "Invalid email or password. Please try again. ",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+/* Deliverer Sign in */
+exports.delivererLogin = CatchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+  let baseSQL = "SELECT email, password FROM deliverers WHERE email=?;";
+  await db
+    .execute(baseSQL, [email])
+    .then(([results, fields]) => {
+      if (results && results.length == 1) {
+        let hashedPassword = results[0].password;
+        return bcrypt.compare(password, hashedPassword);
+      } else {
+        res.status(401).json({
+          status: "fail",
+          error: "email or password is incorrect. Please try again. ",
+        });
+      }
+    })
+    .then((passwordMatch) => {
+      if (passwordMatch) {
+        res.status(401).json({
+          status: "success",
+          message: `Welcome back deliverer, ${email}`,
+        });
+      } else {
+        return res.status(401).json({
+          status: "fail",
+          error: "Invalid email or password. Please try again. ",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+/* Normal user login  for staffs/students*/
+exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+  let baseSQL = "SELECT email, password FROM approved_users WHERE email=?;";
+  await db
+    .execute(baseSQL, [email])
+    .then(([results, fields]) => {
+      if (results && results.length == 1) {
+        let hashedPassword = results[0].password;
+        return bcrypt.compare(password, hashedPassword);
+      } else {
+        res.status(401).json({
+          status: "fail",
+          error: "email or password is incorrect. Please try again. ",
+        });
+      }
+    })
+    .then((passwordMatch) => {
+      if (passwordMatch) {
+        res.status(401).json({
+          status: "success",
+          message: `Welcome back, ${email}`,
+        });
+      } else {
+        return res.status(401).json({
+          status: "fail",
+          error: "Invalid email or password. Please try again. ",
         });
       }
     })
