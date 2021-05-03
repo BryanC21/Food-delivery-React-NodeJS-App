@@ -29,6 +29,8 @@ exports.getAllCuisineType = CatchAsync(async (req, res, next) => {
   });
 });
 
+// Upload does not work unless a register owner is signed in because of the foreign key
+// if you want to test remove foreign key and it will work
 exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
   const {
     restaurant_name,
@@ -57,7 +59,6 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
             dollar_sign,
             fk_restaurant_owner_id,
           ])
-
           .then(([results, fields]) => {
             if (results && results.affectedRows) {
               return res.json({
