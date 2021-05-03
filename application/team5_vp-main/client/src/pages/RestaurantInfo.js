@@ -1,14 +1,71 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const RestaurantInfo = (props) => {
-  //   const restaurantName = props.restaurantName;
+  const [restaurant_name, setRestaurantName] = useState("");
+  const [address, setAddress] = useState("");
+  const [cuisine_type, setCuisineType] = useState("");
+  const [dollar_sign, setDollarSign] = useState("");
+  const [description, setDescription] = useState("");
+  const [restaurant_logo, setRestaurantLogo] = useState("");
+  const [url, setUrl] = useState(undefined);
 
-  const [restaurantName, setRestaurantName] = React.useState("");
-  const [restaurantAddress, setRestaurantAddress] = React.useState("");
-  const [cuisineType, setCuisineType] = React.useState("");
-  const [pricing, setPricing] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [logo, setLogo] = React.useState("");
+  useEffect(() => {
+    if (url) {
+      handleSubmit();
+    }
+  }, [url]);
+
+  const handleSubmit = async () => {
+    const data = {
+      restaurant_name,
+      cuisine_type,
+      address,
+      description,
+      dollar_sign,
+      restaurant_logo: url,
+    };
+    try {
+      const res = await axios.post(
+        "/api/v1/restaurants/restaurantInfoUpload",
+        data
+      );
+      console.log("RESTAURANT INFORMATION: ", res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadPicture = () => {
+    // upload images using cloudinary
+    // and store url in db
+    const data = new FormData();
+    data.append("file", restaurant_logo);
+    data.append("upload_preset", "restaurant_logo");
+    data.append("cloud_name", "gatordash");
+    fetch(
+      "https://api.cloudinary.com/v1_1/gatordash/image/upload",
+
+      {
+        method: "POST",
+        body: data,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.url);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const RestaurantUpload = () => {
+    if (restaurant_logo) {
+      uploadPicture();
+    } else {
+      handleSubmit();
+    }
+  };
 
   return (
     <div>
@@ -34,7 +91,7 @@ const RestaurantInfo = (props) => {
                   <input
                     type='text'
                     style={{ width: "40vw" }}
-                    value={restaurantName}
+                    value={restaurant_name}
                     onChange={(e) => setRestaurantName(e.target.value)}
                   />
                 </label>
@@ -44,8 +101,8 @@ const RestaurantInfo = (props) => {
                   <input
                     type='text'
                     style={{ width: "40vw" }}
-                    value={restaurantAddress}
-                    onChange={(e) => setRestaurantAddress(e.target.value)}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </label>
                 <label>
@@ -54,7 +111,7 @@ const RestaurantInfo = (props) => {
                   <input
                     type='text'
                     style={{ width: "40vw" }}
-                    value={cuisineType}
+                    value={cuisine_type}
                     onChange={(e) => setCuisineType(e.target.value)}
                   />
                 </label>
@@ -67,8 +124,8 @@ const RestaurantInfo = (props) => {
                   <input
                     type='text'
                     style={{ width: "40vw" }}
-                    value={pricing}
-                    onChange={(e) => setPricing(e.target.value)}
+                    value={dollar_sign}
+                    onChange={(e) => setDollarSign(e.target.value)}
                   />
                 </label>
                 <br />
@@ -84,12 +141,23 @@ const RestaurantInfo = (props) => {
                 </label>
                 <br />
                 <label> Upload logo </label>
-                <button className='formButton formUploadButton'>Upload</button>
+                <input
+                  type='file'
+                  name='uploadImage'
+                  className='formButton formUploadButton'
+                  accept='image/*'
+                  onChange={(e) => setRestaurantLogo(e.target.files[0])}
+                />
                 <br />
                 <br />
                 <br />
                 <div className='text-center'>
-                  <button className='btn btn-primary'>Submit Menu</button>
+                  <button
+                    className='btn btn-primary'
+                    onClick={() => RestaurantUpload()}
+                  >
+                    Submit Menu
+                  </button>
                 </div>
               </form>
             </div>
