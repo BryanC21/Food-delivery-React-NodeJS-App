@@ -28,3 +28,57 @@ exports.getAllCuisineType = CatchAsync(async (req, res, next) => {
     }
   });
 });
+
+exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
+  const {
+    restaurant_name,
+    cuisine_type,
+    restaurant_logo,
+    address,
+    description,
+    dollar_sign,
+  } = req.body;
+  // check if the restaurant already exist
+  await db
+    .execute("SELECT * FROM restaurants WHERE restaurant_name=?", [
+      restaurant_name,
+    ])
+    .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        let baseSQL =
+          "INSERT INTO restaurants (restaurant_name, restaurant_logo, cuisine_type, address, description, dollar_sign) VALUE (?,?,?,?,?,?);";
+        return db
+          .execute(baseSQL, [
+            restaurant_name,
+            restaurant_logo,
+            cuisine_type,
+            address,
+            description,
+            dollar_sign,
+          ])
+
+          .then(([results, fields]) => {
+            if (results && results.affectedRows) {
+              return res.json({
+                status: "success",
+                message: "Your restaurant is now up and running!",
+              });
+            } else {
+              return next(
+                new AppError("Restaurant could not be created!", 200)
+              );
+            }
+          })
+          .catch((err) => {
+            return next(new AppError(err), 500);
+          });
+      } else {
+        return next(
+          new AppError(
+            `${restaurant_name} has already registered with our service.`,
+            401
+          )
+        );
+      }
+    });
+});
