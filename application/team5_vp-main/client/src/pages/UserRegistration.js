@@ -1,21 +1,31 @@
 import React, { Component } from "react";
-import "../styling/Registration.css"
+import "../styling/Registration.css";
+import axios from "axios";
 
 export default function UserRegistration() {
-  const [name, setName] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [phone_number, setPhone_Number] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
 
-  const handleSubmit = (event) => {
-    console.log(`
-      Name:  ${name}
-      Email: ${email}
-      Password: ${password}
-      Accepted Terms: ${acceptedTerms}
-    `);
-
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const data = {
+      username,
+      email,
+      password,
+      address,
+      phone_number,
+    };
+
+    try {
+      const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
+      console.log("RESTAURANT INFORMATION: ", res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -26,19 +36,19 @@ export default function UserRegistration() {
         <h1 className='formH1Class'>Create Free Account</h1>
 
         <label className='labelClass'>
-          Please enter your name:
+          Username:
           <input
             className='inputClass'
             name='name'
             type='text'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
 
         <label className='labelClass'>
-          Please enter your email:
+          Email:
           <input
             className='inputClass'
             name='email'
@@ -50,7 +60,7 @@ export default function UserRegistration() {
         </label>
 
         <label className='labelClass'>
-          Please enter your password:
+          Password:
           <input
             className='inputClass'
             name='password'
@@ -60,7 +70,28 @@ export default function UserRegistration() {
             required
           />
         </label>
-        {"\n"}
+        <label className='labelClass'>
+          Address:
+          <input
+            className='inputClass'
+            name='address'
+            type='text'
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </label>
+        <label className='labelClass'>
+          Phone number:
+          <input
+            className='inputClass'
+            name='phone number'
+            type='number'
+            value={phone_number}
+            onChange={(e) => setPhone_Number(e.target.value)}
+            required
+          />
+        </label>
 
         <label className='labelClass'>
           <input
