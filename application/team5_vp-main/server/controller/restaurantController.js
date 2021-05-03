@@ -46,7 +46,7 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
     .then(([results, fields]) => {
       if (results && results.length == 0) {
         let baseSQL =
-          "INSERT INTO restaurants (restaurant_name, restaurant_logo, cuisine_type, address, description, dollar_sign) VALUE (?,?,?,?,?,?);";
+          "INSERT INTO restaurants (restaurant_name, restaurant_logo, cuisine_type, address, description, dollar_sign, fk_restaurant_owner_id) VALUE (?,?,?,?,?,?,?);";
         return db
           .execute(baseSQL, [
             restaurant_name,
@@ -55,6 +55,7 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
             address,
             description,
             dollar_sign,
+            fk_restaurant_owner_id,
           ])
 
           .then(([results, fields]) => {
