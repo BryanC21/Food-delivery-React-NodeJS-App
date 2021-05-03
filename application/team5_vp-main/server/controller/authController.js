@@ -5,11 +5,11 @@ const AppError = require("../utility/AppError");
 
 /* Restuarant Registration */
 exports.restaurantRegister = CatchAsync(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
 
   //   find if restaurant_owner name exist in db
   await db
-    .execute("SELECT * FROM restaurant_owner WHERE name=?", [name])
+    .execute("SELECT * FROM restaurant_owner WHERE username=?", [username])
     .then(([results, fields]) => {
       // if no results
       if (results && results.length == 0) {
@@ -20,7 +20,7 @@ exports.restaurantRegister = CatchAsync(async (req, res, next) => {
       } else {
         return next(
           new AppError(
-            `${name} is associated with an existing account. Please login.`,
+            `${username} is associated with an existing account. Please login.`,
             401
           )
         );
@@ -39,8 +39,8 @@ exports.restaurantRegister = CatchAsync(async (req, res, next) => {
     })
     .then((hashedPassword) => {
       let baseSQL =
-        "INSERT INTO restaurant_owner (name,email,password) VALUES (?,?,?)";
-      return db.execute(baseSQL, [name, email, hashedPassword]);
+        "INSERT INTO restaurant_owner (username,email,password) VALUES (?,?,?)";
+      return db.execute(baseSQL, [username, email, hashedPassword]);
     })
     .then(([results, fields]) => {
       if (results && results.affectedRows) {
@@ -62,10 +62,10 @@ exports.restaurantRegister = CatchAsync(async (req, res, next) => {
 
 /* Deliverer Registration */
 exports.delivererRegister = CatchAsync(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
 
   await db
-    .execute("SELECT * FROM deliverers WHERE name=?", [name])
+    .execute("SELECT * FROM deliverers WHERE username=?", [username])
     .then(() => {
       return db.execute("SELECT * FROM deliverers WHERE email=?", [email]);
     })
@@ -82,8 +82,8 @@ exports.delivererRegister = CatchAsync(async (req, res, next) => {
     })
     .then((hashedPassword) => {
       let baseSQL =
-        "INSERT INTO deliverers (name,email,password) VALUES (?,?,?)";
-      return db.execute(baseSQL, [name, email, hashedPassword]);
+        "INSERT INTO deliverers (username,email,password) VALUES (?,?,?)";
+      return db.execute(baseSQL, [username, email, hashedPassword]);
     })
     .then(([results, fields]) => {
       if (results && results.affectedRows) {
@@ -166,12 +166,16 @@ exports.approvedUserRegister = CatchAsync(async (req, res, next) => {
 /* Restuarant Sign in */
 exports.restaurantLogin = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  let baseSQL = "SELECT email, password FROM restaurant_owner WHERE email=?;";
+  let baseSQL =
+    "SELECT id, email, password FROM restaurant_owner WHERE email=?;";
+  // userID: to set up and link the  foreign key using sessions table in db
+  let userID;
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
+        userID = results[0].id;
         return bcrypt.compare(password, hashedPassword);
       } else {
         res.status(401).json({
@@ -182,7 +186,10 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
     })
     .then((passwordMatch) => {
       if (passwordMatch) {
-        res.status(401).json({
+        req.session.email = email;
+        // using sessions table we can now link our foregin key to this restaurant_owner user
+        req.session.userID = userID;
+        res.status(200).json({
           status: "success",
           message: `Welcome back owner, ${email}`,
         });
@@ -201,12 +208,15 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
 /* Deliverer Sign in */
 exports.delivererLogin = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  let baseSQL = "SELECT email, password FROM deliverers WHERE email=?;";
+  let baseSQL = "SELECT id, email, password FROM deliverers WHERE email=?;";
+  // userID: to set up and link the  foreign key using sessions table in db
+  let userID;
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
+        userID = results[0].id;
         return bcrypt.compare(password, hashedPassword);
       } else {
         res.status(401).json({
@@ -217,6 +227,9 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
     })
     .then((passwordMatch) => {
       if (passwordMatch) {
+        req.session.email = email;
+        // using sessions table we can now link our foregin key to  deliverer
+        req.session.userID = userID;
         res.status(401).json({
           status: "success",
           message: `Welcome back deliverer, ${email}`,
@@ -236,12 +249,15 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
 /* Normal user login  for staffs/students*/
 exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  let baseSQL = "SELECT email, password FROM approved_users WHERE email=?;";
+  let baseSQL = "SELECT id, email, password FROM approved_users WHERE email=?;";
+  // userID: to set up and link the  foreign key using sessions table in db
+  let userID;
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
+        userID = results[0].id;
         return bcrypt.compare(password, hashedPassword);
       } else {
         res.status(401).json({
@@ -252,6 +268,9 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
     })
     .then((passwordMatch) => {
       if (passwordMatch) {
+        req.session.email = email;
+        // using sessions table we can now link our foregin key to  approved_user
+        req.session.userID = userID;
         res.status(401).json({
           status: "success",
           message: `Welcome back, ${email}`,
