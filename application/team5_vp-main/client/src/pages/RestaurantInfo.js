@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const RestaurantInfo = (props) => {
@@ -10,6 +11,7 @@ const RestaurantInfo = (props) => {
   const [description, setDescription] = useState("");
   const [restaurant_logo, setRestaurantLogo] = useState("");
   const [url, setUrl] = useState(undefined);
+  const history = useHistory();
 
   useEffect(() => {
     if (url) {
@@ -31,6 +33,7 @@ const RestaurantInfo = (props) => {
         "/api/v1/restaurants/restaurantInfoUpload",
         data
       );
+      history.push("/HP/RestaurantMenu");
       console.log("RESTAURANT INFORMATION: ", res);
     } catch (err) {
       console.log(err);
