@@ -43,6 +43,10 @@ const CustomerSignIn = ({isLoggedIn}) => {
   
       event.preventDefault();
     };
+   
+    let tit = document.getElementById("title");
+    tit.innerText = "SignIn";
+    console.log(tit.innerText)
     return (
         // Need to start with a div to style more efficiently
         <div className='auth-form'>

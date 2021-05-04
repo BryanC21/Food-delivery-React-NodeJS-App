@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:4000",
+  "proxy": "http://localhost:4000/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
@@ -29,6 +29,7 @@
     "react-scripts": "4.0.3",
     "react-toastify": "^7.0.3",
     "redux-thunk": "^2.3.0",
+    "regex": "^0.1.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

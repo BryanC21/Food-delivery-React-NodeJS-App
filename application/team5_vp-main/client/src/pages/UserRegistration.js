@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 
+
+
+
 export default function UserRegistration() {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -9,6 +12,8 @@ export default function UserRegistration() {
   const [address, setAddress] = React.useState("");
   const [phone_number, setPhone_Number] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,6 +47,10 @@ export default function UserRegistration() {
             name='name'
             type='text'
             value={username}
+           /*  onInvalid = {(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
+            onSubmit = {(e) =>e.target.setCustomValidity("gay")}
+            on
+           /* onChange={(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
             onChange={(e) => setUsername(e.target.value)}
             required
           />
@@ -50,12 +59,15 @@ export default function UserRegistration() {
         <label className='labelClass'>
           Email:
           <input
+          
             className='inputClass'
             name='email'
             type='email'
+            onInvalid={(e) =>e.target.setCustomValidity("Please use @sfsu")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            /*required*/
+            required pattern="[^ @]*@sfsu"
           />
         </label>
 
