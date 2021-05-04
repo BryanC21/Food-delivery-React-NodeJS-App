@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
-import {useHistory } from "react-router-dom"
-
+import { useHistory } from "react-router-dom";
 
 export default function RestaurantRegistration() {
   const [username, setUsername] = React.useState("");
@@ -10,7 +9,7 @@ export default function RestaurantRegistration() {
   const [password, setPassword] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
   const history = useHistory();
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
@@ -22,7 +21,7 @@ export default function RestaurantRegistration() {
     try {
       const res = await axios.post("/api/v1/auth/registerRestaurant", data);
       console.log("RESTAURANT LOGIN: ", res);
-      history.push("/HP/RestaurantInfo");
+      history.push("/HP/RestaurantSignIn");
     } catch (err) {
       console.log(err);
     }
