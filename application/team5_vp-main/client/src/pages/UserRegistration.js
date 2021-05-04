@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
+import { Redirect, useHistory } from "react-router-dom";
 
 export default function UserRegistration() {
   const [username, setUsername] = React.useState("");
@@ -9,6 +10,7 @@ export default function UserRegistration() {
   const [address, setAddress] = React.useState("");
   const [phone_number, setPhone_Number] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
+  const [login, setLogin] = React.useState(false);
 
   const handleSubmit = async (event) => {
     const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
@@ -25,13 +27,13 @@ export default function UserRegistration() {
     } else {
       try {
         const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
+        setLogin(true);
         console.log("RESTAURANT INFORMATION: ", res);
       } catch (err) {
         console.log(err);
       }
     }
   };
-
   return (
     // Need to start with a div to style more efficiently
     <div className='auth-form'>
@@ -46,9 +48,6 @@ export default function UserRegistration() {
             name='name'
             type='text'
             value={username}
-            /*  onInvalid = {(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
-            on
-            /* onChange={(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
             onChange={(e) => setUsername(e.target.value)}
             required
           />
