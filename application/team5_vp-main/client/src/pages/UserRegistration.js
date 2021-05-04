@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { setIsLoggedIn } from "../redux/actions/customerActions"
 
-export default function UserRegistration() {
+function UserRegistration({ dispatch }) {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -28,6 +30,7 @@ export default function UserRegistration() {
       try {
         const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
         console.log("RESTAURANT INFORMATION: ", res);
+        dispatch(setIsLoggedIn(true));
         history.push("/HP/CustomerViewRestaruantMenu");
       } catch (err) {
         console.log(err);
@@ -114,3 +117,13 @@ export default function UserRegistration() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+
+  return {
+    isLoggedIn: state.customerReducer.isLoggedIn,
+    
+  };
+};
+
+export default connect(mapStateToProps)(UserRegistration);

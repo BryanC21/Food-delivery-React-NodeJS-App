@@ -7,12 +7,8 @@ import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css"
 import "./Register.css";
-import {
-  setEmail,
-  setPassword,
-  setIsLoggedIn
-} from "../redux/actions/customerActions"
-import {useHistory } from "react-router-dom"
+import { setIsLoggedIn } from "../redux/actions/customerActions"
+import { useHistory } from "react-router-dom"
 import axios from "axios";
 
 
@@ -27,6 +23,7 @@ const CustomerSignIn = ({isLoggedIn, dispatch}) => {
     const handleSubmit = async (event) => {
       const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
       event.preventDefault();
+      history.push("/HP/CustomerViewRestaruantMenu");
       const data = {
         email,
         password,
@@ -37,6 +34,7 @@ const CustomerSignIn = ({isLoggedIn, dispatch}) => {
         try {
           const res = await axios.post("/api/v1/auth/userLogin", data);
           console.log("RESTAURANT INFORMATION: ", res);
+          dispatch(setIsLoggedIn(true));
           history.push("/HP/CustomerViewRestaruantMenu");
         } catch (err) {
           console.log(err);
