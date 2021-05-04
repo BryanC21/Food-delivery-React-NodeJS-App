@@ -1,14 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
+import axios from "axios";
 
 const RestaurantMenu = (props) => {
-  const restaurantName = props.restaurantName;
-
-  const [foodName, setFoodName] = React.useState("");
-  const [cuisineType, setCuisineType] = React.useState("");
-  const [pricing, setPricing] = React.useState("");
+  const [items_name, setItemsName] = React.useState("");
+  const [cuisine_type, setCuisineType] = React.useState("");
+  const [price, setPricing] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [image, setMenuImage] = useState("");
+  const [url, setUrl] = useState(undefined);
+
+  useEffect(() => {
+    if (url) {
+      handleSubmit();
+    }
+  }, [url]);
+
+  const handleSubmit = async () => {
+    const data = {
+      items_name,
+      cuisine_type,
+      price,
+      description,
+      image: url,
+    };
+    try {
+      const res = await axios.post(
+        "/api/v1/restaurants/uploadRestaurantMenu",
+        data
+      );
+      console.log("MENU INFORMATION: ", res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadPicture = () => {
+    // upload images using cloudinary
+    // and store url in db
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "restaurant_menu");
+    data.append("cloud_name", "gatordash");
+    fetch(
+      "https://api.cloudinary.com/v1_1/gatordash/image/upload",
+
+      {
+        method: "POST",
+        body: data,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.url);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const MenuUpload = () => {
+    if (image) {
+      uploadPicture();
+    } else {
+      handleSubmit();
+    }
+  };
 
   return (
     <div>
@@ -35,8 +90,8 @@ const RestaurantMenu = (props) => {
                   <input
                     type='text'
                     style={{ width: "40vw" }}
-                    value={foodName}
-                    onChange={(e) => setFoodName(e.target.value)}
+                    value={items_name}
+                    onChange={(e) => setItemsName(e.target.value)}
                   />
                 </label>
                 <br />
@@ -46,7 +101,7 @@ const RestaurantMenu = (props) => {
                   <input
                     type='text'
                     style={{ width: "40vw" }}
-                    value={cuisineType}
+                    value={cuisine_type}
                     onChange={(e) => setCuisineType(e.target.value)}
                   />
                 </label>
@@ -57,7 +112,7 @@ const RestaurantMenu = (props) => {
                   <input
                     type='text'
                     style={{ width: "40vw" }}
-                    value={pricing}
+                    value={price}
                     onChange={(e) => setPricing(e.target.value)}
                   />
                 </label>
@@ -72,10 +127,23 @@ const RestaurantMenu = (props) => {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </label>
+                <label> Upload Image </label>
+                <input
+                  type='file'
+                  name='uploadImage'
+                  className='formButton formUploadButton'
+                  accept='image/*'
+                  onChange={(e) => setMenuImage(e.target.files[0])}
+                />
                 <br />
                 <br />
                 <div className='text-center'>
-                  <button className='btn btn-primary'>Submit Menu</button>
+                  <button
+                    className='btn btn-primary'
+                    onClick={() => MenuUpload()}
+                  >
+                    Submit Menu
+                  </button>
                 </div>
               </form>
             </div>
