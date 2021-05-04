@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
-import {Redirect, useHistory } from "react-router-dom"
-
-
-
+import { useHistory } from "react-router-dom";
 
 export default function UserRegistration() {
   const [username, setUsername] = React.useState("");
@@ -13,12 +10,10 @@ export default function UserRegistration() {
   const [address, setAddress] = React.useState("");
   const [phone_number, setPhone_Number] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
-  const [login, setLogin] = React.useState(false);
-
-
-  
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
+    const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
     event.preventDefault();
     const data = {
       username,
@@ -27,22 +22,19 @@ export default function UserRegistration() {
       address,
       phone_number,
     };
-
-    try {
-      const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
-      console.log("RESTAURANT INFORMATION: ", res);
-      setLogin(true);
-    } catch (err) {
-      console.log(err);
+    if (!emailRegex.test(email)) {
+      console.log("Please use a sfsu email");
+    } else {
+      try {
+        const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
+        console.log("RESTAURANT INFORMATION: ", res);
+        history.push("/HP/CustomerViewRestaruantMenu");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
-  
-  if(login) {
-    return <Redirect to="/HP/CustomerViewRestaruantMenu" />;
-  }
-
   return (
-   
     // Need to start with a div to style more efficiently
     <div className='auth-form'>
       {/* If no bootstrap container form will be all the way to the left  */}
@@ -64,15 +56,11 @@ export default function UserRegistration() {
         <label className='labelClass'>
           Email:
           <input
-          
             className='inputClass'
             name='email'
             type='email'
-            onInvalid={(e) =>e.target.setCustomValidity("Please use @sfsu")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            /*required*/
-            required pattern="[^ @]*@sfsu"
           />
         </label>
 
