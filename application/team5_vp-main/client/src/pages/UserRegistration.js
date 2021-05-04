@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function UserRegistration() {
   const [username, setUsername] = React.useState("");
@@ -10,7 +10,7 @@ export default function UserRegistration() {
   const [address, setAddress] = React.useState("");
   const [phone_number, setPhone_Number] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
-  const [login, setLogin] = React.useState(false);
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
@@ -27,8 +27,8 @@ export default function UserRegistration() {
     } else {
       try {
         const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
-        setLogin(true);
         console.log("RESTAURANT INFORMATION: ", res);
+        history.push("/HP/CustomerViewRestaruantMenu");
       } catch (err) {
         console.log(err);
       }
