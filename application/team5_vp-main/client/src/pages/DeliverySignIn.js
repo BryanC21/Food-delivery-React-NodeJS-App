@@ -6,6 +6,8 @@ import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css"
 import "./Register.css";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 
 
@@ -15,23 +17,27 @@ const DeliverySignIn = () => {
     const [email, setStateEmail] = React.useState("");
     const [password, setStatePassword] = React.useState("");
 
+    const history = useHistory();
 
-    
-  
-    const handleSubmit = (event) => {
-      console.log(`
-       
-        Email: ${email}
-        Password: ${password}
-       
-      `);
-
-   
-
-      
-  
+    const handleSubmit = async (event) => {
       event.preventDefault();
+      const data = {
+        email,
+        password,
+      };
+     
+        try {
+          const res = await axios.post("/api/v1/auth//delivererLogin", data);
+          console.log("RESTAURANT INFORMATION: ", res);
+          history.push("/HP/DelivererMainMenu");
+        } catch (err) {
+          console.log(err);
+        }
+      
     };
+
+
+  
     return (
         // Need to start with a div to style more efficiently
         <div className='auth-form'>

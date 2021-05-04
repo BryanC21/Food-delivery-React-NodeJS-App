@@ -8,7 +8,8 @@ import { deleteCart } from "../redux/actions/customerActions";
 
 
 
-const CustomerCart = ({ cart, dispatch }) => {
+
+const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [total, setTotal] = useState(cart.length);//Total number of order
 
     console.log(cart);
@@ -27,6 +28,11 @@ const CustomerCart = ({ cart, dispatch }) => {
         console.log("render");
     }, [cart.length]
     );
+
+    const handleClick = () => {
+        console.log(isLoggedIn)
+
+    }
 
     return (
         <div>
@@ -79,7 +85,7 @@ const CustomerCart = ({ cart, dispatch }) => {
                 </select>
 
                 <br></br>
-                <button className='cart-button'>Order</button>
+                <button className='cart-button' onClick = {(e) => handleClick()}>Order</button>
           
                 </div>
 
@@ -124,7 +130,10 @@ const mapStateToProps = (state) => {
     return {
         restaruant_menu: state.customerReducer.restaruant_menu,
         cart: state.customerReducer.cart,
+        isLoggedIn: state.customerReducer.isLoggedIn,
     };
 };
+
+
 
 export default connect(mapStateToProps)(CustomerCart);

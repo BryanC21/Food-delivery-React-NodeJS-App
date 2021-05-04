@@ -1,21 +1,31 @@
 import React, { Component } from "react";
 import "../styling/Registration.css"
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function DeliveryRegistration() {
-  const [name, setName] = React.useState("");
+  const [username, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
 
-  const handleSubmit = (event) => {
-    console.log(`
-      Name:  ${name}
-      Email: ${email}
-      Password: ${password}
-      Accepted Terms: ${acceptedTerms}
-    `);
+  const history = useHistory();
 
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const data = {
+      username,
+      email,
+      password,
+    };
+
+    try {
+      const res = await axios.post("/api/v1/auth/registerDeliverer", data); //<<<<<<<<<<<
+      console.log("Deliverer LOGIN: ", res);
+      history.push("/HP/DelivererMainMenu");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -31,7 +41,7 @@ export default function DeliveryRegistration() {
             className='inputClass'
             name='name'
             type='text'
-            value={name}
+            value={username}
             onChange={(e) => setName(e.target.value)}
             required
           />
