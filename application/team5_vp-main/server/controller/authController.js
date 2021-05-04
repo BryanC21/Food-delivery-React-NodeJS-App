@@ -196,7 +196,6 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
         // using sessions table we can now link our foregin key to this restaurant_owner user
         req.session.userID = userID;
         res.locals.logged = true;
-        res.local;
         res.status(200).json({
           status: "success",
           message: `Welcome back owner, ${email}`,
