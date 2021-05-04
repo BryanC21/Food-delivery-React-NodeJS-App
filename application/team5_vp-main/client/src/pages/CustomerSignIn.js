@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styling/Customer.css";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -11,7 +12,8 @@ import {
   setPassword,
   setIsLoggedIn
 } from "../redux/actions/customerActions"
-import {Redirect, useHistory } from "react-router-dom"
+import {useHistory } from "react-router-dom"
+import axios from "axios";
 
 
 
@@ -20,28 +22,33 @@ const CustomerSignIn = ({isLoggedIn, dispatch}) => {
     const [email, setStateEmail] = React.useState("");
     const [password, setStatePassword] = React.useState("");
 
+    const history = useHistory();
 
-    if(isLoggedIn) {
-      return <Redirect to="/HP/CustomerViewRestaruantMenu" />;
-    }
+    const handleSubmit = async (event) => {
+      const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
+      event.preventDefault();
+      const data = {
+        email,
+        password,
+      };
+      if (!emailRegex.test(email)) {
+        console.log("Please use a sfsu email");
+      } else {
+        try {
+          const res = await axios.post("/api/v1/auth/userLogin", data);
+          console.log("RESTAURANT INFORMATION: ", res);
+          history.push("/HP/CustomerViewRestaruantMenu");
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    };
+
+
+    
     
   
-    const handleSubmit = (event) => {
-      console.log(`
-       
-        Email: ${email}
-        Password: ${password}
-       
-      `);
 
-      setEmail(email);
-      setPassword(password);
-      dispatch(setIsLoggedIn(true));
-
-      
-  
-     // event.preventDefault();
-    };
    
    // let tit = document.getElementById("title");
     //tit.innerText = "SignIn";
@@ -114,4 +121,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default CustomerSignIn
+export default connect(mapStateToProps)(CustomerSignIn);
