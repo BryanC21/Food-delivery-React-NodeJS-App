@@ -11,19 +11,18 @@ import {
   setPassword,
   setIsLoggedIn
 } from "../redux/actions/customerActions"
+import {Redirect, useHistory } from "react-router-dom"
 
 
 
-const CustomerSignIn = ({isLoggedIn}) => {
+const CustomerSignIn = ({isLoggedIn, dispatch}) => {
     
     const [email, setStateEmail] = React.useState("");
     const [password, setStatePassword] = React.useState("");
 
 
-    if (isLoggedIn)  {
-      console.log("Logged")
-      setIsLoggedIn(true)
-      
+    if(isLoggedIn) {
+      return <Redirect to="/HP/CustomerViewRestaruantMenu" />;
     }
     
   
@@ -37,16 +36,16 @@ const CustomerSignIn = ({isLoggedIn}) => {
 
       setEmail(email);
       setPassword(password);
-      setIsLoggedIn(true)
+      dispatch(setIsLoggedIn(true));
 
       
   
-      event.preventDefault();
+     // event.preventDefault();
     };
    
-    let tit = document.getElementById("title");
-    tit.innerText = "SignIn";
-    console.log(tit.innerText)
+   // let tit = document.getElementById("title");
+    //tit.innerText = "SignIn";
+    
     return (
         // Need to start with a div to style more efficiently
         <div className='auth-form'>

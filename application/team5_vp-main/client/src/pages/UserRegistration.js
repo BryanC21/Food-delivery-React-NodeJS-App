@@ -15,19 +15,6 @@ export default function UserRegistration() {
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
   const [login, setLogin] = React.useState(false);
 
-  
-
-  const handleSubmit2 = () => {
-    
-  
-    console.log("test");
-    setLogin(true);
-   // let history = useHistory;
-    //{useHistory.push("/HP/CustomerViewRestaruantMenu");}
- 
-     // return (<Redirect to="/HP/CustomerViewRestaruantMenu" />);
-  
-  };
 
   
 
@@ -49,6 +36,7 @@ export default function UserRegistration() {
       console.log(err);
     }
   };
+  
   if(login) {
     return <Redirect to="/HP/CustomerViewRestaruantMenu" />;
   }
