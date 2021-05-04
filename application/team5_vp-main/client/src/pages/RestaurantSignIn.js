@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styling/Customer.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -11,6 +11,7 @@ import axios from "axios";
 const RestaurantSignIn = () => {
   const [email, setStateEmail] = React.useState("");
   const [password, setStatePassword] = React.useState("");
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ const RestaurantSignIn = () => {
     try {
       const res = await axios.post("/api/v1/auth/restaurantLogin", data);
       console.log("RESTAURANT LOGIN: ", res);
+      history.push("/HP/RestaurantInfo");
     } catch (err) {
       console.log(err);
     }
