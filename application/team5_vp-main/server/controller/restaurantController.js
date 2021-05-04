@@ -49,6 +49,7 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
       if (results && results.length == 0) {
         let baseSQL =
           "INSERT INTO restaurants (restaurant_name, restaurant_logo, cuisine_type, address, description, dollar_sign, fk_restaurant_owner_id) VALUE (?,?,?,?,?,?,?);";
+        let fk_restaurant_owner_id = req.session.userID;
         return db
           .execute(baseSQL, [
             restaurant_name,
