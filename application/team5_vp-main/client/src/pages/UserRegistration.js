@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 
-
-
-
 export default function UserRegistration() {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -13,9 +10,8 @@ export default function UserRegistration() {
   const [phone_number, setPhone_Number] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
 
-  
-
   const handleSubmit = async (event) => {
+    const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
     event.preventDefault();
     const data = {
       username,
@@ -24,12 +20,15 @@ export default function UserRegistration() {
       address,
       phone_number,
     };
-
-    try {
-      const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
-      console.log("RESTAURANT INFORMATION: ", res);
-    } catch (err) {
-      console.log(err);
+    if (!emailRegex.test(email)) {
+      console.log("Please use a sfsu email");
+    } else {
+      try {
+        const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
+        console.log("RESTAURANT INFORMATION: ", res);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -47,10 +46,9 @@ export default function UserRegistration() {
             name='name'
             type='text'
             value={username}
-           /*  onInvalid = {(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
-            onSubmit = {(e) =>e.target.setCustomValidity("gay")}
+            /*  onInvalid = {(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
             on
-           /* onChange={(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
+            /* onChange={(e) =>e.target.setCustomValidity("Please select a date in the past.")}*/
             onChange={(e) => setUsername(e.target.value)}
             required
           />
@@ -59,15 +57,11 @@ export default function UserRegistration() {
         <label className='labelClass'>
           Email:
           <input
-          
             className='inputClass'
             name='email'
             type='email'
-            onInvalid={(e) =>e.target.setCustomValidity("Please use @sfsu")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            /*required*/
-            required pattern="[^ @]*@sfsu"
           />
         </label>
 
