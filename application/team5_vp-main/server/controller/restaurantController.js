@@ -85,3 +85,56 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
       }
     });
 });
+
+exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
+  //Need to factor this part of the code to find a way to link fk_restaurantid with menu
+  const { items_name, price, description, image, cuisine_type } = req.body;
+  let fkRestaurantID;
+  let baseSQL =
+    "SELECT r.id FROM restaurants r  JOIN menu m  on r.id = m.fk_restaurantid;";
+  await db.query(baseSQL, [fkRestaurantID]).then(([results, fields]) => {
+    if (results && results.length == 0) {
+      fkRestaurantID = results[0].id;
+    }
+  });
+  //Need to factor this part of the code
+
+  await db
+    .execute("SELECT * FROM menu WHERE items_name=?", [items_name])
+    .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        let baseSQL =
+          "INSERT INTO menu (items_name, price, description, image, cuisine_type,fk_restaurantid) VALUE (?,?,?,?,?,?);";
+        return db
+          .execute(baseSQL, [
+            items_name,
+            price,
+            description,
+            image,
+            cuisine_type,
+            fkRestaurantID,
+          ])
+          .then(([results, fields]) => {
+            if (results && results.affectedRows) {
+              return res.json({
+                status: "success",
+                message:
+                  "Your menu is now avaible for others to see and order!",
+              });
+            } else {
+              return next(new AppError("Menu could not be uploaded!", 200));
+            }
+          })
+          .catch((err) => {
+            return next(new AppError("ERROR", err), 500);
+          });
+      } else {
+        return next(
+          new AppError(
+            `${items_name} has already been uploaded to your menu.`,
+            400
+          )
+        );
+      }
+    });
+});
