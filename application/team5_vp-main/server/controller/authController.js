@@ -49,10 +49,12 @@ exports.restaurantRegister = CatchAsync(async (req, res, next) => {
           message: `${email} has successfully signed up!`,
         });
       } else {
-        res.status(500).json({
-          status: "fail",
-          error: `"Server error, restaurant owner user could not be created"`,
-        });
+        return next(
+          new AppError(
+            "Server error, restaurant owner user could not be created",
+            500
+          )
+        );
       }
     })
     .catch((err) => {
@@ -74,10 +76,7 @@ exports.delivererRegister = CatchAsync(async (req, res, next) => {
       if (results && results.length == 0) {
         return bcrypt.hash(password, 15);
       } else {
-        res.status(200).json({
-          status: "fail",
-          error: `${email} already exist. Please login.`,
-        });
+        return next(new AppError(`${email} already exist. Please login.`, 500));
       }
     })
     .then((hashedPassword) => {
@@ -92,10 +91,12 @@ exports.delivererRegister = CatchAsync(async (req, res, next) => {
           message: `${email} has successfully signed up!`,
         });
       } else {
-        res.status(500).json({
-          status: "fail",
-          error: `"Server error, deliverer user could not be created"`,
-        });
+        return next(
+          new AppError(
+            "Server error, restaurant owner user could not be created",
+            500
+          )
+        );
       }
     })
     .catch((err) => {
@@ -152,10 +153,9 @@ exports.approvedUserRegister = CatchAsync(async (req, res, next) => {
           message: `${email} has successfully signed up!`,
         });
       } else {
-        res.status(500).json({
-          status: "fail",
-          error: `"Server error, user could not be created"`,
-        });
+        return next(
+          new AppError("Server error, user could not be created", 500)
+        );
       }
     })
     .catch((err) => {
@@ -176,12 +176,18 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
         userID = results[0].id;
+        res.cookie("logged", email, {
+          expires: new Date(Date.now() + 1000000),
+          httpOnly: false,
+        });
         return bcrypt.compare(password, hashedPassword);
       } else {
-        res.status(401).json({
-          status: "fail",
-          error: "email or password is incorrect. Please try again. ",
-        });
+        return next(
+          new AppError(
+            "email or password is incorrect. Please try again. ",
+            401
+          )
+        );
       }
     })
     .then((passwordMatch) => {
@@ -189,15 +195,16 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
         req.session.email = email;
         // using sessions table we can now link our foregin key to this restaurant_owner user
         req.session.userID = userID;
+        res.locals.logged = true;
+        res.local;
         res.status(200).json({
           status: "success",
           message: `Welcome back owner, ${email}`,
         });
       } else {
-        return res.status(401).json({
-          status: "fail",
-          error: "Invalid email or password. Please try again. ",
-        });
+        return next(
+          new AppError("Invalid email or password. Please try again. ", 401)
+        );
       }
     })
     .catch((err) => {
@@ -219,10 +226,12 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
         userID = results[0].id;
         return bcrypt.compare(password, hashedPassword);
       } else {
-        res.status(401).json({
-          status: "fail",
-          error: "email or password is incorrect. Please try again. ",
-        });
+        return next(
+          new AppError(
+            "email or password is incorrect. Please try again. ",
+            401
+          )
+        );
       }
     })
     .then((passwordMatch) => {
@@ -235,10 +244,9 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
           message: `Welcome back deliverer, ${email}`,
         });
       } else {
-        return res.status(401).json({
-          status: "fail",
-          error: "Invalid email or password. Please try again. ",
-        });
+        return next(
+          new AppError("Invalid email or password. Please try again. ", 401)
+        );
       }
     })
     .catch((err) => {
@@ -260,10 +268,12 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
         userID = results[0].id;
         return bcrypt.compare(password, hashedPassword);
       } else {
-        res.status(401).json({
-          status: "fail",
-          error: "email or password is incorrect. Please try again. ",
-        });
+        return next(
+          new AppError(
+            "email or password is incorrect. Please try again. ",
+            401
+          )
+        );
       }
     })
     .then((passwordMatch) => {
@@ -276,10 +286,9 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
           message: `Welcome back, ${email}`,
         });
       } else {
-        return res.status(401).json({
-          status: "fail",
-          error: "Invalid email or password. Please try again. ",
-        });
+        return next(
+          new AppError("Invalid email or password. Please try again. ", 401)
+        );
       }
     })
     .catch((err) => {
