@@ -6,13 +6,15 @@ const {
   restaurantInfoUpload,
   uploadRestaurantMenu,
 } = require("../controller/restaurantController");
+// MIDDLEWARE
+const { requireSignin } = require("../middleware/requireSignin");
 
 router.get("/getAllRestaurants", getAllRestaurants);
 
 router.get("/getAllCuisineType", getAllCuisineType);
 
-router.post("/restaurantInfoUpload", restaurantInfoUpload);
+router.post("/restaurantInfoUpload", requireSignin, restaurantInfoUpload);
 
-router.post("/uploadRestaurantMenu", uploadRestaurantMenu);
+router.post("/uploadRestaurantMenu", requireSignin, uploadRestaurantMenu);
 
 module.exports = router;
