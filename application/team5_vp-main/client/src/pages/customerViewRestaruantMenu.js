@@ -1,12 +1,12 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styling/customerViewRestaurantMenu.css";
 import { connect } from "react-redux";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { setCart } from "../redux/actions/customerActions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-modal';
-import { useParams } from "react-router";
+import "../styling/Customer.css";
 
 const handleAddToCart = (e) => {
   let item = {
@@ -21,6 +21,9 @@ const handleAddToCart = (e) => {
 
 const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [select, setSelect] = useState('');
+  const [quatity, setQuatity] = useState(0);
+  const [price, setPrice] = useState(1);
   let i = 0;
 
 
@@ -28,14 +31,17 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
     i++;
   }
 
+  useEffect(() => {//Rerender each time the number of order reduce
+    console.log(quatity);
+    setPrice(quatity);
+}, [quatity]
+);
+
 
   return (
     <div>
       <div className='jumbotron bg-dark'>
-        <Modal isOpen={modalIsOpen}>
-          <h2>Item added</h2>
-          <button onClick={() => setModalIsOpen(false)}> close </button>
-        </Modal>
+       
 
 
 
@@ -52,7 +58,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
         <div className="order-content">
           <div className="wrapper2">
             {restaruant_menu.map((restaruant_menu) =>
-              <button className="customer-buttom" key={i} onClick={() => { dispatch(setCart(restaruant_menu)); setModalIsOpen(true); }}>
+              <button className="customer-buttom" key={i} onClick={() => { dispatch(setCart(restaruant_menu)); setModalIsOpen(true); setSelect(restaruant_menu.name);}}>
                 <div className="card card-width" >
                   <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
                   <div className="customer-card-body" >
@@ -72,6 +78,23 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
         </div>
 
       </section>
+
+      <Modal isOpen={modalIsOpen} >
+        <div className="modal-form">
+          <h2 >Item added</h2>
+          <p>Food: {select}</p>
+          <select name="quatity" id="quatity" onChange={(e) => setQuatity(e.target.value)}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          </select>
+          <br></br>
+          total: {price}
+          </div>
+          <button className="buttonClass" onClick={() => setModalIsOpen(false)}> Add </button>
+          
+        </Modal>
 
 
       {/*  <div className="sidenav">
