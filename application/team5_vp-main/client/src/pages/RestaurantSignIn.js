@@ -7,11 +7,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css";
 import "./Register.css";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const RestaurantSignIn = () => {
-  const [email, setStateEmail] = React.useState("");
-  const [password, setStatePassword] = React.useState("");
+  const [email, setStateEmail] = React.useState("test2@yahoo.com");
+  const [password, setStatePassword] = React.useState("123456");
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,7 +24,17 @@ const RestaurantSignIn = () => {
 
     try {
       const res = await axios.post("/api/v1/auth/restaurantLogin", data);
-      console.log("RESTAURANT LOGIN: ", res);
+
+      // save user and token to localstorage
+      window.localStorage.setItem("auth", JSON.stringify(res.data));
+      // save data to redux
+      dispatch({
+        type: "LOGGED_IN_USER",
+        payload: res.data,
+      });
+
+      console.log("RESTAURANT LOGIN: ", JSON.stringify(res.data));
+
       history.push("/HP/RestaurantInfo");
     } catch (err) {
       console.log(err);
@@ -80,12 +92,6 @@ const RestaurantSignIn = () => {
       </form>
     </div>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.customerReducer.isLoggedIn,
-  };
 };
 
 export default RestaurantSignIn;
