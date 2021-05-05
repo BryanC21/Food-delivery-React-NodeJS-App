@@ -23,7 +23,6 @@ const CustomerSignIn = ({ dispatch }) => {
     const handleSubmit = async (event) => {
       const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
       event.preventDefault();
-      history.push("/HP/CustomerViewRestaruantMenu");
       const data = {
         email,
         password,
