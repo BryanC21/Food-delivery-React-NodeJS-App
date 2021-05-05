@@ -48,6 +48,11 @@
 
 }
 
+.modal-form {
+    text-align: center;
+   
+}
+
 .cart-button:hover{
     background-color: var(--primary-color-hover);
     color: #fefefe;

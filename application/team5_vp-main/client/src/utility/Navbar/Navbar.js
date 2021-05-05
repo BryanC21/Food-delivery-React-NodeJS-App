@@ -8,10 +8,11 @@ import { useDispatch } from "react-redux";
 import { setSearchTerm } from "../../redux/actions/searchActions";
 import axios from "axios";
 import { Dropdown } from "react-bootstrap";
+import { connect } from "react-redux";
 
 library.add(faSearch, faCartPlus);
 
-function Navbar() {
+function Navbar({isLoggedIn}) {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const [loadCuisineType, setLoadCuisineType] = useState([]);
@@ -32,6 +33,68 @@ function Navbar() {
   const LoadCuisineTypeCuisine = ({ cuisine_type }) => {
     return <option value={cuisine_type}>{cuisine_type}</option>;
   };
+
+
+  if(isLoggedIn === true){
+    return (
+    <div className='navbar navbar-light bg-light '>
+    <div className='container'>
+      <Link className='navbar-brand' to='/HP/homepage'>
+        <img src={Logo} alt='logo' />
+      </Link>
+      <form className='d-flex container-sm '>
+        <div className='dropdown me-3'>
+          <Link
+            to={{
+              pathname: "/HP/search_result_menu",
+              param1: (e) => e.target.value,
+            }}
+          >
+            <select
+              className='btn btn-secondary dropdown-toggle'
+              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+            >
+              <optgroup>
+                <option value='Cuisines'>Cuisine</option>
+                {loadCuisineType.map((restaurant, id) => (
+                  <LoadCuisineTypeCuisine {...restaurant} key={id} />
+                ))}
+              </optgroup>
+            </select>
+          </Link>
+        </div>
+        <input
+          className='form-control me-2'
+          type='search'
+          placeholder='Search'
+          aria-label='Search'
+          onChange={(e) => setSearch(e.target.value)}
+          maxLength='40'
+        />
+        <Link to={{ pathname: "/HP/search_result_menu", param1: search }}>
+          <button
+            className='btn btn-search btn-outline-success'
+            type='submit'
+            onClick={() => dispatch(setSearchTerm(search))}
+          >
+            <FontAwesomeIcon icon={faSearch} size='1x' />
+          </button>
+        </Link>
+      </form>
+      <nav className='nav '>
+       
+        <ul className='py-3'>
+          <Link to={{ pathname: "/HP/customerCart", param1: search }}>
+            <button className='nav-link btn btn-link nav-active' to='#'>
+              <FontAwesomeIcon icon={faCartPlus} size='2x' />
+            </button>
+          </Link>
+        </ul>
+      </nav>
+    </div>
+  </div>
+);
+  }else{
 
   return (
     <div className='navbar navbar-light bg-light '>
@@ -144,5 +207,19 @@ function Navbar() {
       </div>
     </div>
   );
+                  }
 }
-export default Navbar;
+
+const mapStateToProps = (state) => {
+
+  return {
+      restaruant_menu: state.customerReducer.restaruant_menu,
+      cart: state.customerReducer.cart,
+      isLoggedIn: state.customerReducer.isLoggedIn,
+  };
+};
+
+
+
+export default connect(mapStateToProps)(Navbar);
+
