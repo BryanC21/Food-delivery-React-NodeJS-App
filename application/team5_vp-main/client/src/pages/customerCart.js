@@ -5,12 +5,14 @@ import "../styling/customerViewRestaurantMenu.css";
 import "../styling/cart.css";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { deleteCart } from "../redux/actions/customerActions";
+import { useHistory } from "react-router-dom";
 
 
 
 
 const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [total, setTotal] = useState(cart.length);//Total number of order
+    const history = useHistory();
 
     console.log(cart);
 
@@ -31,6 +33,10 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     const handleClick = () => {
         console.log(isLoggedIn)
+        if(isLoggedIn === false){
+            history.push('/HP/CustomerSignIn') 
+
+        }
 
     }
 

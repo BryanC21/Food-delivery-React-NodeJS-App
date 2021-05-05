@@ -45,7 +45,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
           <div className="wrapper2">
             {restaruant_menu.map((restaruant_menu) =>
               <button className="customer-buttom" onClick={() => { dispatch(setCart(restaruant_menu)); setModalIsOpen(true); }}>
-                <div className="card card-width">
+                <div className="card card-width" id={1}>
                   <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
                   <div className="customer-card-body">
                     <h5 className="customer-card-title">{restaruant_menu.name}</h5>

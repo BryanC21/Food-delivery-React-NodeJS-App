@@ -13,7 +13,7 @@ import axios from "axios";
 
 
 
-const CustomerSignIn = ({isLoggedIn, dispatch}) => {
+const CustomerSignIn = ({ dispatch }) => {
     
     const [email, setStateEmail] = React.useState("");
     const [password, setStatePassword] = React.useState("");
