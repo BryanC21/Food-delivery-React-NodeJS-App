@@ -52,6 +52,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             </div>
 
             <section className="order-section">
+                <h2 className ="head">Summary</h2>
                 <div className="order-content">
                     <div className="wrapper2">
                         {cart.map((cart) =>
@@ -60,7 +61,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                                 <div className="customer-card-body">
                                     <h5 className="customer-card-title">{cart.name}</h5>
                                     <h6 className="card-title">{cart.description}</h6>
-                                    <h6 className="card-title">QTYx1</h6>
+                                    <h6 className="card-title">QTYx{cart.quatity}</h6>
                                     <button className="bottun " onClick={handleDelete}><p className="text-color">Delete</p></button>
                                 </div>
                             </div>
@@ -76,9 +77,9 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                 <div className = "order-form">
                 <form >
                     
-                    <input type="radio" id="male" name="gender" value="male" checked></input>
+                    <input type="radio" id="p" name="deliveryType" value="Pickup" checked></input>
                     <label for="male" className='head'>Pickup</label><br></br>
-                    <input type="radio" id="female" name="gender" value="female"></input>
+                    <input type="radio" id="d" name="deliveryType" value="Delivery"></input>
                     <label for="female" className='head'>Delivery</label><br></br>
                 </form>
 
@@ -91,7 +92,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                 </select>
 
                 <br></br>
-                <button className='cart-button' onClick = {(e) => handleClick()}>Order</button>
+                <button className='cart-button' onClick = {(e) => handleClick()}>Check Out</button>
           
                 </div>
 

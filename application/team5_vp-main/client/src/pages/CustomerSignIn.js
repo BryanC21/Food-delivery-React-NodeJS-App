@@ -34,6 +34,8 @@ const CustomerSignIn = ({ dispatch }) => {
           const res = await axios.post("/api/v1/auth/userLogin", data);
           console.log("RESTAURANT INFORMATION: ", res);
           dispatch(setIsLoggedIn(true));
+      
+          //history.push("/HP/search_result_menu"); << login to this
           history.push("/HP/CustomerViewRestaruantMenu");
         } catch (err) {
           console.log(err);

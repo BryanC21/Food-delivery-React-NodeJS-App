@@ -21,10 +21,17 @@ const handleAddToCart = (e) => {
 
 const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [select, setSelect] = useState('');
-  const [quatity, setQuatity] = useState(0);
+  const [select, setSelect] = useState({});
+  const [quatity, setQuatity] = useState(1);
   const [price, setPrice] = useState(1);
   let i = 0;
+
+  let order = {
+    name: '',
+    description: '',
+    price: 0,
+    quatity: 0,
+  }
 
 
   function plusOne() {
@@ -33,9 +40,22 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
 
   useEffect(() => {//Rerender each time the number of order reduce
     console.log(quatity);
-    setPrice(quatity);
+    setPrice(quatity*7.99);
 }, [quatity]
 );
+
+
+const handleAdd = () => {
+  let order = {
+    name: select.name,
+    description: select.description,
+    price: price,
+    quatity: quatity,
+  }
+
+  dispatch(setCart(order));
+
+};
 
 
   return (
@@ -58,7 +78,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
         <div className="order-content">
           <div className="wrapper2">
             {restaruant_menu.map((restaruant_menu) =>
-              <button className="customer-buttom" key={i} onClick={() => { dispatch(setCart(restaruant_menu)); setModalIsOpen(true); setSelect(restaruant_menu.name);}}>
+              <button className="customer-buttom" key={i} onClick={() => {setModalIsOpen(true); setSelect(restaruant_menu);}}>
                 <div className="card card-width" >
                   <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
                   <div className="customer-card-body" >
@@ -82,7 +102,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
       <Modal isOpen={modalIsOpen} >
         <div className="modal-form">
           <h2 >Item added</h2>
-          <p>Food: {select}</p>
+          <p>Food: {select.name}</p>
           <select name="quatity" id="quatity" onChange={(e) => setQuatity(e.target.value)}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -90,9 +110,14 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
           <option value="4">4</option>
           </select>
           <br></br>
-          total: {price}
+          Total: {price}
           </div>
-          <button className="buttonClass" onClick={() => setModalIsOpen(false)}> Add </button>
+
+          
+
+
+
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false); handleAdd(select); }}> Add </button>
           
         </Modal>
 

@@ -29,7 +29,7 @@ const SearchPage = (props) => {
         travelMode: 'DRIVING',
         unitSystem: google.maps.UnitSystem.IMPERIAL
       }, (response, status) => {
-        setDistance(response.rows[0].elements[0].distance.text)
+       // setDistance(response.rows[0].elements[0].distance.text)
       });
 
   });
