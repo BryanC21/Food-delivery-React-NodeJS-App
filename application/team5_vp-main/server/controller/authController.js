@@ -2,6 +2,7 @@ const db = require("../config/dbConfig");
 const bcrypt = require("bcryptjs");
 const CatchAsync = require("../utility/CatchAsync");
 const AppError = require("../utility/AppError");
+const jwt = require("jsonwebtoken");
 
 /* Restuarant Registration */
 exports.restaurantRegister = CatchAsync(async (req, res, next) => {
@@ -166,6 +167,14 @@ exports.approvedUserRegister = CatchAsync(async (req, res, next) => {
 /* Restuarant Sign in */
 exports.restaurantLogin = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
   let baseSQL =
     "SELECT id, email, password FROM restaurant_owner WHERE email=?;";
   // userID: to set up and link the  foreign key using sessions table in db
@@ -176,10 +185,7 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
         userID = results[0].id;
-        res.cookie("logged", email, {
-          expires: new Date(Date.now() + 1000000),
-          httpOnly: false,
-        });
+
         return bcrypt.compare(password, hashedPassword);
       } else {
         return next(
@@ -192,6 +198,11 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
     })
     .then((passwordMatch) => {
       if (passwordMatch) {
+        // GENERATE JWT TOKEN
+        let token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
+          expiresIn: "7d",
+        });
+        res.cookie("logged", token, cookieOptions);
         req.session.email = email;
         // using sessions table we can now link our foregin key to this restaurant_owner user
         req.session.userID = userID;
@@ -199,6 +210,8 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
         res.status(200).json({
           status: "success",
           message: `Welcome back owner, ${email}`,
+          token,
+          email,
         });
       } else {
         return next(
