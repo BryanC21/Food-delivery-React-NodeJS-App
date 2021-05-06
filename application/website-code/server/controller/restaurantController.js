@@ -62,9 +62,11 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
           ])
           .then(([results, fields]) => {
             if (results && results.affectedRows) {
+              const insertId = results.insertId;
               return res.json({
                 status: "success",
                 message: "Your restaurant is now up and running!",
+                insertId,
               });
             } else {
               return next(
@@ -87,24 +89,15 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
 });
 
 exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
-  //Need to factor this part of the code to find a way to link fk_restaurantid with menu
   const { items_name, price, description, image, cuisine_type } = req.body;
-  let fkRestaurantID = 1; //In reality this should be passed with req as well
-  /*let baseSQL =
-    "SELECT r.id FROM restaurants r  JOIN menu m  on r.id = m.fk_restaurantid;";
-  await db.query(baseSQL, [fkRestaurantID]).then(([results, fields]) => {
-    if (results && results.length == 0) {
-      fkRestaurantID = results[0].id;
-    }
-  });*/
-  //Need to factor this part of the code
+  // const fkRestaurantID = 1;
   //TODO here or in form cant allow any blank rows in form or sql will cry
   await db
     .execute("SELECT * FROM menu WHERE items_name=?", [items_name])
     .then(([results, fields]) => {
       if (results && results.length == 0) {
         let baseSQL =
-          "INSERT INTO menu (items_name, price, description, image, cuisine_type,fk_restaurantid) VALUE (?,?,?,?,?,?);";
+          "INSERT INTO menu (items_name, price, description, image, cuisine_type) VALUE (?,?,?,?,?);";
         return db
           .execute(baseSQL, [
             items_name,
@@ -112,14 +105,15 @@ exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
             description,
             image,
             cuisine_type,
-            fkRestaurantID,
           ])
           .then(([results, fields]) => {
             if (results && results.affectedRows) {
+              const insertId = results.insertId;
               return res.json({
                 status: "success",
                 message:
                   "Your menu is now avaible for others to see and order!",
+                insertId,
               });
             } else {
               return next(new AppError("Menu could not be uploaded!", 200));
