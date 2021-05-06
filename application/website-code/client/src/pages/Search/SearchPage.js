@@ -7,7 +7,30 @@ import { Loader } from "@googlemaps/js-api-loader"
 library.add(faMapMarkerAlt);
 
 const SearchPage = (props) => {
+
   const [distance, setDistance] = useState('');
+
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: "AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc",
+      version: "weekly",
+    });
+    loader.load().then(() => {
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: ['SFSU, 94132'],
+          destinations: [address],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.IMPERIAL
+        }, (response, status) => {
+          setDistance(response.rows[0].elements[0].distance.text)
+        });
+  
+    });
+    const { google } = props;
+  }, []);
+
   const {
     restaurant_name,
     restaurant_logo,
@@ -15,25 +38,6 @@ const SearchPage = (props) => {
     address,
     dollar_sign,
   } = props;
-
-  const loader = new Loader({
-    apiKey: "AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc",
-    version: "weekly",
-  });
-  loader.load().then(() => {
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-      {
-        origins: ['SFSU, 94132'],
-        destinations: [address],
-        travelMode: 'DRIVING',
-        unitSystem: google.maps.UnitSystem.IMPERIAL
-      }, (response, status) => {
-       // setDistance(response.rows[0].elements[0].distance.text)
-      });
-
-  });
-  const { google } = props;
 
   return (
     <div>
