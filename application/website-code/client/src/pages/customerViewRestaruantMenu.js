@@ -7,6 +7,7 @@ import { setCart } from "../redux/actions/customerActions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-modal';
 import "../styling/Customer.css";
+import "../styling/StandardStyle.css";
 
 const handleAddToCart = (e) => {
   let item = {
@@ -69,13 +70,15 @@ const handleAdd = () => {
 
       </div>
 
-      <div className='head-black '>
+      <div className='menu-background'>
+
+      <div className='menu-head-h3'>
         <h3> Our Menu </h3>
       </div>
 
 
       <section className="order-section">
-        <div className="order-content">
+        <div className="menu-order-content">
           <div className="wrapper2">
             {restaruant_menu.map((restaruant_menu) =>
               <button className="customer-buttom" key={i} onClick={() => {setModalIsOpen(true); setSelect(restaruant_menu);}}>
@@ -96,8 +99,10 @@ const handleAdd = () => {
             )}
           </div>
         </div>
+        
 
       </section>
+      </div>
 
       <Modal isOpen={modalIsOpen} >
         <div className="modal-form">
@@ -157,6 +162,7 @@ const handleAdd = () => {
           )}
         </CardColumns>*/}
       {/*</CardDeck>*/}
+     
 
     </div>
 

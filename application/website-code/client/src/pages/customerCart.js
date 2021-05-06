@@ -6,6 +6,7 @@ import "../styling/cart.css";
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { deleteCart } from "../redux/actions/customerActions";
 import { useHistory } from "react-router-dom";
+import "../styling/StandardStyle.css";
 
 
 
@@ -33,8 +34,8 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     const handleClick = () => {
         console.log(isLoggedIn)
-        if(isLoggedIn === false){
-            history.push('/HP/CustomerSignIn') 
+        if (isLoggedIn === false) {
+            history.push('/HP/CustomerSignIn')
 
         }
 
@@ -51,9 +52,11 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
             </div>
 
+            <div className='menu-background'>
+
             <section className="order-section">
-                <h2 className ="head">Summary</h2>
-                <div className="order-content">
+                <h3 className="menu-head-h3">Summary</h3>
+                <div className="menu-order-content">
                     <div className="wrapper2">
                         {cart.map((cart) =>
                             <div className="card card-width">
@@ -70,30 +73,31 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                 </div>
 
             </section>
+            </div>
 
             <div className='jumbotron hero-bg'>
 
                 <h2 className='head'>Check Out Total:</h2>
-                <div className = "order-form">
-                <form >
-                    
-                    <input type="radio" id="p" name="deliveryType" value="Pickup" checked></input>
-                    <label for="male" className='head'>Pickup</label><br></br>
-                    <input type="radio" id="d" name="deliveryType" value="Delivery"></input>
-                    <label for="female" className='head'>Delivery</label><br></br>
-                </form>
+                <div className="order-form">
+                    <form >
 
-                <label for="cars" className='input'>Choose a Delivery Times:</label>
-                <input className='input'></input>
+                        <input type="radio" id="p" name="deliveryType" value="Pickup" checked></input>
+                        <label for="male" className='head'>Pickup</label><br></br>
+                        <input type="radio" id="d" name="deliveryType" value="Delivery"></input>
+                        <label for="female" className='head'>Delivery</label><br></br>
+                    </form>
 
-                <select name="cars" id="cars">
-                    <option value="AM">AM</option>
-                    <option value="PM">PM</option>
-                </select>
+                    <label for="cars" className='input'>Choose a Delivery Times:</label>
+                    <input className='input'></input>
 
-                <br></br>
-                <button className='cart-button' onClick = {(e) => handleClick()}>Check Out</button>
-          
+                    <select name="cars" id="cars">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+
+                    <br></br>
+                    <button className='cart-button' onClick={(e) => handleClick()}>Check Out</button>
+
                 </div>
 
             </div>
