@@ -13,8 +13,8 @@ router.get("/getAllRestaurants", getAllRestaurants);
 
 router.get("/getAllCuisineType", getAllCuisineType);
 
-router.post("/restaurantInfoUpload", requireSignin, restaurantInfoUpload);
+router.post("/restaurantInfoUpload", restaurantInfoUpload);
 
-router.post("/uploadRestaurantMenu", requireSignin, uploadRestaurantMenu);
+router.post("/uploadRestaurantMenu", uploadRestaurantMenu);
 
 module.exports = router;

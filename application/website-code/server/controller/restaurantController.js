@@ -89,16 +89,16 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
 exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
   //Need to factor this part of the code to find a way to link fk_restaurantid with menu
   const { items_name, price, description, image, cuisine_type } = req.body;
-  let fkRestaurantID;
-  let baseSQL =
+  let fkRestaurantID = 1; //In reality this should be passed with req as well
+  /*let baseSQL =
     "SELECT r.id FROM restaurants r  JOIN menu m  on r.id = m.fk_restaurantid;";
   await db.query(baseSQL, [fkRestaurantID]).then(([results, fields]) => {
     if (results && results.length == 0) {
       fkRestaurantID = results[0].id;
     }
-  });
+  });*/
   //Need to factor this part of the code
-
+  //TODO here or in form cant allow any blank rows in form or sql will cry
   await db
     .execute("SELECT * FROM menu WHERE items_name=?", [items_name])
     .then(([results, fields]) => {
