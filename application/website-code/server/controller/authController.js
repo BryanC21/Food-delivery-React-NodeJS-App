@@ -199,7 +199,7 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
     .then((passwordMatch) => {
       if (passwordMatch) {
         // GENERATE JWT TOKEN
-        let token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
+        let token = jwt.sign({ userID }, process.env.JWT_SECRET, {
           expiresIn: "7d",
         });
         res.cookie("logged", token, cookieOptions);
@@ -212,6 +212,7 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
           message: `Welcome back owner, ${email}`,
           token,
           email,
+          userID,
         });
       } else {
         return next(
