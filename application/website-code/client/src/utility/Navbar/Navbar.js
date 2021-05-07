@@ -106,17 +106,17 @@ function Navbar({ isLoggedIn }) {
                 </Dropdown.Toggle>
                 <ul className='nav '>
                   <Dropdown.Menu>
-                    <Dropdown.Item href='/HP/RestaurantSignIn'>
+                    <Dropdown.Item href='/HP/CustomerSignIn'>
                       <span className='primary-color-font me-3' to='#'>
                         Login
                       </span>
                     </Dropdown.Item>
-                    <Dropdown.Item>
+                    <Dropdown.Item href='/HP/RestaurantSignIn'>
                       <span className='primary-color-font me-3' to='#'>
                         Restaurant Login
                       </span>
                     </Dropdown.Item>
-                    <Dropdown.Item>
+                    <Dropdown.Item  href='/HP/DeliverySignIn'>
                       <span className='primary-color-font me-3' to='#'>
                         Deliverer Login
                       </span>
