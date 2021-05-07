@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const RestaurantMenu = (props) => {
@@ -16,6 +17,8 @@ const RestaurantMenu = (props) => {
     }
   }, [url]);
 
+  const { auth } = useSelector((state) => ({ ...state }));
+
   const handleSubmit = async () => {
     const data = {
       items_name,
@@ -23,6 +26,7 @@ const RestaurantMenu = (props) => {
       price,
       description,
       image: url,
+      owner_id: auth.userID,
     };
     try {
       const res = await axios.post(

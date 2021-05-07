@@ -89,15 +89,22 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
 });
 
 exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
-  const { items_name, price, description, image, cuisine_type } = req.body;
-  // const fkRestaurantID = 1;
+  const { items_name, price, description, image, cuisine_type, owner_id } = req.body;
+  let fkRestaurantID; 
+  //Here we get the restaurant id using the restaurant owner's id
+  let baseSQL =
+     "SELECT fk_restaurant_id FROM restaurant_owner WHERE id=?";
+   await db.query(baseSQL, [owner_id]).then(([results, fields]) => {
+      fkRestaurantID = results[0].fk_restaurant_id;
+   });
   //TODO here or in form cant allow any blank rows in form or sql will cry
   await db
     .execute("SELECT * FROM menu WHERE items_name=?", [items_name])
     .then(([results, fields]) => {
       if (results && results.length == 0) {
+        console.log(fkRestaurantID)
         let baseSQL =
-          "INSERT INTO menu (items_name, price, description, image, cuisine_type) VALUE (?,?,?,?,?);";
+          "INSERT INTO menu (items_name, price, description, image, cuisine_type, fk_restaurantid) VALUE (?,?,?,?,?,?);";
         return db
           .execute(baseSQL, [
             items_name,
@@ -105,6 +112,7 @@ exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
             description,
             image,
             cuisine_type,
+            fkRestaurantID,
           ])
           .then(([results, fields]) => {
             if (results && results.affectedRows) {
