@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import "../styling/customerViewRestaurantMenu.css";
 import { connect } from "react-redux";
-import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { setCart } from "../redux/actions/customerActions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-modal';
@@ -41,9 +40,11 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
 
   useEffect(() => {//Rerender each time the number of order reduce
     console.log(quatity);
-    setPrice(quatity*7.99);
+    setPrice(quatity*price);
 }, [quatity]
 );
+
+
 
 
 const handleAdd = () => {
@@ -73,7 +74,7 @@ const handleAdd = () => {
       <div className='menu-background'>
 
       <div className='menu-head-h3'>
-        <h3> Our Menu </h3>
+        <h3> Popular Items </h3>
       </div>
 
 
@@ -81,13 +82,13 @@ const handleAdd = () => {
         <div className="menu-order-content">
           <div className="wrapper2">
             {restaruant_menu.map((restaruant_menu) =>
-              <button className="customer-buttom" key={i} onClick={() => {setModalIsOpen(true); setSelect(restaruant_menu);}}>
+              <button className="customer-buttom" key={i} onClick={() => {setModalIsOpen(true); setSelect(restaruant_menu); setPrice(restaruant_menu.price)}}>
                 <div className="card card-width" >
                   <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
                   <div className="customer-card-body" >
                     <h5 className="customer-card-title" >{restaruant_menu.name}</h5>
-                    <h6 className="card-title" >{restaruant_menu.description}</h6>
-                    <h6 className="card-title" >$7.99</h6>
+                    <p className="card-title" maxlength="12">{restaruant_menu.description}</p>
+                    <h6 className="card-title" >${restaruant_menu.price}</h6>
                     {plusOne()}
                    
 
@@ -105,24 +106,44 @@ const handleAdd = () => {
       </div>
 
       <Modal isOpen={modalIsOpen} >
+        
         <div className="modal-form">
-          <h2 >Item added</h2>
-          <p>Food: {select.name}</p>
-          <select name="quatity" id="quatity" onChange={(e) => setQuatity(e.target.value)}>
+       
+          <h1 >{select.name}</h1>
+          <h4>{select.description}</h4>
+          <img src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
+          <br></br>
+          <br></br>
+          Qty <select name="quatity" id="quatity" onChange={(e) => setQuatity(e.target.value)}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
           </select>
           <br></br>
-          Total: {price}
+          <br></br>
+          <h4>Extra instructions</h4>
+          <textarea rows="4" cols="90" maxlength="50" placeholder="Add any special requests (e.g.,food allergies, extra spicy, etc.) and the store will do its best to accommodate you."></textarea>
+          <br></br>
+          <br></br>
+          <h4>If sold out</h4>
+          <select name="If sold out" id="If sold out" >
+          <option value="1">Go with merchant recommendation</option>
+          <option value="2" selected>Refund this item</option>
+          <option value="3">Contact me</option>
+          <option value="4">Cancel entire order</option>
+          </select>
+          <br></br>
+          <br></br>
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false); handleAdd(select); }}> Add to cart - ${price} </button>
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false);}}> Cancel </button>
           </div>
 
           
 
 
 
-          <button className="buttonClass" onClick={() => {setModalIsOpen(false); handleAdd(select); }}> Add </button>
+         
           
         </Modal>
 

@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
     //Fake data, need database
-    restaruant_menu: [{ name: "burger1", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }],
+    restaruant_menu: [{ name: "Cheeseburger", description: "Certified Angus Beef, American cheese, lettuce, tomatoes, red onions, pickles, Smash Sauce®, ketchup, toasted bun", price: "17.99" }, { name: "Fishburger", description: "Double Certified Angus Beef, American cheese, lettuce, tomatoes, red onions, pickles, Smash Sauce®, ketchup, toasted bun", price: "17.99" }, { name: "burger", description: "Taste good", price: "10.69" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }, { name: "burger", description: "Taste good", price: "17.99" }],
     //fake cart data
     cart: [],
     email: "",//user login email

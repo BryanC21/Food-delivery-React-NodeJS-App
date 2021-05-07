@@ -46,3 +46,7 @@
 .hero-bg {
     background-color: var(--secondary-color);
 }
+
+.Modal-size{
+    padding:100px;
+}
