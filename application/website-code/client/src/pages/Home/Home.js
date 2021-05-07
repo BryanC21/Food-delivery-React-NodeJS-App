@@ -106,7 +106,7 @@ function Home() {
                   </ul>
                   <Link
                     className='btn-link btn btn-outline-success py-2 my-2'
-                    to='#'
+                    to = '/HP/DeliveryRegistration'
                   >
                     Start Delivering
                   </Link>
@@ -131,7 +131,7 @@ function Home() {
                   </ul>
                   <Link
                     className='btn-partner btn-link btn btn-outline-success py-2 my-2'
-                    to='#'
+                    to = '/HP/RestaurantRegistration'
                   >
                     Become our partner
                   </Link>
@@ -156,7 +156,7 @@ function Home() {
                   </ul>
                   <Link
                     className='btn-link btn btn-outline-success py-2 my-2'
-                    to='#'
+                    to = '/HP/UserRegistration'
                   >
                     Register for Free
                   </Link>
