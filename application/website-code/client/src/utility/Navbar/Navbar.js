@@ -133,17 +133,17 @@ function Navbar({ isLoggedIn }) {
                 </Dropdown.Toggle>
                 <ul className='nav '>
                   <Dropdown.Menu>
-                    <Dropdown.Item to='#'>
+                    <Dropdown.Item href='/HP/UserRegistration'>
                       <span className='primary-color-font me-3'>
                         Register For Free
                       </span>
                     </Dropdown.Item>
-                    <Dropdown.Item>
+                    <Dropdown.Item href='/HP/RestaurantRegistration'>
                       <span className='primary-color-font me-3' to='#'>
                         Restaurant Register
                       </span>
                     </Dropdown.Item>
-                    <Dropdown.Item>
+                    <Dropdown.Item href='/HP/DeliveryRegistration'>
                       <span className='primary-color-font me-3' to='#'>
                         Deliverer Register
                       </span>
