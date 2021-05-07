@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styling/customerViewRestaurantMenu.css";
 import "../styling/cart.css";
-import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import { deleteCart } from "../redux/actions/customerActions";
 import { useHistory } from "react-router-dom";
 import "../styling/StandardStyle.css";
@@ -13,9 +12,30 @@ import "../styling/StandardStyle.css";
 
 const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [total, setTotal] = useState(cart.length);//Total number of order
+    const [totalPrice, setTotalPrice] = useState(0);
     const history = useHistory();
+    let count = 0;
 
-    console.log(cart);
+    useEffect(()=> {
+        for(let i = 0; i < cart.length; i++){
+        
+       count = cart[0].price + count
+
+   }
+
+
+    }
+        ,[]
+    )
+    //for(let i = 0; i < cart.length; i++){
+        
+      //  count = cart[0].price + count
+
+   // }
+
+    //setTotalPrice(count);
+
+    console.log(count);
 
     const handleDelete = () => {
         let item = { name: "burger", description: "Taste good", price: "17.99" };
@@ -43,60 +63,65 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     return (
         <div>
-            <div className='jumbotron hero-bg'>
 
-
-                <h2 className='head'>Cart total: {total}</h2>
-
-
-
-            </div>
 
             <div className='menu-background'>
 
-            <section className="order-section">
-                <h3 className="menu-head-h3">Summary</h3>
-                <div className="menu-order-content">
-                    <div className="wrapper2">
-                        {cart.map((cart) =>
-                            <div className="card card-width">
-                                <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
-                                <div className="customer-card-body">
-                                    <h5 className="customer-card-title">{cart.name}</h5>
-                                    <h6 className="card-title">{cart.description}</h6>
-                                    <h6 className="card-title">QTYx{cart.quatity}</h6>
-                                    <button className="bottun " onClick={handleDelete}><p className="text-color">Delete</p></button>
+                <section className="order-section">
+                    <h3 className="menu-head-h3">Summary</h3>
+                    <div className="menu-order-content">
+                        <div className="wrapper2">
+                            {cart.map((cart) =>
+                                <div className="card card-width">
+                                    <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
+                                    <div className="customer-card-body">
+                                        <h5 className="customer-card-title">{cart.name}</h5>
+                                        <h6 className="card-title">{cart.description}</h6>
+                                        <h6 className="card-title">QTYx{cart.quatity}</h6>
+                                        <button className="bottun " onClick={handleDelete}><p className="text-color">Delete</p></button>
+                                    </div>
+                                   
                                 </div>
-                            </div>
-                        )}
+                                
+                            )}
+                        </div>
                     </div>
-                </div>
 
-            </section>
+                </section>
             </div>
 
             <div className='jumbotron hero-bg'>
 
-                <h2 className='head'>Check Out Total:</h2>
-                <div className="order-form">
-                    <form >
 
-                        <input type="radio" id="p" name="deliveryType" value="Pickup" checked></input>
-                        <label for="male" className='head'>Pickup</label><br></br>
-                        <input type="radio" id="d" name="deliveryType" value="Delivery"></input>
-                        <label for="female" className='head'>Delivery</label><br></br>
-                    </form>
+                <div className="checkout-wrapper">
+                    <h2 className='head'>Amount Due: ${totalPrice}</h2>
+                    <div className="order-form">
+                        <h4>Method</h4>
 
-                    <label for="cars" className='input'>Choose a Delivery Times:</label>
-                    <input className='input'></input>
+                        <form >
+                            <input type="radio" id="p" name="deliveryType" value="Pickup" checked></input>
+                            <label for="male" className='head'>Pickup</label><br></br>
+                            <input type="radio" id="d" name="deliveryType" value="Delivery"></input>
+                            <label for="female" className='head'>Delivery</label><br></br>
+                        </form>
+                    </div>
+                    <div className="order-form">
+                        <h4>Time</h4>
 
-                    <select name="cars" id="cars">
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select>
 
-                    <br></br>
-                    <button className='cart-button' onClick={(e) => handleClick()}>Check Out</button>
+                        <input className='input'></input>
+
+                        <select name="cars" id="cars">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+
+                        <br></br>
+                    </div>
+                    <div className="order-form">
+                        <h4>Address</h4>
+                    </div>
+                    <button className='cart-button' onClick={(e) => handleClick()}>Place Order</button>
 
                 </div>
 

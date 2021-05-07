@@ -48,6 +48,7 @@
   background-clip: border-box;
   border: 1px solid var(--primary-color);
   border-radius: 0.3rem;
+  min-width: inherit;
 }
 
 .order-section .card-width {
@@ -95,10 +96,25 @@
 }
 
 .order-form {
-  margin-left: 25%;
+  display: flex;
+  margin-bottom: 1rem;
+  
+}
+
+.order-form h4{
+  margin-right: 2rem;
 }
 
 .order-form .input {
   color: #fff;
   margin-right: 1rem;
+}
+
+.checkout-wrapper{
+  margin-left:25%
+
+}
+
+.Method{
+
 }

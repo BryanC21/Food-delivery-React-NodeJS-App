@@ -8,8 +8,11 @@
     --white-color: #fff;
   }
 
+
+
+
 .head {
-    text-align: center;
+    
     color: black;
 }
 
@@ -49,8 +52,34 @@
 }
 
 .modal-form {
+    padding: 5%;
     text-align: center;
    
+   
+}
+
+.modal-form h1{
+    
+        margin-bottom: 20px;
+        text-align: left;
+    
+   
+}
+
+.modal-form h4{
+    
+    margin-bottom: 20px;
+    text-align: left;
+
+
+}
+
+.modal-form img{
+    
+    width: 50%;
+    
+
+
 }
 
 .cart-button:hover{
