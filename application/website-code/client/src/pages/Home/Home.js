@@ -71,7 +71,7 @@ function Home() {
             </p>
           </div>
           <div className='wrapper'>
-            {loadRestaurants.map((restaurant, id) => (
+            {loadRestaurants.slice(0, 6).map((restaurant, id) => (
               <LoadRestaurantDetail key={id} {...restaurant} />
             ))}
           </div>
