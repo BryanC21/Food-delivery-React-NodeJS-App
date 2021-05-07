@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 const restaurantRoutes = require("./routes/restaurants");
 const authRoutes = require("./routes/auth");
 const searchRoutes = require("./routes/search");
+const orderRoutes = require("./routes/order");
 // Error handling
 const AppError = require("./utility/AppError");
 const GlobalErrorHandler = require("./controller/errorController");
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 app.use("/api/v1/restaurants", restaurantRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/search", searchRoutes);
+app.use("/api/v1/orders", orderRoutes);
 
 // route middleware
 app.all("*", (req, res, next) => {
