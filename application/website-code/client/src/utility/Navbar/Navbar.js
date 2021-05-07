@@ -64,7 +64,7 @@ function Navbar({ isLoggedIn }) {
                 <optgroup>
                   <option value='Cuisines'>Cuisine</option>
                   {loadCuisineType.map((restaurant, id) => (
-                    <LoadCuisineTypeCuisine {...restaurant} key={id} />
+                    LoadCuisineTypeCuisine(restaurant)
                   ))}
                 </optgroup>
               </select>

@@ -104,7 +104,7 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
 });
 
 exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
-  const { items_name, price, description, image, cuisine_type, owner_id } = req.body;
+  const { items_name, price, description, image, owner_id, fk_cuisine_type_id } = req.body;
   let fkRestaurantID; 
   //Here we get the restaurant id using the restaurant owner's id
   let baseSQL =
@@ -116,18 +116,19 @@ exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
   await db
     .execute("SELECT * FROM menu WHERE items_name=?", [items_name])
     .then(([results, fields]) => {
-      if (results && results.length == 0) {
-        console.log(fkRestaurantID)
+      if (true) { //@Denny allow menu items with same name y not, but i didnt remove the check cause i was scared to break this
+        console.log('got this far')
         let baseSQL =
-          "INSERT INTO menu (items_name, price, description, image, cuisine_type, fk_restaurantid) VALUE (?,?,?,?,?,?);";
+          "INSERT INTO menu (items_name, price, description, image, cuisine_type, fk_restaurantid, fk_cuisine_type_id) VALUE (?,?,?,?,?,?,?);";
         return db
           .execute(baseSQL, [
             items_name,
             price,
             description,
             image,
-            cuisine_type,
+            "",
             fkRestaurantID,
+            fk_cuisine_type_id,
           ])
           .then(([results, fields]) => {
             if (results && results.affectedRows) {

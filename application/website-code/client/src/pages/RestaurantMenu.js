@@ -5,28 +5,40 @@ import axios from "axios";
 
 const RestaurantMenu = (props) => {
   const [items_name, setItemsName] = React.useState("");
-  const [cuisine_type, setCuisineType] = React.useState("");
+  const [cuisine_type, setCuisineType] = React.useState(2);
+  const [loadCuisineType, setLoadCuisineType] = React.useState([]);
   const [price, setPricing] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [image, setMenuImage] = useState("");
-  const [url, setUrl] = useState(undefined);
+  const [image, setMenuImage] = React.useState("");
+  const [url, setUrl] = React.useState(undefined);
 
   useEffect(() => {
+    loadAllRestaurants();
     if (url) {
       handleSubmit();
     }
   }, [url]);
+
+  const loadAllRestaurants = async () => {
+    const url = "/api/v1/restaurants/getAllCuisineType";
+    axios.get(url).then((res) => {
+      const { restaurants } = res.data;
+      console.log(restaurants);
+      setLoadCuisineType(restaurants);
+      console.log(loadCuisineType)
+    });
+  };
 
   const { auth } = useSelector((state) => ({ ...state }));
 
   const handleSubmit = async () => {
     const data = {
       items_name,
-      cuisine_type,
       price,
       description,
       image: url,
       owner_id: auth.userID,
+      fk_cuisine_type_id: cuisine_type
     };
     try {
       const res = await axios.post(
@@ -69,6 +81,11 @@ const RestaurantMenu = (props) => {
     }
   };
 
+  const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
+    //console.log(id)
+    return <option value={id}>{cuisine_type}</option>;
+  };
+
   return (
     <div>
       {/*FRONTEND TODO*/}
@@ -99,17 +116,19 @@ const RestaurantMenu = (props) => {
                   />
                 </label>
                 <br />
+                <div>
                 <label>
                   Cuisine Type:
-                  <br></br>
-                  <input
-                    type='text'
-                    style={{ width: "40vw" }}
-                    value={cuisine_type}
-                    onChange={(e) => setCuisineType(e.target.value)}
-                  />
                 </label>
-                <br />
+                <br/>
+                <select className=''
+                onChange={(e) => (setCuisineType(e.target.value))}>
+                  <option value='2'>Cuisine</option>
+                  {loadCuisineType.map((restaurant, id) => (
+                    LoadCuisineTypeCuisine(restaurant)
+                  ))}
+                </select>
+                </div>
                 <label>
                   Price:
                   <br></br>
@@ -131,7 +150,9 @@ const RestaurantMenu = (props) => {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </label>
+                <br />
                 <label> Upload Image </label>
+                <br />
                 <input
                   type='file'
                   name='uploadImage'
