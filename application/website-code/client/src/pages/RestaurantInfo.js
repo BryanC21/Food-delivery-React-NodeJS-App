@@ -19,7 +19,8 @@ const RestaurantInfo = (props) => {
     }
   }, [url]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { //TODO after signin/register you should know the owner id
+    //so set the owner id for this new restaurant to that 
     const data = {
       restaurant_name,
       cuisine_type,
@@ -29,7 +30,10 @@ const RestaurantInfo = (props) => {
       restaurant_logo: url,
     };
     try {
-      const res = await axios.post(
+      const res = await axios.post(//TODO return the id of the restaurant once created
+        //set the restaurant id for current signed in owner to this restaurant in DB
+        //make sure owner cant come back to this page once successfully created restaurant so
+        //maybe have a  check if the owner has a restaurant id assigned
         "/api/v1/restaurants/restaurantInfoUpload",
         data
       );

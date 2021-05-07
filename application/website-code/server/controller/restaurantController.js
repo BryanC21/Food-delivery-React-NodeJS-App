@@ -29,6 +29,21 @@ exports.getAllCuisineType = CatchAsync(async (req, res, next) => {
   });
 });
 
+exports.getAllMenuItems = CatchAsync(async (req, res, next) => {
+  const restaurantId = req.query.restaurantId;
+  await db.query("SELECT * FROM menu WHERE fk_restaurantid=?;", [restaurantId]).then(([results, fields]) => {
+    if (results && results.length == 0) {
+      return next(new AppError("No menu items were found!", 200));
+    } else {
+      return res.json({
+        status: "success",
+        message: `${results.length} menu items were successfully found`,
+        menuItems: results,
+      });
+    }
+  });
+});
+
 // Upload does not work unless a register owner is signed in because of the foreign key
 // if you want to test remove foreign key and it will work
 exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
