@@ -8,9 +8,11 @@ const {
   getAllDeliveryOrders,
 } = require("../controller/ordersController");
 
-router.post("/createPickupOrder", createPickupOrders);
-router.post("/createDeliveryOrder", createDeliveryOrders);
+//pickup route
 router.get("/pickupOrders", getAllPickupOrders);
-router.get("/deliveryOrders", getAllDeliveryOrders);
+router.post("/createPickupOrder", createPickupOrders);
 
+// delivery route
+router.get("/deliveryOrders", getAllDeliveryOrders);
+router.post("/createDeliveryOrder", createDeliveryOrders);
 module.exports = router;
