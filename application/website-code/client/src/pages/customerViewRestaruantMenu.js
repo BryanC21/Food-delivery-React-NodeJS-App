@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-modal';
 import "../styling/Customer.css";
 import "../styling/StandardStyle.css";
+import axios from 'axios';
 
 const handleAddToCart = (e) => {
   let item = {
@@ -19,11 +20,12 @@ const handleAddToCart = (e) => {
 
 
 
-const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
+const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu, selectedID }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [select, setSelect] = useState({});
   const [quatity, setQuatity] = useState(1);
   const [price, setPrice] = useState(1);
+  const [menu, setMenu] = useState([]);
   let i = 0;
 
   let order = {
@@ -44,8 +46,24 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu }) => {
 }, [quatity]
 );
 
+useEffect(() => {
+  loadMenu();
+}, []);
+
+const loadMenu = async () => {
+  const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${selectedID}`;
+  try{
+  axios.get(url).then((res) => {
+    setMenu(res.data.menuItems);
+    console.log(res.data.menuItems)
+  })}catch (err) {
+    console.log(err);
+    //setMenu(0);
+  }
+};
 
 
+console.log("id is" + selectedID)
 
 const handleAdd = () => {
   let order = {
@@ -58,6 +76,21 @@ const handleAdd = () => {
   dispatch(setCart(order));
 
 };
+
+
+if(menu == undefined){
+  return(<div>
+    <div className='jumbotron bg-dark'>
+     
+
+
+
+      <h2 className='customer-head'>Nothing</h2>
+
+    </div>
+    </div>
+    );
+}else{
 
 
   return (
@@ -81,14 +114,14 @@ const handleAdd = () => {
       <section className="order-section">
         <div className="menu-order-content">
           <div className="wrapper2">
-            {restaruant_menu.map((restaruant_menu) =>
-              <button className="customer-buttom" key={i} onClick={() => {setModalIsOpen(true); setSelect(restaruant_menu); setPrice(restaruant_menu.price)}}>
+            {menu.map((menu) =>
+              <button className="customer-buttom" key={menu.id} onClick={() => {setModalIsOpen(true); setSelect(menu); setPrice(menu.price)}}>
                 <div className="card card-width" >
-                  <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
+                  <img className="card-img-top" src={menu.image} alt="burger"></img>
                   <div className="customer-card-body" >
-                    <h5 className="customer-card-title" >{restaruant_menu.name}</h5>
-                    <p className="card-title" maxlength="12">{restaruant_menu.description}</p>
-                    <h6 className="card-title" >${restaruant_menu.price}</h6>
+                    <h5 className="customer-card-title" >{menu.items_name}</h5>
+                    <p className="card-title" maxlength="12">{menu.description}</p>
+                    <h6 className="card-title" >${menu.price}</h6>
                     {plusOne()}
                    
 
@@ -109,9 +142,9 @@ const handleAdd = () => {
         
         <div className="modal-form">
        
-          <h1 >{select.name}</h1>
+          <h1 >{select.items_name}</h1>
           <h4>{select.description}</h4>
-          <img src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
+          <img src={select.image} alt="burger"></img>
           <br></br>
           <br></br>
           Qty <select name="quatity" id="quatity" onChange={(e) => setQuatity(e.target.value)}>
@@ -197,7 +230,7 @@ const handleAdd = () => {
 
 
 
-  )
+  )}
 };
 
 const mapStateToProps = (state) => {
@@ -205,6 +238,7 @@ const mapStateToProps = (state) => {
   return {
     restaruant_menu: state.customerReducer.restaruant_menu,
     cart: state.customerReducer.cart,
+    selectedID: state.customerReducer.selectedID,
   };
 };
 

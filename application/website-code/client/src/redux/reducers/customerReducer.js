@@ -5,7 +5,8 @@ const INITIAL_STATE = {
     cart: [],
     email: "",//user login email
     password: "",//user login password
-    isLoggedIn: false
+    isLoggedIn: false,
+    selectedID: 0
 };
 
 const customerReducer = (state = INITIAL_STATE, action) => {
@@ -39,6 +40,11 @@ const customerReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 cart: action.cart,
+            };
+        case "SET_ID":
+            return {
+                ...state,
+                selectedID: action.selectedID,
             };
         default:
             return state;

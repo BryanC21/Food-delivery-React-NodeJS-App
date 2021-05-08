@@ -23,5 +23,10 @@ export const setPassword = (password) => ({
     password,
 });
 
+export const setId = (selectedID) => ({ 
+    type: 'SET_ID',
+    selectedID,
+});
+
 
 
