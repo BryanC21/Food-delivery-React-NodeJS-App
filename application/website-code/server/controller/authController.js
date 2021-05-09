@@ -4,6 +4,13 @@ const CatchAsync = require("../utility/CatchAsync");
 const AppError = require("../utility/AppError");
 const jwt = require("jsonwebtoken");
 
+const cookieOptions = {
+  expires: new Date(
+    Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+  ),
+  httpOnly: true,
+};
+
 /* Restuarant Registration */
 exports.restaurantRegister = CatchAsync(async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -167,14 +174,7 @@ exports.approvedUserRegister = CatchAsync(async (req, res, next) => {
 /* Restuarant Sign in */
 exports.restaurantLogin = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
-
   let baseSQL =
     "SELECT id, email, password FROM restaurant_owner WHERE email=?;";
   // userID: to set up and link the  foreign key using sessions table in db
@@ -230,8 +230,8 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
 /* Deliverer Sign in */
 exports.delivererLogin = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
   let baseSQL = "SELECT id, email, password FROM deliverers WHERE email=?;";
-  // userID: to set up and link the  foreign key using sessions table in db
   let userID;
   let account_type = "deliverer";
   await db
@@ -252,12 +252,20 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
     })
     .then((passwordMatch) => {
       if (passwordMatch) {
+        let token = jwt.sign({ userID }, process.env.JWT_SECRET, {
+          expiresIn: "7d",
+        });
+        res.cookie("loggedDeliverer", token, cookieOptions);
         req.session.email = email;
         // using sessions table we can now link our foregin key to  deliverer
         req.session.userID = userID;
-        res.status(401).json({
+        res.locals.logged = true;
+        res.status(200).json({
           status: "success",
-          message: `Welcome back deliverer, ${email}`,
+          message: `Welcome back owner, ${email}`,
+          token,
+          email,
+          userID,
           account_type,
         });
       } else {
@@ -296,12 +304,20 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
     })
     .then((passwordMatch) => {
       if (passwordMatch) {
+        let token = jwt.sign({ userID }, process.env.JWT_SECRET, {
+          expiresIn: "7d",
+        });
+        res.cookie("loggedUser", token, cookieOptions);
         req.session.email = email;
         // using sessions table we can now link our foregin key to  approved_user
         req.session.userID = userID;
-        res.status(401).json({
+        res.locals.logged = true;
+        res.status(200).json({
           status: "success",
-          message: `Welcome back, ${email}`,
+          message: `Welcome back owner, ${email}`,
+          token,
+          email,
+          userID,
           account_type,
         });
       } else {
