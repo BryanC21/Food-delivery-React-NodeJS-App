@@ -7,12 +7,15 @@ const {
   uploadRestaurantMenu,
   getAllMenuItems,
 } = require("../controller/restaurantController");
-// MIDDLEWARE
-const { requireSignin } = require("../middleware/requireSignin");
+
+const { restrictTo } = require("../controller/authController");
 
 router.get("/getAllRestaurants", getAllRestaurants);
 
 router.get("/getAllCuisineType", getAllCuisineType);
+
+// restrict users to only restaurant
+router.use(restrictTo("restaurant"));
 
 router.post("/restaurantInfoUpload", restaurantInfoUpload);
 
