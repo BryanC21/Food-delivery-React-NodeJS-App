@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../styling/Registration.css"
+import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -20,9 +20,9 @@ export default function DeliveryRegistration() {
     };
 
     try {
-      const res = await axios.post("/api/v1/auth/registerDeliverer", data); 
-      console.log("Deliverer LOGIN: ", res);
-      history.push("/HP/DelivererMainMenu");
+      const res = await axios.post("/api/v1/auth/registerDeliverer", data);
+      console.log("Deliverer REGISTRATION: ", res);
+      history.push("/HP/DeliverySignIn");
     } catch (err) {
       console.log(err);
     }
