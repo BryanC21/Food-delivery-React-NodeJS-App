@@ -179,6 +179,7 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
     "SELECT id, email, password FROM restaurant_owner WHERE email=?;";
   // userID: to set up and link the  foreign key using sessions table in db
   let userID;
+  let account_type = "restaurant";
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
@@ -213,6 +214,7 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
           token,
           email,
           userID,
+          account_type,
         });
       } else {
         return next(
@@ -231,6 +233,7 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
   let baseSQL = "SELECT id, email, password FROM deliverers WHERE email=?;";
   // userID: to set up and link the  foreign key using sessions table in db
   let userID;
+  let account_type = "deliverer";
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
@@ -255,6 +258,7 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
         res.status(401).json({
           status: "success",
           message: `Welcome back deliverer, ${email}`,
+          account_type,
         });
       } else {
         return next(
@@ -273,6 +277,7 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
   let baseSQL = "SELECT id, email, password FROM approved_users WHERE email=?;";
   // userID: to set up and link the  foreign key using sessions table in db
   let userID;
+  let account_type = "user";
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
@@ -297,6 +302,7 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
         res.status(401).json({
           status: "success",
           message: `Welcome back, ${email}`,
+          account_type,
         });
       } else {
         return next(
@@ -308,3 +314,15 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
       console.log(err);
     });
 });
+
+exports.restrictTo = (...account_type) => {
+  return (req, res, next) => {
+    if (!account_type.includes(req.account_type)) {
+      return next(
+        new AppError("You do not have permission to perform this action", 403)
+      );
+    }
+
+    next();
+  };
+};
