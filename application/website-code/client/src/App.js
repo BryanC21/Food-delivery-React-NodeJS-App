@@ -7,6 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import MapContainer from "./components/MapContainer";
+import ReactGa from "react-ga";
 
 function App() {
   const [restaurant, setRestaurant] = useState([]);
@@ -17,6 +18,8 @@ function App() {
 
   useEffect(() => {
     load();
+    ReactGa.initialize('UA-196598528-1')
+    ReactGa.pageview('/')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
