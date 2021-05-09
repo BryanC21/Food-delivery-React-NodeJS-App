@@ -31,17 +31,19 @@ exports.getAllCuisineType = CatchAsync(async (req, res, next) => {
 
 exports.getAllMenuItems = CatchAsync(async (req, res, next) => {
   const restaurantId = req.query.restaurantId;
-  await db.query("SELECT * FROM menu WHERE fk_restaurantid=?;", [restaurantId]).then(([results, fields]) => {
-    if (results && results.length == 0) {
-      return next(new AppError("No menu items were found!", 200));
-    } else {
-      return res.json({
-        status: "success",
-        message: `${results.length} menu items were successfully found`,
-        menuItems: results,
-      });
-    }
-  });
+  await db
+    .query("SELECT * FROM menu WHERE fk_restaurantid=?;", [restaurantId])
+    .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        return next(new AppError("No menu items were found!", 200));
+      } else {
+        return res.json({
+          status: "success",
+          message: `${results.length} menu items were successfully found`,
+          menuItems: results,
+        });
+      }
+    });
 });
 
 // Upload does not work unless a register owner is signed in because of the foreign key
@@ -104,55 +106,48 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
 });
 
 exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
-  const { items_name, price, description, image, owner_id, fk_cuisine_type_id } = req.body;
-  let fkRestaurantID; 
+  const {
+    items_name,
+    price,
+    description,
+    image,
+    owner_id,
+    fk_cuisine_type_id,
+  } = req.body;
+  let fkRestaurantID;
   //Here we get the restaurant id using the restaurant owner's id
-  let baseSQL =
-     "SELECT fk_restaurant_id FROM restaurant_owner WHERE id=?";
-   await db.query(baseSQL, [owner_id]).then(([results, fields]) => {
-      fkRestaurantID = results[0].fk_restaurant_id;
-   });
-  //TODO here or in form cant allow any blank rows in form or sql will cry
+  let baseSQL = "SELECT fk_restaurant_id FROM restaurant_owner WHERE id=?";
   await db
-    .execute("SELECT * FROM menu WHERE items_name=?", [items_name])
+    .query(baseSQL, [owner_id])
     .then(([results, fields]) => {
-      if (true) { //@Denny allow menu items with same name y not, but i didnt remove the check cause i was scared to break this
-        console.log('got this far')
-        let baseSQL =
-          "INSERT INTO menu (items_name, price, description, image, cuisine_type, fk_restaurantid, fk_cuisine_type_id) VALUE (?,?,?,?,?,?,?);";
-        return db
-          .execute(baseSQL, [
-            items_name,
-            price,
-            description,
-            image,
-            "",
-            fkRestaurantID,
-            fk_cuisine_type_id,
-          ])
-          .then(([results, fields]) => {
-            if (results && results.affectedRows) {
-              const insertId = results.insertId;
-              return res.json({
-                status: "success",
-                message:
-                  "Your menu is now avaible for others to see and order!",
-                insertId,
-              });
-            } else {
-              return next(new AppError("Menu could not be uploaded!", 200));
-            }
-          })
-          .catch((err) => {
-            return next(new AppError("ERROR", err), 500);
+      fkRestaurantID = results[0].fk_restaurant_id;
+    })
+    //TODO here or in form cant allow any blank rows in form or sql will cry
+    .then(async () => {
+      let baseSQL =
+        "INSERT INTO menu (items_name, price, description, image, cuisine_type, fk_restaurantid, fk_cuisine_type_id) VALUE (?,?,?,?,?,?,?);";
+      try {
+        const [results, fields] = await db.execute(baseSQL, [
+          items_name,
+          price,
+          description,
+          image,
+          "",
+          fkRestaurantID,
+          fk_cuisine_type_id,
+        ]);
+        if (results && results.affectedRows) {
+          const insertId = results.insertId;
+          return res.json({
+            status: "success",
+            message: "Your menu is now avaible for others to see and order!",
+            insertId,
           });
-      } else {
-        return next(
-          new AppError(
-            `${items_name} has already been uploaded to your menu.`,
-            400
-          )
-        );
+        } else {
+          return next(new AppError("Menu could not be uploaded!", 200));
+        }
+      } catch (err) {
+        return next(new AppError("ERROR", err), 500);
       }
     });
 });
