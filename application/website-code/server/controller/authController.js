@@ -317,7 +317,7 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
 
 exports.restrictTo = (...account_type) => {
   return (req, res, next) => {
-    if (!account_type.includes(req.account_type)) {
+    if (!account_type) {
       return next(
         new AppError("You do not have permission to perform this action", 403)
       );
