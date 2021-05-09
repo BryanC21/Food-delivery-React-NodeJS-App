@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { connect } from "react-redux";
-import { setIsLoggedIn } from "../redux/actions/customerActions"
 
 function UserRegistration({ dispatch }) {
-  const [username, setUsername] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [address, setAddress] = React.useState("");
-  const [phone_number, setPhone_Number] = React.useState("");
+  const [username, setUsername] = React.useState("test000");
+  const [email, setEmail] = React.useState("test@sfsu.edu");
+  const [password, setPassword] = React.useState("123456");
+  const [address, setAddress] = React.useState("some address");
+  const [phone_number, setPhone_Number] = React.useState("44444444");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
   const history = useHistory();
 
@@ -29,9 +27,8 @@ function UserRegistration({ dispatch }) {
     } else {
       try {
         const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
-        console.log("RESTAURANT INFORMATION: ", res);
-        dispatch(setIsLoggedIn(true));
-        history.push("/HP/CustomerViewRestaruantMenu");
+        console.log("USER INFORMATION: ", res);
+        history.push("/HP/CustomerSignIn");
       } catch (err) {
         console.log(err);
       }
@@ -118,12 +115,4 @@ function UserRegistration({ dispatch }) {
   );
 }
 
-const mapStateToProps = (state) => {
-
-  return {
-    isLoggedIn: state.customerReducer.isLoggedIn,
-    
-  };
-};
-
-export default connect(mapStateToProps)(UserRegistration);
+export default UserRegistration;
