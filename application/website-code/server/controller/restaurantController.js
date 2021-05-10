@@ -77,13 +77,40 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
             dollar_sign,
             fk_restaurant_owner_id,
           ])
-          .then(([results, fields]) => {
+          .then( async ([results, fields]) => {
+            let restaurant_id;
+            await db
+              .query("SELECT LAST_INSERT_ID();", [])
+              .then(async ([results, fields]) => {
+                if (results && results.length == 0) {
+                  return next(new AppError("Restaurant creation failed!", 200));
+                } else {
+                  console.log(JSON.stringify(results))
+                  //restaurant_id = results[0].LAST_INSERT_ID()
+                  for (var key in results[0]) {
+                   restaurant_id  = results[0][key]
+                  }
+                  console.log(restaurant_id)
+
+                  await db
+                  .query("UPDATE restaurant_owner SET fk_restaurant_id = ? WHERE id = ?", [restaurant_id, fk_restaurant_owner_id])
+                  .then(([results, fields]) => {
+                    if (results && results.length == 0) {
+                      return next(new AppError("Restaurant creation failed!", 200));
+                    } else {
+                    }
+                  });
+
+                }
+              });
+
             if (results && results.affectedRows) {
               const insertId = results.insertId;
               return res.json({
                 status: "success",
                 message: "Your restaurant is now up and running!",
                 insertId,
+                restaurant_id,
               });
             } else {
               return next(
