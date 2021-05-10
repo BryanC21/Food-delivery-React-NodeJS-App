@@ -4,7 +4,7 @@ import "../styling/orderDetails.css"
 
 function RestaurantPickupOrderDetails(props){
     return(
-        <div>
+        <div className = "delivery-wrapper">
             <InfoCard
                 img = "https://holeinthewall.yqme.com.au/MC/holeinthewall.yqme.com.au/Content/Assets/HITW_slide_1000x360_b%20(1)%20(1).jpg"
                 foodName = "Ham and Lettuce Sandwich"
@@ -17,7 +17,7 @@ function RestaurantPickupOrderDetails(props){
             >
             </InfoCard>
         <br></br>
-        <button className = "cancelOrder">Cancel Order</button>
+        <button className = "confirmButton">Cancel Order</button>
         </div>
     )
 }

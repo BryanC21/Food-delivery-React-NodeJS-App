@@ -29,7 +29,7 @@ const SearchPage = (props) => {
           travelMode: 'DRIVING',
           unitSystem: google.maps.UnitSystem.IMPERIAL
         }, (response, status) => {
-          setDistance(response.rows[0].elements[0].distance.text)
+         // setDistance(response.rows[0].elements[0].distance.text)
         });
   
     });
@@ -50,7 +50,7 @@ const SearchPage = (props) => {
   return (
     <div>
       <div className='card mb-4 shadow-sm'>
-        <Link to='/HP/CustomerViewRestaruantMenu' onClick={() =>  dispatch(setId(id))}>
+        <Link to='/HP/CustomerViewRestaruantMenu' onClick={() =>  {dispatch(setId(id));  window.localStorage.setItem("RID", JSON.stringify(id));}}>
         <img
           src={restaurant_logo}
           className='card-img-top card-img'
