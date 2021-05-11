@@ -3,23 +3,31 @@ img {
     height: 50%;
   }
   
-.directions{
+  .directions{
     color:white;
     background-color: #743282;
     margin:auto;
     display:block;
     width: 200px;
     cursor: pointer;
-
-
+   
 }
 
+.directions:hover{
+    background-color: var(--primary-color-hover);
+    color: #fefefe;
+  }
+
 .cancelOrder{
-    color:rgb(95, 99, 104);
-    background-color: white;
+    color:white;
+    background-color: #743282;
     margin:auto;
     display:block;
     width: 200px;
     cursor: pointer;
-
 }
+
+.cancelOrder:hover{
+    background-color: var(--primary-color-hover);
+    color: #fefefe;
+  }
