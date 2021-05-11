@@ -9,6 +9,9 @@ img {
     margin:auto;
     display:block;
     width: 200px;
+    cursor: pointer;
+
+
 }
 
 .cancelOrder{
