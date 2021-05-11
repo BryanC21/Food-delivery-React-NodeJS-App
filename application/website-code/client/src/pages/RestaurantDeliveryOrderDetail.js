@@ -40,7 +40,7 @@ function RestaurantDeliveryOrderDetail(){
                 <br></br>
                 <br></br>
                 <br></br>
-            <button className = 'cancelOrder'>Cancel Order</button>
+            <button className = 'cancelOrder'>Cancel Orders</button>
         </div>
     )
 }
