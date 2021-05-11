@@ -1,7 +1,8 @@
 .heading{
+    color: #dc9200;
     text-align: center;
-    background-color: rgb(210,227,234);
-    padding: 100px;
+    background-color: #743282;
+    padding: 40px;
 }
 
 .button{
