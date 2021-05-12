@@ -180,21 +180,11 @@ exports.uploadRestaurantMenu = CatchAsync(async (req, res, next) => {
 });
 
 exports.removeRestaurantMenuItem = CatchAsync(async(req,res,next)=>{
-  //I assume we know the id of the item we are deleting, but I am not sure how we get the info. This is my best guess
-  const {
-    id,
-    items_name,
-    price,
-    description,
-    image,
-    cuisine_type,
-    fk_restaurant_id,
-    fk_cuisine_type_id,
-  } = req.body;
-
+  const id = req.query.id;
+  
   let searchSql = "SELECT * FROM menu WHERE id = ?"
   let deleteSql = "DELETE FROM menu where id = ?"
-
+  
   await db.execute(searchSql,[id]).then(([results,fields]) => {
     //if the SELECT statement does not find anything 
     if(results && results.length == 0){
@@ -203,6 +193,11 @@ exports.removeRestaurantMenuItem = CatchAsync(async(req,res,next)=>{
     //if the SELECT statement does find something, execute the delete
     else{
       db.execute(deleteSql,[id])
+      return res.json({
+        status: "success",
+        message: "Item was deleted"
+      });
     }
-  })
+  }) 
+  
 })
