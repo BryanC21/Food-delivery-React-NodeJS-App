@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 import "../styling/Customer.css";
 import "../styling/StandardStyle.css";
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 const handleAddToCart = (e) => {
   let item = {
@@ -26,6 +27,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu, selectedID }) =
   const [quatity, setQuatity] = useState(1);
   const [price, setPrice] = useState(1);
   const [menu, setMenu] = useState([]);
+  const history = useHistory();
   let i = 0;
 
   let order = {
@@ -48,6 +50,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu, selectedID }) =
 
 useEffect(() => {
   loadMenu();
+  
 }, []);
 
 const loadMenu = async () => {
@@ -56,6 +59,10 @@ const loadMenu = async () => {
   axios.get(url).then((res) => {
     setMenu(res.data.menuItems);
     console.log(res.data.menuItems)
+    if(res.data.menuItems == undefined){
+      history.push("/HP/search_result_menu")
+ 
+   }
   })}catch (err) {
     console.log(err);
     //setMenu(0);
@@ -79,8 +86,10 @@ const handleAdd = () => {
 
 
 if(menu == undefined){
+  
   return(<div>
     <div className='jumbotron bg-dark'>
+   
      
 
 
