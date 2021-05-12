@@ -74,13 +74,13 @@ const RestaurantMenu = (props) => {
   };
 
   const resetFields = () =>{
-    document.getElementById('resCuisineInfo').value = '';
+    /*document.getElementById('resCuisineInfo').value = '';
     document.getElementById('resImageField').value = '';
     var fieldsList = document.getElementsByClassName('resInfoField');
     var i; 
     for(i = 0; i <fieldsList.length; i++ ){
       fieldsList[i].value = '';
-    }
+    }*/
   }
 
   const MenuUpload = () => {
@@ -119,7 +119,6 @@ const RestaurantMenu = (props) => {
                   Food Name:
                   <br></br>
                   <input
-                    className ='resInfoField'
                     type='text'
                     style={{ width: "40vw" }}
                     value={items_name}
@@ -133,9 +132,8 @@ const RestaurantMenu = (props) => {
                 </label>
                 <br/>
                 <select className=''
-                  
                 onChange={(e) => (setCuisineType(e.target.value))}>
-                  <option id='resCuisineInfo' value='2'>Cuisine</option>
+                  <option value='2'>Cuisine</option>
                   {loadCuisineType.map((restaurant, id) => (
                     LoadCuisineTypeCuisine(restaurant)
                   ))}
@@ -146,7 +144,6 @@ const RestaurantMenu = (props) => {
                   <br></br>
                   <input
                     type='text'
-                    className='resInfoField'
                     style={{ width: "40vw" }}
                     value={price}
                     onChange={(e) => setPricing(e.target.value)}
@@ -158,7 +155,6 @@ const RestaurantMenu = (props) => {
                   <br></br>
                   <input
                     type='text'
-                    className='resInfoField'
                     style={{ width: "40vw" }}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -169,7 +165,6 @@ const RestaurantMenu = (props) => {
                 <br />
                 <input
                   type='file'
-                  id='resImageField'
                   name='uploadImage'
                   className='formButton formUploadButton'
                   accept='image/*'
