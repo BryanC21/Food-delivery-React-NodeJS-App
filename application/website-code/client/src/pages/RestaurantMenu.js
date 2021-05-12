@@ -168,6 +168,7 @@ const RestaurantMenu = (props) => {
                 <br />
                 <input
                   type='file'
+                  id='resImageField'
                   name='uploadImage'
                   className='formButton formUploadButton'
                   accept='image/*'
