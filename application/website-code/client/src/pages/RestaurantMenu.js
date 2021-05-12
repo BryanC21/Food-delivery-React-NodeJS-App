@@ -73,12 +73,22 @@ const RestaurantMenu = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const resetFields = () =>{
+    document.getElementById('resCuisineInfo').value = '';
+    var fieldsList = document.getElementsByClassName('resInfoField');
+    var i; 
+    for(i = 0; i <fieldsList.length; i++ ){
+      fieldsList[i].value = '';
+    }
+  }
+
   const MenuUpload = () => {
     if (image) {
       uploadPicture();
     } else {
       handleSubmit();
     }
+    resetFields();
   };
 
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
@@ -109,6 +119,7 @@ const RestaurantMenu = (props) => {
                   Food Name:
                   <br></br>
                   <input
+                    className ='resInfoField'
                     type='text'
                     style={{ width: "40vw" }}
                     value={items_name}
@@ -122,8 +133,9 @@ const RestaurantMenu = (props) => {
                 </label>
                 <br/>
                 <select className=''
+                  
                 onChange={(e) => (setCuisineType(e.target.value))}>
-                  <option value='2'>Cuisine</option>
+                  <option id='resCuisineInfo' value='2'>Cuisine</option>
                   {loadCuisineType.map((restaurant, id) => (
                     LoadCuisineTypeCuisine(restaurant)
                   ))}
@@ -134,6 +146,7 @@ const RestaurantMenu = (props) => {
                   <br></br>
                   <input
                     type='text'
+                    className='resInfoField'
                     style={{ width: "40vw" }}
                     value={price}
                     onChange={(e) => setPricing(e.target.value)}
@@ -145,6 +158,7 @@ const RestaurantMenu = (props) => {
                   <br></br>
                   <input
                     type='text'
+                    className='resInfoField'
                     style={{ width: "40vw" }}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
