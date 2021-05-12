@@ -6,6 +6,7 @@ import "../styling/cart.css";
 import { deleteCart } from "../redux/actions/customerActions";
 import { useHistory } from "react-router-dom";
 import "../styling/StandardStyle.css";
+import payimg from "../images/pay.png";
 
 
 
@@ -13,6 +14,7 @@ import "../styling/StandardStyle.css";
 const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [total, setTotal] = useState(cart.length);//Total number of order
     const [totalPrice, setTotalPrice] = useState(0);
+    const [title, setTitle] = useState("Summary")
     const history = useHistory();
     let count = 0;
 
@@ -49,6 +51,9 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     useEffect(() => {//Rerender each time the number of order reduce
         console.log("render");
+        if(cart.length == 0){
+            setTitle("No food in cart")
+        }
     }, [cart.length]
     );
 
@@ -61,6 +66,9 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     }
 
+    
+
+
     return (
         <div>
 
@@ -68,7 +76,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             <div className='menu-background'>
 
                 <section className="order-section">
-                    <h3 className="menu-head-h3">Summary</h3>
+                    <h3 className="menu-head-h3">{title}</h3>
                     <div className="menu-order-content">
                         <div className="wrapper2">
                             {cart.map((cart) =>
@@ -98,7 +106,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                     <div className="order-form">
                         <h4>Method</h4>
 
-                        <form >
+                        <form>
                             <input type="radio" id="p" name="deliveryType" value="Pickup" checked></input>
                             <label for="male" className='head'>Pickup</label><br></br>
                             <input type="radio" id="d" name="deliveryType" value="Delivery"></input>
@@ -120,6 +128,20 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                     </div>
                     <div className="order-form">
                         <h4>Address</h4>
+                        <input className='input'></input>
+                    </div>
+
+                    <div className="order-form">
+                        <h4>Payment</h4>
+
+                        <form>
+                            <input type="radio" id="c" name="payment" value="credit" checked></input>
+                            <label className='head'>Credit Card</label><br></br>
+                            <input type="radio" id="pa" name="payment" value="payPal"></input>
+                            <label className='head'>PayPal</label><br></br>
+                        </form>
+
+                       
                     </div>
                     <button className='cart-button' onClick={(e) => handleClick()}>Place Order</button>
 

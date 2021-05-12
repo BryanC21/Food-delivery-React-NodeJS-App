@@ -26,6 +26,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu, selectedID }) =
   const [select, setSelect] = useState({});
   const [quatity, setQuatity] = useState(1);
   const [price, setPrice] = useState(1);
+  const [tempPrice, setTempPrice] = useState(1);
   const [menu, setMenu] = useState([]);
   const history = useHistory();
   let i = 0;
@@ -43,8 +44,9 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu, selectedID }) =
   }
 
   useEffect(() => {//Rerender each time the number of order reduce
+    
     console.log(quatity);
-    setPrice(quatity*price);
+    setPrice(quatity*tempPrice);
 }, [quatity]
 );
 
@@ -54,7 +56,7 @@ useEffect(() => {
 }, []);
 
 const loadMenu = async () => {
-  const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${selectedID}`;
+  const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${selectedID.id}`;
   try{
   axios.get(url).then((res) => {
     setMenu(res.data.menuItems);
@@ -70,7 +72,7 @@ const loadMenu = async () => {
 };
 
 
-console.log("id is" + selectedID)
+console.log(selectedID)
 
 const handleAdd = () => {
   let order = {
@@ -106,10 +108,10 @@ if(menu == undefined){
     <div>
       <div className='jumbotron bg-dark'>
        
-
-
-
-        <h2 className='customer-head'>Resturant Name</h2>
+        <h1 className='customer-head'>{selectedID.restaurant_name}</h1>
+        <h4 className='customer-head'>{selectedID.cuisine_type}</h4>
+        <h4 className='customer-head'>{selectedID.address}</h4>
+        <h4 className='customer-head'>{selectedID.dollar_sign}</h4>
 
       </div>
 
@@ -124,7 +126,7 @@ if(menu == undefined){
         <div className="menu-order-content">
           <div className="wrapper2">
             {menu.map((menu) =>
-              <button className="customer-buttom" key={menu.id} onClick={() => {setModalIsOpen(true); setSelect(menu); setPrice(menu.price)}}>
+              <button className="customer-buttom" key={menu.id} onClick={() => {setModalIsOpen(true); setSelect(menu); setTempPrice(menu.price); setPrice(menu.price)}}>
                 <div className="card card-width" >
                   <img className="card-img-top" src={menu.image} alt="burger"></img>
                   <div className="customer-card-body" >

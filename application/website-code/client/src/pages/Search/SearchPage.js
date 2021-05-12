@@ -50,7 +50,7 @@ const SearchPage = (props) => {
   return (
     <div>
       <div className='card mb-4 shadow-sm'>
-        <Link to='/HP/CustomerViewRestaruantMenu' onClick={() =>  {dispatch(setId(id));  window.localStorage.setItem("RID", JSON.stringify(id));}}>
+        <Link to='/HP/CustomerViewRestaruantMenu' onClick={() =>  {dispatch(setId(props));  window.localStorage.setItem("RID", JSON.stringify(id));}}>
         <img
           src={restaurant_logo}
           className='card-img-top card-img'

@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     email: "",//user login email
     password: "",//user login password
     isLoggedIn: false,
-    selectedID: 0
+    selectedID: {}
 };
 
 const customerReducer = (state = INITIAL_STATE, action) => {

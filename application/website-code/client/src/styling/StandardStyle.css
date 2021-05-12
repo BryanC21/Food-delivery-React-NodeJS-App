@@ -1,5 +1,6 @@
 .menu-background{
     background-color: #f2f4f7;
+    min-height: 500px;
 }
 
 .order-section .menu-order-content {
