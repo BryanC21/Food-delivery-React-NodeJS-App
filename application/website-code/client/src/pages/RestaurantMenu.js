@@ -75,6 +75,7 @@ const RestaurantMenu = (props) => {
 
   const resetFields = () =>{
     document.getElementById('resCuisineInfo').value = '';
+    document.getElementById('resImageField').value = '';
     var fieldsList = document.getElementsByClassName('resInfoField');
     var i; 
     for(i = 0; i <fieldsList.length; i++ ){
