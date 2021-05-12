@@ -29,6 +29,13 @@ import DeliveryRegistration from "./pages/DeliveryRegistration";
 import RestaurantSignIn from "./pages/RestaurantSignIn";
 import DeliverySignIn from "./pages/DeliverySignIn";
 
+// private routing
+import {
+  RestuarantPrivateRoute,
+  DelivererPrivateRoute,
+  UserPrivateRoute,
+} from "./components/PrivateRoute";
+
 const store = createStore(rootReducer, applyMiddleware(thunk)); //save fake data for customerVieRestaurantMenu
 
 ReactDOM.render(
@@ -39,29 +46,33 @@ ReactDOM.render(
         <Switch>
           <Route exact path='/' component={App} />
           <Route exact path='/HP_Pages' component={HP_Links} />
-          <Route
+          <UserPrivateRoute
             exact
             path='/HP/CustomerViewRestaruantMenu'
             component={CustomerViewRestaruantMenu}
           />
-          <Route exact path='/HP/customerCart' component={customerCart} />
+          <UserPrivateRoute
+            exact
+            path='/HP/customerCart'
+            component={customerCart}
+          />
           <Route exact path='/HP/CustomerSignIn' component={CustomerSignIn} />
-          <Route
+          <DelivererPrivateRoute
             exact
             path='/HP/DelivererMainMenu'
             component={DelivererMainMenu}
           />
-          <Route
+          <DelivererPrivateRoute
             exact
             path='/HP/DeliveryOrderDetail'
             component={DeliveryOrderDetail}
           />
-          <Route
+          <RestuarantPrivateRoute
             exact
             path='/HP/RestaurantDeliveryOrderDetail'
             component={RestaurantDeliveryOrderDetail}
           />
-          <Route
+          <RestuarantPrivateRoute
             exact
             path='/HP/RestaurantPickupOrderDetails'
             component={RestaurantPickupOrderDetails}
@@ -87,20 +98,28 @@ ReactDOM.render(
             component={DeliveryRegistration}
           />
           <Route exact path='/HP/DeliverySignIn' component={DeliverySignIn} />
-          <Route
+          <RestuarantPrivateRoute
             exact
             path='/HP/RestaurantOrderPage'
             component={RestaurantOrderPage}
           />
-          <Route
+          <DelivererPrivateRoute
             exact
             path='/HP/DeliveryOrderPage'
             component={DeliveryOrderPage}
           />
           <Route exact path='/HP/homepage' component={Home} />
           <Route exact path='/HP/search_result_menu' component={SearchMenu} />
-          <Route exact path='/HP/RestaurantMenu' component={ResMenuPage} />
-          <Route exact path='/HP/RestaurantInfo' component={ResInfoPage} />
+          <RestuarantPrivateRoute
+            exact
+            path='/HP/RestaurantMenu'
+            component={ResMenuPage}
+          />
+          <RestuarantPrivateRoute
+            exact
+            path='/HP/RestaurantInfo'
+            component={ResInfoPage}
+          />
         </Switch>
         <Route path='/HP' component={Footer} />
       </Router>
