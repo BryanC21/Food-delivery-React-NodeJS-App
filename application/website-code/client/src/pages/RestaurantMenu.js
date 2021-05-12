@@ -92,7 +92,6 @@ const RestaurantMenu = (props) => {
   };
 
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
-    //console.log(id)
     return <option value={id}>{cuisine_type}</option>;
   };
 
