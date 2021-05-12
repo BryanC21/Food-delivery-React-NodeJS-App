@@ -6,6 +6,7 @@ const {
   restaurantInfoUpload,
   uploadRestaurantMenu,
   getAllMenuItems,
+  removeRestaurantMenuItem,
 } = require("../controller/restaurantController");
 
 const { restrictTo } = require("../controller/authController");
@@ -22,5 +23,7 @@ router.post("/restaurantInfoUpload", restaurantInfoUpload);
 router.post("/uploadRestaurantMenu", uploadRestaurantMenu);
 
 router.get("/getAllMenuItems", getAllMenuItems);
+
+router.get("/removeRestaurantMenuItem",removeRestaurantMenuItem)
 
 module.exports = router;
