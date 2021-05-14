@@ -76,7 +76,7 @@ console.log(selectedID)
 
 const handleAdd = () => {
   let order = {
-    name: select.name,
+    name: select.items_name,
     description: select.description,
     price: price,
     quatity: quatity,
@@ -91,10 +91,6 @@ if(menu == undefined){
   
   return(<div>
     <div className='jumbotron bg-dark'>
-   
-     
-
-
 
       <h2 className='customer-head'>Nothing</h2>
 
