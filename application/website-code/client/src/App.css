@@ -128,6 +128,29 @@
   border-color: var(--primary-color) !important;
 }
 
+.nav .btn-logout {
+    color: #fff;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    border: none;
+    height: 50%;
+    margin-top: 9%;
+
+}
+
+.nav .btn-logout:hover {
+  color: #fff;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+
+}
+
+.nav .logh5 {
+ 
+  margin-top: 9%;
+
+}
+
 /* NAVBAR END */
 
 /* BUTTON START */

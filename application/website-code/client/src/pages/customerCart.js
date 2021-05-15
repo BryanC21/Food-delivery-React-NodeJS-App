@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styling/customerViewRestaurantMenu.css";
@@ -16,12 +16,16 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [totalPrice, setTotalPrice] = useState(0.00);
     const [title, setTitle] = useState("Summary")
     const [select, setSelect] = useState();
-    const [method, setMethod] = useState("Delivery");
-    const [payment, setPayment] = useState("credit");
+    //const [method, setMethod] = useState("Delivery");
+    const method = useRef("Delivery");
+    const pay = useRef("credit");
+    const show = useRef("")
+    const [type, setType] = useState("")
     const history = useHistory();
     let count = 0;
 
     useEffect(() => {
+
         for (let i = 0; i < cart.length; i++) {
 
             count = parseFloat(cart[i].price) + count
@@ -44,10 +48,23 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     //setTotalPrice(count);
 
- 
+    const handlecheckOut = (event) => {
+        event.preventDefault();
+        const order = {
+            title: "aa",
+            totalPrice,
+            description: "burger",
+            pickup_address: "something",
+
+        }
+
+        console.log(order);
+    }
+
+
 
     const handleDelete = () => {
-        
+
         console.log(select);
         console.log(cart.indexOf(select));
 
@@ -69,7 +86,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
         event.preventDefault();
         console.log(method)
         if (isLoggedIn === false) {
-           // history.push('/HP/CustomerSignIn')
+            // history.push('/HP/CustomerSignIn')
 
         }
 
@@ -77,7 +94,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     function plusOne(e) {
         setSelect(e)
-      }
+    }
 
 
 
@@ -96,16 +113,16 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                                 <div className="card card-width">
                                     <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
                                     <div className="customer-card-body">
-                                       
+
                                         <h5 className="customer-card-title">{cart.name}</h5>
                                         <h6 className="card-title">{cart.description}</h6>
                                         <h6 className="card-title">QTYx{cart.quatity}</h6>
-                                        <button className="bottun" key="1"   onClick={() => { setSelect(cart);console.log(cart); console.log(select)}}><p className="text-color">Delete</p></button>
-                                        
+                                        <button className="bottun" key="1" onClick={() => { setSelect(cart); console.log(cart); console.log(select) }}><p className="text-color">Delete</p></button>
+
                                     </div>
-                                
+
                                 </div>
-                                
+
 
                             )}
                         </div>
@@ -119,58 +136,72 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
                 <div className="checkout-wrapper">
                     <h2 className='head'>Amount Due: ${totalPrice.toFixed(2)}</h2>
-                    <form onSubmit={handleSubmit}>
-                    <div className="order-form">
-                        <h4>Method</h4>
+                    <form onSubmit={handlecheckOut}>
+                        <div className="order-form">
+                            <h4>Method</h4>
 
-                        <span>
-                            <input type="radio" id="d" name="deliveryType" value="Delivery" onClick={()=>setMethod("Delivery")} checked></input>
-                            <label className='head'>Delivery</label><br></br>
+                           
+
+
+
+
+
+
+                            <span>
+                                <label className='head'>
+                                    <input type="radio" name="deliveryType" value="Delivery" checked={true} onClick={() => { method.current = "Delivery"; setType("")}} />
+                            Delivery</label><br></br>
                             </span>
 
                             <span>
-                            <input type="radio" id="p" name="deliveryType" value="Pickup" onClick={()=>setMethod("Pickup")}></input>
-                            <label className='head'>Pickup</label><br></br>
+                                <input type="radio" name="deliveryType" value="Pickup" onClick={() => { method.current = "Pickup"; setType("hidden")}} />
+                                <label className='head'>Pickup</label><br></br>
                             </span>
-                           
-                        
-                    </div>
-                    <div className="order-form">
-                        <h4>Time</h4>
 
-                        <select>
-                            <option value="AM">ASAP</option>
-                            <option value="PM">30 minute</option>
-                            <option value="PM">60 minute</option>
-                            <option value="PM">120 minute</option>
-                        </select>
 
-                        <br></br>
-                    </div>
-                    <div className="order-form">
-                        <h4>Address</h4>
-                        <input className='input' placeholder="building, room"  required></input>
-                    </div>
 
-                    <div className="order-form">
-                        <h4>Payment</h4>
+                        </div>
+                        <div className="order-form">
+                            <h4>Time</h4>
 
-                         <span>
-                            <input type="radio" id="c" name="payment" value="credit"  onClick={()=>setPayment("credit")}  checked></input>
+                            <select>
+                                <option value="ASAP">ASAP</option>
+                                <option value="30">30 minute</option>
+                                <option value="60">60 minute</option>
+                                <option value="120">120 minute</option>
+                            </select>
+
+                            <br></br>
+                        </div>
+                        <div className="order-form">
+                            <h4>Address</h4>
+                            <input className='input' placeholder="building, room" type={type} required></input>
+                        </div>
+
+                        <div className="order-form">
+                            <h4>Payment</h4>
+
+                            <select onChange={(e) => pay.current = e.target.value}>
+                                <option value="credit">Credit Card</option>
+                                <option value="payPal">PayPal</option>
+                            </select>
+
+                            {/*   <span>
+                            <input type="radio" name="payment" value="credit" checked={true}  onClick={()=>setPayment("credit")} />
                             <label className='head'>Credit Card</label><br></br>
                             </span>
 
                             <span>
-                            <input type="radio" id="pa" name="payment" value="payPal"  onClick={()=>setPayment("paypal")} ></input>
+                            <input type="radio" name="payment" value="payPal"  onClick={()=>setPayment("paypal")} />
                             <label className='head'>PayPal</label><br></br>
-                            </span>
-                       
+                            </span>*/}
 
 
-                    </div>
-                    <button className='cart-button' onClick={() => console.log(method)}>Place Order</button>
+
+                        </div>
+                        <button className='cart-button'>Place Order</button>
                     </form>
-                    <button className='cart-button' onClick={() => console.log(method)}>Place Order</button>
+                    <button className='cart-button' onClick={() => console.log(method.current + " " + pay.current)}>Place Order</button>
 
                 </div>
 

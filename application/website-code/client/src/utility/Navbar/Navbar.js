@@ -49,6 +49,33 @@ function Navbar({ isLoggedIn }) {
         <Link className='navbar-brand' to='/HP/homepage'>
           <img src={Logo} alt='logo' />
         </Link>
+
+        {auth !== null && auth.account_type === "deliverer" && (
+            <>
+            <Dropdown className='dropdown'>
+              <Dropdown.Toggle
+                variant='btn btn btn-outline-primary my-3 '
+                id='dropdown-basic'
+              >
+                Menu
+              </Dropdown.Toggle>
+              <ul className='nav '>
+                <Dropdown.Menu>
+                  <Dropdown.Item href='/HP/DelivererMainMenu'>
+                    <span className='primary-color-font me-3' to='#'>
+                      MainMenu
+                    </span>
+                  </Dropdown.Item>
+                  <Dropdown.Item href='/HP/DeliveryOrderPage'>
+                    <span className='primary-color-font me-3' to='#'>
+                      Order
+                    </span>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </ul>
+            </Dropdown>
+            </>
+          )}
         <form className='d-flex container-sm '>
           <div className='dropdown me-3'>
             <Link
@@ -91,8 +118,8 @@ function Navbar({ isLoggedIn }) {
         <nav className='nav '>
           {auth !== null && (
             <>
-              <h1 className='h5'>Hello, {auth.email}</h1>
-              <button onClick={logout}>Logout</button>
+              <h1 className='h5 logh5'>Hello, {auth.email}</h1>
+              <button onClick={logout} className="btn-logout">Logout</button>
             </>
           )}
           {auth === null && (
