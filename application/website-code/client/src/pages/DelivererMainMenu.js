@@ -4,17 +4,34 @@ import "../styling/DelivererMainMenu.css";
 import InfoCard from "../components/InfoCard"
 import MapContainer from '../components/MapContainer';
 import { left } from '@popperjs/core';
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
 
 
 const DelivererMainMenu = (props) => {
+    const history = useHistory();
+    const { auth } = useSelector((state) => ({ ...state }));
+
+    const handleClick = () => {
+        history.push("/HP/DeliveryOrderPage")
+
+    }
     
     return (
         <div>
             <div className = 'heading'>
+
+                {/*
             <h1 >
                 {props.name}
                 Placeholder Name
-            </h1>
+                </h1>*/}
+
+               <h1>
+               {auth.email}, Welcome
+               
+                </h1>
 
             <h6>
                 Number of Orders Completed: {props.numberOfOrders}
@@ -27,7 +44,7 @@ const DelivererMainMenu = (props) => {
             </button>
             */}
 
-            <button className = 'button'>
+            <button className = 'button' onClick = {()=> handleClick()}>
                 Orders
             </button>
             {/*

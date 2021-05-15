@@ -1,11 +1,42 @@
-import React,{useState} from "react";
+import React,{useEffect,useState} from "react";
 import "../styling/DeliveryOrderPage.css"
 import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InfoCard from "../components/InfoCard";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
 
 
 const DeliveryOrderPage = () =>{
+    const history = useHistory();
+    const [orders, setOrders] = useState([]);
+
+    const { auth } = useSelector((state) => ({ ...state }));
+
+    const handleClick = () => {
+        history.push("/HP/DeliveryOrderPage")
+
+    }
+
+    useEffect(() => {
+        loadMenu();
+        
+      }, []);
+      
+      const loadMenu = async () => {
+        const url = `/api/v1/orders/deliveryOrders`;
+        try{
+        axios.get(url).then((res) => {
+          
+          console.log(res)
+          setOrders(res.data.orders)
+         
+        })}catch (err) {
+          console.log(err);
+          //setMenu(0);
+        }
+      };
     
     return(
         <div>
@@ -17,6 +48,20 @@ const DeliveryOrderPage = () =>{
         <h1 className='overHeading'>
         <div className = 'orderSection'>
 
+        {orders.map((orders) => 
+       < div className='infoSheet'>
+        <InfoCard
+        restaurantName="Nation's Giant Hamburgers"
+        restaurantAddress='612 Willem Ave. Berkley, CA 48067'
+        orderNumber='11285'
+        specialInstructions='none'
+        deliveryTime='11:30pm'
+        deliveryAddress='5824 Aleghany Rd. Berkley, CA 48067'
+        ></InfoCard>
+        <button className ='confirmButton' onClick={()=>handleClick()}>Accept Order</button>
+        </div>
+        )}
+
         <div className='infoSheet'>
         <InfoCard
         restaurantName="Nation's Giant Hamburgers"
@@ -26,7 +71,7 @@ const DeliveryOrderPage = () =>{
         deliveryTime='11:30pm'
         deliveryAddress='5824 Aleghany Rd. Berkley, CA 48067'
         ></InfoCard>
-        <button className ='confirmButton'>Accept Order</button>
+        <button className ='confirmButton' onClick={()=>handleClick()}>Accept Order</button>
         </div>
 
         <div className='infoSheet'>
