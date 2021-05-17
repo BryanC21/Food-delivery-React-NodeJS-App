@@ -1,6 +1,7 @@
 const db = require("../config/dbConfig");
 const CatchAsync = require("../utility/CatchAsync");
 const AppError = require("../utility/AppError");
+const { search } = require("../routes/restaurants");
 
 exports.getAllRestaurants = CatchAsync(async (req, res, next) => {
   await db.query("SELECT * FROM restaurants;").then(([results, fields]) => {
@@ -200,4 +201,23 @@ exports.removeRestaurantMenuItem = CatchAsync(async(req,res,next)=>{
     }
   }) 
   
+})
+
+exports.checkRestaurantApproval = CatchAsync(async(req,res,next)=>{
+  //restaurant id
+  const id = req.query.id
+  let searchSql = "SELECT * FROM restaurants WHERE id = ? AND isApproved = 1"
+
+  await db.execute(searchSql,[id]).then(([results,fields])=>{
+    //if the SELECT statement does not find anything
+    if(results && results.length == 0){
+      return next(new AppError("No approved restaurants with that id were found",200));
+    }
+    else{
+      return res.json({
+        status:"success",
+        restaurant: results
+      })
+    }
+  })
 })
