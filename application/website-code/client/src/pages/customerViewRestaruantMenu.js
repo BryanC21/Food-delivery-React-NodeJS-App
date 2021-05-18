@@ -22,6 +22,7 @@ const CustomerViewRestaruantMenu = ({ dispatch, restaruant_menu, selectedID }) =
   const [price, setPrice] = useState(1);
   const [tempPrice, setTempPrice] = useState(1);
   const [menu, setMenu] = useState([]);
+  const [count, setCount] = useState(0);
   const history = useHistory();
  
 
@@ -65,11 +66,14 @@ const handleAdd = () => {
   let order = {
     name: select.items_name,
     description: select.description,
+    image:select.image,
     price: price,
     quatity: quatity,
+    id: count
   }
 
   dispatch(setCart(order));
+  setCount(count + 1);
 
 };
 

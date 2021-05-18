@@ -7,15 +7,17 @@ import { deleteCart } from "../redux/actions/customerActions";
 import { useHistory } from "react-router-dom";
 import "../styling/StandardStyle.css";
 import payimg from "../images/pay.png";
+import Modal from 'react-modal';
 
 
 
 
 const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [total, setTotal] = useState(0);//Total number of order
     const [totalPrice, setTotalPrice] = useState(0.00);
     const [title, setTitle] = useState("Summary")
-    const [select, setSelect] = useState();
+    const [select, setSelect] = useState({});
     //const [method, setMethod] = useState("Delivery");
     const method = useRef("Delivery");
     const pay = useRef("credit");
@@ -58,7 +60,22 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
         }
 
+        if(method === "Delivery"){ //if delivery
+        
         console.log(order);
+    }else{  //if pickup
+        const order = {
+            title: "aa",
+            totalPrice,
+            description: "burger",
+            pickup_address: "something",
+
+        }
+        
+        console.log(order);
+    }
+
+    console.log(order);
     }
 
 
@@ -68,9 +85,11 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
         console.log(select);
         console.log(cart.indexOf(select));
 
-        cart.pop()
-        setTotal(cart.length);
-        dispatch(deleteCart(cart));
+        cart.splice(cart.indexOf(select), 1);
+
+       // cart.pop()
+      setTotal(cart.length);
+     dispatch(deleteCart(cart));
         console.log("delete")
     };
 
@@ -111,13 +130,13 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                         <div className="wrapper2">
                             {cart.map((cart) =>
                                 <div className="card card-width">
-                                    <img className="card-img-top" src="https://res.cloudinary.com/dis7ep3yq/image/upload/v1616095822/American_hef5n1.jpg" alt="burger"></img>
+                                    <img className="card-img-top" src={cart.image} alt="burger"></img>
                                     <div className="customer-card-body">
 
                                         <h5 className="customer-card-title">{cart.name}</h5>
                                         <h6 className="card-title">{cart.description}</h6>
                                         <h6 className="card-title">QTYx{cart.quatity}</h6>
-                                        <button className="bottun" key="1" onClick={() => { setSelect(cart); console.log(cart); console.log(select) }}><p className="text-color">Delete</p></button>
+                                        <button className="bottun" id="1" onClick={() => { setSelect(cart); console.log(cart); setModalIsOpen(true)}}><p className="text-color">Delete</p></button>
 
                                     </div>
 
@@ -236,10 +255,40 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                 )}
             </CardColumns>
                 */}
+
+<Modal isOpen={modalIsOpen} >
+        
+        <div className="modal-form">
+        
+          <h1 >{select.name}</h1>
+          <h4>{select.description}</h4>
+          <img src={select.image} alt="burger"></img>
+          <br></br>
+          <br></br>
+          Qty {select.quatity}
+          
+          <br></br>
+          <br></br>
+        
+          <br></br>
+          <br></br>
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false); handleDelete()}}> Delete</button>
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false);}}> Cancel </button>
+          </div>
+        
+          
+        
+        
+        
+         
+          
+        </Modal>
         </div>
 
     )
 };
+
+
 
 const mapStateToProps = (state) => {
 
