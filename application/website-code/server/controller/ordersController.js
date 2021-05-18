@@ -68,19 +68,27 @@ exports.createPickupOrders = CatchAsync(async (req, res, next) => {
     .execute(baseSQL, [description, price, pickup_address])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
-    .then(([results, fields]) => {
+    .then(async ([results, fields]) => {
       if (results && results.affectedRows) {
-        return res.json({
-          status: "success",
-          message: "Your pickup order has been received!",
-          orders: [
-            {
-              price: price,
-              description: description,
-              pickup_address: pickup_address,
-            },
-          ],
-        });
+        await db
+          .query("SELECT LAST_INSERT_ID();", [])
+          .then(([results, fields]) => {
+            for (var key in results[0]) {
+              insertId = results[0][key]
+            }
+            return res.json({
+              status: "success",
+              message: "Your pickup order has been received!",
+              orders: [
+                {
+                  id: insertId,
+                  price: price,
+                  description: description,
+                  pickup_address: pickup_address,
+                },
+              ],
+            });
+          })
       }
     })
     .catch((err) => {
@@ -96,19 +104,27 @@ exports.createDeliveryOrders = CatchAsync(async (req, res, next) => {
     .execute(baseSQL, [description, price, delivery_address])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
-    .then(([results, fields]) => {
+    .then(async ([results, fields]) => {
       if (results && results.affectedRows) {
-        return res.json({
-          status: "success",
-          message: "Your delivery order has been received!",
-          orders: [
-            {
-              price: price,
-              description: description,
-              delivery_address: delivery_address,
-            },
-          ],
-        });
+        await db
+          .query("SELECT LAST_INSERT_ID();", [])
+          .then(([results, fields]) => {
+            for (var key in results[0]) {
+              insertId = results[0][key]
+            }
+            return res.json({
+              status: "success",
+              message: "Your delivery order has been received!",
+              orders: [
+                {
+                  id: insertId,
+                  price: price,
+                  description: description,
+                  delivery_address: delivery_address,
+                },
+              ],
+            });
+          })
       }
     })
     .catch((err) => {
@@ -132,28 +148,28 @@ exports.setOrderItems = CatchAsync(async (req, res, next) => {
         .catch((err) => {
           return next(new AppError(err), 500);
         });
-      }
-      return res.json({
-        status: "success",
-        message: "Your pickup order items were received!",
-      });
-    } else {
-      for (let i = 0; i < itemNames.length; i++) {
-        let baseSQL =
-          "INSERT INTO orderItems VALUES (?,?,?,?,?,?);";
-        await db
-          .execute(baseSQL, [null, null, null, order_id, counts[i], itemNames[i]])
-          .then(([results, fields]) => {
-            if (results && results.affectedRows) {
-            }
-          })
-          .catch((err) => {
-            return next(new AppError(err), 500);
-          });
-      }
-      return res.json({
-        status: "success",
-        message: "Your delivery order items were received!",
-      });
     }
+    return res.json({
+      status: "success",
+      message: "Your pickup order items were received!",
+    });
+  } else {
+    for (let i = 0; i < itemNames.length; i++) {
+      let baseSQL =
+        "INSERT INTO orderItems VALUES (?,?,?,?,?,?);";
+      await db
+        .execute(baseSQL, [null, null, null, order_id, counts[i], itemNames[i]])
+        .then(([results, fields]) => {
+          if (results && results.affectedRows) {
+          }
+        })
+        .catch((err) => {
+          return next(new AppError(err), 500);
+        });
+    }
+    return res.json({
+      status: "success",
+      message: "Your delivery order items were received!",
+    });
+  }
 });
