@@ -61,11 +61,11 @@ exports.getPickupOrderDetails = CatchAsync(async (req, res, next) => {
 
 exports.createPickupOrders = CatchAsync(async (req, res, next) => {
   // still need to realte this back to all three foreign keys
-  const { title, price, description, pickup_address } = req.body;
+  const { price, description, pickup_address } = req.body;
   let baseSQL =
-    "INSERT INTO pickup_orders (title, price, description, pickup_address, created) VALUES (?,?,?,?,now());";
+    "INSERT INTO pickup_orders ( price, comments, pickup_address, created) VALUES (?,?,?,?,now());";
   await db
-    .execute(baseSQL, [title, price, description, pickup_address])
+    .execute(baseSQL, [price, description, pickup_address])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
     .then(([results, fields]) => {
@@ -75,7 +75,6 @@ exports.createPickupOrders = CatchAsync(async (req, res, next) => {
           message: "Your pickup order has been received!",
           orders: [
             {
-              title: title,
               price: price,
               description: description,
               pickup_address: pickup_address,
@@ -90,11 +89,11 @@ exports.createPickupOrders = CatchAsync(async (req, res, next) => {
 });
 exports.createDeliveryOrders = CatchAsync(async (req, res, next) => {
   // still need to realte this back to all three foreign keys
-  const { title, price, description, delivery_address } = req.body;
+  const {price, description, delivery_address } = req.body;
   let baseSQL =
-    "INSERT INTO delivery_orders (title, price, description, delivery_address, created) VALUES (?,?,?,?,now());";
+    "INSERT INTO delivery_orders (price, comments, delivery_address, created) VALUES (?,?,?,?,now());";
   await db
-    .execute(baseSQL, [title, price, description, delivery_address])
+    .execute(baseSQL, [price, description, delivery_address])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
     .then(([results, fields]) => {
@@ -104,7 +103,6 @@ exports.createDeliveryOrders = CatchAsync(async (req, res, next) => {
           message: "Your delivery order has been received!",
           orders: [
             {
-              title: title,
               price: price,
               description: description,
               delivery_address: delivery_address,
