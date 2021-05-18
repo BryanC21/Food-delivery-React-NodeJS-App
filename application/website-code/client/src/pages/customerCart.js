@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import "../styling/StandardStyle.css";
 import payimg from "../images/pay.png";
 import Modal from 'react-modal';
+import axios from 'axios';
 
 
 
@@ -17,6 +18,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [total, setTotal] = useState(0);//Total number of order
     const [totalPrice, setTotalPrice] = useState(0.00);
     const [title, setTitle] = useState("Summary")
+    const [address, setAddress] = useState("")
     const [select, setSelect] = useState({});
     //const [method, setMethod] = useState("Delivery");
     const method = useRef("Delivery");
@@ -27,55 +29,57 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     let count = 0;
 
     useEffect(() => {
-
         for (let i = 0; i < cart.length; i++) {
-
             count = parseFloat(cart[i].price) + count
-
         }
-
         count.toFixed(2)
-
         setTotalPrice(count)
+    },[cart.length])
 
-
-    }
-        , [cart.length]
-    )
-    //for(let i = 0; i < cart.length; i++){
-
-    //  count = cart[0].price + count
-
-    // }
-
-    //setTotalPrice(count);
-
-    const handlecheckOut = (event) => {
+    const handlecheckOut = async (event) => {
         event.preventDefault();
-        const order = {
-            title: "aa",
-            totalPrice,
-            description: "burger",
-            pickup_address: "something",
+        if(method.current === "Delivery"){ //if delivery
+            const data = {
+                title: "Test delivery order",
+                price: totalPrice,
+                description: "burger",
+                delivery_address: address,
+            }
 
-        }
+            try {
+                const res = await axios.post("/api/v1/orders/createDeliveryOrder", data);
+                console.log("Res", res);
+                //history.push("/HP/DeliverySignIn");
+              } catch (err) {
+                console.log(err);
+              }
 
-        if(method === "Delivery"){ //if delivery
-        
-        console.log(order);
+        console.log(data);
     }else{  //if pickup
-        const order = {
-            title: "aa",
-            totalPrice,
-            description: "burger",
-            pickup_address: "something",
+        const data = {
+            title: "Test Pickup order",
+            price: totalPrice,
+            description: "time: ASAP",
+            pickup_address: "store",
 
         }
         
-        console.log(order);
+        
+        try {
+            const res = await axios.post("/api/v1/orders/createPickupOrder", data);
+            console.log("Res", res);
+            //history.push("/HP/DeliverySignIn");
+          } catch (err) {
+            console.log(err);
+          }
+
+    console.log(data);
     }
 
-    console.log(order);
+
+    console.log(method.current === "Delivery");
+
+  //  console.log(data);
     }
 
 
@@ -194,7 +198,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                         </div>
                         <div className="order-form">
                             <h4>Address</h4>
-                            <input className='input' placeholder="building, room" type={type} required></input>
+                            <input className='input' placeholder="building, room" type={type} onChange={(e)=>setAddress(e.target.value)} required></input>
                         </div>
 
                         <div className="order-form">
