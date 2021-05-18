@@ -5,6 +5,8 @@ import Deliverer from "../../images/deliverer.svg";
 import restaurant_img from "../../images/Chef.svg";
 import subscription from "../../images/subscriptions.svg";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setId } from "../../redux/actions/customerActions";
 
 function Home() {
   const [loadRestaurants, setLoadRestaurants] = useState([]);
@@ -32,8 +34,11 @@ function Home() {
       dollar_sign,
       cuisine_type,
     } = props;
+
+    const dispatch = useDispatch();
     return (
       <div className='card card-width text-white primary-color-bg mb-3'>
+         <Link to='/HP/CustomerViewRestaruantMenu' onClick={() =>  {dispatch(setId(props));}}>
         <img className='card-img-top' src={restaurant_logo} alt='Breakfast' />
         <div className='card-body'>
           <h5 className='card-title'>{restaurant_name}</h5>
@@ -42,6 +47,7 @@ function Home() {
           </h6>
           <p className='card-text'>{address}</p>
         </div>
+        </Link>
       </div>
     );
   };
