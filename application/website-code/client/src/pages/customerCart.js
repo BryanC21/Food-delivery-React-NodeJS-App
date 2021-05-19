@@ -28,6 +28,8 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [type, setType] = useState("")
     const history = useHistory();//jump to different pages
     let count = 0;
+
+    let theID = 0;
     
 
     useEffect(() => {
@@ -43,7 +45,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             itemNames: ["toast", "bathwater", "Burger"], // save all item names in this array
             counts: [1, 2, 4], //for each item put count at same index
             P_or_D: "D", //write "P" if pickup order instead
-            order_id: id.current, //pickup or delivery order id that you are setting these items to
+            order_id: theID, //pickup or delivery order id that you are setting these items to
           };
           try {
             const res = await axios.post(
@@ -64,14 +66,15 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             const data = {
                 title: "Test delivery order",
                 price: totalPrice,
-                description: "burger",
+                description: "yes",
                 delivery_address: address,
             }
 
             try {
                 const res = await axios.post("/api/v1/orders/createDeliveryOrder", data);
                 console.log("Res", res.data.orders[0]);
-                id.current = parseInt(res.data.orders[0].id);
+                theID = parseInt(res.data.orders[0].id);
+                console.log("------", theID)
                 handleItem();
                 
               } catch (err) {
