@@ -71,11 +71,13 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             }
 
             try {
-                const res = await axios.post("/api/v1/orders/createDeliveryOrder", data);
+                await axios.post("/api/v1/orders/createDeliveryOrder", data)
+                .then((res) => {
                 console.log("Res", res.data.orders[0]);
                 theID = parseInt(res.data.orders[0].id);
                 console.log("------", theID)
                 handleItem();
+                })
                 
               } catch (err) {
                 console.log(err);
