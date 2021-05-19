@@ -69,7 +69,8 @@ const handleAdd = () => {
     image:select.image,
     price: price,
     quatity: quatity,
-    id: count
+    id: count,
+    rid: select.fk_restaurantid
   }
 
   dispatch(setCart(order));

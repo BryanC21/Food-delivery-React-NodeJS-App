@@ -42,6 +42,18 @@ const DeliveryOrderPage = () =>{
           //setMenu(0);
         }
       };
+
+      if(orders === undefined){
+  
+        return(<div>
+          <div className='jumbotron bg-dark'>
+      
+            <h2 className='customer-head'>Nothing</h2>
+      
+          </div>
+          </div>
+          );
+      }else{
     
     return(
         <div>
@@ -98,6 +110,7 @@ const DeliveryOrderPage = () =>{
         </Modal>
         </div>
     )
+        }
 }
 
 export default DeliveryOrderPage
