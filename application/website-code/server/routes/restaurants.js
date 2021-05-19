@@ -27,6 +27,6 @@ router.get("/getAllMenuItems", getAllMenuItems);
 
 router.get("/removeRestaurantMenuItem",removeRestaurantMenuItem);
 
-router.get("/checkRestaurantApproval",checkRestaurantApproval);
+router.get("/getRestaurantByID",checkRestaurantApproval);
 
 module.exports = router;
