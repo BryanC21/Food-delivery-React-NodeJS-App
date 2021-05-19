@@ -24,6 +24,7 @@ function MapContainer(props) {
   const [activeMarker, setActiveMarker] = useState({});
   const [selectedPlace, setSelectedPlace] = useState({});
   const [latLon, setLatLon] = useState({ lat: 1, lng: 1 });
+  const [latLon2, setLatLon2] = useState({ lat: 37.7227669, lng: -122.47891 });
 
   const getCoordinates = async () => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${props.name}&key=AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc`;
@@ -80,12 +81,14 @@ function MapContainer(props) {
   return (
     <Map
       google={google}
-      zoom={15}
+      zoom={12}
       style={mapStyles}
       initialCenter={latLon}
       center={latLon}
     >
+     
       <Marker onClick={onMarkerClick} name={props.name} position={latLon} />
+      <Marker onClick={onMarkerClick} name={"SFSU"} position={latLon2} />
       <InfoWindow
         marker={activeMarker}
         visible={showInfoWindow}

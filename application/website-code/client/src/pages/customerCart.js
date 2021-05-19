@@ -53,6 +53,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
               data
             );
             console.log("Success: ", res);
+            history.push("/HP/homepage")
           } catch (err) {
             console.log("F? ",err);
           }
