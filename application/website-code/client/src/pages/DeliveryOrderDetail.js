@@ -2,21 +2,20 @@ import React from 'react'
 import InfoCard from '../components/InfoCard'
 import MapContainer from '../components/MapContainer'
 import "../styling/orderDetails.css"
+import { connect } from "react-redux";
 
-function DeliveryOrderDetail(){
-    const places = [
-        {latitude: 25.8103146,longitude: -80.1751609},
-        {latitude: 27.9947147,longitude: -82.5943645},
-        {latitude: 28.4813018,longitude: -81.4387899},
-        
-      ]
+
+function DeliveryOrderDetail({ selectedID }){
+
+    console.log(selectedID)
+    
     return(
-        <div >
+        <div className="wrapperD">
+
             <InfoCard 
-                img = "https://static.takeaway.com/images/restaurants/bg/NO73N7Q/categories/_0006_subway_takeaway_kat_sub2.png?timestamp=1618549301"
                 restaurantName = "Subway"
                 foodName = "BBQ Chicken Sandwich"
-                orderNumber = "33"
+                orderNumber = {selectedID.id}
                 orderersInfo = "123 Street, 94132"
                 deliveryTime = "10:00AM"
                 statusFulfilled = "Delivered"
@@ -44,11 +43,20 @@ function DeliveryOrderDetail(){
                 <br></br>
                 <br></br>
                 <br></br>
-            <button className="directions">Directions</button>
+            
             <br></br>
-            <button className ="cancelOrder">Cancel Order</button>
+            <button className ="cancelOrder">Order Completed</button>
         </div>
     )
 }
 
-export default DeliveryOrderDetail
+const mapStateToProps = (state) => {
+
+    return {
+        selectedID: state.customerReducer.selectedID,
+    };
+};
+
+
+
+export default connect(mapStateToProps)(DeliveryOrderDetail);

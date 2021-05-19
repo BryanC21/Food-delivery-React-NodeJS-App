@@ -2,6 +2,11 @@ img {
     width: 80%;
     height: 50%;
   }
+
+  .wrapperD{
+    margin-left: 25% !important;
+    width: 56%;
+  }
   
   .directions{
     color:white;

@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import Modal from 'react-modal';
 import MapContainer from "../components/MapContainer";
+import { setId } from "../redux/actions/customerActions";
 
 
 const DeliveryOrderPage = () =>{
     const history = useHistory();
     const [orders, setOrders] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const dispatch = useDispatch();
 
     const { auth } = useSelector((state) => ({ ...state }));
 
@@ -58,12 +60,12 @@ const DeliveryOrderPage = () =>{
         <InfoCard
         restaurantName="Nation's Giant Hamburgers"
         restaurantAddress='612 Willem Ave. Berkley, CA 48067'
-        orderNumber='11285'
-        specialInstructions='none'
+        orderNumber={orders.id}
+        specialInstructions={orders.comments}
         deliveryTime='11:30pm'
-        deliveryAddress='5824 Aleghany Rd. Berkley, CA 48067'
+        deliveryAddress={orders.delivery_address}
         ></InfoCard>
-        <button className ='confirmButton' onClick={()=>handleClick()}>Check Status</button>
+        <button className ='confirmButton' onClick={()=>{dispatch(setId(orders));handleClick()}}>Check Status</button>
         </div>
         )}
 

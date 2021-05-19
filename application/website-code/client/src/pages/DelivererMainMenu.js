@@ -33,9 +33,7 @@ const DelivererMainMenu = (props) => {
                
                 </h1>
 
-            <h6>
-                Number of Orders Completed: {props.numberOfOrders}
-            </h6>
+        
 
         <div>
             {/*
@@ -54,6 +52,7 @@ const DelivererMainMenu = (props) => {
             */}
         </div>
         </div>
+        
         <div>
             <h1 className = 'orderHeading'>
                 Completed Orders
