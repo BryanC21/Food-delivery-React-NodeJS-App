@@ -13,6 +13,7 @@ dotenv.config({ path: "./config/config.env" });
 
 const mapStyles = {
   margin: "10px",
+  width: "55%",
   height: "50%",
   position: "relative",
   border: "solid",

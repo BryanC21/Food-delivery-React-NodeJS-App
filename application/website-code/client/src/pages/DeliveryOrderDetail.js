@@ -10,7 +10,7 @@ function DeliveryOrderDetail({ selectedID }){
     console.log(selectedID)
     
     return(
-        <div >
+        <div className="wrapperD">
 
             <InfoCard 
                 restaurantName = "Subway"
@@ -43,9 +43,9 @@ function DeliveryOrderDetail({ selectedID }){
                 <br></br>
                 <br></br>
                 <br></br>
-            <button className="directions">Directions</button>
+            
             <br></br>
-            <button className ="cancelOrder">Cancel Order</button>
+            <button className ="cancelOrder">Order Completed</button>
         </div>
     )
 }
