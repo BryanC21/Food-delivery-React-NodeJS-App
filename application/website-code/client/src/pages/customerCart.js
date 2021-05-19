@@ -14,30 +14,52 @@ import axios from 'axios';
 
 
 const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);// for modal
     const [total, setTotal] = useState(0);//Total number of order
-    const [totalPrice, setTotalPrice] = useState(0.00);
-    const [title, setTitle] = useState("Summary")
-    const [address, setAddress] = useState("")
-    const [select, setSelect] = useState({});
+    const [totalPrice, setTotalPrice] = useState(0.00);// total due
+    const [title, setTitle] = useState("Summary")//Title Summary or Not thing in cart
+    const [address, setAddress] = useState("")// address input field
+    const [select, setSelect] = useState({});//item user selected will save to this
     //const [method, setMethod] = useState("Delivery");
-    const method = useRef("Delivery");
-    const pay = useRef("credit");
+    const method = useRef("Delivery");//delivery or pickup
+    const pay = useRef("credit");// credit or paypal
     const show = useRef("")
+    const id = useRef(89)
     const [type, setType] = useState("")
-    const history = useHistory();
+    const history = useHistory();//jump to different pages
     let count = 0;
+    
 
     useEffect(() => {
-        for (let i = 0; i < cart.length; i++) {
+        for (let i = 0; i < cart.length; i++) {//calculate total due
             count = parseFloat(cart[i].price) + count
         }
         count.toFixed(2)
         setTotalPrice(count)
     },[cart.length])
 
+    const handleItem = async () => {
+        const data = {
+            itemNames: ["toast", "bathwater", "Burger"], // save all item names in this array
+            counts: [1, 2, 4], //for each item put count at same index
+            P_or_D: "D", //write "P" if pickup order instead
+            order_id: id.current, //pickup or delivery order id that you are setting these items to
+          };
+          try {
+            const res = await axios.post(
+              "/api/v1/orders/setOrderItems",
+              data
+            );
+            console.log("Success: ", res);
+          } catch (err) {
+            console.log("F? ",err);
+          }
+
+    }
+
     const handlecheckOut = async (event) => {
         event.preventDefault();
+      
         if(method.current === "Delivery"){ //if delivery
             const data = {
                 title: "Test delivery order",
@@ -48,8 +70,10 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
             try {
                 const res = await axios.post("/api/v1/orders/createDeliveryOrder", data);
-                console.log("Res", res);
-                //history.push("/HP/DeliverySignIn");
+                console.log("Res", res.data.orders[0]);
+                id.current = parseInt(res.data.orders[0].id);
+                handleItem();
+                
               } catch (err) {
                 console.log(err);
               }

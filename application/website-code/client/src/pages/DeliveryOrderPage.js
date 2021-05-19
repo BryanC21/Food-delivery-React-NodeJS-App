@@ -6,16 +6,19 @@ import InfoCard from "../components/InfoCard";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
+import Modal from 'react-modal';
+import MapContainer from "../components/MapContainer";
 
 
 const DeliveryOrderPage = () =>{
     const history = useHistory();
     const [orders, setOrders] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const { auth } = useSelector((state) => ({ ...state }));
 
     const handleClick = () => {
-        history.push("/HP/DeliveryOrderPage")
+        history.push("/HP/DeliveryOrderDetail")
 
     }
 
@@ -49,7 +52,9 @@ const DeliveryOrderPage = () =>{
         <div className = 'orderSection'>
 
         {orders.map((orders) => 
+        
        < div className='infoSheet'>
+         {console.log(orders)}
         <InfoCard
         restaurantName="Nation's Giant Hamburgers"
         restaurantAddress='612 Willem Ave. Berkley, CA 48067'
@@ -58,61 +63,37 @@ const DeliveryOrderPage = () =>{
         deliveryTime='11:30pm'
         deliveryAddress='5824 Aleghany Rd. Berkley, CA 48067'
         ></InfoCard>
-        <button className ='confirmButton' onClick={()=>handleClick()}>Accept Order</button>
+        <button className ='confirmButton' onClick={()=>handleClick()}>Check Status</button>
         </div>
         )}
 
-        <div className='infoSheet'>
-        <InfoCard
-        restaurantName="Nation's Giant Hamburgers"
-        restaurantAddress='612 Willem Ave. Berkley, CA 48067'
-        orderNumber='11285'
-        specialInstructions='none'
-        deliveryTime='11:30pm'
-        deliveryAddress='5824 Aleghany Rd. Berkley, CA 48067'
-        ></InfoCard>
-        <button className ='confirmButton' onClick={()=>handleClick()}>Accept Order</button>
-        </div>
-
-        <div className='infoSheet'>
-        <InfoCard
-        restaurantName='Taco Bell'
-        restaurantAddress='600 Willem Ave. Berkley, CA 48067'
-        orderNumber = '11286'
-        specialInstructions = 'More diablo sauce'
-        deliveryTime = '1:30am'
-        deliveryAddress='5537 Brunswick Ave. Berkley, CA 48067'
-        ></InfoCard>
-        <button className ='confirmButton'>Accept Order</button>
-        </div>
-
-        <div className='infoSheet'>
-        <InfoCard
-        restaurantName='The Philly Cheesesteak Shop'
-        restaurantAddress='703 Willem Ave, Berkley, CA 48067'
-        orderNumber = '11287'
-        specialInstructions = 'none'
-        deliveryTime = '11:20'
-        deliveryAddress='9898 Clayton Dr. Berkley, CA 48067'
-        ></InfoCard>
-        <button className ='confirmButton'>Accept Order</button>
-        </div>
-
-        <div className='infoSheet'>
-        <InfoCard
-        restaurantName='The Philly Cheesesteak Shop'
-        restaurantAddress='703 Willem Ave, Berkley, CA 48067'
-        orderNumber = '11287'
-        specialInstructions = 'none'
-        deliveryTime = '11:20'
-        deliveryAddress='9898 Clayton Dr.'
-        ></InfoCard>
-        <button className ='confirmButton'>Accept Order</button>
-        </div>
+       
 
         </div>
         </h1>
         <hr></hr>
+
+
+
+        <Modal isOpen={modalIsOpen} >
+        
+        <div className="modal-form">
+          
+       
+          
+        <MapContainer name={"612 Willem Ave. Berkley, CA 48067"} />
+          <br></br>
+          <br></br>
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false);}}> Cancel </button>
+          </div>
+
+          
+
+
+
+         
+          
+        </Modal>
         </div>
     )
 }

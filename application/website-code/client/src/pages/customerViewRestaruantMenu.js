@@ -60,7 +60,7 @@ const loadMenu = async () => {
 };
 
 
-console.log(selectedID)
+
 
 const handleAdd = () => {
   let order = {
@@ -139,6 +139,7 @@ if(menu === undefined){
       <Modal isOpen={modalIsOpen} >
         
         <div className="modal-form">
+       
        
           <h1 >{select.items_name}</h1>
           <h4>{select.description}</h4>
