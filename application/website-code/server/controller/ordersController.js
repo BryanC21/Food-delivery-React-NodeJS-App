@@ -174,3 +174,23 @@ exports.setOrderItems = CatchAsync(async (req, res, next) => {
     });
   }
 });
+
+exports.setOrderDeliverer = CatchAsync(async(req,res,next)=>{
+  //restaurant id
+  const orderid = req.query.orderid
+  const delivererid = req.query.delivererid
+  let searchSql = "UPDATE delivery_order SET fk_deliverer_id = ? WHERE id = ?"
+
+  await db.execute(searchSql,[delivererid, orderid]).then(([results,fields])=>{
+    //if the SELECT statement does not find anything
+    if(results && results.length == 0){
+      return next(new AppError("unable to set deliverer",200));
+    }
+    else{
+      return res.json({
+        status:"success",
+        order: results
+      })
+    }
+  })
+})
