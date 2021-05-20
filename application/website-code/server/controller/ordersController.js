@@ -180,7 +180,7 @@ exports.setOrderDeliverer = CatchAsync(async(req,res,next)=>{
   //restaurant id
   const orderid = req.query.orderid
   const delivererid = req.query.delivererid
-  let searchSql = "UPDATE delivery_order SET fk_deliverer_id = ? WHERE id = ?"
+  let searchSql = "UPDATE delivery_orders SET fk_deliverer_id = ? WHERE id = ?"
 
   await db.execute(searchSql,[delivererid, orderid]).then(([results,fields])=>{
     //if the SELECT statement does not find anything
