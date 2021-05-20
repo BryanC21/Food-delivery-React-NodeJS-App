@@ -55,6 +55,19 @@ function HP_Links() {
         <br></br>
         <Link to='/HP/DeliverySignIn'>DeliverySignIn</Link>
         <br></br>
+        <h2>About Me pages</h2>
+        <Link to='/HP/BryanCaldera'>BryanCaldera</Link>
+        <br></br>
+        <Link to='/HP/DennyFeng'>DennyFeng</Link>
+        <br></br>
+        <Link to='/HP/JohnTo'>JohnTo</Link>
+        <br></br>
+        <Link to='/HP/MarcoMarino'>MarcoMarino</Link>
+        <br></br>
+        <Link to='/HP/CalvinTan'>CalvinTan</Link>
+        <br></br>
+        <Link to='/HP/HuanNguyen'>HuanNguyen</Link>
+        <br></br>
       </header>
     </div>
   );
