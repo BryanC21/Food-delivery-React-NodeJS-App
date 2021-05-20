@@ -25,7 +25,7 @@ function DeliveryOrderDetail({ selectedID }){
         try{
             axios.get(url).then((res) => {
                 console.log(res)
-                setRestaurant(res.data.orders)  
+               // setRestaurant(res.data.orders)  
            
             
              
@@ -37,14 +37,16 @@ function DeliveryOrderDetail({ selectedID }){
       }
 
       const loadRestaurant = async () => {
-        const url = `/api/v1/restaurants/getRestaurantByID`;
-        const data = {
-            id: selectedID.fk_restaurant_id,  
-        }
+        
+        const url = `/api/v1/restaurants/getRestaurantByID?id=${selectedID.fk_restaurant_id}`;
+        
         try{
-        axios.post(url, data).then((res) => {
+        axios.get(url).then((res) => {
           console.log(res)
-          setRestaurant(res.data.orders)   
+          setRestaurant(res.data.restaurant[0])   
+          console.log(res.data.restaurant[0])
+          console.log(restaruant.restaurant_name)
+          
         })}catch (err) {
           console.log(err);
           
@@ -52,20 +54,23 @@ function DeliveryOrderDetail({ selectedID }){
       };
 
     console.log(selectedID)
+
+
+    if(restaruant.restaurant_name != undefined){
     
     return(
         <div className="wrapperD">
 
             <InfoCard 
-                restaurantName = "Subway"
+                restaurantName = {restaruant.restaurant_name}
                 foodName = "BBQ Chicken Sandwich"
                 orderNumber = {selectedID.id}
-                orderersInfo = "123 Street, 94132"
+                orderersInfo = {restaruant.address}
                 deliveryTime = "10:00AM"
-                statusFulfilled = "Delivered"
-                specialInstructions = "N/a"
+                
+               
             ></InfoCard>
-            <MapContainer name = "123 Street, 94132"></MapContainer>
+           <MapContainer name = "Stonestown, 94132"></MapContainer>;
                 <br></br>
                 <br></br>
                 <br></br>
@@ -92,6 +97,10 @@ function DeliveryOrderDetail({ selectedID }){
             <button className ="cancelOrder">Order Completed</button>
         </div>
     )
+    
+    }else{
+        return( <div className="wrapperD"></div>)
+    }
 }
 
 const mapStateToProps = (state) => {
