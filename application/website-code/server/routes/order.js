@@ -15,7 +15,7 @@ const {
 
 router.post("/setOrderItems", setOrderItems)
 
-router.get("/setOrderDeliverer", setOrderDeliverer)
+router.post("/setOrderDeliverer", setOrderDeliverer)
 
 //pickup route
 router.get("/pickupOrders", getAllPickupOrders);

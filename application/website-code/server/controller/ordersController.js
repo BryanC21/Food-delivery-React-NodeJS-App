@@ -176,6 +176,7 @@ exports.setOrderItems = CatchAsync(async (req, res, next) => {
 });
 
 exports.setOrderDeliverer = CatchAsync(async(req,res,next)=>{
+  //const { orderid, delivererid } = req.body;
   //restaurant id
   const orderid = req.query.orderid
   const delivererid = req.query.delivererid
