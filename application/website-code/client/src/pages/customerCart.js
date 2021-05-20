@@ -9,6 +9,7 @@ import "../styling/StandardStyle.css";
 import payimg from "../images/pay.png";
 import Modal from 'react-modal';
 import axios from 'axios';
+import { useSelector } from 'react-redux'
 
 
 
@@ -20,8 +21,10 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [title, setTitle] = useState("Summary")//Title Summary or Not thing in cart
     const [address, setAddress] = useState("")// address input field
     const [select, setSelect] = useState({});//item user selected will save to this
+    const { auth } = useSelector((state) => ({ ...state }));
+
     //const [method, setMethod] = useState("Delivery");
-    const method = useRef("Delivery");//delivery or pickup
+    const method = useRef("D");//delivery or pickup
     const pay = useRef("credit");// credit or paypal
     const show = useRef("")
     const id = useRef(89)
@@ -30,6 +33,8 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     let count = 0;
 
     let theID = 0;
+    let item = []
+    let quatity = []
     
 
     useEffect(() => {
@@ -42,8 +47,8 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     const handleItem = async () => {
         const data = {
-            itemNames: ["toast", "bathwater", "Burger"], // save all item names in this array
-            counts: [1, 2, 4], //for each item put count at same index
+            itemNames: item, // save all item names in this array
+            counts: quatity, //for each item put count at same index
             P_or_D: "D", //write "P" if pickup order instead
             order_id: theID, //pickup or delivery order id that you are setting these items to
           };
@@ -53,7 +58,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
               data
             );
             console.log("Success: ", res);
-            history.push("/HP/homepage")
+            //history.push("/HP/homepage") //push user to homepage when they check out
           } catch (err) {
             console.log("F? ",err);
           }
@@ -62,14 +67,32 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     const handlecheckOut = async (event) => {
         event.preventDefault();
+        console.log(cart)
+
+        for (let i = 0; i < cart.length; i++) {
+            item.push(cart[i].name)
+            quatity.push(cart[i].quatity)
+
+
+        }
+
+
+
+
+        
+        
       
-        if(method.current === "Delivery"){ //if delivery
+        if(method.current === "D"){ //if delivery
             const data = {
                 title: "Test delivery order",
                 price: totalPrice,
                 description: "yes",
                 delivery_address: address,
+                userID: auth.userID, 
+                restaurantID: cart[0].rid
             }
+
+            console.log(data)
 
             try {
                 await axios.post("/api/v1/orders/createDeliveryOrder", data)
@@ -106,8 +129,8 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     console.log(data);
     }
 
-
-    console.log(method.current === "Delivery");
+    console.log(method.current);
+    console.log(method.current === "D");
 
   //  console.log(data);
     }
@@ -202,12 +225,12 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
                             <span>
                                 <label className='head'>
-                                    <input type="radio" name="deliveryType" value="Delivery" checked={true} onClick={() => { method.current = "Delivery"; setType("")}} />
+                                    <input type="radio" name="deliveryType" value="Delivery" checked={true} onClick={() => { method.current = "D"; setType("")}} />
                             Delivery</label><br></br>
                             </span>
 
                             <span>
-                                <input type="radio" name="deliveryType" value="Pickup" onClick={() => { method.current = "Pickup"; setType("hidden")}} />
+                                <input type="radio" name="deliveryType" value="Pickup" onClick={() => { method.current = "P"; setType("hidden")}} />
                                 <label className='head'>Pickup</label><br></br>
                             </span>
 
@@ -254,7 +277,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                         </div>
                         <button className='cart-button'>Place Order</button>
                     </form>
-                    <button className='cart-button' onClick={() => console.log(method.current + " " + pay.current)}>Place Order</button>
+                  
 
                 </div>
 
