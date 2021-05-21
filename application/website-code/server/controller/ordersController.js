@@ -200,7 +200,7 @@ exports.setOrderDeliverer = CatchAsync(async(req,res,next)=>{
 })
 
 exports.getDeliveryOrdersForDeliverer = CatchAsync(async (req, res, next) => {
-  await db.query("SELECT delivery_orders.*, orderItems.* FROM delivery_orders JOIN orderItems ON orderItems.fk_deliverer_order_id = delivery_orders.id WHERE delivery_orders.fk_deliverer_id = ?;", [req.query.id])
+  await db.query("SELECT * FROM delivery_orders WHERE fk_deliverer_id = ?;", [req.query.id])
     .then(([results, fields]) => {
       if (results && results.length == 0) {
         return next(new AppError("No delivery items were found!", 200));
@@ -213,3 +213,47 @@ exports.getDeliveryOrdersForDeliverer = CatchAsync(async (req, res, next) => {
       }
     });
 });
+
+exports.removeDeliveryOrder = CatchAsync(async(req,res,next)=>{
+  const id = req.query.id;
+  
+  let searchSql = "SELECT * FROM delivery_orders WHERE id = ?"
+  let deleteSql = "DELETE FROM delivery_orders where id = ?"
+  
+  await db.execute(searchSql,[id]).then(([results,fields]) => {
+    //if the SELECT statement does not find anything 
+    if(results && results.length == 0){
+      return next(new AppError("No orders with that id were found", 200));
+    } 
+    //if the SELECT statement does find something, execute the delete
+    else{
+      db.execute(deleteSql,[id])
+      return res.json({
+        status: "success",
+        message: "Item was deleted"
+      });
+    }
+  }) 
+})
+
+exports.removePickupOrder = CatchAsync(async(req,res,next)=>{
+  const id = req.query.id;
+  
+  let searchSql = "SELECT * FROM pickup_orders WHERE id = ?"
+  let deleteSql = "DELETE FROM pickup_orders where id = ?"
+  
+  await db.execute(searchSql,[id]).then(([results,fields]) => {
+    //if the SELECT statement does not find anything 
+    if(results && results.length == 0){
+      return next(new AppError("No orders with that id were found", 200));
+    } 
+    //if the SELECT statement does find something, execute the delete
+    else{
+      db.execute(deleteSql,[id])
+      return res.json({
+        status: "success",
+        message: "Item was deleted"
+      });
+    }
+  }) 
+})
