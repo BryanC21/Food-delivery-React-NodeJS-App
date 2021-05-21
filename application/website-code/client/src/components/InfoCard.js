@@ -24,6 +24,7 @@ function InfoCard (props){
                 <p style = {{display: props.statusFulfilled ? "block":"none"}}><b>Status Fulfilled: </b>{props.statusFulfilled}</p>
                 <p style = {{display: props.price ? "block":"none"}}><b>Price: </b>{props.price}</p>
                 <p style = {{display: props.specialInstructions ? "block":"none"}}><b>Special Instructions: </b>{props.specialInstructions}</p>
+                <p style = {{display: props.timeCreated ? "block":"none"}}><b>Time Created: </b>{props.timeCreated}</p>
                 </div>
         </div>
     )
