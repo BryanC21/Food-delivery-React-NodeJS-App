@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
 
-
+//loader css
 const override = css`
   display: block;
   margin: 0 auto;
@@ -19,6 +19,8 @@ const override = css`
   position: fixed;
   top: 50%;
   left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
 `;
 
 const RestaurantSignIn = () => {
@@ -111,8 +113,6 @@ const RestaurantSignIn = () => {
       </form>
        {
        /*loader component below
-       loader isnt exactly centered on the form, i thought i had it centered to the middle of the screen
-       you can play with the css in const override on line 15
        */
        }
 
