@@ -23,6 +23,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [address, setAddress] = useState("")// address input field
     const [select, setSelect] = useState({});//item user selected will save to this
     const { auth } = useSelector((state) => ({ ...state }));
+    const [bubbleSelected, setBubbleSelected] = useState(1);
 
     //const [method, setMethod] = useState("Delivery");
     const method = useRef("D");//delivery or pickup
@@ -231,14 +232,14 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
 
 
-                            <span>
+                            <span> 
                                 <label className='head'>
-                                    <input type="radio" name="deliveryType" value="Delivery" checked={true} onClick={() => { method.current = "D"; setType("") }} />
+                                    <input type="radio" name="deliveryType" value="Delivery" checked={bubbleSelected == 1} onClick={() => {  setType(""); method.current = "D"; setBubbleSelected(1)}} />
                             Delivery</label><br></br>
                             </span>
 
                             <span>
-                                <input type="radio" name="deliveryType" value="Pickup" onClick={() => { method.current = "P"; setType("hidden") }} />
+                                <input type="radio" name="deliveryType" value="Pickup" checked={bubbleSelected == 2} onClick={() => {  setType("hidden"); method.current = "P"; setBubbleSelected(2) }} />
                                 <label className='head'>Pickup</label><br></br>
                             </span>
 
