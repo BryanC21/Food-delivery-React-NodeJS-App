@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../styling/customerViewRestaurantMenu.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -27,16 +28,17 @@ const RestaurantMenu = (props) => {
     if (url) {
       handleSubmit();
     }
-    
-  }, [url, auth, ]);
+
+  }, [url, auth,]);
 
   const loadMenu = async (restaurantID) => {
     const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${restaurantID}`;
-    try{
-    await axios.get(url).then((res) => {
-      setMenu(res.data);
-      console.log(res.data)
-    })}catch (err) {
+    try {
+      await axios.get(url).then((res) => {
+        setMenu(res.data.menuItems);
+        console.log(res.data)
+      })
+    } catch (err) {
       console.log(err);
       //setMenu(0);
     }
@@ -66,7 +68,7 @@ const RestaurantMenu = (props) => {
       const res = await axios.post(
         "/api/v1/restaurants/uploadRestaurantMenu",
         data
-      ).then(() =>{
+      ).then(() => {
         resetFields();
       });
       console.log("MENU INFORMATION: ", res);
@@ -77,7 +79,7 @@ const RestaurantMenu = (props) => {
 
   const LoadRestaurantDetails = async () => {
     const url = `/api/v1/restaurants/getRestaurantByOwner?id=${auth.userID}`;
-    await axios.get(url).then( (res) => {
+    await axios.get(url).then((res) => {
       const { restaurant } = res.data;
       console.log(restaurant);
       //setLoadCuisineType(restaurant);
@@ -129,7 +131,7 @@ const RestaurantMenu = (props) => {
     } else {
       handleSubmit();
     }
-    
+
   };
 
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
@@ -164,7 +166,7 @@ const RestaurantMenu = (props) => {
               <form
                 className='container border rounded'
                 style={{ paddingBottom: "20px", paddingTop: "20px" }}
-                onSubmit={(e) => {e.preventDefault(); MenuUpload()}}
+                onSubmit={(e) => { e.preventDefault(); MenuUpload() }}
               >
                 <label>
                   Food Name:
@@ -244,8 +246,32 @@ const RestaurantMenu = (props) => {
       <section className='jumbotron bg-light '>
         <div className='container-fluid'>
           <div className='row'>
-            <div className='col-md text-center align-self-center'>
-              <p>{JSON.stringify(menu)}</p>
+            <div className='col-md align-self-center'>
+              <section className="order-section">
+                <div className="menu-order-content">
+                  <div className="wrapper2">
+                    { menu.map((item, id) =>
+                      <button className="customer-button" key={item.id} onClick={() => null}>
+                        <div className="card card-width" >
+                          <img className="card-img-top" src={item.image} alt="Failed to load image"></img>
+                          <div className="customer-card-body" >
+                            <h5 className="customer-card-title" >{item.items_name}</h5>
+                            <p className="card-title" maxlength="12">{item.description}</p>
+                            <h6 className="card-title" >${item.price}</h6>
+
+
+
+                            {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
+                          </div>
+                        </div>
+                      </button>
+
+                    )}
+                  </div>
+                </div>
+
+
+              </section>
             </div>
           </div>
         </div>
