@@ -34,8 +34,8 @@ const RestaurantMenu = (props) => {
     const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${restaurantID}`;
     try{
     await axios.get(url).then((res) => {
-      setMenu(res.data.menuItems);
-      console.log(res.data.menuItems)
+      setMenu(res.data);
+      console.log(res.data)
     })}catch (err) {
       console.log(err);
       //setMenu(0);
@@ -66,7 +66,9 @@ const RestaurantMenu = (props) => {
       const res = await axios.post(
         "/api/v1/restaurants/uploadRestaurantMenu",
         data
-      );
+      ).then(() =>{
+        resetFields();
+      });
       console.log("MENU INFORMATION: ", res);
     } catch (err) {
       console.log(err);
@@ -127,7 +129,7 @@ const RestaurantMenu = (props) => {
     } else {
       handleSubmit();
     }
-    resetFields();
+    
   };
 
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
@@ -162,7 +164,7 @@ const RestaurantMenu = (props) => {
               <form
                 className='container border rounded'
                 style={{ paddingBottom: "20px", paddingTop: "20px" }}
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => {e.preventDefault(); MenuUpload()}}
               >
                 <label>
                   Food Name:
@@ -171,6 +173,7 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={items_name}
+                    required
                     onChange={(e) => setItemsName(e.target.value)}
                   />
                 </label>
@@ -181,6 +184,7 @@ const RestaurantMenu = (props) => {
                 </label>
                   <br />
                   <select className=''
+                    required
                     onChange={(e) => (setCuisineType(e.target.value))}>
                     <option value='2'>Cuisine</option>
                     {loadCuisineType.map((restaurant, id) => (
@@ -195,6 +199,7 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={price}
+                    required
                     onChange={(e) => setPricing(e.target.value)}
                   />
                 </label>
@@ -206,6 +211,7 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={description}
+                    required
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </label>
@@ -217,6 +223,7 @@ const RestaurantMenu = (props) => {
                   name='uploadImage'
                   className='formButton formUploadButton'
                   accept='image/*'
+                  required
                   onChange={(e) => setMenuImage(e.target.files[0])}
                 />
                 <br />
@@ -224,7 +231,7 @@ const RestaurantMenu = (props) => {
                 <div className='text-center'>
                   <button
                     className='btn btn-primary'
-                    onClick={() => MenuUpload()}
+                    type='submit'
                   >
                     Submit Menu
                   </button>
