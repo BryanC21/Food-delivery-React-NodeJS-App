@@ -8,6 +8,7 @@ const {
   getAllMenuItems,
   removeRestaurantMenuItem,
   checkRestaurantApproval,
+  getRestaurantByOwner,
 } = require("../controller/restaurantController");
 
 const { restrictTo } = require("../controller/authController");
@@ -28,5 +29,9 @@ router.get("/getAllMenuItems", getAllMenuItems);
 router.get("/removeRestaurantMenuItem",removeRestaurantMenuItem);
 
 router.get("/getRestaurantByID",checkRestaurantApproval);
+
+
+router.get("/getRestaurantByOwner",getRestaurantByOwner);
+
 
 module.exports = router;

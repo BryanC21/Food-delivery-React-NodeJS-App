@@ -6,14 +6,16 @@ import axios from "axios";
 const RestaurantInfo = (props) => {
   const [restaurant_name, setRestaurantName] = useState("");
   const [address, setAddress] = useState("");
-  const [cuisine_type, setCuisineType] = useState("");
+  const [cuisine_type, setCuisineType] = useState("American");
   const [dollar_sign, setDollarSign] = useState("");
   const [description, setDescription] = useState("");
   const [restaurant_logo, setRestaurantLogo] = useState("");
   const [url, setUrl] = useState(undefined);
   const history = useHistory();
+  const [loadCuisineType, setLoadCuisineType] = React.useState([]);
 
   useEffect(() => {
+    loadAllRestaurants();
     if (url) {
       handleSubmit();
     }
@@ -36,7 +38,7 @@ const RestaurantInfo = (props) => {
         //maybe have a  check if the owner has a restaurant id assigned
         "/api/v1/restaurants/restaurantInfoUpload",
         data
-      );
+      )
       history.push("/HP/RestaurantMenu");
       console.log("RESTAURANT INFORMATION: ", res);
     } catch (err) {
@@ -72,6 +74,20 @@ const RestaurantInfo = (props) => {
     } else {
       handleSubmit();
     }
+  };
+
+  const loadAllRestaurants = async () => {
+    const url = "/api/v1/restaurants/getAllCuisineType";
+    axios.get(url).then((res) => {
+      const { restaurants } = res.data;
+      console.log(restaurants);
+      setLoadCuisineType(restaurants);
+      console.log(loadCuisineType)
+    });
+  };
+
+  const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
+    return <option value={cuisine_type}>{cuisine_type}</option>;
   };
 
   return (
@@ -112,21 +128,25 @@ const RestaurantInfo = (props) => {
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </label>
+                <br />
+                <div>
                 <label>
                   Cuisine Type:
-                  <br></br>
-                  <input
-                    type='text'
-                    style={{ width: "40vw" }}
-                    value={cuisine_type}
-                    onChange={(e) => setCuisineType(e.target.value)}
-                  />
                 </label>
+                <br/>
+                <select className=''
+                onChange={(e) => (setCuisineType(e.target.value))}>
+                  <option value='American'>Cuisine</option>
+                  {loadCuisineType.map((restaurant, id) => (
+                    LoadCuisineTypeCuisine(restaurant)
+                  ))}
+                </select>
+                </div>
                 <br />
                 {/*FRONTEND TODO*/}
                 {/* FRONTEND:  Change this to A dropdown so owner can choose dollarsign from $ to $$$ */}
                 <label>
-                  Price:
+                  Price - Enter $, $$ or $$$ only:
                   <br></br>
                   <input
                     type='text'
