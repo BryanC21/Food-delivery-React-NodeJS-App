@@ -6,6 +6,7 @@ import MapContainer from '../components/MapContainer';
 import { left } from '@popperjs/core';
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
+import { setId } from "../redux/actions/customerActions"
 import axios from 'axios';
 
 
@@ -13,6 +14,7 @@ const DelivererMainMenu = (props) => {
     const history = useHistory();
     const { auth } = useSelector((state) => ({ ...state }));
     const [orders, setOrders] = useState([]);
+    const dispatch = useDispatch();
 
     const handleClick = () => {
         history.push("/HP/DeliveryOrderPage")
@@ -51,7 +53,7 @@ const DelivererMainMenu = (props) => {
                 {auth.email}, Welcome         
                 </h1>
         <div>
-        <button className = 'button' onClick = {()=> handleClick()}>
+        <button className = 'button' onClick = {()=> {dispatch(setId(orders));handleClick()}}>
             Orders
         </button>
     </div>
@@ -125,7 +127,7 @@ const DelivererMainMenu = (props) => {
          deliveryTime='11:30pm'
          deliveryAddress={orders.delivery_address}
          ></InfoCard>
-         <button className ='confirmButton' onClick={()=>handleCheck()}>Claim Order</button>
+         <button className ='confirmButton' onClick={()=>handleCheck()}>Check Order</button>
          </div>
          )}
                 

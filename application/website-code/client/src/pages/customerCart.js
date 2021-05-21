@@ -10,6 +10,7 @@ import payimg from "../images/pay.png";
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useSelector } from 'react-redux'
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -35,7 +36,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     let theID = 0;
     let item = []
     let quatity = []
-    
+
 
     useEffect(() => {
         for (let i = 0; i < cart.length; i++) {//calculate total due
@@ -43,7 +44,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
         }
         count.toFixed(2)
         setTotalPrice(count)
-    },[cart.length])
+    }, [cart.length])
 
     const handleItem = async () => {
         const data = {
@@ -51,17 +52,17 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             counts: quatity, //for each item put count at same index
             P_or_D: "D", //write "P" if pickup order instead
             order_id: theID, //pickup or delivery order id that you are setting these items to
-          };
-          try {
+        };
+        try {
             const res = await axios.post(
-              "/api/v1/orders/setOrderItems",
-              data
+                "/api/v1/orders/setOrderItems",
+                data
             );
             console.log("Success: ", res);
             //history.push("/HP/homepage") //push user to homepage when they check out
-          } catch (err) {
-            console.log("F? ",err);
-          }
+        } catch (err) {
+            console.log("F? ", err);
+        }
 
     }
 
@@ -78,17 +79,22 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
 
 
+        if(cart.length === 0){
+            toast.success("No Item in cart");
+
 
         
-        
-      
-        if(method.current === "D"){ //if delivery
+
+
+
+        }
+        else if (method.current === "D") { //if delivery
             const data = {
                 title: "Test delivery order",
                 price: totalPrice,
                 description: "yes",
                 delivery_address: address,
-                userID: auth.userID, 
+                userID: auth.userID,
                 restaurantID: cart[0].rid
             }
 
@@ -96,43 +102,45 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
             try {
                 await axios.post("/api/v1/orders/createDeliveryOrder", data)
-                .then((res) => {
-                console.log("Res", res.data.orders[0]);
-                theID = parseInt(res.data.orders[0].id);
-                console.log("------", theID)
-                handleItem();
-                })
-                
-              } catch (err) {
+                    .then((res) => {
+                        console.log("Res", res.data.orders[0]);
+                        theID = parseInt(res.data.orders[0].id);
+                        console.log("------", theID)
+                        handleItem();
+                    })
+
+            } catch (err) {
                 console.log(err);
-              }
+            }
 
-        console.log(data);
-    }else{  //if pickup
-        const data = {
-            title: "Test Pickup order",
-            price: totalPrice,
-            description: "time: ASAP",
-            pickup_address: "store",
+            console.log(data);
+        } else {  //if pickup
+            const data = {
+                title: "Test Pickup order",
+                price: totalPrice,
+                description: "time: ASAP",
+                pickup_address: "store",
 
+            }
+
+
+            try {
+                const res = await axios.post("/api/v1/orders/createPickupOrder", data);
+                console.log("Res", res);
+                //history.push("/HP/DeliverySignIn");
+            } catch (err) {
+                console.log(err);
+            }
+
+            console.log(data);
         }
-        
-        
-        try {
-            const res = await axios.post("/api/v1/orders/createPickupOrder", data);
-            console.log("Res", res);
-            //history.push("/HP/DeliverySignIn");
-          } catch (err) {
-            console.log(err);
-          }
 
-    console.log(data);
-    }
+    
 
-    console.log(method.current);
-    console.log(method.current === "D");
+        console.log(method.current);
+        console.log(method.current === "D");
 
-  //  console.log(data);
+        //  console.log(data);
     }
 
 
@@ -144,9 +152,9 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
         cart.splice(cart.indexOf(select), 1);
 
-       // cart.pop()
-      setTotal(cart.length);
-     dispatch(deleteCart(cart));
+        // cart.pop()
+        setTotal(cart.length);
+        dispatch(deleteCart(cart));
         console.log("delete")
     };
 
@@ -193,7 +201,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                                         <h5 className="customer-card-title">{cart.name}</h5>
                                         <h6 className="card-title">{cart.description}</h6>
                                         <h6 className="card-title">QTYx{cart.quatity}</h6>
-                                        <button className="bottun" id="1" onClick={() => { setSelect(cart); console.log(cart); setModalIsOpen(true)}}><p className="text-color">Delete</p></button>
+                                        <button className="bottun" id="1" onClick={() => { setSelect(cart); console.log(cart); setModalIsOpen(true) }}><p className="text-color">Delete</p></button>
 
                                     </div>
 
@@ -216,7 +224,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                         <div className="order-form">
                             <h4>Method</h4>
 
-                           
+
 
 
 
@@ -225,12 +233,12 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
                             <span>
                                 <label className='head'>
-                                    <input type="radio" name="deliveryType" value="Delivery" checked={true} onClick={() => { method.current = "D"; setType("")}} />
+                                    <input type="radio" name="deliveryType" value="Delivery" checked={true} onClick={() => { method.current = "D"; setType("") }} />
                             Delivery</label><br></br>
                             </span>
 
                             <span>
-                                <input type="radio" name="deliveryType" value="Pickup" onClick={() => { method.current = "P"; setType("hidden")}} />
+                                <input type="radio" name="deliveryType" value="Pickup" onClick={() => { method.current = "P"; setType("hidden") }} />
                                 <label className='head'>Pickup</label><br></br>
                             </span>
 
@@ -242,16 +250,16 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
                             <select>
                                 <option value="ASAP">ASAP</option>
-                                <option value="30">30 minute</option>
-                                <option value="60">60 minute</option>
-                                <option value="120">120 minute</option>
+                                <option value="30">Wait 30 minute</option>
+                                <option value="60">Wait 60 minute</option>
+                                <option value="120">Wait 120 minute</option>
                             </select>
 
                             <br></br>
                         </div>
                         <div className="order-form">
                             <h4>Address</h4>
-                            <input className='input' placeholder="building, room" type={type} onChange={(e)=>setAddress(e.target.value)} required></input>
+                            <input className='input' placeholder="building, room" type={type} onChange={(e) => setAddress(e.target.value)} required></input>
                         </div>
 
                         <div className="order-form">
@@ -277,7 +285,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                         </div>
                         <button className='cart-button'>Place Order</button>
                     </form>
-                  
+
 
                 </div>
 
@@ -313,33 +321,34 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             </CardColumns>
                 */}
 
-<Modal isOpen={modalIsOpen} >
-        
-        <div className="modal-form">
-        
-          <h1 >{select.name}</h1>
-          <h4>{select.description}</h4>
-          <img src={select.image} alt="burger"></img>
-          <br></br>
-          <br></br>
+            <Modal isOpen={modalIsOpen} >
+
+                <div className="modal-form">
+
+                    <h1 >{select.name}</h1>
+                    <h4>{select.description}</h4>
+                    <img src={select.image} alt="burger"></img>
+                    <br></br>
+                    <br></br>
           Qty {select.quatity}
-          
-          <br></br>
-          <br></br>
-        
-          <br></br>
-          <br></br>
-          <button className="buttonClass" onClick={() => {setModalIsOpen(false); handleDelete()}}> Delete</button>
-          <button className="buttonClass" onClick={() => {setModalIsOpen(false);}}> Cancel </button>
-          </div>
-        
-          
-        
-        
-        
-         
-          
-        </Modal>
+
+                    <br></br>
+                    <br></br>
+
+                    <br></br>
+                    <br></br>
+                    <button className="buttonClass" onClick={() => { setModalIsOpen(false); handleDelete() }}> Delete</button>
+                    <button className="buttonClass" onClick={() => { setModalIsOpen(false); }}> Cancel </button>
+                </div>
+
+
+
+
+
+
+
+            </Modal>
+            <ToastContainer />
         </div>
 
     )
