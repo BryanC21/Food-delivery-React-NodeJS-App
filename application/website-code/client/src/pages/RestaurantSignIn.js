@@ -2,26 +2,40 @@ import React, { useEffect, useState } from "react";
 import "../styling/Customer.css";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faCartPlus, faTruckLoading } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css";
 import "./Register.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
+
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+`;
 
 const RestaurantSignIn = () => {
   const [email, setStateEmail] = React.useState("test2@yahoo.com");
   const [password, setStatePassword] = React.useState("123456");
+  const [loading,setLoading] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    //setLoading is for the loader
+    setLoading(true);
     const data = {
       email,
       password,
     };
-
     try {
       const res = await axios.post("/api/v1/auth/restaurantLogin", data);
 
@@ -95,6 +109,18 @@ const RestaurantSignIn = () => {
           Delivery Sign In
         </Link>
       </form>
+       {
+       /*loader component below
+       loader isnt exactly centered on the form, i thought i had it centered to the middle of the screen
+       you can play with the css in const override on line 15
+       */
+       }
+
+      <div className="sweet-loading">
+        <BounceLoader color={"#966CA2"} loading={loading} css={override} size={100} />
+      </div>
+      
+  );
     </div>
   );
 };
