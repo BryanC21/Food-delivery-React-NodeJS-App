@@ -111,6 +111,7 @@ const RestaurantInfo = (props) => {
               >
                 <label>
                   Restaurant Name:
+                  <br />
                   <input
                     type='text'
                     style={{ width: "40vw" }}
@@ -142,18 +143,16 @@ const RestaurantInfo = (props) => {
                   ))}
                 </select>
                 </div>
-                <br />
                 {/*FRONTEND TODO*/}
                 {/* FRONTEND:  Change this to A dropdown so owner can choose dollarsign from $ to $$$ */}
                 <label>
-                  Price - Enter $, $$ or $$$ only:
+                  Price range:
                   <br></br>
-                  <input
-                    type='text'
-                    style={{ width: "40vw" }}
-                    value={dollar_sign}
-                    onChange={(e) => setDollarSign(e.target.value)}
-                  />
+                  <select className='' onChange={(e) => (setDollarSign(e.target.value))}>
+                  <option value='$'>$</option>
+                  <option value='$$'>$$</option>
+                  <option value='$$$'>$$$</option>
+                </select>
                 </label>
                 <br />
                 <label>
