@@ -7,14 +7,18 @@ import axios from 'axios';
 
 
 
-function DeliveryOrderDetail({ selectedID }){
+function DeliveryOrderDetail({ selectedID }){//selectedID is order data from DeliveryOrderPage
     const { auth } = useSelector((state) => ({ ...state }));
     const [restaruant, setRestaurant] = useState({})
+    const [foodName, setfoodName] = useState([])
+    const [Name, setName] = useState("[]")
+    
 
 
     useEffect(() => {
         claimOrder();
         loadRestaurant();
+        loadOrderDetail();
         
       }, []);
 
@@ -35,6 +39,34 @@ function DeliveryOrderDetail({ selectedID }){
             }
 
       }
+
+      const loadOrderDetail = async () => {
+        
+        const url = `/api/v1/orders/getDeliveryOrder?id=${selectedID.id}`;
+        
+        try{
+        axios.get(url).then((res) => {
+          console.log(res.data.orders)
+
+          var i;
+          for( i = 0; i < res.data.orders.length; i++){
+              
+              console.log(res.data.orders[i].itemName)
+              setfoodName(foodName.push(res.data.orders[i].itemName))
+
+          }
+
+          console.log(foodName)
+          if(foodName != undefined && foodName != null){
+          setName(foodName.toString())
+          }
+         
+          
+        })}catch (err) {
+          console.log(err);
+          
+        }
+      };
 
       const loadRestaurant = async () => {
         
@@ -63,10 +95,11 @@ function DeliveryOrderDetail({ selectedID }){
 
             <InfoCard 
                 restaurantName = {restaruant.restaurant_name}
-                foodName = "BBQ Chicken Sandwich"
+                foodName = {Name}
                 orderNumber = {selectedID.id}
                 orderersInfo = {restaruant.address}
                 deliveryTime = "10:00AM"
+                deliveryAddress={selectedID.delivery_address}
                 
                
             ></InfoCard>
