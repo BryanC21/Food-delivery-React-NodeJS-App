@@ -9,6 +9,7 @@ import "../styling/Customer.css";
 import "../styling/StandardStyle.css";
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -75,6 +76,7 @@ const handleAdd = () => {
 
   dispatch(setCart(order));
   setCount(count + 1);
+  toast.success("Item added");
 
 };
 
@@ -186,7 +188,7 @@ if(menu === undefined){
 
    
             
-     
+        <ToastContainer />
 
     </div>
 
