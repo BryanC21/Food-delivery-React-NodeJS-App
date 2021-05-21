@@ -35,8 +35,12 @@ const RestaurantSignIn = () => {
 
       console.log("RESTAURANT LOGIN: ", JSON.stringify(res.data));
 
-      history.push("/HP/RestaurantInfo"); //TODO you should only be pushed to this page once
+      if(res.data.restaurantID == null){
+        history.push("/HP/RestaurantInfo"); //TODO you should only be pushed to this page once
       //then once you have set up your restaurant you go to restaurant menu and never go back to info
+      } else {
+        history.push("/HP/RestaurantMenu");
+      }
     } catch (err) {
       console.log(err);
     }

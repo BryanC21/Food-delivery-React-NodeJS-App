@@ -11,13 +11,21 @@ const RestaurantMenu = (props) => {
   const [description, setDescription] = React.useState("");
   const [image, setMenuImage] = React.useState("");
   const [url, setUrl] = React.useState(undefined);
+  const [restaurantInfo, setRestaurantInfo] = React.useState({});
+  const [restaurantName, setRestaurantName] = React.useState("")
+  const [restaurantStatus, setRestaurantStatus] = React.useState("")
+
+  const { auth } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadAllRestaurants();
+    if(auth){
+      LoadRestaurantDetails();
+    }
     if (url) {
       handleSubmit();
     }
-  }, [url]);
+  }, [url, auth,]);
 
   const loadAllRestaurants = async () => {
     const url = "/api/v1/restaurants/getAllCuisineType";
@@ -29,7 +37,6 @@ const RestaurantMenu = (props) => {
     });
   };
 
-  const { auth } = useSelector((state) => ({ ...state }));
 
   const handleSubmit = async () => {
     const data = {
@@ -49,6 +56,24 @@ const RestaurantMenu = (props) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const LoadRestaurantDetails = async () => {
+    const url = `/api/v1/restaurants/getRestaurantByOwner?id=${auth.userID}`;
+    axios.get(url).then((res) => {
+      const { restaurant } = res.data;
+      console.log(restaurant);
+      //setLoadCuisineType(restaurant);
+      setRestaurantInfo(restaurant[0]);
+      console.log("this: ",restaurantInfo)
+      setRestaurantName(restaurant[0].restaurant_name);
+      if(restaurant[0].isApproved == 0){
+        setRestaurantStatus("Your restaurant is under review by admin")
+      } else {
+        setRestaurantStatus("Your restaurant is approved to sell")
+      }
+      //console.log(loadCuisineType)
+    });
   };
 
   const uploadPicture = () => {
@@ -101,6 +126,14 @@ const RestaurantMenu = (props) => {
       {/* Might need to separate label/input as their own */}
       <section className='jumbotron bg-dark '>
         <div className='container-fluid'>
+          <div className='row'>
+          <div className='col-md text-center text-white align-self-center'>
+              <h1>{restaurantName}</h1>
+              <br />
+              <h3>{restaurantStatus}</h3>
+              <br />
+            </div>
+          </div>
           <div className='row'>
             <div className='col-md text-center text-white align-self-center'>
               <h2>Add your latest menu</h2>
