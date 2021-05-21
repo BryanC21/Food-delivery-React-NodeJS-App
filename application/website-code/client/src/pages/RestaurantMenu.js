@@ -14,18 +14,33 @@ const RestaurantMenu = (props) => {
   const [restaurantInfo, setRestaurantInfo] = React.useState({});
   const [restaurantName, setRestaurantName] = React.useState("")
   const [restaurantStatus, setRestaurantStatus] = React.useState("")
+  const [menu, setMenu] = React.useState([]);
 
   const { auth } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadAllRestaurants();
-    if(auth){
+    if (auth) {
       LoadRestaurantDetails();
+      console.log(restaurantInfo)
     }
     if (url) {
       handleSubmit();
     }
-  }, [url, auth,]);
+    
+  }, [url, auth, ]);
+
+  const loadMenu = async (restaurantID) => {
+    const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${restaurantID}`;
+    try{
+    await axios.get(url).then((res) => {
+      setMenu(res.data.menuItems);
+      console.log(res.data.menuItems)
+    })}catch (err) {
+      console.log(err);
+      //setMenu(0);
+    }
+  };
 
   const loadAllRestaurants = async () => {
     const url = "/api/v1/restaurants/getAllCuisineType";
@@ -60,18 +75,19 @@ const RestaurantMenu = (props) => {
 
   const LoadRestaurantDetails = async () => {
     const url = `/api/v1/restaurants/getRestaurantByOwner?id=${auth.userID}`;
-    axios.get(url).then((res) => {
+    await axios.get(url).then( (res) => {
       const { restaurant } = res.data;
       console.log(restaurant);
       //setLoadCuisineType(restaurant);
       setRestaurantInfo(restaurant[0]);
-      console.log("this: ",restaurantInfo)
+      console.log("this: ", restaurantInfo)
       setRestaurantName(restaurant[0].restaurant_name);
-      if(restaurant[0].isApproved == 0){
+      if (restaurant[0].isApproved == 0) {
         setRestaurantStatus("Your restaurant is under review by admin")
       } else {
         setRestaurantStatus("Your restaurant is approved to sell")
       }
+      loadMenu(restaurant[0].id);
       //console.log(loadCuisineType)
     });
   };
@@ -98,7 +114,7 @@ const RestaurantMenu = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const resetFields = () =>{
+  const resetFields = () => {
     setItemsName("");
     setPricing("");
     setDescription("");
@@ -124,16 +140,19 @@ const RestaurantMenu = (props) => {
       {/* Style this form w/o using needing to use <br/> b/c there's a better approach*/}
       {/* Hint: Display flex, flex-direction: column  Ex:RestaurantRegistration.js*/}
       {/* Might need to separate label/input as their own */}
-      <section className='jumbotron bg-dark '>
+      <section className='jumbotron bg-light '>
         <div className='container-fluid'>
           <div className='row'>
-          <div className='col-md text-center text-white align-self-center'>
+            <div className='col-md text-center align-self-center'>
               <h1>{restaurantName}</h1>
               <br />
               <h3>{restaurantStatus}</h3>
-              <br />
             </div>
           </div>
+        </div>
+      </section>
+      <section className='jumbotron bg-dark '>
+        <div className='container-fluid'>
           <div className='row'>
             <div className='col-md text-center text-white align-self-center'>
               <h2>Add your latest menu</h2>
@@ -157,17 +176,17 @@ const RestaurantMenu = (props) => {
                 </label>
                 <br />
                 <div>
-                <label>
-                  Cuisine Type:
+                  <label>
+                    Cuisine Type:
                 </label>
-                <br/>
-                <select className=''
-                onChange={(e) => (setCuisineType(e.target.value))}>
-                  <option value='2'>Cuisine</option>
-                  {loadCuisineType.map((restaurant, id) => (
-                    LoadCuisineTypeCuisine(restaurant)
-                  ))}
-                </select>
+                  <br />
+                  <select className=''
+                    onChange={(e) => (setCuisineType(e.target.value))}>
+                    <option value='2'>Cuisine</option>
+                    {loadCuisineType.map((restaurant, id) => (
+                      LoadCuisineTypeCuisine(restaurant)
+                    ))}
+                  </select>
                 </div>
                 <label>
                   Price:
@@ -211,6 +230,15 @@ const RestaurantMenu = (props) => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className='jumbotron bg-light '>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-md text-center align-self-center'>
+              <p>{JSON.stringify(menu)}</p>
             </div>
           </div>
         </div>
