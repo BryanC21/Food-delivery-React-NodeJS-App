@@ -70,7 +70,7 @@ function DeliveryOrderDetail({ selectedID }){
                 
                
             ></InfoCard>
-           <MapContainer name = "Stonestown, 94132"></MapContainer>;
+           <MapContainer name = {restaruant.address}></MapContainer>
                 <br></br>
                 <br></br>
                 <br></br>

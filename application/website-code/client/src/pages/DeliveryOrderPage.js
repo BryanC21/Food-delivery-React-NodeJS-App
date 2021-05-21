@@ -25,11 +25,11 @@ const DeliveryOrderPage = () =>{
     }
 
     useEffect(() => {
-        loadMenu();
+        loadOrder();
         
       }, []);
       
-      const loadMenu = async () => {
+      const loadOrder = async () => {
         const url = `/api/v1/orders/deliveryOrders`;
         try{
         axios.get(url).then((res) => {
@@ -43,15 +43,21 @@ const DeliveryOrderPage = () =>{
         }
       };
 
-      if(orders === undefined){
+      if(orders === undefined){// if no order show this
   
         return(<div>
-          <div className='jumbotron bg-dark'>
-      
-            <h2 className='customer-head'>Nothing</h2>
-      
+
+          <div className="Title">
+          <p><b>Current available orders in your area</b></p>
           </div>
+  
+          <h1 className='overHeading'>
+          <div className = 'orderSection'>
           </div>
+          
+          </h1>
+          </div>
+          
           );
       }else{
     
@@ -77,7 +83,7 @@ const DeliveryOrderPage = () =>{
         deliveryTime='11:30pm'
         deliveryAddress={orders.delivery_address}
         ></InfoCard>
-        <button className ='confirmButton' onClick={()=>{dispatch(setId(orders));handleClick()}}>Check Status</button>
+        <button className ='confirmButton' onClick={()=>{dispatch(setId(orders));handleClick()}}>Claim Order</button>
         </div>
         )}
 
