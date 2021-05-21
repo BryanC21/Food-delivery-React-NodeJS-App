@@ -198,3 +198,18 @@ exports.setOrderDeliverer = CatchAsync(async(req,res,next)=>{
     return next(new AppError(err), 500);
   });
 })
+
+exports.getDeliveryOrdersForDeliverer = CatchAsync(async (req, res, next) => {
+  await db.query("SELECT delivery_orders.*, orderItems.* FROM delivery_orders JOIN orderItems ON orderItems.fk_deliverer_order_id = delivery_orders.id WHERE delivery_orders.fk_deliverer_id = ?;", [req.query.id])
+    .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        return next(new AppError("No delivery items were found!", 200));
+      } else {
+        return res.json({
+          status: "success",
+          message: `${results.length} delivery items were successfully found`,
+          orders: results,
+        });
+      }
+    });
+});

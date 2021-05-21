@@ -10,12 +10,15 @@ const {
   getPickupOrderDetails,
   setOrderItems,
   setOrderDeliverer,
+  getDeliveryOrdersForDeliverer
 
 } = require("../controller/ordersController");
 
 router.post("/setOrderItems", setOrderItems)
 
 router.get("/setOrderDeliverer", setOrderDeliverer)
+
+router.get("/getOrdersForDeliverer", getDeliveryOrdersForDeliverer)
 
 //pickup route
 router.get("/pickupOrders", getAllPickupOrders);
