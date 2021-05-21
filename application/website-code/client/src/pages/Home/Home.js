@@ -38,15 +38,20 @@ function Home() {
     const dispatch = useDispatch();
     return (
       <div className='card card-width text-white primary-color-bg mb-3'>
-         <Link to='/HP/CustomerViewRestaruantMenu' onClick={() =>  {dispatch(setId(props));}}>
-        <img className='card-img-top' src={restaurant_logo} alt='Breakfast' />
-        <div className='card-body'>
-          <h5 className='card-title'>{restaurant_name}</h5>
-          <h6 className='card-subtitle mb-2 text-muted'>
-            {dollar_sign} → {cuisine_type}
-          </h6>
-          <p className='card-text'>{address}</p>
-        </div>
+        <Link
+          to='/HP/CustomerViewRestaruantMenu'
+          onClick={() => {
+            dispatch(setId(props));
+          }}
+        >
+          <img className='card-img-top' src={restaurant_logo} alt='Breakfast' />
+          <div className='card-body'>
+            <h5 className='card-title'>{restaurant_name}</h5>
+            <h6 className='card-subtitle mb-2 text-muted'>
+              {dollar_sign} → {cuisine_type}
+            </h6>
+            <p className='card-text'>{address}</p>
+          </div>
         </Link>
       </div>
     );
@@ -114,7 +119,7 @@ function Home() {
                   </ul>
                   <Link
                     className='btn-link btn btn-outline-success py-2 my-2'
-                    to = '/HP/DeliveryRegistration'
+                    to='/HP/DeliveryRegistration'
                   >
                     Start Delivering
                   </Link>
@@ -139,7 +144,7 @@ function Home() {
                   </ul>
                   <Link
                     className='btn-partner btn-link btn btn-outline-success py-2 my-2'
-                    to = '/HP/RestaurantRegistration'
+                    to='/HP/RestaurantRegistration'
                   >
                     Become our partner
                   </Link>
@@ -164,7 +169,7 @@ function Home() {
                   </ul>
                   <Link
                     className='btn-link btn btn-outline-success py-2 my-2'
-                    to = '/HP/UserRegistration'
+                    to='/HP/UserRegistration'
                   >
                     Register for Free
                   </Link>
@@ -181,8 +186,8 @@ function Home() {
               <div className='chef-about col-sm-6 white-color-font '>
                 <h2>Your Next Meal Awaits You. </h2>
                 <p className='lead'>
-                  Neighborhood chefs are waiting to cook your next meal, that
-                  will help satisfy your cravings.
+                  Neighborhood chefs around SFSU are waiting to cook your next
+                  meal.
                 </p>
               </div>
               <div className='col-sm-6'>
