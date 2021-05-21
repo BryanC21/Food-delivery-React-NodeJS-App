@@ -71,7 +71,8 @@ const handleAdd = () => {
     price: price,
     quatity: quatity,
     id: count,
-    rid: select.fk_restaurantid
+    rid: select.fk_restaurantid,
+    restaruantName: selectedID.restaurant_name
   }
 
   dispatch(setCart(order));

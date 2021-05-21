@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
 import "../styling/DeliveryOrderPage.css"
-import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InfoCard from "../components/InfoCard";
 import { useHistory } from "react-router-dom";
@@ -21,22 +20,21 @@ const DeliveryOrderPage = () =>{
 
     const handleClick = () => {
         history.push("/HP/DeliveryOrderDetail")
-
     }
 
     useEffect(() => {
         loadOrder();
-        
       }, []);
       
       const loadOrder = async () => {
         const url = `/api/v1/orders/deliveryOrders`;
         try{
         axios.get(url).then((res) => {
-          
           console.log(res)
           setOrders(res.data.orders)
          
+        }).catch((err) => {
+          console.log(err);
         })}catch (err) {
           console.log(err);
           //setMenu(0);
@@ -48,7 +46,7 @@ const DeliveryOrderPage = () =>{
         return(<div>
 
           <div className="Title">
-          <p><b>Current available orders in your area</b></p>
+          <p><b>No available orders in your area</b></p>
           </div>
   
           <h1 className='overHeading'>
@@ -76,11 +74,9 @@ const DeliveryOrderPage = () =>{
        < div className='infoSheet'>
          {console.log(orders)}
         <InfoCard
-        restaurantName="Nation's Giant Hamburgers"
-        restaurantAddress='612 Willem Ave. Berkley, CA 48067'
+        restaurantName={orders.comments}
         orderNumber={orders.id}
-        specialInstructions={orders.comments}
-        deliveryTime='11:30pm'
+        timeCreated={orders.created}
         deliveryAddress={orders.delivery_address}
         ></InfoCard>
         <button className ='confirmButton' onClick={()=>{dispatch(setId(orders));handleClick()}}>Claim Order</button>

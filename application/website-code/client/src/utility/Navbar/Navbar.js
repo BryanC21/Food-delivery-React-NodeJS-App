@@ -49,6 +49,33 @@ function Navbar({ isLoggedIn }) {
         <Link className='navbar-brand' to='/HP/homepage'>
           <img src={Logo} alt='logo' />
         </Link>
+        {auth !== null && auth.account_type === "restaruant" && (
+            <>
+            <Dropdown className='dropdown'>
+              <Dropdown.Toggle
+                variant='btn btn btn-outline-primary my-3 '
+                id='dropdown-basic'
+              >
+                Menu
+              </Dropdown.Toggle>
+              <ul className='nav '>
+                <Dropdown.Menu>
+                  <Dropdown.Item href='/HP/DelivererMainMenu'>
+                    <span className='primary-color-font me-3' to='#'>
+                      MainMenu
+                    </span>
+                  </Dropdown.Item>
+                  <Dropdown.Item href='/HP/DeliveryOrderPage'>
+                    <span className='primary-color-font me-3' to='#'>
+                      Order
+                    </span>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </ul>
+            </Dropdown>
+            </>
+          )}
+        
 
         {auth !== null && auth.account_type === "deliverer" && (
             <>

@@ -50,7 +50,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
         const data = {
             itemNames: item, // save all item names in this array
             counts: quatity, //for each item put count at same index
-            P_or_D: "D", //write "P" if pickup order instead
+            P_or_D: method.current, //write "P" if pickup order instead
             order_id: theID, //pickup or delivery order id that you are setting these items to
         };
         try {
@@ -81,18 +81,12 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
         if(cart.length === 0){
             toast.success("No Item in cart");
-
-
-        
-
-
-
         }
         else if (method.current === "D") { //if delivery
             const data = {
                 title: "Test delivery order",
                 price: totalPrice,
-                description: "yes",
+                description: cart[0].restaruantName,
                 delivery_address: address,
                 userID: auth.userID,
                 restaurantID: cart[0].rid

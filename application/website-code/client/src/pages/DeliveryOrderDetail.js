@@ -4,10 +4,16 @@ import MapContainer from '../components/MapContainer'
 import "../styling/orderDetails.css"
 import { connect, useSelector } from "react-redux";
 import axios from 'axios';
+import Modal from 'react-modal';
+import { useHistory } from 'react-router-dom'
+import Logo from "../images/sfsu_map_color-1.png";
 
 
 
 function DeliveryOrderDetail({ selectedID }){//selectedID is order data from DeliveryOrderPage
+    const history = useHistory();
+    
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const { auth } = useSelector((state) => ({ ...state }));
     const [restaruant, setRestaurant] = useState({})
     const [foodName, setfoodName] = useState([])
@@ -29,6 +35,25 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
         try{
             axios.get(url).then((res) => {
                 console.log(res)
+               // setRestaurant(res.data.orders)  
+           
+            
+             
+            }) }catch (err) {
+              console.log(err);
+              
+            }
+
+      }
+
+      const handleComplete = async () => {
+        const url = `/api/v1/orders/removeDeliveryOrder?id=${selectedID.id}`;
+        
+
+        try{
+            axios.get(url).then((res) => {
+                console.log(res)
+                history.push("/HP/DeliveryOrderPage")
                // setRestaurant(res.data.orders)  
            
             
@@ -62,8 +87,12 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
           }
          
           
+        }).catch((err) =>
+        {
+            history.push("/HP/DeliveryOrderPage")
         })}catch (err) {
           console.log(err);
+          history.push("/HP/DeliveryOrderPage")
           
         }
       };
@@ -79,6 +108,9 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
           console.log(res.data.restaurant[0])
           console.log(restaruant.restaurant_name)
           
+        }).catch((err) =>
+        {
+            history.push("/HP/DeliveryOrderPage")
         })}catch (err) {
           console.log(err);
           
@@ -98,11 +130,14 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
                 foodName = {Name}
                 orderNumber = {selectedID.id}
                 orderersInfo = {restaruant.address}
-                deliveryTime = "10:00AM"
                 deliveryAddress={selectedID.delivery_address}
                 
                
             ></InfoCard>
+            <div>
+            <button className ="cancelOrder" onClick={()=> handleComplete()}>Order Completed</button>
+            <button className ="cancelOrder" onClick={()=> setModalIsOpen(true)}>School Map</button>
+            </div>
            <MapContainer name = {restaruant.address}></MapContainer>
                 <br></br>
                 <br></br>
@@ -126,8 +161,33 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
                 <br></br>
                 <br></br>
             
-            <br></br>
-            <button className ="cancelOrder">Order Completed</button>
+           
+            
+
+
+        <Modal isOpen={modalIsOpen} >
+        
+        <div className="modal-form">
+       
+       
+          
+         
+          <h4>Extra instructions</h4>
+
+          <img className="map" src={Logo} alt='logo' />
+         
+          
+
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false);}}> Close </button>
+          </div>
+
+          
+
+
+
+         
+          
+        </Modal>
         </div>
     )
     

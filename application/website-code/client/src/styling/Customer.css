@@ -27,14 +27,14 @@
 }
 
 
-    .Customer-button {
+.Customer-button {
         display: flex;
         background-color:  var(--primary-color);
         color: white;
         margin: auto;
         border: none;
         padding: 10px 100px;
-    }
+}
 
 .cart-button{
     min-width: 55%;
@@ -80,6 +80,10 @@
     
 
 
+}
+
+.map {
+    width: 100% !important;
 }
 
 .cart-button:hover{
