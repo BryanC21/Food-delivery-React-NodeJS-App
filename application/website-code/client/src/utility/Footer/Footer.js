@@ -19,24 +19,7 @@ function Footer() {
               </Link>
             </div>
           </div>
-          <div className='col footer-nav'>
-            <h1 className='h4 primary-color-font '>Cusines</h1>
-            <p className='lead primary-color-font'>Chinese</p>
-            <p className='lead primary-color-font'>Italian</p>
-            <p className='lead primary-color-font'>American</p>
-            <p className='lead primary-color-font'>Korean</p>
-          </div>
-          <div className='col footer-nav'>
-            <h1 className='h4 primary-color-font '>Places to Eat</h1>
-            <p className='lead primary-color-font'>Chinese Restaurant</p>
-            <p className='lead primary-color-font'>Italian Restaurant</p>
-            <p className='lead primary-color-font'>American Restaurant</p>
-            <p className='lead primary-color-font'>Korean Restaurant</p>
-          </div>
-          <div className='col footer-nav'>
-            <h1 className='h4 primary-color-font '>Company</h1>
-            <p className='lead primary-color-font'>Careers</p>
-          </div>
+          
           <div className='col footer-nav'>
             <h1 className='h4 primary-color-font '>About Us</h1>
             <a href='/HP/BryanCaldera' className='lead primary-color-font'>Bryan Caldera</a>
