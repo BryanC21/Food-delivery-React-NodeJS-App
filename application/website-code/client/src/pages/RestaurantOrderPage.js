@@ -61,7 +61,6 @@ const RestaurantOrderPage = () => {
         });
     } catch (err) {
       console.log(err);
-      //setMenu(0);
     }
   };
 
@@ -75,49 +74,51 @@ const RestaurantOrderPage = () => {
       <h3 className='text-center'>Delivery Orders</h3>
       <h1 className='overHeading'>
         <div className='orderSection'>
-          {orders.map((orders) => (
-            <div className='infoSheet'>
-              {console.log(orders)}
-              <InfoCard
-                restaurantName={orders.RestaurantName}
-                orderNumber={orders.id}
-                timeCreated={orders.created}
-                deliveryAddress={orders.delivery_address}
-              ></InfoCard>
-              <button
-                className='order-btn btn-link btn btn-outline-success py-2 my-2'
-                onClick={() => {
-                  dispatch(setId(orders));
-                  handleClick();
-                }}
-              >
-                View Order
-              </button>
-            </div>
-          ))}
+          {orders &&
+            orders.map((orders) => (
+              <div className='infoSheet'>
+                {console.log(orders)}
+                <InfoCard
+                  restaurantName={orders.RestaurantName}
+                  orderNumber={orders.id}
+                  timeCreated={orders.created}
+                  deliveryAddress={orders.delivery_address}
+                ></InfoCard>
+                <button
+                  className='order-btn btn-link btn btn-outline-success py-2 my-2'
+                  onClick={() => {
+                    dispatch(setId(orders));
+                    handleClick();
+                  }}
+                >
+                  View Order
+                </button>
+              </div>
+            ))}
         </div>
         <h3 className='text-center'>Pickup Orders</h3>
         <div className='orderSection'>
-          {pickupOrders.map((orders) => (
-            <div className='infoSheet'>
-              {console.log(orders)}
-              <InfoCard
-                restaurantName={orders.RestaurantName}
-                orderNumber={orders.id}
-                timeCreated={orders.created}
-                deliveryAddress={orders.delivery_address}
-              ></InfoCard>
-              <button
-                className='order-btn btn-link btn btn-outline-success py-2 my-2'
-                onClick={() => {
-                  dispatch(setId(orders));
-                  handleClick2();
-                }}
-              >
-                View Order
-              </button>
-            </div>
-          ))}
+          {pickupOrders &&
+            pickupOrders.map((orders) => (
+              <div className='infoSheet'>
+                {console.log(orders)}
+                <InfoCard
+                  restaurantName={orders.RestaurantName}
+                  orderNumber={orders.id}
+                  timeCreated={orders.created}
+                  deliveryAddress={orders.delivery_address}
+                ></InfoCard>
+                <button
+                  className='order-btn btn-link btn btn-outline-success py-2 my-2'
+                  onClick={() => {
+                    dispatch(setId(orders));
+                    handleClick2();
+                  }}
+                >
+                  View Order
+                </button>
+              </div>
+            ))}
         </div>
       </h1>
       <hr></hr>
