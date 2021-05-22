@@ -114,9 +114,10 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             const data = {
                 price: totalPrice,
                 restaurantName: cart[0].restaruantName,
-                pickup_address: "store",
+                pickup_address: cart[0].restaruantAddress,
+                userID: auth.userID,
+                restaurantID: cart[0].rid,
                 time: time,
-                
 
             }
 
