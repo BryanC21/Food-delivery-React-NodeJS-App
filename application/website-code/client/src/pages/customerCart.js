@@ -157,14 +157,6 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     }, [cart.length]
     );
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(method)
-        if (isLoggedIn === false) {
-            // history.push('/HP/CustomerSignIn')
-        }
-
-    }
 
     function plusOne(e) {
         setSelect(e)
