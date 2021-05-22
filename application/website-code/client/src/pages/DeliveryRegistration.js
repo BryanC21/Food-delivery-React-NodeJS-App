@@ -11,7 +11,7 @@ export default function DeliveryRegistration() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [, setAcceptedTerms] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [, setLoading] = React.useState(false);
   const history = useHistory();
 
   const handleSubmit = async (event) => {
