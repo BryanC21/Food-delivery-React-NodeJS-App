@@ -36,7 +36,7 @@ const RestaurantMenu = (props) => {
     const url = `/api/v1/restaurants/getAllMenuItems?restaurantId=${restaurantID}`;
     try {
       await axios.get(url).then((res) => {
-        if(res.data.menuItems.length = 0){
+        if(res.data.menuItems.length != 0){
           setMenu(res.data.menuItems);
         }
         console.log(res.data);
