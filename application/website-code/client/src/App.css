@@ -19,6 +19,16 @@
   font-size: 15px !important;
 }
 
+.label {
+  position: relative;
+  bottom: 19px;
+  left: 20px;
+}
+
+.accept {
+  margin-left: 10px;
+}
+
 /* Bootstrap  */
 
 .col-sm-4 {

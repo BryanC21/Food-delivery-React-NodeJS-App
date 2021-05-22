@@ -120,17 +120,16 @@ function UserRegistration({ dispatch }) {
           />
         </label>
 
-        <label className='labelClass'>
-          <input
-            className='inputClass'
-            name='acceptedTerms'
-            type='checkbox'
-            onChange={(e) => setAcceptedTerms(e.target.value)}
-            required
-          />
+        <input
+          name='acceptedTerms'
+          type='checkbox'
+          onChange={(e) => setAcceptedTerms(e.target.value)}
+          required
+        />
+        <label className='label labelClass'>
+          {" "}
           I accept the terms of service
         </label>
-
         <button className='buttonClass'>Register</button>
       </form>
       <div className='sweet-loading'>

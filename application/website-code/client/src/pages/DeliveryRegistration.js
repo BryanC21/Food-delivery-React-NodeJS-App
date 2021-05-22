@@ -96,14 +96,13 @@ export default function DeliveryRegistration() {
         </label>
         {"\n"}
 
-        <label className='labelClass'>
-          <input
-            className='inputClass'
-            name='acceptedTerms'
-            type='checkbox'
-            onChange={(e) => setAcceptedTerms(e.target.value)}
-            required
-          />
+        <input
+          name='acceptedTerms'
+          type='checkbox'
+          onChange={(e) => setAcceptedTerms(e.target.value)}
+          required
+        />
+        <label className='label labelClass'>
           I accept the terms of service
         </label>
 
