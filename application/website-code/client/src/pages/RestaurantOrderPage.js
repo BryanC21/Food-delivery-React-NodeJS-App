@@ -85,7 +85,7 @@ const RestaurantOrderPage = () => {
                 deliveryAddress={orders.delivery_address}
               ></InfoCard>
               <button
-                className='btn-link btn btn-outline-success py-2 my-2'
+                className='order-btn btn-link btn btn-outline-success py-2 my-2'
                 onClick={() => {
                   dispatch(setId(orders));
                   handleClick();
@@ -108,7 +108,7 @@ const RestaurantOrderPage = () => {
                 deliveryAddress={orders.delivery_address}
               ></InfoCard>
               <button
-                className='btn-link btn btn-outline-success py-2 my-2'
+                className='order-btn btn-link btn btn-outline-success py-2 my-2'
                 onClick={() => {
                   dispatch(setId(orders));
                   handleClick2();

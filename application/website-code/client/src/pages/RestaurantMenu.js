@@ -169,7 +169,7 @@ const RestaurantMenu = (props) => {
             <div className='heading'>
               <div>
                 <button
-                  className='btn-link btn btn-outline-success py-2 my-2'
+                  className='order-btn btn-link btn btn-outline-success py-2 my-2'
                   onClick={() => handleClick()}
                 >
                   Orders
@@ -299,12 +299,7 @@ const RestaurantMenu = (props) => {
                           >
                             <p className='rtext-color'>Delete this item</p>
                           </button>
-
-                          {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
                         </div>
-                        {/*  <div className="" >
-                          <button className="button" key={item.id} onClick={(e) => handleDelete(item.id)}>Delete this item</button>
-                          </div>*/}
                       </div>
                     ))}
                   </div>
