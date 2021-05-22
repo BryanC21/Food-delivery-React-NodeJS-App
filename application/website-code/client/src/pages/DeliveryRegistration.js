@@ -10,7 +10,7 @@ export default function DeliveryRegistration() {
   const [username, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [acceptedTerms, setAcceptedTerms] = React.useState(false);
+  const [, setAcceptedTerms] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const history = useHistory();
 
