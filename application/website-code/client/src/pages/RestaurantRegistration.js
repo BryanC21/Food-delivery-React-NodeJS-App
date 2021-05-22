@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
