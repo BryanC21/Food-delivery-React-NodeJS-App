@@ -4,26 +4,13 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { css } from "@emotion/react";
-import BounceLoader from "react-spinners/BounceLoader";
-
-//loader css
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -50px;
-`;
 
 export default function RestaurantRegistration() {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [] = React.useState(false);
+  const [, setAcceptedTerms] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const history = useHistory();
 
@@ -68,7 +55,6 @@ export default function RestaurantRegistration() {
           required
           onChange={(e) => setUsername(e.target.value)}
         />
-
         <label htmlFor='email' className='formLabel'>
           Email
         </label>
@@ -81,7 +67,6 @@ export default function RestaurantRegistration() {
           required
           onChange={(e) => setEmail(e.target.value)}
         />
-
         <label htmlFor='password' className='formLabel'>
           Password: (8 Characters Min. At least 1 letter and 1 digit)
         </label>
@@ -94,8 +79,17 @@ export default function RestaurantRegistration() {
           onChange={(e) => setPassword(e.target.value)}
           required
           pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$'
-        />
-
+        />{" "}
+        <label className=' formLabel'>
+          <input
+            className=''
+            name='acceptedTerms'
+            type='checkbox'
+            onChange={(e) => setAcceptedTerms(e.target.value)}
+            required
+          />
+          <span className='accept'>I accept the terms of service</span>
+        </label>
         <button
           className='formButton  btn btn-outline-primary '
           name='signUpButton'
@@ -104,14 +98,6 @@ export default function RestaurantRegistration() {
           Sign Up
         </button>
       </form>
-      <div className='sweet-loading'>
-        <BounceLoader
-          color={"#966CA2"}
-          loading={loading}
-          css={override}
-          size={100}
-        />
-      </div>
       <ToastContainer />
     </div>
   );
