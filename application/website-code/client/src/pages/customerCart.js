@@ -70,6 +70,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     const handlecheckOut = async (event) => {
         event.preventDefault();
+        //setVisible for place order button, for conditional rendering
         setVisible(false)
         console.log(cart)
 

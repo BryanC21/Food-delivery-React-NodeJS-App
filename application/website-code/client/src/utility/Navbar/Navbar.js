@@ -59,7 +59,7 @@ function Navbar({ isLoggedIn }) {
           <Link className='navbar-brand' to='/HP/homepage'>
             <img src={Logo} alt='logo' />
           </Link>
-          {auth !== null && auth.account_type === "restaruant" && (
+          {auth !== null && auth.account_type === "restaurant" && (
             <>
               <Dropdown className='dropdown'>
                 <Dropdown.Toggle
@@ -70,14 +70,14 @@ function Navbar({ isLoggedIn }) {
                 </Dropdown.Toggle>
                 <ul className='nav '>
                   <Dropdown.Menu>
-                    <Dropdown.Item href='/HP/DelivererMainMenu'>
+                    <Dropdown.Item href='/HP/RestaurantMenu'>
                       <span className='primary-color-font me-3' to='#'>
-                        MainMenu
+                        Restaurant Menu
                       </span>
                     </Dropdown.Item>
-                    <Dropdown.Item href='/HP/DeliveryOrderPage'>
+                    <Dropdown.Item href='/HP/RestaurantOrderPage'>
                       <span className='primary-color-font me-3' to='#'>
-                        Order
+                        Order Page
                       </span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
