@@ -197,6 +197,12 @@
   margin-left: 20px;
 }
 
+.order-btn {
+  width: 220px;
+  position: relative;
+  right: 10px;
+}
+
 .btn-outline-success:hover {
   background-color: var(--primary-color-hover) !important;
   border-color: var(--primary-color) !important;
