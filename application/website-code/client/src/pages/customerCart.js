@@ -158,9 +158,6 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     );
 
 
-    function plusOne(e) {
-        setSelect(e)
-    }
 
     return (
         <div>
