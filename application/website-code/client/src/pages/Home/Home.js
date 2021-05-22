@@ -88,13 +88,13 @@ function Home() {
           </div>
         </div>
       </section>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <section className='join jumbotron jumbotron-fluid'>
         <div className='join-section container text-center  '>
-          {/* <div className='row justify-content-center'> */}
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
           <div className='row '>
             <div className='col-4 join-about'>
               <h2 className='h1'>Join Us</h2>

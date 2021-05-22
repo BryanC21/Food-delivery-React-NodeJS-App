@@ -21,6 +21,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [select, setSelect] = useState({});//item user selected will save to this
     const { auth } = useSelector((state) => ({ ...state }));
     const [bubbleSelected, setBubbleSelected] = useState(1);
+    const [time, setTime] = useState("ASAP")
 
     //for making placeorder button invisible after one click
     const [visible,setVisible] = useState(true);
@@ -83,12 +84,14 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
         }
         else if (method.current === "D") { //if delivery
             const data = {
-                title: "Test delivery order",
                 price: totalPrice,
-                description: cart[0].restaruantName,
+                restaurantName: cart[0].restaruantName,
                 delivery_address: address,
                 userID: auth.userID,
-                restaurantID: cart[0].rid
+                restaurantID: cart[0].rid,
+                time: time,
+                restaurantAddress: cart[0].restaruantAddress
+
             }
 
             console.log(data)
@@ -109,10 +112,12 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
             console.log(data);
         } else {  //if pickup
             const data = {
-                title: "Test Pickup order",
                 price: totalPrice,
-                description: "time: ASAP",
-                pickup_address: "store",
+                restaurantName: cart[0].restaruantName,
+                pickup_address: cart[0].restaruantAddress,
+                userID: auth.userID,
+                restaurantID: cart[0].rid,
+                time: time,
 
             }
 
@@ -209,11 +214,11 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                         </div>
                         <div className="order-form">
                             <h4>Time</h4>
-                            <select>
+                            <select onChange={(e) => setTime(e.target.value)}>
                                 <option value="ASAP">ASAP</option>
-                                <option value="30">Wait 30 minute</option>
-                                <option value="60">Wait 60 minute</option>
-                                <option value="120">Wait 120 minute</option>
+                                <option value="Wait 30 minute">Wait 30 minute</option>
+                                <option value="Wait 60 minute">Wait 60 minute</option>
+                                <option value="Wait 120 minute">Wait 120 minute</option>
                             </select>
                             <br></br>
                         </div>

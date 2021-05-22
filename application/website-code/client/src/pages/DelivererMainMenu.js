@@ -120,11 +120,11 @@ const DelivererMainMenu = (props) => {
         < div className='infoSheet'>
           {console.log(orders)}
          <InfoCard
-         restaurantName="Nation's Giant Hamburgers"
-         restaurantAddress='612 Willem Ave. Berkley, CA 48067'
+         restaurantName={orders.RestaurantName}
+         restaurantAddress={orders.restaurantAddress}
          orderNumber={orders.id}
-         specialInstructions={orders.comments}
-         deliveryTime='11:30pm'
+         timeCreated={orders.created}
+         specialInstructions={orders.time}
          deliveryAddress={orders.delivery_address}
          ></InfoCard>
          <button className ='confirmButton' onClick={()=>{dispatch(setId(orders));handleCheck()}}>Check Order</button>
