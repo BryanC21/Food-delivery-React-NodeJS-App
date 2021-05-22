@@ -11,7 +11,7 @@ export default function RestaurantRegistration() {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [, setAcceptedTerms] = React.useState(false);
+  const [] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const history = useHistory();
 
