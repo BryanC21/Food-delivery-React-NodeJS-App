@@ -22,6 +22,9 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const { auth } = useSelector((state) => ({ ...state }));
     const [bubbleSelected, setBubbleSelected] = useState(1);
 
+    //for making placeorder button invisible after one click
+    const [visible,setVisible] = useState(true);
+
     //const [method, setMethod] = useState("Delivery");
     const method = useRef("D");//delivery or pickup
     const pay = useRef("credit");// credit or paypal
@@ -66,6 +69,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     const handlecheckOut = async (event) => {
         event.preventDefault();
+        setVisible(false)
         console.log(cart)
 
         for (let i = 0; i < cart.length; i++) {
@@ -223,7 +227,11 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                                 <option value="payPal">PayPal</option>
                             </select>
                         </div>
+                        {/*conditional rendering of place order button*/}
+                        {visible ? 
                         <button className='cart-button'>Place Order</button>
+                        :
+                        <h2>Your order has been placed</h2>}
                     </form>
                 </div>
             </div>
