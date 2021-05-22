@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../styling/Customer.css";
 import { Link, useHistory } from "react-router-dom";
 import "../styling/Registration.css";
