@@ -6,7 +6,6 @@ import "../styling/cart.css";
 import { deleteCart } from "../redux/actions/customerActions";
 import { useHistory } from "react-router-dom";
 import "../styling/StandardStyle.css";
-import payimg from "../images/pay.png";
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useSelector } from 'react-redux'
@@ -14,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);// for modal
-    const [total, setTotal] = useState(0);//Total number of order
+    const [, setTotal] = useState(0);//Total number of order
     const [totalPrice, setTotalPrice] = useState(0.00);// total due
     const [title, setTitle] = useState("Summary")//Title Summary or Not thing in cart
     const [address, setAddress] = useState("")// address input field
