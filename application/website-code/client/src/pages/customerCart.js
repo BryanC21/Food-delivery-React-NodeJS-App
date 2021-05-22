@@ -151,7 +151,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
     useEffect(() => {//Rerender each time the number of order reduce
         console.log("render");
-        if (cart.length == 0) {
+        if (cart.length === 0) {
             setTitle("No food in cart")
         }
     }, [cart.length]
