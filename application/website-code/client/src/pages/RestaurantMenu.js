@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styling/customerViewRestaurantMenu.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useHistory } from 'react-router-dom'
+
 
 const RestaurantMenu = (props) => {
   const [items_name, setItemsName] = React.useState("");
@@ -18,6 +20,7 @@ const RestaurantMenu = (props) => {
   const [menu, setMenu] = React.useState([]);
 
   const { auth } = useSelector((state) => ({ ...state }));
+  const history = useHistory();
 
   useEffect(() => {
     loadAllRestaurants();
@@ -54,6 +57,10 @@ const RestaurantMenu = (props) => {
     });
   };
 
+  const handleClick = () => {
+    history.push("/HP/RestaurantOrderPage")
+
+}
 
   const handleSubmit = async () => {
     const data = {
@@ -141,7 +148,7 @@ const RestaurantMenu = (props) => {
       console.log(res.data.message);
       loadMenu(restaurantInfo.id);
     })
-    .catch((err) => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
@@ -161,6 +168,13 @@ const RestaurantMenu = (props) => {
               <h1>{restaurantName}</h1>
               <br />
               <h3>{restaurantStatus}</h3>
+            </div>
+            <div className='heading'>
+              <div>
+                <button className='button' onClick={() => handleClick()}>
+                  Orders
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -209,8 +223,8 @@ const RestaurantMenu = (props) => {
                   <br></br>
                   <input
                     type='number'
-                    step = "0.01"
-                    min = "0"
+                    step="0.01"
+                    min="0"
                     style={{ width: "40vw" }}
                     value={price}
                     required
@@ -271,15 +285,18 @@ const RestaurantMenu = (props) => {
                             <h5 className="customer-card-title" >{item.items_name}</h5>
                             <p className="card-title" maxlength="12">{item.description}</p>
                             <h6 className="card-title" >${item.price}</h6>
+                            <button className="rbutton" key={item.id} onClick={(e) => handleDelete(item.id)}><p className="rtext-color">Delete this item</p></button>
 
+                     
 
                             {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
                           </div>
-                          <div className="" >
+                         {/*  <div className="" >
                           <button className="button" key={item.id} onClick={(e) => handleDelete(item.id)}>Delete this item</button>
-                          </div>
+                          </div>*/}
                         </div>
-                        
+                     
+
 
                     )}
                   </div>

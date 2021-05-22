@@ -2,8 +2,6 @@ import React, {useEffect, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styling/DelivererMainMenu.css";
 import InfoCard from "../components/InfoCard"
-import MapContainer from '../components/MapContainer';
-import { left } from '@popperjs/core';
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { setId } from "../redux/actions/customerActions"

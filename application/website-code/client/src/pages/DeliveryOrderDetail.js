@@ -84,7 +84,7 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
           }
 
           console.log(foodName)
-          if(foodName != undefined && foodName != null){
+          if(foodName !== undefined && foodName !== null){
             let temp = ""
             for(let i = 0; i < foodName.length; i++){
               temp = temp + " - " +foodName[i] +" x" + foodCount[i]
@@ -126,7 +126,7 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
     console.log(selectedID)
 
 
-    if(restaruant.restaurant_name != undefined){
+    if(restaruant.restaurant_name !== undefined){
     
     return(
         <div className="wrapperD">
