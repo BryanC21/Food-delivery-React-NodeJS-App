@@ -2,7 +2,6 @@ import React, { } from "react";
 import "../styling/Customer.css";
 import { Link } from "react-router-dom";
 import { faSearch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css";
 import "./Register.css";
 import axios from "axios";
