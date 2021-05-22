@@ -35,8 +35,8 @@ const CustomerSignIn = () => {
         });
         console.log("USER INFORMATION: ", res);
 
-        //history.push("/HP/search_result_menu"); << login to this
-        history.push("/HP/CustomerViewRestaruantMenu");
+      history.push("/HP/search_result_menu");// << login to this
+       // history.push("/HP/CustomerViewRestaruantMenu");
       } catch (err) {
         console.log(err);
       }
