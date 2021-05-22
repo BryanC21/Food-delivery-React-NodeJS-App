@@ -10,7 +10,7 @@ import MapContainer from "./components/MapContainer";
 import ReactGa from "react-ga";
 
 function App() {
-  const [restaurant, setRestaurant] = useState([]);
+  const [, setRestaurant] = useState([]);
   const [loadRestaurants, setLoadRestaurants] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [search, setSearch] = useState("");
