@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 const RestaurantSignIn = () => {
   const [email, setStateEmail] = React.useState("test2@yahoo.com");
   const [password, setStatePassword] = React.useState("123456");
-  const [loading, setLoading] = React.useState(false);
+  const [, setLoading] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
