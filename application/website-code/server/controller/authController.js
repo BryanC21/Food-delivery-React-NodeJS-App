@@ -188,7 +188,7 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
         userID = results[0].id;
-        restaurantID = results[0].fk_restaurant_id
+        restaurantID = results[0].fk_restaurant_id;
 
         return bcrypt.compare(password, hashedPassword);
       } else {
@@ -218,7 +218,7 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
           email,
           userID,
           account_type,
-          restaurantID
+          restaurantID,
         });
       } else {
         return next(
@@ -266,7 +266,7 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
         res.locals.logged = true;
         res.status(200).json({
           status: "success",
-          message: `Welcome back owner, ${email}`,
+          message: `Welcome back deliverer, ${email}`,
           token,
           email,
           userID,
@@ -318,7 +318,7 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
         res.locals.logged = true;
         res.status(200).json({
           status: "success",
-          message: `Welcome back owner, ${email}`,
+          message: `Welcome back, ${email}`,
           token,
           email,
           userID,
