@@ -21,10 +21,11 @@ function InfoCard (props){
                 <p style = {{display: props.deliveredDate ? "block":"none"}}><b>Delivered Date: </b>{props.deliveredDate}</p>
                 <p style = {{display: props.deliveryDate ? "block":"none"}}><b>Delivery Date: </b>{props.deliveryDate}</p>
                 <p style = {{display: props.deliverersName ? "block":"none"}}><b>Deliverer's Name: </b>{props.deliverersName}</p>
-                <p style = {{display: props.statusFulfilled ? "block":"none"}}><b>Status Fulfilled: </b>{props.statusFulfilled}</p>
+                <p style = {{display: props.status ? "block":"none"}}><b>Status: </b>{props.status}</p>
                 <p style = {{display: props.price ? "block":"none"}}><b>Price: </b>{props.price}</p>
                 <p style = {{display: props.specialInstructions ? "block":"none"}}><b>Special Instructions: </b>{props.specialInstructions}</p>
-                <p style = {{display: props.timeCreated ? "block":"none"}}><b>Time Created: </b>{props.timeCreated}</p>
+                <p style = {{display: props.time ? "block":"none"}}><b>Time: </b>{props.time}</p>
+                
                 </div>
         </div>
     )

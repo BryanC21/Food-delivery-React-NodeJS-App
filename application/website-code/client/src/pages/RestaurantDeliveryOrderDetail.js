@@ -2,22 +2,18 @@ import React, { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapContainer from "../components/MapContainer";
 import InfoCard from "../components/InfoCard";
-import Footer from "../utility/Footer/Footer"
 import "../styling/orderDetails.css"
 import { connect, useSelector } from "react-redux";
 import axios from 'axios';
-import Modal from 'react-modal';
 import { useHistory } from 'react-router-dom'
-import Logo from "../images/sfsu_map_color-1.png";
 
 function RestaurantDeliveryOrderDetail({ selectedID }){
 
     const history = useHistory();
-    
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const { auth } = useSelector((state) => ({ ...state }));
     const [restaruant, setRestaurant] = useState({})
     const [foodName, setfoodName] = useState([])
+    const [foodCount, setFoodCount] = useState([])
     const [Name, setName] = useState("[]")
     
 
@@ -78,12 +74,17 @@ function RestaurantDeliveryOrderDetail({ selectedID }){
               
               console.log(res.data.orders[i].itemName)
               setfoodName(foodName.push(res.data.orders[i].itemName))
+              setFoodCount(foodCount.push(res.data.orders[i].count))
 
           }
 
           console.log(foodName)
           if(foodName != undefined && foodName != null){
-          setName(foodName.toString())
+              let temp = ""
+              for(let i = 0; i < foodName.length; i++){
+                temp = temp + " - " +foodName[i] +" x" + foodCount[i]
+              }
+          setName(temp)
           }
          
           
@@ -110,7 +111,7 @@ function RestaurantDeliveryOrderDetail({ selectedID }){
           
         }).catch((err) =>
         {
-            history.push("/HP/DeliveryOrderPage")
+            history.push("/HP/RestaurantOrderPage")
         })}catch (err) {
           console.log(err);
           
@@ -129,8 +130,10 @@ function RestaurantDeliveryOrderDetail({ selectedID }){
                 restaurantName = {restaruant.restaurant_name}
                 foodName = {Name}
                 orderNumber = {selectedID.id}
-                orderersInfo = {restaruant.address}
+                restaurantAddress = {selectedID.RestaurantAddress}
                 deliveryAddress={selectedID.delivery_address}
+                price={selectedID.price}
+                time={selectedID.time}
                 
                
             ></InfoCard>
