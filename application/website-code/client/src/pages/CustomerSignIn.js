@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 const CustomerSignIn = () => {
   const [email, setStateEmail] = React.useState("test@sfsu.edu");
   const [password, setStatePassword] = React.useState("123456");
-  const [loading, setLoading] = React.useState(false);
+  const [, setLoading] = React.useState(false);
   const dispatch = useDispatch();
 
   const history = useHistory();
