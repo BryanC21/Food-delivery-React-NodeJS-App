@@ -27,8 +27,8 @@ const override = css`
 `;
 
 const DeliverySignIn = () => {
-  const [email, setStateEmail] = React.useState("d@gmail.com");
-  const [password, setStatePassword] = React.useState("123456");
+  const [email, setStateEmail] = React.useState("");
+  const [password, setStatePassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
 
@@ -94,7 +94,7 @@ const DeliverySignIn = () => {
         </label>
         {"\n"}
 
-        <Link>Forgot your password?</Link>
+        {/*<Link>Forgot your password?</Link>*/}
 
         <button className='buttonClass'>Sign In</button>
 

@@ -6,11 +6,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function UserRegistration({ dispatch }) {
-  const [username, setUsername] = React.useState("test000");
-  const [email, setEmail] = React.useState("test@sfsu.edu");
-  const [password, setPassword] = React.useState("123456");
-  const [address, setAddress] = React.useState("some address");
-  const [phone_number, setPhone_Number] = React.useState("44444444");
+  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [phone_number, setPhone_Number] = React.useState("");
   const [, setAcceptedTerms] = React.useState(false);
   const history = useHistory();
   const [loading, setLoading] = React.useState(false);
