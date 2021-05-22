@@ -3,8 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styling/customerViewRestaurantMenu.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useHistory } from 'react-router-dom'
-
+import { useHistory } from "react-router-dom";
 
 const RestaurantMenu = (props) => {
   const [items_name, setItemsName] = React.useState("");
@@ -15,8 +14,8 @@ const RestaurantMenu = (props) => {
   const [image, setMenuImage] = React.useState("");
   const [url, setUrl] = React.useState(undefined);
   const [restaurantInfo, setRestaurantInfo] = React.useState({});
-  const [restaurantName, setRestaurantName] = React.useState("")
-  const [restaurantStatus, setRestaurantStatus] = React.useState("")
+  const [restaurantName, setRestaurantName] = React.useState("");
+  const [restaurantStatus, setRestaurantStatus] = React.useState("");
   const [menu, setMenu] = React.useState([]);
 
   const { auth } = useSelector((state) => ({ ...state }));
@@ -26,21 +25,20 @@ const RestaurantMenu = (props) => {
     loadAllRestaurants();
     if (auth) {
       LoadRestaurantDetails();
-      console.log(restaurantInfo)
+      console.log(restaurantInfo);
     }
     if (url) {
       handleSubmit();
     }
-
-  }, [url, auth,]);
+  }, [url, auth]);
 
   const loadMenu = async (restaurantID) => {
     const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${restaurantID}`;
     try {
       await axios.get(url).then((res) => {
         setMenu(res.data.menuItems);
-        console.log(res.data)
-      })
+        console.log(res.data);
+      });
     } catch (err) {
       console.log(err);
       //setMenu(0);
@@ -53,14 +51,13 @@ const RestaurantMenu = (props) => {
       const { restaurants } = res.data;
       console.log(restaurants);
       setLoadCuisineType(restaurants);
-      console.log(loadCuisineType)
+      console.log(loadCuisineType);
     });
   };
 
   const handleClick = () => {
-    history.push("/HP/RestaurantOrderPage")
-
-}
+    history.push("/HP/RestaurantOrderPage");
+  };
 
   const handleSubmit = async () => {
     const data = {
@@ -69,15 +66,14 @@ const RestaurantMenu = (props) => {
       description,
       image: url,
       owner_id: auth.userID,
-      fk_cuisine_type_id: cuisine_type
+      fk_cuisine_type_id: cuisine_type,
     };
     try {
-      const res = await axios.post(
-        "/api/v1/restaurants/uploadRestaurantMenu",
-        data
-      ).then(() => {
-        resetFields();
-      });
+      const res = await axios
+        .post("/api/v1/restaurants/uploadRestaurantMenu", data)
+        .then(() => {
+          resetFields();
+        });
       console.log("MENU INFORMATION: ", res);
     } catch (err) {
       console.log(err);
@@ -91,12 +87,12 @@ const RestaurantMenu = (props) => {
       console.log(restaurant);
       //setLoadCuisineType(restaurant);
       setRestaurantInfo(restaurant[0]);
-      console.log("this: ", restaurantInfo)
+      console.log("this: ", restaurantInfo);
       setRestaurantName(restaurant[0].restaurant_name);
       if (restaurant[0].isApproved == 0) {
-        setRestaurantStatus("Your restaurant is under review by admin")
+        setRestaurantStatus("Your restaurant is under review by admin");
       } else {
-        setRestaurantStatus("Your restaurant is approved to sell")
+        setRestaurantStatus("Your restaurant is approved to sell");
       }
       loadMenu(restaurant[0].id);
       //console.log(loadCuisineType)
@@ -130,7 +126,7 @@ const RestaurantMenu = (props) => {
     setPricing("");
     setDescription("");
     setMenuImage("");
-  }
+  };
 
   const MenuUpload = () => {
     if (image) {
@@ -138,16 +134,17 @@ const RestaurantMenu = (props) => {
     } else {
       handleSubmit();
     }
-
   };
 
   const handleDelete = async (itemID) => {
-    console.log(itemID)
+    console.log(itemID);
     const url = `/api/v1/restaurants/removeRestaurantMenuItem?id=${itemID}`;
-    await axios.get(url).then((res) => {
-      console.log(res.data.message);
-      loadMenu(restaurantInfo.id);
-    })
+    await axios
+      .get(url)
+      .then((res) => {
+        console.log(res.data.message);
+        loadMenu(restaurantInfo.id);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -171,7 +168,10 @@ const RestaurantMenu = (props) => {
             </div>
             <div className='heading'>
               <div>
-                <button className='button' onClick={() => handleClick()}>
+                <button
+                  className='btn-link btn btn-outline-success py-2 my-2'
+                  onClick={() => handleClick()}
+                >
                   Orders
                 </button>
               </div>
@@ -190,7 +190,10 @@ const RestaurantMenu = (props) => {
               <form
                 className='container border rounded'
                 style={{ paddingBottom: "20px", paddingTop: "20px" }}
-                onSubmit={(e) => { e.preventDefault(); MenuUpload() }}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  MenuUpload();
+                }}
               >
                 <label>
                   Food Name:
@@ -205,17 +208,17 @@ const RestaurantMenu = (props) => {
                 </label>
                 <br />
                 <div>
-                  <label>
-                    Cuisine Type:
-                </label>
+                  <label>Cuisine Type:</label>
                   <br />
-                  <select className=''
+                  <select
+                    className=''
                     required
-                    onChange={(e) => (setCuisineType(e.target.value))}>
+                    onChange={(e) => setCuisineType(e.target.value)}
+                  >
                     <option value='2'>Cuisine</option>
-                    {loadCuisineType.map((restaurant, id) => (
+                    {loadCuisineType.map((restaurant, id) =>
                       LoadCuisineTypeCuisine(restaurant)
-                    ))}
+                    )}
                   </select>
                 </div>
                 <label>
@@ -223,8 +226,8 @@ const RestaurantMenu = (props) => {
                   <br></br>
                   <input
                     type='number'
-                    step="0.01"
-                    min="0"
+                    step='0.01'
+                    min='0'
                     style={{ width: "40vw" }}
                     value={price}
                     required
@@ -257,10 +260,7 @@ const RestaurantMenu = (props) => {
                 <br />
                 <br />
                 <div className='text-center'>
-                  <button
-                    className='btn btn-primary'
-                    type='submit'
-                  >
+                  <button className='btn btn-primary' type='submit'>
                     Submit Menu
                   </button>
                 </div>
@@ -274,35 +274,41 @@ const RestaurantMenu = (props) => {
           <div className='row'>
             <div className='col-md text-center align-self-center'>
               <h2>View and change your menu</h2>
-              <section className="order-section">
-                <div className="menu-order-content">
-                  <div className="wrapper2">
-                    { menu.map((item, id) =>
-                      
-                        <div className="card card-width" >
-                          <img className="card-img-top" src={item.image} alt="Failed to load image"></img>
-                          <div className="customer-card-body" >
-                            <h5 className="customer-card-title" >{item.items_name}</h5>
-                            <p className="card-title" maxlength="12">{item.description}</p>
-                            <h6 className="card-title" >${item.price}</h6>
-                            <button className="rbutton" key={item.id} onClick={(e) => handleDelete(item.id)}><p className="rtext-color">Delete this item</p></button>
+              <section className='order-section'>
+                <div className='menu-order-content'>
+                  <div className='wrapper2'>
+                    {menu.map((item, id) => (
+                      <div className='card card-width'>
+                        <img
+                          className='card-img-top'
+                          src={item.image}
+                          alt='Failed to load image'
+                        ></img>
+                        <div className='customer-card-body'>
+                          <h5 className='customer-card-title'>
+                            {item.items_name}
+                          </h5>
+                          <p className='card-title' maxlength='12'>
+                            {item.description}
+                          </p>
+                          <h6 className='card-title'>${item.price}</h6>
+                          <button
+                            className='rbutton'
+                            key={item.id}
+                            onClick={(e) => handleDelete(item.id)}
+                          >
+                            <p className='rtext-color'>Delete this item</p>
+                          </button>
 
-                     
-
-                            {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
-                          </div>
-                         {/*  <div className="" >
+                          {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
+                        </div>
+                        {/*  <div className="" >
                           <button className="button" key={item.id} onClick={(e) => handleDelete(item.id)}>Delete this item</button>
                           </div>*/}
-                        </div>
-                     
-
-
-                    )}
+                      </div>
+                    ))}
                   </div>
                 </div>
-
-
               </section>
             </div>
           </div>
