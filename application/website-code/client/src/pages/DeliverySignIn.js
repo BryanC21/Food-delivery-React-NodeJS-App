@@ -10,7 +10,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
-import BounceLoader from "react-spinners/BounceLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //loader css
 const override = css`
@@ -27,7 +28,7 @@ const override = css`
 const DeliverySignIn = () => {
   const [email, setStateEmail] = React.useState("d@gmail.com");
   const [password, setStatePassword] = React.useState("123456");
-  const [loading,setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -51,9 +52,13 @@ const DeliverySignIn = () => {
         payload: res.data,
       });
       console.log("RESTAURANT INFORMATION: ", res);
-      history.push("/HP/DelivererMainMenu");
+      toast(`${res.data.message}`);
+      setTimeout(() => {
+        history.push("/HP/DelivererMainMenu");
+      }, 2000);
     } catch (err) {
       console.log(err);
+      toast(err.response.data.message);
     }
   };
 
@@ -107,14 +112,7 @@ const DeliverySignIn = () => {
           Restaurant Sign In
         </Link>
       </form>
-      {
-       /*loader component below
-       */
-       }
-
-      <div className="sweet-loading">
-        <BounceLoader color={"#966CA2"} loading={loading} css={override} size={100} />
-      </div>
+      <ToastContainer />
     </div>
   );
 };

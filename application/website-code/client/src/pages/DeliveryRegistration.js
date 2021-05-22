@@ -3,7 +3,8 @@ import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { css } from "@emotion/react";
-import BounceLoader from "react-spinners/BounceLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //loader css
 const override = css`
@@ -22,12 +23,12 @@ export default function DeliveryRegistration() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
-  const [loading,setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const data = {
       username,
       email,
@@ -37,9 +38,12 @@ export default function DeliveryRegistration() {
     try {
       const res = await axios.post("/api/v1/auth/registerDeliverer", data);
       console.log("Deliverer REGISTRATION: ", res);
-      history.push("/HP/DeliverySignIn");
+      toast(`${res.data.message}`);
+      setTimeout(() => {
+        history.push("/HP/DeliverySignIn");
+      }, 2000);
     } catch (err) {
-      console.log(err);
+      toast(err.response.data.message);
     }
   };
 
@@ -100,15 +104,7 @@ export default function DeliveryRegistration() {
 
         <button className='buttonClass'>Register</button>
       </form>
-      {
-       /*loader component below
-       */
-       }
-
-      <div className="sweet-loading">
-        <BounceLoader color={"#966CA2"} loading={loading} css={override} size={100} />
-      </div>
-    
+      <ToastContainer />
     </div>
   );
 }

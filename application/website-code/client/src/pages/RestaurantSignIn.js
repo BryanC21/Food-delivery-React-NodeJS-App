@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../styling/Customer.css";
 import { Link, useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCartPlus, faTruckLoading } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import "../styling/Registration.css";
 import "./Register.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
-import BounceLoader from "react-spinners/BounceLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //loader css
 const override = css`
@@ -26,7 +24,7 @@ const override = css`
 const RestaurantSignIn = () => {
   const [email, setStateEmail] = React.useState("test2@yahoo.com");
   const [password, setStatePassword] = React.useState("123456");
-  const [loading,setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -40,7 +38,7 @@ const RestaurantSignIn = () => {
     };
     try {
       const res = await axios.post("/api/v1/auth/restaurantLogin", data);
-
+      console.log(res.data.message);
       // save user and token to localstorage
       window.localStorage.setItem("auth", JSON.stringify(res.data));
       // save data to redux
@@ -51,14 +49,17 @@ const RestaurantSignIn = () => {
 
       console.log("RESTAURANT LOGIN: ", JSON.stringify(res.data));
 
-      if(res.data.restaurantID == null){
+      if (res.data.restaurantID == null) {
         history.push("/HP/RestaurantInfo"); //TODO you should only be pushed to this page once
-      //then once you have set up your restaurant you go to restaurant menu and never go back to info
+        //then once you have set up your restaurant you go to restaurant menu and never go back to info
       } else {
-        history.push("/HP/RestaurantMenu");
+        toast(`${res.data.message}`);
+        setTimeout(() => {
+          history.push("/HP/RestaurantMenu");
+        }, 2000);
       }
     } catch (err) {
-      console.log(err);
+      toast(err.response.data.message);
     }
   };
   return (
@@ -111,16 +112,7 @@ const RestaurantSignIn = () => {
           Delivery Sign In
         </Link>
       </form>
-       {
-       /*loader component below
-       */
-       }
-
-      <div className="sweet-loading">
-        <BounceLoader color={"#966CA2"} loading={loading} css={override} size={100} />
-      </div>
-      
-  );
+      <ToastContainer />
     </div>
   );
 };

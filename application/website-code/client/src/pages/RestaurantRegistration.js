@@ -4,6 +4,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //loader css
 const override = css`
@@ -22,12 +24,12 @@ export default function RestaurantRegistration() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
-  const [loading,setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const data = {
       username,
       email,
@@ -37,9 +39,12 @@ export default function RestaurantRegistration() {
     try {
       const res = await axios.post("/api/v1/auth/registerRestaurant", data);
       console.log("RESTAURANT LOGIN: ", res);
-      history.push("/HP/RestaurantSignIn");
+      toast(`${res.data.message}`);
+      setTimeout(() => {
+        history.push("/HP/RestaurantSignIn");
+      }, 2000);
     } catch (err) {
-      console.log(err);
+      toast(err.response.data.message);
     }
   };
 
@@ -90,16 +95,6 @@ export default function RestaurantRegistration() {
           required
         />
 
-        {/* <label htmlFor='passwordConfirm' className='formLabel'>
-          Confirm Password
-        </label>
-        <input
-          id='passwordConfirm'
-          className='formInput'
-          name='confirmPassword'
-          type='password'
-          required
-        /> */}
         <button
           className='formButton  btn btn-outline-primary '
           name='signUpButton'
@@ -108,14 +103,7 @@ export default function RestaurantRegistration() {
           Sign Up
         </button>
       </form>
-      {
-       /*loader component below
-       */
-       }
-
-      <div className="sweet-loading">
-        <BounceLoader color={"#966CA2"} loading={loading} css={override} size={100} />
-      </div>
+      <ToastContainer />
     </div>
   );
 }
