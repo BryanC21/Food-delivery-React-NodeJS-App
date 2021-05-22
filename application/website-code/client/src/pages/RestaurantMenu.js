@@ -134,6 +134,16 @@ const RestaurantMenu = (props) => {
 
   };
 
+  const handleDelete = async (itemID) => {
+    console.log(itemID)
+    const url = `/api/v1/restaurants/removeRestaurantMenuItem?id=${itemID}`;
+    await axios.get(url).then((res) => {
+      console.log(res.data.message);
+      loadMenu(restaurantInfo.id);
+    })
+    .catch((err) => console.log(err));
+  };
+
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
     return <option value={id}>{cuisine_type}</option>;
   };
@@ -246,12 +256,13 @@ const RestaurantMenu = (props) => {
       <section className='jumbotron bg-light '>
         <div className='container-fluid'>
           <div className='row'>
-            <div className='col-md align-self-center'>
+            <div className='col-md text-center align-self-center'>
+              <h2>View and change your menu</h2>
               <section className="order-section">
                 <div className="menu-order-content">
                   <div className="wrapper2">
                     { menu.map((item, id) =>
-                      <button className="customer-button" key={item.id} onClick={() => null}>
+                      
                         <div className="card card-width" >
                           <img className="card-img-top" src={item.image} alt="Failed to load image"></img>
                           <div className="customer-card-body" >
@@ -260,11 +271,13 @@ const RestaurantMenu = (props) => {
                             <h6 className="card-title" >${item.price}</h6>
 
 
-
                             {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
                           </div>
+                          <div className="" >
+                          <button className="button" key={item.id} onClick={(e) => handleDelete(item.id)}>Delete this item</button>
+                          </div>
                         </div>
-                      </button>
+                        
 
                     )}
                   </div>
