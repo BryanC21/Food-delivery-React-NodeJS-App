@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../images/logo.png";
 
 function Footer() {
   return (
@@ -36,8 +35,21 @@ function Footer() {
           </div>
           <div className='col footer-nav'>
             <h1 className='h4 primary-color-font '>Company</h1>
-            <p className='lead primary-color-font'>About Us</p>
             <p className='lead primary-color-font'>Careers</p>
+          </div>
+          <div className='col footer-nav'>
+            <h1 className='h4 primary-color-font '>About Us</h1>
+            <a href='/HP/BryanCaldera' className='lead primary-color-font'>Bryan Caldera</a>
+            <br></br>
+            <a href='/HP/DennyFeng' className='lead primary-color-font'>Denny Feng</a>
+            <br></br>
+            <a href='/HP/JohnTo' className='lead primary-color-font'>John To</a>
+            <br></br>
+            <a href='/HP/MarcoMarino' className='lead primary-color-font'>Marco Marino</a> 
+            <br></br>
+            <a href='/HP/CalvinTan' className='lead primary-color-font'>Calvin Tan</a>
+            <br></br>
+            <a href='/HP/HuanNguyen' className='lead primary-color-font'>Huan Nguyen</a>
           </div>
         </div>
       </div>

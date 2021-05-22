@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../styling/Customer.css";
 import { Link } from "react-router-dom";
 import "../styling/Registration.css";
@@ -6,17 +6,35 @@ import "./Register.css";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
+
+//loader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+`;
 
 const CustomerSignIn = () => {
   const [email, setStateEmail] = React.useState("test@sfsu.edu");
   const [password, setStatePassword] = React.useState("123456");
+  const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
 
   const history = useHistory();
 
   const handleSubmit = async (event) => {
-    const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
+    const emailRegex = /^"?[\w-_.]*"?@sfsu\.edu$/;
     event.preventDefault();
+    setLoading(true);
     const data = {
       email,
       password,
@@ -35,8 +53,12 @@ const CustomerSignIn = () => {
         });
         console.log("USER INFORMATION: ", res);
 
-        //history.push("/HP/search_result_menu"); << login to this
-        history.push("/HP/CustomerViewRestaruantMenu");
+        toast(`${res.data.message}`);
+        setTimeout(() => {
+          history.push("/HP/search_result_menu"); // << login to this
+        }, 2000);
+
+        // history.push("/HP/CustomerViewRestaruantMenu");
       } catch (err) {
         console.log(err);
       }
@@ -96,6 +118,15 @@ const CustomerSignIn = () => {
           Delivery Sign In
         </Link>
       </form>
+      <div className='sweet-loading'>
+        <BounceLoader
+          color={"#966CA2"}
+          loading={loading}
+          css={override}
+          size={100}
+        />
+      </div>
+      <ToastContainer />
     </div>
   );
 };

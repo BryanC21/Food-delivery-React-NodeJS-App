@@ -1,17 +1,35 @@
-import React, { Component } from "react";
+import React from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
+
+//loader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+`;
 
 export default function RestaurantRegistration() {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [acceptedTerms, setAcceptedTerms] = React.useState(false);
+  const [] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const data = {
       username,
       email,
@@ -21,9 +39,12 @@ export default function RestaurantRegistration() {
     try {
       const res = await axios.post("/api/v1/auth/registerRestaurant", data);
       console.log("RESTAURANT LOGIN: ", res);
-      history.push("/HP/RestaurantSignIn");
+      toast(res.data.message);
+      setTimeout(() => {
+        history.push("/HP/RestaurantSignIn");
+      }, 2000);
     } catch (err) {
-      console.log(err);
+      toast(err.response.data.message);
     }
   };
 
@@ -62,7 +83,7 @@ export default function RestaurantRegistration() {
         />
 
         <label htmlFor='password' className='formLabel'>
-          Password
+          Password: (8 Characters Min. At least 1 letter and 1 digit)
         </label>
         <input
           id='password'
@@ -72,18 +93,9 @@ export default function RestaurantRegistration() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$'
         />
 
-        {/* <label htmlFor='passwordConfirm' className='formLabel'>
-          Confirm Password
-        </label>
-        <input
-          id='passwordConfirm'
-          className='formInput'
-          name='confirmPassword'
-          type='password'
-          required
-        /> */}
         <button
           className='formButton  btn btn-outline-primary '
           name='signUpButton'
@@ -92,6 +104,15 @@ export default function RestaurantRegistration() {
           Sign Up
         </button>
       </form>
+      <div className='sweet-loading'>
+        <BounceLoader
+          color={"#966CA2"}
+          loading={loading}
+          css={override}
+          size={100}
+        />
+      </div>
+      <ToastContainer />
     </div>
   );
 }

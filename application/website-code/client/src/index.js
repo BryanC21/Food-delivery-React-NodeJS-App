@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import HP_Links from "./pages/HP_Links";
@@ -28,7 +28,12 @@ import RestaurantRegistration from "./pages/RestaurantRegistration";
 import DeliveryRegistration from "./pages/DeliveryRegistration";
 import RestaurantSignIn from "./pages/RestaurantSignIn";
 import DeliverySignIn from "./pages/DeliverySignIn";
-
+import BryanCaldera from './pages/BryanCaldera'
+import DennyFeng from './pages/DennyFeng'
+import MarcoMarino from './pages/MarcoMarino'
+import JohnTo from './pages/JohnTo'
+import CalvinTan from './pages/CalvinTan'
+import HuanNguyen from './pages/HuanNguyen'
 // private routing
 import {
   RestuarantPrivateRoute,
@@ -107,6 +112,30 @@ ReactDOM.render(
             exact
             path='/HP/DeliveryOrderPage'
             component={DeliveryOrderPage}
+          />
+          <Route 
+            exact path = '/HP/BryanCaldera'
+            component = {BryanCaldera}
+          />
+          <Route 
+            exact path = '/HP/DennyFeng'
+            component = {DennyFeng}
+          />
+          <Route 
+            exact path = '/HP/JohnTo'
+            component = {JohnTo}
+          />
+          <Route 
+            exact path = '/HP/MarcoMarino'
+            component = {MarcoMarino}
+          />
+          <Route 
+            exact path = '/HP/CalvinTan'
+            component = {CalvinTan}
+          />
+          <Route 
+            exact path = '/HP/HuanNguyen'
+            component = {HuanNguyen}
           />
           <Route exact path='/HP/homepage' component={Home} />
           <Route exact path='/HP/search_result_menu' component={SearchMenu} />

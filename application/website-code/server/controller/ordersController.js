@@ -61,29 +61,26 @@ exports.getPickupOrderDetails = CatchAsync(async (req, res, next) => {
 
 exports.createPickupOrders = CatchAsync(async (req, res, next) => {
   // still need to realte this back to all three foreign keys
-  const { price, description, pickup_address } = req.body;
+  const { price, restaurantName, pickup_address, time, userID, restaurantID } = req.body;
   let baseSQL =
-    "INSERT INTO pickup_orders ( comments, price, pickup_address, created, fk_user_id, fk_restaurant_id) VALUES (?,?,?,now(),?,?);";
+    "INSERT INTO pickup_orders ( RestaurantName, price, pickup_address, created, fk_user_id, fk_restaurant_id, time) VALUES (?,?,?,now(),?,?, ?);";
   await db
-    .execute(baseSQL, [description, price, pickup_address, userID, restaurantID])
+    .execute(baseSQL, [restaurantName, price, pickup_address, userID, restaurantID, time])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
     .then(async ([results, fields]) => {
       if (results && results.affectedRows) {
+        let x = results.insertId
         await db
           .query("SELECT LAST_INSERT_ID();", [])
           .then(([results, fields]) => {
-            for (var key in results[0]) {
-              insertId = results[0][key]
-            }
             return res.json({
               status: "success",
               message: "Your pickup order has been received!",
               orders: [
                 {
-                  id: insertId,
+                  id: x,
                   price: price,
-                  description: description,
                   pickup_address: pickup_address,
                 },
               ],
@@ -97,11 +94,11 @@ exports.createPickupOrders = CatchAsync(async (req, res, next) => {
 });
 exports.createDeliveryOrders = CatchAsync(async (req, res, next) => {
   // still need to realte this back to all three foreign keys
-  const {price, description, delivery_address, userID, restaurantID } = req.body;
+  const {price, restaurantName, delivery_address, userID, restaurantID, time, restaurantAddress } = req.body;
   let baseSQL =
-    "INSERT INTO delivery_orders (comments, price, delivery_address, created, fk_user_id, fk_restaurant_id) VALUES (?,?,?,now(),?,?);";
+    "INSERT INTO delivery_orders (RestaurantName, price, delivery_address, created, fk_user_id, fk_restaurant_id, time, RestaurantAddress) VALUES (?,?,?,now(),?,?, ?, ?);";
   await db
-    .execute(baseSQL, [description, price, delivery_address, userID, restaurantID])
+    .execute(baseSQL, [restaurantName, price, delivery_address, userID, restaurantID, time, restaurantAddress])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
     .then(async ([results, fields]) => {
@@ -120,7 +117,6 @@ exports.createDeliveryOrders = CatchAsync(async (req, res, next) => {
                 {
                   id: x,
                   price: price,
-                  description: description,
                   delivery_address: delivery_address,
                 },
               ],
@@ -180,7 +176,7 @@ exports.setOrderDeliverer = CatchAsync(async(req,res,next)=>{
   //restaurant id
   const orderid = req.query.orderid
   const delivererid = req.query.delivererid
-  let searchSql = "UPDATE delivery_orders SET fk_deliverer_id = ? WHERE id = ?"
+  let searchSql = "UPDATE delivery_orders SET fk_deliverer_id = ? WHERE id = ? AND fk_deliverer_id IS NULL"
 
   await db.execute(searchSql,[delivererid, orderid]).then(([results,fields])=>{
     //if the SELECT statement does not find anything
@@ -194,4 +190,66 @@ exports.setOrderDeliverer = CatchAsync(async(req,res,next)=>{
       })
     }
   })
+  .catch((err) => {
+    return next(new AppError(err), 500);
+  });
+})
+
+exports.getDeliveryOrdersForDeliverer = CatchAsync(async (req, res, next) => {
+  await db.query("SELECT * FROM delivery_orders WHERE fk_deliverer_id = ?;", [req.query.id])
+    .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        return next(new AppError("No delivery items were found!", 200));
+      } else {
+        return res.json({
+          status: "success",
+          message: `${results.length} delivery items were successfully found`,
+          orders: results,
+        });
+      }
+    });
+});
+
+exports.removeDeliveryOrder = CatchAsync(async(req,res,next)=>{
+  const id = req.query.id;
+  
+  let searchSql = "SELECT * FROM delivery_orders WHERE id = ?"
+  let deleteSql = "DELETE FROM delivery_orders where id = ?"
+  
+  await db.execute(searchSql,[id]).then(([results,fields]) => {
+    //if the SELECT statement does not find anything 
+    if(results && results.length == 0){
+      return next(new AppError("No orders with that id were found", 200));
+    } 
+    //if the SELECT statement does find something, execute the delete
+    else{
+      db.execute(deleteSql,[id])
+      return res.json({
+        status: "success",
+        message: "Item was deleted"
+      });
+    }
+  }) 
+})
+
+exports.removePickupOrder = CatchAsync(async(req,res,next)=>{
+  const id = req.query.id;
+  
+  let searchSql = "SELECT * FROM pickup_orders WHERE id = ?"
+  let deleteSql = "DELETE FROM pickup_orders where id = ?"
+  
+  await db.execute(searchSql,[id]).then(([results,fields]) => {
+    //if the SELECT statement does not find anything 
+    if(results && results.length == 0){
+      return next(new AppError("No orders with that id were found", 200));
+    } 
+    //if the SELECT statement does find something, execute the delete
+    else{
+      db.execute(deleteSql,[id])
+      return res.json({
+        status: "success",
+        message: "Item was deleted"
+      });
+    }
+  }) 
 })

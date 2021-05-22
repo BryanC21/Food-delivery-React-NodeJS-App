@@ -1,10 +1,9 @@
 import React,{useEffect,useState} from "react";
 import "../styling/DeliveryOrderPage.css"
-import { Button, Card, CardColumns, CardDeck, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InfoCard from "../components/InfoCard";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from 'axios';
 import Modal from 'react-modal';
 import MapContainer from "../components/MapContainer";
@@ -17,41 +16,46 @@ const DeliveryOrderPage = () =>{
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { auth } = useSelector((state) => ({ ...state }));
+
 
     const handleClick = () => {
         history.push("/HP/DeliveryOrderDetail")
-
     }
 
     useEffect(() => {
-        loadMenu();
-        
+        loadOrder();
       }, []);
       
-      const loadMenu = async () => {
+      const loadOrder = async () => {
         const url = `/api/v1/orders/deliveryOrders`;
         try{
         axios.get(url).then((res) => {
-          
           console.log(res)
           setOrders(res.data.orders)
          
+        }).catch((err) => {
+          console.log(err);
         })}catch (err) {
           console.log(err);
           //setMenu(0);
         }
       };
 
-      if(orders === undefined){
+      if(orders === undefined){// if no order show this
   
         return(<div>
-          <div className='jumbotron bg-dark'>
-      
-            <h2 className='customer-head'>Nothing</h2>
-      
+
+          <div className="Title">
+          <p><b>No available orders in your area</b></p>
           </div>
+  
+          <h1 className='overHeading'>
+          <div className = 'orderSection'>
           </div>
+          
+          </h1>
+          </div>
+          
           );
       }else{
     
@@ -65,19 +69,17 @@ const DeliveryOrderPage = () =>{
         <h1 className='overHeading'>
         <div className = 'orderSection'>
 
-        {orders.map((orders) => 
+        {orders.filter(orders => orders.fk_deliverer_id === null).map((orders) => 
         
        < div className='infoSheet'>
          {console.log(orders)}
         <InfoCard
-        restaurantName="Nation's Giant Hamburgers"
-        restaurantAddress='612 Willem Ave. Berkley, CA 48067'
+        restaurantName={orders.RestaurantName}
         orderNumber={orders.id}
-        specialInstructions={orders.comments}
-        deliveryTime='11:30pm'
+        timeCreated={orders.created}
         deliveryAddress={orders.delivery_address}
         ></InfoCard>
-        <button className ='confirmButton' onClick={()=>{dispatch(setId(orders));handleClick()}}>Check Status</button>
+        <button className ='confirmButton' onClick={()=>{dispatch(setId(orders));handleClick()}}>Claim Order</button>
         </div>
         )}
 

@@ -79,18 +79,10 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
             fk_restaurant_owner_id,
           ])
           .then( async ([results, fields]) => {
-            let restaurant_id;
-            await db
-              .query("SELECT LAST_INSERT_ID();", [])
-              .then(async ([results, fields]) => {
-                if (results && results.length == 0) {
-                  return next(new AppError("Restaurant creation failed!", 200));
-                } else {
+            console.log("inserted restaurant")
+            let restaurant_id = results.insertId;
                   console.log(JSON.stringify(results))
                   //restaurant_id = results[0].LAST_INSERT_ID()
-                  for (var key in results[0]) {
-                   restaurant_id  = results[0][key]
-                  }
                   console.log(restaurant_id)
 
                   await db
@@ -102,8 +94,7 @@ exports.restaurantInfoUpload = CatchAsync(async (req, res, next) => {
                     }
                   });
 
-                }
-              });
+          
 
             if (results && results.affectedRows) {
               const insertId = results.insertId;
@@ -207,6 +198,25 @@ exports.checkRestaurantApproval = CatchAsync(async(req,res,next)=>{
   //restaurant id
   const id = req.query.id
   let searchSql = "SELECT * FROM restaurants WHERE id = ? AND isApproved = 1"
+
+  await db.execute(searchSql,[id]).then(([results,fields])=>{
+    //if the SELECT statement does not find anything
+    if(results && results.length == 0){
+      return next(new AppError("No approved restaurants with that id were found",200));
+    }
+    else{
+      return res.json({
+        status:"success",
+        restaurant: results
+      })
+    }
+  })
+})
+
+exports.getRestaurantByOwner = CatchAsync(async(req,res,next)=>{
+  //restaurant id
+  const id = req.query.id
+  let searchSql = "SELECT * FROM restaurants WHERE fk_restaurant_owner_id = ?"
 
   await db.execute(searchSql,[id]).then(([results,fields])=>{
     //if the SELECT statement does not find anything

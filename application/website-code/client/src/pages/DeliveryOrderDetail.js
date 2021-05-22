@@ -4,17 +4,28 @@ import MapContainer from '../components/MapContainer'
 import "../styling/orderDetails.css"
 import { connect, useSelector } from "react-redux";
 import axios from 'axios';
+import Modal from 'react-modal';
+import { useHistory } from 'react-router-dom'
+import Logo from "../images/sfsu_map_color-1.png";
 
 
 
-function DeliveryOrderDetail({ selectedID }){
+function DeliveryOrderDetail({ selectedID }){//selectedID is order data from DeliveryOrderPage
+    const history = useHistory();
+    
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const { auth } = useSelector((state) => ({ ...state }));
     const [restaruant, setRestaurant] = useState({})
+    const [foodName, setfoodName] = useState([])
+    const [foodCount, setFoodCount] = useState([])
+    const [Name, setName] = useState("[]")
+    
 
 
     useEffect(() => {
         claimOrder();
         loadRestaurant();
+        loadOrderDetail();
         
       }, []);
 
@@ -36,6 +47,62 @@ function DeliveryOrderDetail({ selectedID }){
 
       }
 
+      const handleComplete = async () => {
+        const url = `/api/v1/orders/removeDeliveryOrder?id=${selectedID.id}`;
+        
+
+        try{
+            axios.get(url).then((res) => {
+                console.log(res)
+                history.push("/HP/DeliveryOrderPage")
+               // setRestaurant(res.data.orders)  
+           
+            
+             
+            }) }catch (err) {
+              console.log(err);
+              
+            }
+
+      }
+
+      const loadOrderDetail = async () => {
+        
+        const url = `/api/v1/orders/getDeliveryOrder?id=${selectedID.id}`;
+        
+        try{
+        axios.get(url).then((res) => {
+          console.log(res)
+
+          var i;
+          for( i = 0; i < res.data.orders.length; i++){
+              
+              console.log(res.data.orders[i].itemName)
+              setfoodName(foodName.push(res.data.orders[i].itemName))
+              setFoodCount(foodCount.push(res.data.orders[i].count))
+
+          }
+
+          console.log(foodName)
+          if(foodName !== undefined && foodName !== null){
+            let temp = ""
+            for(let i = 0; i < foodName.length; i++){
+              temp = temp + " - " +foodName[i] +" x" + foodCount[i]
+            }
+          setName(temp)
+          }
+         
+          
+        }).catch((err) =>
+        {
+            history.push("/HP/DeliveryOrderPage")
+        })}catch (err) {
+          console.log(err);
+          history.push("/HP/DeliveryOrderPage")
+          
+        }
+      };
+
       const loadRestaurant = async () => {
         
         const url = `/api/v1/restaurants/getRestaurantByID?id=${selectedID.fk_restaurant_id}`;
@@ -47,6 +114,9 @@ function DeliveryOrderDetail({ selectedID }){
           console.log(res.data.restaurant[0])
           console.log(restaruant.restaurant_name)
           
+        }).catch((err) =>
+        {
+            history.push("/HP/DeliveryOrderPage")
         })}catch (err) {
           console.log(err);
           
@@ -56,21 +126,27 @@ function DeliveryOrderDetail({ selectedID }){
     console.log(selectedID)
 
 
-    if(restaruant.restaurant_name != undefined){
+    if(restaruant.restaurant_name !== undefined){
     
     return(
         <div className="wrapperD">
 
             <InfoCard 
                 restaurantName = {restaruant.restaurant_name}
-                foodName = "BBQ Chicken Sandwich"
+                restaurantAddress = {restaruant.address}
+                foodName = {Name}
                 orderNumber = {selectedID.id}
-                orderersInfo = {restaruant.address}
-                deliveryTime = "10:00AM"
+                deliveryAddress={selectedID.delivery_address}
+                price={selectedID.price}
+                time={selectedID.time}
                 
                
             ></InfoCard>
-           <MapContainer name = "Stonestown, 94132"></MapContainer>;
+            <div>
+            <button className ="cancelOrder" onClick={()=> handleComplete()}>Order Completed</button>
+            <button className ="cancelOrder" onClick={()=> setModalIsOpen(true)}>School Map</button>
+            </div>
+           <MapContainer name = {restaruant.address}></MapContainer>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -93,8 +169,33 @@ function DeliveryOrderDetail({ selectedID }){
                 <br></br>
                 <br></br>
             
-            <br></br>
-            <button className ="cancelOrder">Order Completed</button>
+           
+            
+
+
+        <Modal isOpen={modalIsOpen} >
+        
+        <div className="modal-form">
+       
+       
+          
+         
+          <h4>Extra instructions</h4>
+
+          <img className="map" src={Logo} alt='logo' />
+         
+          
+
+          <button className="buttonClass" onClick={() => {setModalIsOpen(false);}}> Close </button>
+          </div>
+
+          
+
+
+
+         
+          
+        </Modal>
         </div>
     )
     

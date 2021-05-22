@@ -9,6 +9,7 @@ import "../styling/Customer.css";
 import "../styling/StandardStyle.css";
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -49,6 +50,7 @@ const loadMenu = async () => {
   axios.get(url).then((res) => {
     setMenu(res.data.menuItems);
     console.log(res.data.menuItems)
+    console.log(selectedID)
     if(res.data.menuItems === undefined){
       history.push("/HP/search_result_menu")
  
@@ -70,11 +72,14 @@ const handleAdd = () => {
     price: price,
     quatity: quatity,
     id: count,
-    rid: select.fk_restaurantid
+    rid: select.fk_restaurantid,
+    restaruantName: selectedID.restaurant_name,
+    restaruantAddress: selectedID.address
   }
 
   dispatch(setCart(order));
   setCount(count + 1);
+  toast.success("Item added");
 
 };
 
@@ -114,7 +119,7 @@ if(menu === undefined){
         <div className="menu-order-content">
           <div className="wrapper2">
             {menu.map((menu) =>
-              <button className="customer-buttom" key={menu.id} onClick={() => {setModalIsOpen(true); setSelect(menu); setTempPrice(menu.price); setPrice(menu.price)}}>
+              <button className="customer-button" key={menu.id} onClick={() => {setModalIsOpen(true); setSelect(menu); setTempPrice(menu.price); setPrice(menu.price)}}>
                 <div className="card card-width" >
                   <img className="card-img-top" src={menu.image} alt="burger"></img>
                   <div className="customer-card-body" >
@@ -124,7 +129,7 @@ if(menu === undefined){
                    
                    
 
-                    {/* <button className="bottun " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
+                    {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
                   </div>
                 </div>
               </button>
@@ -186,7 +191,7 @@ if(menu === undefined){
 
    
             
-     
+        <ToastContainer />
 
     </div>
 

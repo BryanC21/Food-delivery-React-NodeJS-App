@@ -12,7 +12,7 @@ module.exports = { // pm2 start process.config.js
     },
     {
       name: 'apiserver',
-      script: '../team5_vp-main/server/server.js',
+      script: '../website-code/server/server.js',
       watch: true,
     },
   ],

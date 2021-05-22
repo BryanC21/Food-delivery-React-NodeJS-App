@@ -1,7 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
+
+//loader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+`;
 
 function UserRegistration({ dispatch }) {
   const [username, setUsername] = React.useState("test000");
@@ -9,12 +25,14 @@ function UserRegistration({ dispatch }) {
   const [password, setPassword] = React.useState("123456");
   const [address, setAddress] = React.useState("some address");
   const [phone_number, setPhone_Number] = React.useState("44444444");
-  const [acceptedTerms, setAcceptedTerms] = React.useState(false);
+  const [, setAcceptedTerms] = React.useState(false);
   const history = useHistory();
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async (event) => {
-    const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
+    const emailRegex = /^"?[\w-_.]*"?@sfsu\.edu$/;
     event.preventDefault();
+    setLoading(true);
     const data = {
       username,
       email,
@@ -28,9 +46,12 @@ function UserRegistration({ dispatch }) {
       try {
         const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
         console.log("USER INFORMATION: ", res);
-        history.push("/HP/CustomerSignIn");
+        toast(res.data.message);
+        setTimeout(() => {
+          history.push("/HP/CustomerSignIn");
+        }, 2000);
       } catch (err) {
-        console.log(err);
+        toast(err.response.data.message);
       }
     }
   };
@@ -65,7 +86,7 @@ function UserRegistration({ dispatch }) {
         </label>
 
         <label className='labelClass'>
-          Password:
+          Password: (8 Characters Min. At least 1 letter and 1 digit)
           <input
             className='inputClass'
             name='password'
@@ -73,6 +94,7 @@ function UserRegistration({ dispatch }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$'
           />
         </label>
         <label className='labelClass'>
@@ -111,6 +133,15 @@ function UserRegistration({ dispatch }) {
 
         <button className='buttonClass'>Register</button>
       </form>
+      <div className='sweet-loading'>
+        <BounceLoader
+          color={"#966CA2"}
+          loading={loading}
+          css={override}
+          size={100}
+        />
+      </div>
+      <ToastContainer />
     </div>
   );
 }

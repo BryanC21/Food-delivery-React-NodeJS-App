@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../styling/customerViewRestaurantMenu.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const RestaurantMenu = (props) => {
   const [items_name, setItemsName] = React.useState("");
@@ -11,13 +13,39 @@ const RestaurantMenu = (props) => {
   const [description, setDescription] = React.useState("");
   const [image, setMenuImage] = React.useState("");
   const [url, setUrl] = React.useState(undefined);
+  const [restaurantInfo, setRestaurantInfo] = React.useState({});
+  const [restaurantName, setRestaurantName] = React.useState("");
+  const [restaurantStatus, setRestaurantStatus] = React.useState("");
+  const [menu, setMenu] = React.useState([]);
+
+  const { auth } = useSelector((state) => ({ ...state }));
+  const history = useHistory();
 
   useEffect(() => {
     loadAllRestaurants();
+    if (auth) {
+      LoadRestaurantDetails();
+      console.log(restaurantInfo);
+    }
     if (url) {
       handleSubmit();
     }
-  }, [url]);
+  }, [url, auth]);
+
+  const loadMenu = async (restaurantID) => {
+    const url = `/api/v1/restaurants/getAllMenuItems?restaurantId=${restaurantID}`;
+    try {
+      await axios.get(url).then((res) => {
+        if(res.data.menuItems.length != 0){
+          setMenu(res.data.menuItems);
+        }
+        console.log(res.data);
+      });
+    } catch (err) {
+      console.log(err);
+      //setMenu(0);
+    }
+  };
 
   const loadAllRestaurants = async () => {
     const url = "/api/v1/restaurants/getAllCuisineType";
@@ -25,11 +53,13 @@ const RestaurantMenu = (props) => {
       const { restaurants } = res.data;
       console.log(restaurants);
       setLoadCuisineType(restaurants);
-      console.log(loadCuisineType)
+      console.log(loadCuisineType);
     });
   };
 
-  const { auth } = useSelector((state) => ({ ...state }));
+  const handleClick = () => {
+    history.push("/HP/RestaurantOrderPage");
+  };
 
   const handleSubmit = async () => {
     const data = {
@@ -38,17 +68,37 @@ const RestaurantMenu = (props) => {
       description,
       image: url,
       owner_id: auth.userID,
-      fk_cuisine_type_id: cuisine_type
+      fk_cuisine_type_id: cuisine_type,
     };
     try {
-      const res = await axios.post(
-        "/api/v1/restaurants/uploadRestaurantMenu",
-        data
-      );
+      const res = await axios
+        .post("/api/v1/restaurants/uploadRestaurantMenu", data)
+        .then(() => {
+          resetFields();
+        });
       console.log("MENU INFORMATION: ", res);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const LoadRestaurantDetails = async () => {
+    const url = `/api/v1/restaurants/getRestaurantByOwner?id=${auth.userID}`;
+    await axios.get(url).then((res) => {
+      const { restaurant } = res.data;
+      console.log(restaurant);
+      //setLoadCuisineType(restaurant);
+      setRestaurantInfo(restaurant[0]);
+      console.log("this: ", restaurantInfo);
+      setRestaurantName(restaurant[0].restaurant_name);
+      if (restaurant[0].isApproved == 0) {
+        setRestaurantStatus("Your restaurant is under review by admin");
+      } else {
+        setRestaurantStatus("Your restaurant is approved to sell");
+      }
+      loadMenu(restaurant[0].id);
+      //console.log(loadCuisineType)
+    });
   };
 
   const uploadPicture = () => {
@@ -73,12 +123,12 @@ const RestaurantMenu = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const resetFields = () =>{
+  const resetFields = () => {
     setItemsName("");
     setPricing("");
     setDescription("");
     setMenuImage("");
-  }
+  };
 
   const MenuUpload = () => {
     if (image) {
@@ -86,7 +136,18 @@ const RestaurantMenu = (props) => {
     } else {
       handleSubmit();
     }
-    resetFields();
+  };
+
+  const handleDelete = async (itemID) => {
+    console.log(itemID);
+    const url = `/api/v1/restaurants/removeRestaurantMenuItem?id=${itemID}`;
+    await axios
+      .get(url)
+      .then((res) => {
+        console.log(res.data.message);
+        loadMenu(restaurantInfo.id);
+      })
+      .catch((err) => console.log(err));
   };
 
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
@@ -99,6 +160,27 @@ const RestaurantMenu = (props) => {
       {/* Style this form w/o using needing to use <br/> b/c there's a better approach*/}
       {/* Hint: Display flex, flex-direction: column  Ex:RestaurantRegistration.js*/}
       {/* Might need to separate label/input as their own */}
+      <section className='jumbotron bg-light '>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-md text-center align-self-center'>
+              <h1>{restaurantName}</h1>
+              <br />
+              <h3>{restaurantStatus}</h3>
+            </div>
+            <div className='heading'>
+              <div>
+                <button
+                  className='order-btn btn-link btn btn-outline-success py-2 my-2'
+                  onClick={() => handleClick()}
+                >
+                  Orders
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className='jumbotron bg-dark '>
         <div className='container-fluid'>
           <div className='row'>
@@ -110,7 +192,10 @@ const RestaurantMenu = (props) => {
               <form
                 className='container border rounded'
                 style={{ paddingBottom: "20px", paddingTop: "20px" }}
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  MenuUpload();
+                }}
               >
                 <label>
                   Food Name:
@@ -119,30 +204,35 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={items_name}
+                    required
                     onChange={(e) => setItemsName(e.target.value)}
                   />
                 </label>
                 <br />
                 <div>
-                <label>
-                  Cuisine Type:
-                </label>
-                <br/>
-                <select className=''
-                onChange={(e) => (setCuisineType(e.target.value))}>
-                  <option value='2'>Cuisine</option>
-                  {loadCuisineType.map((restaurant, id) => (
-                    LoadCuisineTypeCuisine(restaurant)
-                  ))}
-                </select>
+                  <label>Cuisine Type:</label>
+                  <br />
+                  <select
+                    className=''
+                    required
+                    onChange={(e) => setCuisineType(e.target.value)}
+                  >
+                    <option value='2'>Cuisine</option>
+                    {loadCuisineType.map((restaurant, id) =>
+                      LoadCuisineTypeCuisine(restaurant)
+                    )}
+                  </select>
                 </div>
                 <label>
                   Price:
                   <br></br>
                   <input
-                    type='text'
+                    type='number'
+                    step='0.01'
+                    min='0'
                     style={{ width: "40vw" }}
                     value={price}
+                    required
                     onChange={(e) => setPricing(e.target.value)}
                   />
                 </label>
@@ -154,6 +244,7 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={description}
+                    required
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </label>
@@ -165,19 +256,57 @@ const RestaurantMenu = (props) => {
                   name='uploadImage'
                   className='formButton formUploadButton'
                   accept='image/*'
+                  required
                   onChange={(e) => setMenuImage(e.target.files[0])}
                 />
                 <br />
                 <br />
                 <div className='text-center'>
-                  <button
-                    className='btn btn-primary'
-                    onClick={() => MenuUpload()}
-                  >
+                  <button className='btn btn-primary' type='submit'>
                     Submit Menu
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className='jumbotron bg-light '>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-md text-center align-self-center'>
+              <h2>View and change your menu</h2>
+              <section className='order-section'>
+                <div className='menu-order-content'>
+                  <div className='wrapper2'>
+                    {menu.map((item, id) => (
+                      <div className='card card-width'>
+                        <img
+                          className='card-img-top'
+                          src={item.image}
+                          alt='Failed to load image'
+                        ></img>
+                        <div className='customer-card-body'>
+                          <h5 className='customer-card-title'>
+                            {item.items_name}
+                          </h5>
+                          <p className='card-title' maxlength='12'>
+                            {item.description}
+                          </p>
+                          <h6 className='card-title'>${item.price}</h6>
+                          <button
+                            className='rbutton'
+                            key={item.id}
+                            onClick={(e) => handleDelete(item.id)}
+                          >
+                            <p className='rtext-color'>Delete this item</p>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
         </div>
