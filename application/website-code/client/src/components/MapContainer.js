@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Map, GoogleApiWrapper, Marker, InfoWindow, DirectionsRenderer } from "google-maps-react";
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 //const NodeGeocoder = require('node-geocoder');
 //var geocoder = require('google-geocoder');
 //const net = require('net');
