@@ -119,7 +119,7 @@ const RestaurantOrderPage = (name) => {
         <div>
             <div className='Title'>
                 <p>
-                    <b>Current available orders in your area</b>
+                    <b>Orders placed</b>
                 </p>
             </div>
             <h3 className='text-center'>Delivery Orders</h3>
