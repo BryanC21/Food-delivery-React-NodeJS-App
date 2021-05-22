@@ -28,8 +28,6 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
     //const [method, setMethod] = useState("Delivery");
     const method = useRef("D");//delivery or pickup
     const pay = useRef("credit");// credit or paypal
-    const show = useRef("")
-    const id = useRef(89)
     const [type, setType] = useState("")
     const history = useHistory();//jump to different pages
     let count = 0;
