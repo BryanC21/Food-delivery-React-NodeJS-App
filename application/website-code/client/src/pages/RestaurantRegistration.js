@@ -83,7 +83,8 @@ export default function RestaurantRegistration() {
         />
 
         <label htmlFor='password' className='formLabel'>
-          Password
+          Password:
+          (8 Characters Min. At least 1 letter and 1 digit)
         </label>
         <input
           id='password'
@@ -93,6 +94,8 @@ export default function RestaurantRegistration() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+
         />
 
         <button
