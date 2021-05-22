@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow, DirectionsRenderer } from "google-maps-react";
 
 function MapDirectionsRenderer(props) {
+    state = {
+        
+    }
     const [directions, setDirections] = useState(null);
     const [error, setError] = useState(null);
   

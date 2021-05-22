@@ -50,6 +50,7 @@ const loadMenu = async () => {
   axios.get(url).then((res) => {
     setMenu(res.data.menuItems);
     console.log(res.data.menuItems)
+    console.log(selectedID)
     if(res.data.menuItems === undefined){
       history.push("/HP/search_result_menu")
  
@@ -72,7 +73,8 @@ const handleAdd = () => {
     quatity: quatity,
     id: count,
     rid: select.fk_restaurantid,
-    restaruantName: selectedID.restaurant_name
+    restaruantName: selectedID.restaurant_name,
+    restaruantAddress: selectedID.address
   }
 
   dispatch(setCart(order));
