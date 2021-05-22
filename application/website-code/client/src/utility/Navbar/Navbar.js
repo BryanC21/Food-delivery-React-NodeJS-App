@@ -101,9 +101,7 @@ function Navbar({ isLoggedIn }) {
           <nav className='nav '>
             {auth !== null && (
               <>
-                <h5 className='h6 logh5 primary-color-font'>
-                  Hi, {auth.email}
-                </h5>
+                <h5 className='h6 logh5 primary-color-font'>Hi,{auth.email}</h5>
                 {auth.account_type === "restaurant" && (
                   <div className='restaurant-dropdown'>
                     <Dropdown className='dropdown'>
