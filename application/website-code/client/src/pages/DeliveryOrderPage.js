@@ -74,7 +74,7 @@ const DeliveryOrderPage = () =>{
        < div className='infoSheet'>
          {console.log(orders)}
         <InfoCard
-        restaurantName={orders.comments}
+        restaurantName={orders.RestaurantName}
         orderNumber={orders.id}
         timeCreated={orders.created}
         deliveryAddress={orders.delivery_address}
