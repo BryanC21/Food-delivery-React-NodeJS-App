@@ -25,7 +25,7 @@ function MapContainer(props) {
   const [activeMarker, setActiveMarker] = useState({});
   const [selectedPlace, setSelectedPlace] = useState({});
   const [latLon, setLatLon] = useState({ lat: 1, lng: 1 });
-  const [latLon2, setLatLon2] = useState({ lat: 37.7227669, lng: -122.47891 });
+  const [latLon2] = useState({ lat: 37.7227669, lng: -122.47891 });
 
   const getCoordinates = async () => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${props.name}&key=AIzaSyDgxMmRpNuAUHiSSHFCBhjRlQImItrHrsc`;
