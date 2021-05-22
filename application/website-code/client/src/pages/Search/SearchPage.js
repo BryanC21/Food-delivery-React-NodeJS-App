@@ -40,7 +40,6 @@ const SearchPage = (props) => {
   }, []);
 
   const {
-    id,
     restaurant_name,
     restaurant_logo,
     cuisine_type,
