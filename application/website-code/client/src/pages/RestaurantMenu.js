@@ -271,13 +271,14 @@ const RestaurantMenu = (props) => {
                             <h5 className="customer-card-title" >{item.items_name}</h5>
                             <p className="card-title" maxlength="12">{item.description}</p>
                             <h6 className="card-title" >${item.price}</h6>
+                            <button className="rbutton" key={item.id} onClick={(e) => handleDelete(item.id)}><p className="rtext-color">Delete this item</p></button>
 
 
                             {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
                           </div>
-                          <div className="" >
+                         {/*  <div className="" >
                           <button className="button" key={item.id} onClick={(e) => handleDelete(item.id)}>Delete this item</button>
-                          </div>
+                          </div>*/}
                         </div>
                         
 

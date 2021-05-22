@@ -3,7 +3,7 @@ import "../styling/DeliveryOrderPage.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import InfoCard from "../components/InfoCard";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from 'axios';
 import Modal from 'react-modal';
 import MapContainer from "../components/MapContainer";
@@ -16,7 +16,7 @@ const DeliveryOrderPage = () =>{
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { auth } = useSelector((state) => ({ ...state }));
+
 
     const handleClick = () => {
         history.push("/HP/DeliveryOrderDetail")
