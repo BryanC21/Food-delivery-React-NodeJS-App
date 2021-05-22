@@ -83,7 +83,6 @@ exports.createPickupOrders = CatchAsync(async (req, res, next) => {
                 {
                   id: insertId,
                   price: price,
-                  description: description,
                   pickup_address: pickup_address,
                 },
               ],
@@ -120,7 +119,6 @@ exports.createDeliveryOrders = CatchAsync(async (req, res, next) => {
                 {
                   id: x,
                   price: price,
-                  description: description,
                   delivery_address: delivery_address,
                 },
               ],
