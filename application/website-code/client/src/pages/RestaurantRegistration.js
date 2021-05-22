@@ -3,7 +3,6 @@ import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { css } from "@emotion/react";
-import BounceLoader from "react-spinners/BounceLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
