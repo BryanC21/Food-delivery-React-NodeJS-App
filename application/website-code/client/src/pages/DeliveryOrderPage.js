@@ -69,7 +69,7 @@ const DeliveryOrderPage = () =>{
         <h1 className='overHeading'>
         <div className = 'orderSection'>
 
-        {orders.filter(orders => orders.fk_deliverer_id != auth.userID).map((orders) => 
+        {orders.filter(orders => orders.fk_deliverer_id === null).map((orders) => 
         
        < div className='infoSheet'>
          {console.log(orders)}

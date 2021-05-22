@@ -71,7 +71,7 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
         
         try{
         axios.get(url).then((res) => {
-          console.log(res.data.orders)
+          console.log(res)
 
           var i;
           for( i = 0; i < res.data.orders.length; i++){
