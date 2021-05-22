@@ -61,7 +61,7 @@ exports.getPickupOrderDetails = CatchAsync(async (req, res, next) => {
 
 exports.createPickupOrders = CatchAsync(async (req, res, next) => {
   // still need to realte this back to all three foreign keys
-  const { price, restaurantName, pickup_address, time } = req.body;
+  const { price, restaurantName, pickup_address, time, userID, restaurantID } = req.body;
   let baseSQL =
     "INSERT INTO pickup_orders ( RestaurantName, price, pickup_address, created, fk_user_id, fk_restaurant_id, time) VALUES (?,?,?,now(),?,?, ?);";
   await db
