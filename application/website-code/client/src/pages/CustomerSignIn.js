@@ -20,7 +20,7 @@ const CustomerSignIn = () => {
   const history = useHistory();
 
   const handleSubmit = async (event) => {
-    const emailRegex = /^"?[\w-_.]*\"?@sfsu\.edu$/;
+    const emailRegex = /^"?[\w-_.]*"?@sfsu\.edu$/;
     event.preventDefault();
     setLoading(true);
     const data = {
