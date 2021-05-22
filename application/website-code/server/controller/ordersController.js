@@ -61,11 +61,11 @@ exports.getPickupOrderDetails = CatchAsync(async (req, res, next) => {
 
 exports.createPickupOrders = CatchAsync(async (req, res, next) => {
   // still need to realte this back to all three foreign keys
-  const { price, description, pickup_address } = req.body;
+  const { price, restaurantName, pickup_address, time } = req.body;
   let baseSQL =
-    "INSERT INTO pickup_orders ( comments, price, pickup_address, created, fk_user_id, fk_restaurant_id) VALUES (?,?,?,now(),?,?);";
+    "INSERT INTO pickup_orders ( RestaurantName, price, pickup_address, created, fk_user_id, fk_restaurant_id, time) VALUES (?,?,?,now(),?,?, ?);";
   await db
-    .execute(baseSQL, [description, price, pickup_address, userID, restaurantID])
+    .execute(baseSQL, [restaurantName, price, pickup_address, userID, restaurantID, time])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
     .then(async ([results, fields]) => {
@@ -97,11 +97,11 @@ exports.createPickupOrders = CatchAsync(async (req, res, next) => {
 });
 exports.createDeliveryOrders = CatchAsync(async (req, res, next) => {
   // still need to realte this back to all three foreign keys
-  const {price, description, delivery_address, userID, restaurantID } = req.body;
+  const {price, restaurantName, delivery_address, userID, restaurantID, time, restaurantAddress } = req.body;
   let baseSQL =
-    "INSERT INTO delivery_orders (comments, price, delivery_address, created, fk_user_id, fk_restaurant_id) VALUES (?,?,?,now(),?,?);";
+    "INSERT INTO delivery_orders (RestaurantName, price, delivery_address, created, fk_user_id, fk_restaurant_id, time, RestaurantAddress) VALUES (?,?,?,now(),?,?, ?, ?);";
   await db
-    .execute(baseSQL, [description, price, delivery_address, userID, restaurantID])
+    .execute(baseSQL, [restaurantName, price, delivery_address, userID, restaurantID, time, restaurantAddress])
     // for delivery/pickup: front end needs to do a testing case to see which option the user chose
     // if user picks delivery option, block pickup, vice versa
     .then(async ([results, fields]) => {
