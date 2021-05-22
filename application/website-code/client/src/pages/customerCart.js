@@ -199,7 +199,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                             Delivery</label><br></br>
                             </span>
                             <span>
-                                <input type="radio" name="deliveryType" value="Pickup" checked={bubbleSelected == 2} onClick={() => { setType("hidden"); method.current = "P"; setBubbleSelected(2) }} />
+                                <input type="radio" name="deliveryType" value="Pickup" checked={bubbleSelected === 2} onClick={() => { setType("hidden"); method.current = "P"; setBubbleSelected(2) }} />
                                 <label className='head'>Pickup</label><br></br>
                             </span>
                         </div>
