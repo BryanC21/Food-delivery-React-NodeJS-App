@@ -2,6 +2,21 @@ import React, { Component } from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
+
+//loader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+`;
+
 
 function UserRegistration({ dispatch }) {
   const [username, setUsername] = React.useState("test000");
@@ -11,10 +26,12 @@ function UserRegistration({ dispatch }) {
   const [phone_number, setPhone_Number] = React.useState("44444444");
   const [acceptedTerms, setAcceptedTerms] = React.useState(false);
   const history = useHistory();
+  const [loading,setLoading] = React.useState(false);
 
   const handleSubmit = async (event) => {
     const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
     event.preventDefault();
+    setLoading(true);
     const data = {
       username,
       email,
@@ -111,6 +128,15 @@ function UserRegistration({ dispatch }) {
 
         <button className='buttonClass'>Register</button>
       </form>
+
+      {
+       /*loader component below
+       */
+       }
+
+      <div className="sweet-loading">
+        <BounceLoader color={"#966CA2"} loading={loading} css={override} size={100} />
+      </div>
     </div>
   );
 }

@@ -6,10 +6,25 @@ import "./Register.css";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
+
+//loader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+`;
 
 const CustomerSignIn = () => {
   const [email, setStateEmail] = React.useState("test@sfsu.edu");
   const [password, setStatePassword] = React.useState("123456");
+  const [loading,setLoading] = React.useState(false);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -17,6 +32,7 @@ const CustomerSignIn = () => {
   const handleSubmit = async (event) => {
     const emailRegex = /^\"?[\w-_\.]*\"?@sfsu\.edu$/;
     event.preventDefault();
+    setLoading(true);
     const data = {
       email,
       password,
@@ -96,6 +112,15 @@ const CustomerSignIn = () => {
           Delivery Sign In
         </Link>
       </form>
+      {
+       /*loader component below
+       */
+       }
+
+      <div className="sweet-loading">
+        <BounceLoader color={"#966CA2"} loading={loading} css={override} size={100} />
+      </div>
+    
     </div>
   );
 };

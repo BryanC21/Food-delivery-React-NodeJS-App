@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../styling/customerViewRestaurantMenu.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -14,18 +15,34 @@ const RestaurantMenu = (props) => {
   const [restaurantInfo, setRestaurantInfo] = React.useState({});
   const [restaurantName, setRestaurantName] = React.useState("")
   const [restaurantStatus, setRestaurantStatus] = React.useState("")
+  const [menu, setMenu] = React.useState([]);
 
   const { auth } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadAllRestaurants();
-    if(auth){
+    if (auth) {
       LoadRestaurantDetails();
+      console.log(restaurantInfo)
     }
     if (url) {
       handleSubmit();
     }
+
   }, [url, auth,]);
+
+  const loadMenu = async (restaurantID) => {
+    const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${restaurantID}`;
+    try {
+      await axios.get(url).then((res) => {
+        setMenu(res.data.menuItems);
+        console.log(res.data)
+      })
+    } catch (err) {
+      console.log(err);
+      //setMenu(0);
+    }
+  };
 
   const loadAllRestaurants = async () => {
     const url = "/api/v1/restaurants/getAllCuisineType";
@@ -51,7 +68,9 @@ const RestaurantMenu = (props) => {
       const res = await axios.post(
         "/api/v1/restaurants/uploadRestaurantMenu",
         data
-      );
+      ).then(() => {
+        resetFields();
+      });
       console.log("MENU INFORMATION: ", res);
     } catch (err) {
       console.log(err);
@@ -60,18 +79,19 @@ const RestaurantMenu = (props) => {
 
   const LoadRestaurantDetails = async () => {
     const url = `/api/v1/restaurants/getRestaurantByOwner?id=${auth.userID}`;
-    axios.get(url).then((res) => {
+    await axios.get(url).then((res) => {
       const { restaurant } = res.data;
       console.log(restaurant);
       //setLoadCuisineType(restaurant);
       setRestaurantInfo(restaurant[0]);
-      console.log("this: ",restaurantInfo)
+      console.log("this: ", restaurantInfo)
       setRestaurantName(restaurant[0].restaurant_name);
-      if(restaurant[0].isApproved == 0){
+      if (restaurant[0].isApproved == 0) {
         setRestaurantStatus("Your restaurant is under review by admin")
       } else {
         setRestaurantStatus("Your restaurant is approved to sell")
       }
+      loadMenu(restaurant[0].id);
       //console.log(loadCuisineType)
     });
   };
@@ -98,7 +118,7 @@ const RestaurantMenu = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const resetFields = () =>{
+  const resetFields = () => {
     setItemsName("");
     setPricing("");
     setDescription("");
@@ -111,7 +131,17 @@ const RestaurantMenu = (props) => {
     } else {
       handleSubmit();
     }
-    resetFields();
+
+  };
+
+  const handleDelete = async (itemID) => {
+    console.log(itemID)
+    const url = `/api/v1/restaurants/removeRestaurantMenuItem?id=${itemID}`;
+    await axios.get(url).then((res) => {
+      console.log(res.data.message);
+      loadMenu(restaurantInfo.id);
+    })
+    .catch((err) => console.log(err));
   };
 
   const LoadCuisineTypeCuisine = ({ cuisine_type, id }) => {
@@ -124,16 +154,19 @@ const RestaurantMenu = (props) => {
       {/* Style this form w/o using needing to use <br/> b/c there's a better approach*/}
       {/* Hint: Display flex, flex-direction: column  Ex:RestaurantRegistration.js*/}
       {/* Might need to separate label/input as their own */}
-      <section className='jumbotron bg-dark '>
+      <section className='jumbotron bg-light '>
         <div className='container-fluid'>
           <div className='row'>
-          <div className='col-md text-center text-white align-self-center'>
+            <div className='col-md text-center align-self-center'>
               <h1>{restaurantName}</h1>
               <br />
               <h3>{restaurantStatus}</h3>
-              <br />
             </div>
           </div>
+        </div>
+      </section>
+      <section className='jumbotron bg-dark '>
+        <div className='container-fluid'>
           <div className='row'>
             <div className='col-md text-center text-white align-self-center'>
               <h2>Add your latest menu</h2>
@@ -143,7 +176,7 @@ const RestaurantMenu = (props) => {
               <form
                 className='container border rounded'
                 style={{ paddingBottom: "20px", paddingTop: "20px" }}
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => { e.preventDefault(); MenuUpload() }}
               >
                 <label>
                   Food Name:
@@ -152,22 +185,24 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={items_name}
+                    required
                     onChange={(e) => setItemsName(e.target.value)}
                   />
                 </label>
                 <br />
                 <div>
-                <label>
-                  Cuisine Type:
+                  <label>
+                    Cuisine Type:
                 </label>
-                <br/>
-                <select className=''
-                onChange={(e) => (setCuisineType(e.target.value))}>
-                  <option value='2'>Cuisine</option>
-                  {loadCuisineType.map((restaurant, id) => (
-                    LoadCuisineTypeCuisine(restaurant)
-                  ))}
-                </select>
+                  <br />
+                  <select className=''
+                    required
+                    onChange={(e) => (setCuisineType(e.target.value))}>
+                    <option value='2'>Cuisine</option>
+                    {loadCuisineType.map((restaurant, id) => (
+                      LoadCuisineTypeCuisine(restaurant)
+                    ))}
+                  </select>
                 </div>
                 <label>
                   Price:
@@ -176,6 +211,7 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={price}
+                    required
                     onChange={(e) => setPricing(e.target.value)}
                   />
                 </label>
@@ -187,6 +223,7 @@ const RestaurantMenu = (props) => {
                     type='text'
                     style={{ width: "40vw" }}
                     value={description}
+                    required
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </label>
@@ -198,6 +235,7 @@ const RestaurantMenu = (props) => {
                   name='uploadImage'
                   className='formButton formUploadButton'
                   accept='image/*'
+                  required
                   onChange={(e) => setMenuImage(e.target.files[0])}
                 />
                 <br />
@@ -205,12 +243,48 @@ const RestaurantMenu = (props) => {
                 <div className='text-center'>
                   <button
                     className='btn btn-primary'
-                    onClick={() => MenuUpload()}
+                    type='submit'
                   >
                     Submit Menu
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className='jumbotron bg-light '>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-md text-center align-self-center'>
+              <h2>View and change your menu</h2>
+              <section className="order-section">
+                <div className="menu-order-content">
+                  <div className="wrapper2">
+                    { menu.map((item, id) =>
+                      
+                        <div className="card card-width" >
+                          <img className="card-img-top" src={item.image} alt="Failed to load image"></img>
+                          <div className="customer-card-body" >
+                            <h5 className="customer-card-title" >{item.items_name}</h5>
+                            <p className="card-title" maxlength="12">{item.description}</p>
+                            <h6 className="card-title" >${item.price}</h6>
+
+
+                            {/* <button className="button " onClick={() => {dispatch(setCart(restaruant_menu));  setModalIsOpen(true);}}><p className="text-color">Add</p></button>*/}
+                          </div>
+                          <div className="" >
+                          <button className="button" key={item.id} onClick={(e) => handleDelete(item.id)}>Delete this item</button>
+                          </div>
+                        </div>
+                        
+
+                    )}
+                  </div>
+                </div>
+
+
+              </section>
             </div>
           </div>
         </div>
