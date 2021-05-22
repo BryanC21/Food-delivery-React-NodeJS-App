@@ -6,21 +6,6 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { css } from "@emotion/react";
-import BounceLoader from "react-spinners/BounceLoader";
-
-//loader css
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -50px;
-`;
-
 export default function DeliveryRegistration() {
   const [username, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -108,14 +93,7 @@ export default function DeliveryRegistration() {
 
         <button className='buttonClass'>Register</button>
       </form>
-      <div className='sweet-loading'>
-        <BounceLoader
-          color={"#966CA2"}
-          loading={loading}
-          css={override}
-          size={100}
-        />
-      </div>
+
       <ToastContainer />
     </div>
   );
