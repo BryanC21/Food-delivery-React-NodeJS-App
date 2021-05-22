@@ -182,13 +182,15 @@
 /* BUTTON START */
 
 .hero .btn-outline-success,
-.orderSection .btn-outline-success {
+.orderSection .btn-outline-success,
+.heading .btn-outline-success {
   color: var(--white-color) !important;
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
 }
 
-.orderSection .btn-link {
+.orderSection .btn-link,
+.heading .btn-link {
   text-decoration: none !important;
 }
 .orderSection .btn {
