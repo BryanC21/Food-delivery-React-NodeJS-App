@@ -76,6 +76,8 @@ export default function DeliveryRegistration() {
 
         <label className='labelClass'>
           Please enter your password:
+          (8 Characters Min. At least 1 letter and 1 digit)
+          
           <input
             className='inputClass'
             name='password'
@@ -83,6 +85,8 @@ export default function DeliveryRegistration() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+
           />
         </label>
         {"\n"}

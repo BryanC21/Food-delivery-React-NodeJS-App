@@ -83,6 +83,7 @@ function UserRegistration({ dispatch }) {
 
         <label className='labelClass'>
           Password:
+          (8 Characters Min. At least 1 letter and 1 digit)
           <input
             className='inputClass'
             name='password'
@@ -90,6 +91,7 @@ function UserRegistration({ dispatch }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
           />
         </label>
         <label className='labelClass'>
