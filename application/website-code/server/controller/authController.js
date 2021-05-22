@@ -185,6 +185,16 @@ exports.restaurantLogin = CatchAsync(async (req, res, next) => {
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        return next(
+          new AppError(
+            `${email} is not associated with an existing account. Please register.`,
+            401
+          )
+        );
+      }
+    })
+    .then(([results, fields]) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
         userID = results[0].id;
@@ -241,6 +251,16 @@ exports.delivererLogin = CatchAsync(async (req, res, next) => {
   await db
     .execute(baseSQL, [email])
     .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        return next(
+          new AppError(
+            `${email} is not associated with an existing account. Please register.`,
+            401
+          )
+        );
+      }
+    })
+    .then(([results, fields]) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
         userID = results[0].id;
@@ -292,6 +312,16 @@ exports.approvedUserLogin = CatchAsync(async (req, res, next) => {
   let account_type = "user";
   await db
     .execute(baseSQL, [email])
+    .then(([results, fields]) => {
+      if (results && results.length == 0) {
+        return next(
+          new AppError(
+            `${email} is not associated with an existing account. Please register.`,
+            401
+          )
+        );
+      }
+    })
     .then(([results, fields]) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
