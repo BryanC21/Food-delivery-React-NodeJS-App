@@ -33,10 +33,12 @@ const RestaurantMenu = (props) => {
   }, [url, auth]);
 
   const loadMenu = async (restaurantID) => {
-    const url = `/api/v1/restaurants//getAllMenuItems?restaurantId=${restaurantID}`;
+    const url = `/api/v1/restaurants/getAllMenuItems?restaurantId=${restaurantID}`;
     try {
       await axios.get(url).then((res) => {
-        setMenu(res.data.menuItems);
+        if(res.data.menuItems.length = 0){
+          setMenu(res.data.menuItems);
+        }
         console.log(res.data);
       });
     } catch (err) {
