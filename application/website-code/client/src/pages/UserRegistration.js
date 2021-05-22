@@ -14,7 +14,7 @@ function UserRegistration({ dispatch }) {
   const [password, setPassword] = React.useState("123456");
   const [address, setAddress] = React.useState("some address");
   const [phone_number, setPhone_Number] = React.useState("44444444");
-  const [acceptedTerms, setAcceptedTerms] = React.useState(false);
+  const [, setAcceptedTerms] = React.useState(false);
   const history = useHistory();
   const [loading, setLoading] = React.useState(false);
 
