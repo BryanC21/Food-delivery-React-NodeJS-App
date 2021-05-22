@@ -208,7 +208,7 @@ const RestaurantMenu = (props) => {
                   Price:
                   <br></br>
                   <input
-                    type='text'
+                    type='number'
                     style={{ width: "40vw" }}
                     value={price}
                     required
