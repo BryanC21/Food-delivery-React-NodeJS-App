@@ -123,7 +123,10 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
 
             try {
                 const res = await axios.post("/api/v1/orders/createPickupOrder", data);
-                console.log("Res", res);
+                console.log("Res", res.data.orders[0]);
+                theID = parseInt(res.data.orders[0].id);
+                console.log("------", theID)
+                handleItem();
                 //history.push("/HP/DeliverySignIn");
             } catch (err) {
                 console.log(err);

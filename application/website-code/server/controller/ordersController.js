@@ -70,18 +70,16 @@ exports.createPickupOrders = CatchAsync(async (req, res, next) => {
     // if user picks delivery option, block pickup, vice versa
     .then(async ([results, fields]) => {
       if (results && results.affectedRows) {
+        let x = results.insertId
         await db
           .query("SELECT LAST_INSERT_ID();", [])
           .then(([results, fields]) => {
-            for (var key in results[0]) {
-              insertId = results[0][key]
-            }
             return res.json({
               status: "success",
               message: "Your pickup order has been received!",
               orders: [
                 {
-                  id: insertId,
+                  id: x,
                   price: price,
                   pickup_address: pickup_address,
                 },

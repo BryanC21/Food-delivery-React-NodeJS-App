@@ -21,6 +21,11 @@ const RestaurantOrderPage = () => {
         history.push("/HP/RestaurantDeliveryOrderDetail")
     }
 
+    const handleClick2 = () => {
+        history.push("/HP/RestaurantPickupOrderDetails")
+    }
+
+
     useEffect(() => {
         loadDeliveryOrder();
         loadPickupOrder();
@@ -96,7 +101,7 @@ const RestaurantOrderPage = () => {
                                 timeCreated={orders.created}
                                 deliveryAddress={orders.delivery_address}
                             ></InfoCard>
-                            <button className='confirmButton' onClick={() => { dispatch(setId(orders)); handleClick() }}>View Order</button>
+                            <button className='confirmButton' onClick={() => { dispatch(setId(orders)); handleClick2() }}>View Order</button>
                         </div>
                     )}
 
