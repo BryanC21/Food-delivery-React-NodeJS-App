@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import MapContainer from "./components/MapContainer";
 import ReactGa from "react-ga";
+import { useHistory } from "react-router-dom";
 
 function App() {
   const [, setRestaurant] = useState([]);
@@ -15,8 +16,10 @@ function App() {
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [search, setSearch] = useState("");
   const [searchType, setSearchType] = useState("All");
-
+  let history = useHistory();
   useEffect(() => {
+    
+    history.push("/HP/homepage");
     load();
     ReactGa.initialize('UA-196598528-1')
     ReactGa.pageview('/')
