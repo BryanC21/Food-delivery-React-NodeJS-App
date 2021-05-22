@@ -4,8 +4,20 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
 
 //loader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+`;
 
 function UserRegistration({ dispatch }) {
   const [username, setUsername] = React.useState("test000");
@@ -34,7 +46,7 @@ function UserRegistration({ dispatch }) {
       try {
         const res = await axios.post("/api/v1/auth/registerApprovedUser", data);
         console.log("USER INFORMATION: ", res);
-        toast(`${res.data.message}`);
+        toast(res.data.message);
         setTimeout(() => {
           history.push("/HP/CustomerSignIn");
         }, 2000);
@@ -74,8 +86,7 @@ function UserRegistration({ dispatch }) {
         </label>
 
         <label className='labelClass'>
-          Password:
-          (8 Characters Min. At least 1 letter and 1 digit)
+          Password: (8 Characters Min. At least 1 letter and 1 digit)
           <input
             className='inputClass'
             name='password'
@@ -83,7 +94,7 @@ function UserRegistration({ dispatch }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+            pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$'
           />
         </label>
         <label className='labelClass'>
@@ -122,7 +133,14 @@ function UserRegistration({ dispatch }) {
 
         <button className='buttonClass'>Register</button>
       </form>
-
+      <div className='sweet-loading'>
+        <BounceLoader
+          color={"#966CA2"}
+          loading={loading}
+          css={override}
+          size={100}
+        />
+      </div>
       <ToastContainer />
     </div>
   );

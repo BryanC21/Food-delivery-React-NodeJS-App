@@ -10,6 +10,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -58,7 +59,6 @@ const DeliverySignIn = () => {
       }, 2000);
     } catch (err) {
       console.log(err);
-      toast(err.response.data.message);
     }
   };
 
@@ -112,6 +112,14 @@ const DeliverySignIn = () => {
           Restaurant Sign In
         </Link>
       </form>
+      <div className='sweet-loading'>
+        <BounceLoader
+          color={"#966CA2"}
+          loading={loading}
+          css={override}
+          size={100}
+        />
+      </div>
       <ToastContainer />
     </div>
   );
