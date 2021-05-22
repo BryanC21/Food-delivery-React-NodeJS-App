@@ -2,7 +2,6 @@ import React from "react";
 import "../styling/Registration.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { css } from "@emotion/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
