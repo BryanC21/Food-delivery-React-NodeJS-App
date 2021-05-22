@@ -26,7 +26,10 @@ img {
 .cancelOrder{
     color:white;
     background-color: #743282;
+    border: none;
     margin:auto;
+    margin-bottom: 1rem;
+    border-radius: 5px;
     display:block;
     width: 200px;
     cursor: pointer;
