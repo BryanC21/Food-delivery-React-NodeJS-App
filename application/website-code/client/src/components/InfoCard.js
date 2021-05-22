@@ -11,6 +11,7 @@ function InfoCard (props){
             <div style ={{padding:"10px"}}>
                 <p style = {{display: props.restaurantName ? "block":"none"}}><b>Restaurant Name: </b>{props.restaurantName}</p>
                 <p style = {{display: props.restaurantAddress ? "block":"none"}}><b>Restaurant Address: </b>{props.restaurantAddress}</p>
+                <p style = {{display: props.pickupAddress ? "block":"none"}}><b>Pickup Address: </b>{props.pickupAddress}</p>
                 <p style = {{display: props.foodName ? "block":"none"}}><b>Food Name: </b>{props.foodName} </p>
                 <p style = {{display: props.orderNumber ? "block":"none"}}><b>Order Number: </b>{props.orderNumber}</p>
                 <p style = {{display: props.pickupTime ? "block":"none"}}><b>Pickup Time: </b>{props.pickupTime}</p>
@@ -25,7 +26,7 @@ function InfoCard (props){
                 <p style = {{display: props.price ? "block":"none"}}><b>Price: </b>{props.price}</p>
                 <p style = {{display: props.specialInstructions ? "block":"none"}}><b>Special Instructions: </b>{props.specialInstructions}</p>
                 <p style = {{display: props.time ? "block":"none"}}><b>Time: </b>{props.time}</p>
-                
+
                 </div>
         </div>
     )

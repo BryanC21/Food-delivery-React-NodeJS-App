@@ -17,6 +17,7 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
     const { auth } = useSelector((state) => ({ ...state }));
     const [restaruant, setRestaurant] = useState({})
     const [foodName, setfoodName] = useState([])
+    const [foodCount, setFoodCount] = useState([])
     const [Name, setName] = useState("[]")
     
 
@@ -78,12 +79,17 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
               
               console.log(res.data.orders[i].itemName)
               setfoodName(foodName.push(res.data.orders[i].itemName))
+              setFoodCount(foodCount.push(res.data.orders[i].count))
 
           }
 
           console.log(foodName)
           if(foodName != undefined && foodName != null){
-          setName(foodName.toString())
+            let temp = ""
+            for(let i = 0; i < foodName.length; i++){
+              temp = temp + " - " +foodName[i] +" x" + foodCount[i]
+            }
+          setName(temp)
           }
          
           
@@ -127,10 +133,12 @@ function DeliveryOrderDetail({ selectedID }){//selectedID is order data from Del
 
             <InfoCard 
                 restaurantName = {restaruant.restaurant_name}
+                restaurantAddress = {restaruant.address}
                 foodName = {Name}
                 orderNumber = {selectedID.id}
-                orderersInfo = {restaruant.address}
                 deliveryAddress={selectedID.delivery_address}
+                price={selectedID.price}
+                time={selectedID.time}
                 
                
             ></InfoCard>
