@@ -41,10 +41,10 @@ const DelivererMainMenu = (props) => {
     return (
       <div>
         <div className='heading'>
-          <h1>{auth.email}, Welcome</h1>
+          <h1 className='white-color-font'>{auth.email}, Welcome</h1>
           <div>
             <button
-              className='button'
+              className='order-btn btn-link btn btn-outline-success py-2 my-2'
               onClick={() => {
                 handleClick();
               }}
