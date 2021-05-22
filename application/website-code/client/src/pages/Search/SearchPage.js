@@ -5,7 +5,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { GoogleApiWrapper } from "google-maps-react";
 import { Loader } from "@googlemaps/js-api-loader"
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { setId } from "../../redux/actions/customerActions";
 import { useDispatch } from "react-redux";
 library.add(faMapMarkerAlt);
