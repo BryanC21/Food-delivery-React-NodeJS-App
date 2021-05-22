@@ -195,7 +195,7 @@ const CustomerCart = ({ cart, isLoggedIn, dispatch }) => {
                             <h4>Method</h4>
                             <span>
                                 <label className='head'>
-                                    <input type="radio" name="deliveryType" value="Delivery" checked={bubbleSelected == 1} onClick={() => { setType(""); method.current = "D"; setBubbleSelected(1) }} />
+                                    <input type="radio" name="deliveryType" value="Delivery" checked={bubbleSelected === 1} onClick={() => { setType(""); method.current = "D"; setBubbleSelected(1) }} />
                             Delivery</label><br></br>
                             </span>
                             <span>
