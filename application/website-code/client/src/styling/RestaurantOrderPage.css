@@ -1,19 +1,19 @@
-.Title p{
+.Title p {
   text-align: center;
-  color:#dc9200;
+  color: white;
   background-color: #743282;
-  font-size: 50px;
+  font-size: 30px;
 }
 
-.infoSheet{
-  width: 90%;
+.infoSheet {
+  width: 250px;
   margin: 3px;
   padding: 0px;
   margin-top: 10px;
   border-radius: 5px;
 }
 
-.confirmButton{
+.confirmButton {
   border-radius: 3px;
   border-color: #dc9200;
   background-color: #743282;
