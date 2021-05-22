@@ -98,26 +98,27 @@ const RestaurantOrderPage = () => {
         </div>
         <h3 className='text-center'>Pickup Orders</h3>
         <div className='orderSection'>
-          {pickupOrders.map((orders) => (
-            <div className='infoSheet'>
-              {console.log(orders)}
-              <InfoCard
-                restaurantName={orders.RestaurantName}
-                orderNumber={orders.id}
-                timeCreated={orders.created}
-                deliveryAddress={orders.delivery_address}
-              ></InfoCard>
-              <button
-                className='order-btn btn-link btn btn-outline-success py-2 my-2'
-                onClick={() => {
-                  dispatch(setId(orders));
-                  handleClick2();
-                }}
-              >
-                View Order
-              </button>
-            </div>
-          ))}
+          {pickupOrders &&
+            pickupOrders.map((orders) => (
+              <div className='infoSheet'>
+                {console.log(orders)}
+                <InfoCard
+                  restaurantName={orders.RestaurantName}
+                  orderNumber={orders.id}
+                  timeCreated={orders.created}
+                  deliveryAddress={orders.delivery_address}
+                ></InfoCard>
+                <button
+                  className='order-btn btn-link btn btn-outline-success py-2 my-2'
+                  onClick={() => {
+                    dispatch(setId(orders));
+                    handleClick2();
+                  }}
+                >
+                  View Order
+                </button>
+              </div>
+            ))}
         </div>
       </h1>
       <hr></hr>
