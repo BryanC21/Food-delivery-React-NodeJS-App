@@ -59,60 +59,6 @@ function Navbar({ isLoggedIn }) {
           <Link className='navbar-brand' to='/HP/homepage'>
             <img src={Logo} alt='logo' />
           </Link>
-          {auth !== null && auth.account_type === "restaurant" && (
-            <>
-              <Dropdown className='dropdown'>
-                <Dropdown.Toggle
-                  variant='btn btn btn-outline-primary my-3 '
-                  id='dropdown-basic'
-                >
-                  Menu
-                </Dropdown.Toggle>
-                <ul className='nav '>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href='/HP/RestaurantMenu'>
-                      <span className='primary-color-font me-3' to='#'>
-                        Restaurant Menu
-                      </span>
-                    </Dropdown.Item>
-                    <Dropdown.Item href='/HP/RestaurantOrderPage'>
-                      <span className='primary-color-font me-3' to='#'>
-                        Order Page
-                      </span>
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </ul>
-              </Dropdown>
-            </>
-          )}
-
-          {auth !== null && auth.account_type === "deliverer" && (
-            <>
-              <Dropdown className='dropdown'>
-                <Dropdown.Toggle
-                  variant='btn btn btn-outline-primary my-3 '
-                  id='dropdown-basic'
-                >
-                  Menu
-                </Dropdown.Toggle>
-                <ul className='nav '>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href='/HP/DelivererMainMenu'>
-                      <span className='primary-color-font me-3' to='#'>
-                        MainMenu
-                      </span>
-                    </Dropdown.Item>
-                    <Dropdown.Item href='/HP/DeliveryOrderPage'>
-                      <span className='primary-color-font me-3' to='#'>
-                        Order
-                      </span>
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </ul>
-              </Dropdown>
-            </>
-          )}
-
           <form className='d-flex container-sm '>
             <div className='dropdown me-3'>
               <Link
@@ -155,7 +101,63 @@ function Navbar({ isLoggedIn }) {
           <nav className='nav '>
             {auth !== null && (
               <>
-                <h1 className='h5 logh5'>Hello, {auth.email}</h1>
+                <h5 className='h6 logh5 primary-color-font'>
+                  Hi, {auth.email}
+                </h5>
+                {auth.account_type === "restaurant" && (
+                  <div className='restaurant-dropdown'>
+                    <Dropdown className='dropdown'>
+                      <Dropdown.Toggle
+                        variant='btn btn btn-outline-primary my-3 '
+                        id='dropdown-basic'
+                      >
+                        Menu
+                      </Dropdown.Toggle>
+                      <ul className='nav '>
+                        <Dropdown.Menu>
+                          <Dropdown.Item href='/HP/RestaurantMenu'>
+                            <span className='primary-color-font me-3' to='#'>
+                              Restaurant Menu
+                            </span>
+                          </Dropdown.Item>
+                          <Dropdown.Item href='/HP/RestaurantOrderPage'>
+                            <span className='primary-color-font me-3' to='#'>
+                              Order Page
+                            </span>
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </ul>
+                    </Dropdown>
+                  </div>
+                )}
+
+                {auth.account_type === "deliverer" && (
+                  <div className='deliverer-dropdown'>
+                    <Dropdown className='dropdown'>
+                      <Dropdown.Toggle
+                        variant='btn btn btn-outline-primary my-3 '
+                        id='dropdown-basic'
+                      >
+                        Menu
+                      </Dropdown.Toggle>
+                      <ul className='nav '>
+                        <Dropdown.Menu>
+                          <Dropdown.Item href='/HP/DelivererMainMenu'>
+                            <span className='primary-color-font me-3' to='#'>
+                              MainMenu
+                            </span>
+                          </Dropdown.Item>
+                          <Dropdown.Item href='/HP/DeliveryOrderPage'>
+                            <span className='primary-color-font me-3' to='#'>
+                              Order
+                            </span>
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </ul>
+                    </Dropdown>
+                  </div>
+                )}
+
                 <button onClick={logout} className='btn-logout'>
                   Logout
                 </button>
@@ -163,7 +165,7 @@ function Navbar({ isLoggedIn }) {
             )}
             {auth === null && (
               <>
-                <Dropdown className='dropdown'>
+                <Dropdown className='dropdown nav-dropdown'>
                   <Dropdown.Toggle
                     variant='btn btn btn-outline-primary my-3 '
                     id='dropdown-basic'
@@ -190,7 +192,7 @@ function Navbar({ isLoggedIn }) {
                     </Dropdown.Menu>
                   </ul>
                 </Dropdown>
-                <Dropdown>
+                <Dropdown className='dropdown nav-dropdown'>
                   <Dropdown.Toggle
                     variant='btn btn btn-outline-primary my-3 '
                     id='dropdown-basic'
@@ -221,7 +223,10 @@ function Navbar({ isLoggedIn }) {
             )}
             <ul className='py-3'>
               <Link to={{ pathname: "/HP/customerCart", param1: search }}>
-                <button className='nav-link btn btn-link nav-active' to='#'>
+                <button
+                  className='nav-cart nav-link btn btn-link nav-active'
+                  to='#'
+                >
                   <FontAwesomeIcon icon={faCartPlus} size='2x' />
                 </button>
               </Link>

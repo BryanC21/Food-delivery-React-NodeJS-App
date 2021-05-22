@@ -25,7 +25,7 @@ function RestaurantPickupOrderDetails({ selectedID }){
       }, []);
 
       const handleComplete = async () => {
-        const url = `/api/v1/orders/removeDeliveryOrder?id=${selectedID.id}`;
+        const url = `/api/v1/orders/removePickupOrder?id=${selectedID.id}`;
         
 
         try{
@@ -118,6 +118,9 @@ function RestaurantPickupOrderDetails({ selectedID }){
                 
                
             ></InfoCard>
+             <div>
+            <button className ="cancelOrder" onClick={()=> handleComplete()}>Order Completed</button>
+            </div>
            <MapContainer name = {restaruant.address}></MapContainer>
                 <br></br>
                 <br></br>
