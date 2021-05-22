@@ -7,16 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //loader css
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -50px;
-`;
 
 function UserRegistration({ dispatch }) {
   const [username, setUsername] = React.useState("test000");
