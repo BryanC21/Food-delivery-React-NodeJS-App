@@ -181,10 +181,18 @@
 
 /* BUTTON START */
 
-.hero .btn-outline-success {
+.hero .btn-outline-success,
+.orderSection .btn-outline-success {
   color: var(--white-color) !important;
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
+}
+
+.orderSection .btn-link {
+  text-decoration: none !important;
+}
+.orderSection .btn {
+  margin-left: 20px;
 }
 
 .btn-outline-success:hover {
